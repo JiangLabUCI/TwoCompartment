@@ -1,0 +1,10 @@
+# OS generated files #
+######################
+.mypy_cache
+__pycache__
+.pytest_cache
+._*
+.vscode
+getfromclust.sh
+/docs/plt-images/
+/docs/*.pdf
