@@ -189,6 +189,7 @@ def carrier_obj_wrapper(
         # even higher objectives.
 
         if np.sum(devs) > 3e3:
+            print("Stopping early.")
             objval = 3.1e3
             return objval
 
@@ -197,18 +198,17 @@ def carrier_obj_wrapper(
         statuses.append(status)
         this_status = status
         print(
-            "Seed and status histogram : ",
-            seed,
-            np.histogram(this_status, bins=np.array([-2, -1, 0, 1, 2, 3, 4, 5]) - 0.1)[
-                0
-            ],
+            f"Seed = {seed}, dev = {dev}, status histogram : ",
+            np.histogram(
+                this_status, bins=np.array([-2, -1, 0, 1, 2, 3, 4, 5, 6]) - 0.1
+            )[0],
         )
         if np.any(this_status == 0):
             print("Zero status detected, rates, dose =  ", rates, h0[choice])
 
     if obj_flag:
         objval = np.sum(devs)
-        print(objval)
+        print("Objective is : ", objval)
         print("------------------------------------------")
         return objval
     else:
@@ -258,6 +258,7 @@ def compute_devs_min(
 
     print("Seed is : ", seed)
     print("Nstep : ", nstep)
+    print("Number of points is : ", npts)
     ndesol = len(desol_ind)  # number of DE solutions to investigate
     data = sio.loadmat(filename)
     Xlist = data["solset"][0][0][2]
