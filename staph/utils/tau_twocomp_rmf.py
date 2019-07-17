@@ -1,6 +1,7 @@
 import numpy as np
 from numba import njit, jit
 from typing import List, Tuple
+from .roulette import roulette
 
 
 @njit(cache=True)
@@ -140,7 +141,7 @@ def tau_twocomp_carrier_rmf(
     tiny = 1e-12
     high = 1e12
     eps = 0.03
-    u, r, roulette_sum, t = 0.0, 0.0, 0.0, 0.0
+    u, r, t = 0.0, 0.0, 0.0
     bflag = 0
     pop_array = np.zeros((2, nstep + 1), dtype=np.int32)
     pop_array[0, 0], pop_array[1, 0] = curH, curI
@@ -242,16 +243,7 @@ def tau_twocomp_carrier_rmf(
                 u = np.random.rand()
                 t += -np.log(u) / prop_total
                 r = np.random.rand()
-                roulette_sum = prop_array[0]
-                for ind3 in range(nprop):
-                    if r < roulette_sum / prop_total:
-                        break
-                    else:
-                        roulette_sum += prop_array[ind3]
-                        if roulette_sum / prop_total >= 1:
-                            break
-                # Fire reaction ind3
-                reaction_index = ind3
+                reaction_index = roulette(prop_array=prop_array)
                 curH += vH[reaction_index]
                 curI += vI[reaction_index]
 
@@ -320,13 +312,7 @@ def tau_twocomp_carrier_rmf(
             # Fire all non critical reactions. Fire one critical reaction
             # once based on propensity.
             # First compute jc or crit_index_to_fire
-            roulette_sum = prop_crit[0]
-            for ind3 in range(1, nprop):
-                if r < (roulette_sum / prop_crit_total):
-                    break
-                else:
-                    roulette_sum += prop_crit[ind3]
-            crit_index_to_fire = ind3 - 1
+            crit_index_to_fire = roulette(prop_array=prop_crit)
             for ind3 in range(nprop):
                 if J[ind3]:
                     K[ind3] = np.random.poisson(prop_array[ind3] * tau)
