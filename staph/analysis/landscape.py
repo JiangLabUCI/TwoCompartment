@@ -5,12 +5,11 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from typing import List
 from ..utils.pareto_rank import get_pareto_ranks
-from ..utils.data import get_singh_data, get_rh_fit_data
+from ..utils.data import get_singh_data
+from ..utils.rh_data import get_rh_fit_data
 
 
 matplotlib.rcParams.update({"font.size": 15})
-rh_best_fit = 0.73
-rh_best_dev = 5.49
 
 
 def igate(
