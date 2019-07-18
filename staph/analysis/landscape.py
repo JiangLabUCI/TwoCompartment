@@ -4,7 +4,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from typing import List
-from ..utils.pareto_rank import get_pareto_ranks, get_singh_data
+from ..utils.pareto_rank import get_pareto_ranks
+from ..utils.data import get_singh_data, get_rh_fit_data
 
 
 matplotlib.rcParams.update({"font.size": 15})
@@ -40,10 +41,16 @@ def igate(
     - Alternating ranks are colored alternately.
 
     choice = 2
-    - 
+    - Plot all solution paramter values.
+    - Highlight better performers in red.
+    
+    choice = 3
+    - Compute pareto ranks of all solutions.
+    - Save all solutions with rank in a file.
+    - Save rank 1 solutions in a file.
     """
     # h0, norig, ntot, tiny, A, H0 = get_singh_data()
-    global rh_best_dev, rh_best_fit
+    rh_best_sse, rh_best_dev = get_rh_fit_data()
 
     # Preprocess data
     min_devs = []
@@ -54,7 +61,7 @@ def igate(
     bXs = np.empty([0, 4])
     bFs = np.empty([0, 1])
     for fname in filenames:
-        with np.load(fname) as data:
+        with np.load(fname, allow_pickle=True) as data:
             desol_ind = data["desol_ind"]
             ndesol = len(desol_ind)
             bXs = np.vstack([bXs, data["bXlist"]])
@@ -118,7 +125,7 @@ def igate(
             markeredgecolor=[0, 0, 0],
         )
         h2, = plt.plot(
-            [rh_best_fit, rh_best_fit], [0, 100], "--k", label="Rose & Haas best fit"
+            [rh_best_sse, rh_best_sse], [0, 100], "--k", label="Rose & Haas best fit"
         )
         h3, = plt.plot(
             bFs[min_devs < rh_best_dev],
@@ -163,7 +170,4 @@ def igate(
         output_filename = "results/rank_1_solutions.npz"
         with open(output_filename, "wb") as f:
             np.savez(f, df=df)
-    elif choice == 4:
-        plt.plot(df.d1, df.Fcu, "rx")
-        print(df[df.Fcu < 1e3])
     plt.show()
