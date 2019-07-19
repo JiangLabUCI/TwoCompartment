@@ -4,11 +4,13 @@ import multiprocessing as mp
 from timeit import default_timer as timer
 from scipy.optimize import minimize
 from functools import partial
+from numba import njit
 from .data import get_singh_data, get_b1d2, calc_for_map
 from .tau_twocomp import tau_twocomp_carrier
 from typing import List, Tuple, Any, Union
 
 
+@njit(cache=True)
 def compute_deviance(p_inf: float, dose_index: int) -> float:
     """Compute deviance from Singh data.
 
