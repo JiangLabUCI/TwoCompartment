@@ -134,7 +134,7 @@ def tau_twocomp_carrier(
     tiny = 1e-12
     high = 1e12
     eps = 0.03
-    u, r, t = 0.0, 0.0, 0.0
+    u, t = 0.0, 0.0
     bflag = 0
     pop_array = np.zeros((2, nstep + 1), dtype=np.int32)
     pop_array[0, 0], pop_array[1, 0] = curH, curI
@@ -223,7 +223,6 @@ def tau_twocomp_carrier(
             while (ind < nstep) and (ind2 < 100):
                 u = np.random.rand()
                 t += -np.log(u) / prop_total
-                r = np.random.rand()
                 reaction_index = roulette(prop_array=prop_array)
                 curH += vH[reaction_index]
                 curI += vI[reaction_index]
