@@ -221,7 +221,7 @@ def compute_devs_min(
     nrep: int = 10,
     seed: int = 0,
     desol_ind: List[float] = [0],
-    nstep: int = 200000,
+    nstep: int = 200_000,
     method: str = "Powell",
     niter: int = 4,
     problem_type: int = 1,
