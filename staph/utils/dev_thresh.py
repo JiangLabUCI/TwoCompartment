@@ -12,11 +12,13 @@ from .dev import compute_deviance
 
 
 @njit(cache=True)
-def get_best_thresh(final_loads: np.ndarray, low: int = 10, high: int = 20):
+def get_best_thresh(
+    final_loads: np.ndarray, low: int = 10, high: int = 20
+) -> Tuple[int, float, np.ndarray, np.ndarray]:
     """Brute force best threshold search.
 
     Return the threshold that provides the best deviance for the given 
-    `final_loads` array.
+    `final_loads` array. Checks every value in [`low`, `high`).
 
     Parameters
     ----------
@@ -33,23 +35,28 @@ def get_best_thresh(final_loads: np.ndarray, low: int = 10, high: int = 20):
         The threshold that minimizes deviance.
     best_dev
         The lowest deviance found.
-
+    devs
+        The list of (total) deviances for each threshold.
+    all_devs
+        The list of deviances for each point for each threshold.
     """
     npts = final_loads.shape[0]
     thresh_array = np.arange(low, high)
     nthresh = thresh_array.shape[0]
     p_inf = np.zeros(npts)
     devs = np.zeros(thresh_array.shape[0])
+    all_devs = np.zeros((thresh_array.shape[0], npts))
     for ind1 in range(npts):
         for ind2 in range(nthresh):
             this_thresh = thresh_array[ind2]
             p_inf[ind1] = np.mean(final_loads[ind1, :] >= this_thresh)
-            devs[ind2] += compute_deviance(p_inf=p_inf[ind1], dose_index=ind1)
+            all_devs[ind2, ind1] = compute_deviance(p_inf=p_inf[ind1], dose_index=ind1)
+            devs[ind2] += all_devs[ind2, ind1]
     best_dev_index = np.argmin(devs)
     best_thresh = thresh_array[best_dev_index]
     best_dev = devs[best_dev_index]
 
-    return best_thresh, best_dev
+    return best_thresh, best_dev, devs, all_devs
 
 
 def thresh_obj_wrapper(
