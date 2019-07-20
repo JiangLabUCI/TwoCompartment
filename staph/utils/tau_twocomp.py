@@ -5,7 +5,7 @@ from .roulette import roulette
 
 
 @njit(cache=True)
-def get_propensity(rates: List[float], curH: int, curI: int) -> np.ndarray:
+def get_propensity(rates: np.ndarray, curH: int, curI: int) -> np.ndarray:
     """Returns the propensity for the two-comp model.
 
     Parameters
@@ -55,7 +55,7 @@ def get_propensity(rates: List[float], curH: int, curI: int) -> np.ndarray:
 @njit(cache=True)
 def tau_twocomp_carrier(
     init_load: np.ndarray,
-    rates: List[float],
+    rates: np.ndarray,
     Imax: float,
     nstep: int,
     seed: int,
@@ -144,9 +144,9 @@ def tau_twocomp_carrier(
     J = np.ones(nprop, dtype=np.int32)
     K = np.zeros(nprop, dtype=np.int32)
     g0, g1 = 1.0, 0.0
-    maxval = np.array([0, 0], dtype=np.float32)
-    mu = np.array([0, 0], dtype=np.float32)
-    sigsq = np.array([0, 0], dtype=np.float32)
+    maxval = np.array([0, 0], dtype=np.float64)
+    mu = np.array([0, 0], dtype=np.float64)
+    sigsq = np.array([0, 0], dtype=np.float64)
     vH = np.array([-1, -1, 0, 0, 0, 0], dtype=np.int32)
     vI = np.array([0, 1, 1, 1, -1, -1], dtype=np.int32)
 
