@@ -112,7 +112,7 @@ def thresh_obj_wrapper(
     b2 = 0
     d1 = 0
     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
-    rates = [r1, r2, b1, b2, d1, d2]
+    rates = np.array([r1, r2, b1, b2, d1, d2])
 
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
     p_inf = [0 for choice in range(npts)]
