@@ -20,8 +20,14 @@ rates = [
     0.009_187_849_603_656_904,
 ]  # [r1, r2, b1, b2, d1, d2]
 
+rates_nd = np.array(rates)
+print(rates_nd.dtype)
 
 h0, _, _, _, A, H0 = get_singh_data()
 
 init_load = np.array([H0[3]], dtype=np.int32)
-tau_twocomp_carrier(init_load, rates, Imax * A, nstep, seeds[836], 6.0, False)
+try:
+    tau_twocomp_carrier(init_load, rates, Imax * A, nstep, seeds[836], 6.0, False)
+except ZeroDivisionError:
+    print("zerodiverror")
+tau_twocomp_carrier(init_load, rates_nd, Imax * A, nstep, seeds[836], 6.0, False)
