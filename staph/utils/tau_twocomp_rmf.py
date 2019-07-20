@@ -46,7 +46,7 @@ def get_propensity(rates: np.ndarray, curH: int, curI: int) -> np.ndarray:
     b1, b2 = rates[2], rates[3]
     d1, d2 = rates[4], rates[5]
     rmf = rates[6]
-    prop = np.zeros(8, dtype=np.float32)
+    prop = np.zeros(8, dtype=np.float64)
     prop[0] = r1 * curH
     prop[1] = r2 * curH
     prop[2] = b1 * curI
@@ -133,7 +133,7 @@ def tau_twocomp_carrier_rmf(
     prop_array = get_propensity(rates, curH, curI)
     prop_total = np.sum(prop_array)
     nprop = 8
-    prop_crit = np.zeros(nprop, dtype=np.float32)
+    prop_crit = np.zeros(nprop, dtype=np.float64)
 
     # Tau leaping parameters
     nc = 10
