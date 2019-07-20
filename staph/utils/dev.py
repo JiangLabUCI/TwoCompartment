@@ -132,7 +132,7 @@ def carrier_obj_wrapper(
     """
 
     # Get data
-    h0, _, _, _, _, H0 = get_singh_data()
+    h0, _, _, _, A, H0 = get_singh_data()
 
     # Return high objective values for negative rates.
     if (x[0] < 0) or (x[1] < 0):
@@ -156,7 +156,6 @@ def carrier_obj_wrapper(
     if np.any(np.array(rates) < 0):
         return 3.2e3
     arg_list = []
-
     for choice in range(npts):
         # Holders for the return values of each dose
         extflag = np.zeros(nrep)
@@ -167,7 +166,9 @@ def carrier_obj_wrapper(
         arg_list = []
         for ind1 in range(nrep):
             init_load = np.array([H0[choice]], dtype=np.int32)
-            arg_list.append((init_load, rates, Imax, nstep, seeds[ind1], 6.0, False))
+            arg_list.append(
+                (init_load, rates, Imax * A, nstep, seeds[ind1], 6.0, False)
+            )
         # Run parallel simulation
         partial_func = partial(calc_for_map, func=tau_twocomp_carrier)
         results = pool.map(partial_func, arg_list)
