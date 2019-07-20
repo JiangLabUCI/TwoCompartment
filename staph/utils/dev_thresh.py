@@ -166,7 +166,7 @@ def thresh_obj_wrapper(
         # p_inf = prob (H(t) + I(t) > thresh)
 
     best_thresh = get_best_thresh(
-        final_loads=final_loads, low=H0[5] + 1, high=np.int(Imax)
+        final_loads=final_loads, low=H0[5] + 1, high=np.int(Imax * A)
     )
     print(best_thresh)
 
