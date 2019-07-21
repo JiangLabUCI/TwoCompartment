@@ -281,7 +281,8 @@ def compute_devs_min(
 
     if problem_type == 1:
         minimization_objective = carrier_obj_wrapper
-        initial_guess = (3.5, 4)
+        initial_guess = (2.5, 30)
+        print("Initial_guess is : ", initial_guess)
 
     print("Creating pool with", n_procs, " processes\n")
     pool = mp.Pool(n_procs)
