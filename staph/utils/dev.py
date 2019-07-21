@@ -139,8 +139,7 @@ def carrier_obj_wrapper(
         return 3000
 
     # Compute b1 and d2 for simulation.
-    b2 = 10 ** (-x[0])
-    d1 = x[1]
+    b2, d1 = transform_x(x)
     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
     rates = np.array([r1, r2, b1, b2, d1, d2])
     np.random.seed(seed)
@@ -215,6 +214,34 @@ def carrier_obj_wrapper(
         return objval
     else:
         return (devs, extflags, endts, statuses)
+
+
+def transform_x(x: List[float]) -> Tuple[float, float]:
+    """Transform `x` to `b2` and `d1`.
+
+    Transform `x` to `b2` and `d1`, used by `carrier_obj_wrapper`.
+
+    Parameters
+    ----------
+    x
+        The vector containing values used for transformation.
+    
+    Returns
+    -------
+    b2 : float
+        Second order birth rate of twocomp model (stochastic,
+        units = 1 / (bacteria * day)).
+    d1 : float
+        First order death rate of twocomp model. (stochastic,
+        units = 1 / day)
+
+    Notes
+    -----
+    Use this function to centralize the transform to avoid errors.
+    """
+    b2 = 10 ** (-x[0])
+    d1 = x[1]
+    return b2, d1
 
 
 def compute_devs_min(
