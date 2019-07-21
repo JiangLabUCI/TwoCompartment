@@ -103,7 +103,7 @@ def carrier_obj_wrapper(
     Parameters
     ----------
     x
-        Input array to be optimized. Consists of rate constants b1 and d2.
+        Input array to be optimized. Consists of rate constants b2 and d1.
     r1
         Rate constant with units (/day).
     r2
