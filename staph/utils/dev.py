@@ -305,7 +305,9 @@ def compute_devs_min(
 
     t0 = timer()
     for ind in range(ndesol):
-        r1, r2, r3, Imax, modno = get_consts_bX(bXlist=bXlist, ind=ind, filename=filename)
+        r1, r2, r3, Imax, modno = get_consts_bX(
+            bXlist=bXlist, ind=ind, filename=filename
+        )
         t1 = timer()
         min_obj = minimize(
             minimization_objective,
