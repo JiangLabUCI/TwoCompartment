@@ -278,14 +278,7 @@ def compute_devs_min(
 
     t0 = timer()
     for ind in range(ndesol):
-        r1, r2, r3 = bXlist[ind, 0], bXlist[ind, 1], bXlist[ind, 2]
-        modno = int(filename[filename.find("mod") - 1])
-        if modno == 3:
-            Imax = bXlist[ind, 3]
-        elif modno == 6:
-            Imax = bXlist[ind, 3] / r3
-            print("bXlist, r3 and Imax are : ", bXlist[ind, 3], r3, Imax)
-        print("r3 * Imax is : ", r3 * Imax)
+        r1, r2, r3, Imax, modno = get_consts_bX(bXlist=bXlist, ind=ind, filename=filename)
         t1 = timer()
         min_obj = minimize(
             minimization_objective,
@@ -333,6 +326,54 @@ def compute_devs_min(
             optim_objs=optim_objs,
             modno=modno,
         )
+
+
+def get_consts_bX(
+    bXlist: np.ndarray, ind: int, filename: str
+) -> Tuple[float, float, float, float, int]:
+    """Pre-process bX and return kinetic constants.
+
+    From bXlist, extract the kinetic constants r1, r2, r3 and Imax.
+
+    Parameters
+    ----------
+    bXlist
+        The array of solutions that provide the best objective values.
+    ind
+        The index of the solution to return constants for.
+    filename
+        The name of the file from which the indices were extracted.
+    
+    Returns
+    -------
+    r1
+        Rate constant with units (/day).
+    r2
+        Rate constant with units (/day).
+    r3
+        Rate constant with units (cm^2/(bacteria * day)).
+    Imax
+        Carrying capacity with units (bacteria/cm^2).
+    modno
+        Model number. 3 means Imax was predicted in DEMC. 
+        6 means r3Imax was predicted in DEMC.
+
+    Notes
+    -----
+    If the filename has `3mod` in it, Imax was predicted as the 4th element.
+    If it has `6mod` in it, r3Imax was predicted as the 4th element and Imax
+    has to be computed from its value.
+    """
+    r1, r2, r3 = bXlist[ind, 0], bXlist[ind, 1], bXlist[ind, 2]
+    modno = int(filename[filename.find("mod") - 1])
+    if modno == 3:
+        Imax = bXlist[ind, 3]
+    elif modno == 6:
+        Imax = bXlist[ind, 3] / r3
+        print("bXlist, r3 and Imax are : ", bXlist[ind, 3], r3, Imax)
+    print("r3 * Imax is : ", r3 * Imax)
+
+    return r1, r2, r3, Imax, modno
 
 
 def get_bF_bX(
