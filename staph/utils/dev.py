@@ -70,7 +70,7 @@ def compute_deviance(p_inf: float, dose_index: int) -> float:
             + (ntot - norig[dose_index])
             * np.log((1 - p_inf) * ntot / (ntot - norig[dose_index]))
         )
-        dev = dev + 1e3
+        dev = dev
         p_inf = 0
     else:
         dev = -2 * (
@@ -139,7 +139,7 @@ def carrier_obj_wrapper(
         return 3000
 
     # Compute b1 and d2 for simulation.
-    b2 = x[0]
+    b2 = 10 ** (-x[0])
     d1 = x[1]
     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
     rates = np.array([r1, r2, b1, b2, d1, d2])
@@ -177,7 +177,6 @@ def carrier_obj_wrapper(
             extflag[ind1] = r[0]
             endt[ind1] = r[1]
             status[ind1] = r[4]
-
         # p_inf = prob (I(t) > Imax)
         # Population exceeds Imax if I(t) > Imax (status == 3) or
         # if I(t) overflows.
@@ -191,9 +190,9 @@ def carrier_obj_wrapper(
         # threshold. Higher doses will have p_inf = 1, resulting in
         # even higher objectives.
 
-        if np.sum(devs) > 3e3:
+        if np.sum(devs) > 150:
             print("Stopping early.")
-            objval = 3.1e3
+            objval = 150
             return objval
 
         extflags.append(extflag)
@@ -201,7 +200,7 @@ def carrier_obj_wrapper(
         statuses.append(status)
         this_status = status
         print(
-            f"Seed = {seed}, dev = {dev}, status histogram : ",
+            f"Seed = {seed}, pinf = {p_inf[choice]:.3f}, dev = {dev:.3f},  status histogram : ",
             np.histogram(
                 this_status, bins=np.array([-2, -1, 0, 1, 2, 3, 4, 5, 6]) - 0.1
             )[0],
@@ -263,18 +262,7 @@ def compute_devs_min(
     print("Nstep : ", nstep)
     print("Number of points is : ", npts)
     ndesol = len(desol_ind)  # number of DE solutions to investigate
-    data = sio.loadmat(filename)
-    Xlist = data["solset"][0][0][2]
-    Flist = data["solset"][0][0][3]
-    sortF = np.sort(np.unique(Flist.flatten()))
-    bFlist = np.zeros([ndesol])
-    bXlist = np.zeros([ndesol, Xlist.shape[2]])
-    for ind in range(ndesol):
-        bFlist[ind] = sortF[desol_ind[ind]]
-        [ind1, ind2] = np.where(Flist == bFlist[ind])
-        Xt = Xlist[ind1, ind2, :]
-        Xt2 = np.unique(Xt, axis=0)
-        bXlist[ind, :] = np.power(10, Xt2.flatten())
+    bFlist, bXlist = get_bF_bX(filename=filename, desol_ind=desol_ind)
     print("Best F values : ", bFlist)
     print("Best parameters : ", bXlist)
     optim_objs = []
@@ -345,3 +333,42 @@ def compute_devs_min(
             optim_objs=optim_objs,
             modno=modno,
         )
+
+
+def get_bF_bX(
+    filename: str = "results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat",
+    desol_ind: List[int] = [0],
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Get the best F and X values from DEMC solutions.
+    
+    Read the solutions present in `filename` and extract the best objective
+    values and the solutions giving best objective values to return.
+
+    Parameters
+    ----------
+    filename
+        The file containing the DEMC solutions.
+    desol_ind
+        The indexes of the DE solutions to return objective and solutions at.
+    
+    Returns
+    -------
+    bFlist
+        The best objective values.
+    bXlist
+        The solutions that provide the best objective values.
+    """
+    ndesol = len(desol_ind)  # number of DE solutions to investigate
+    data = sio.loadmat(filename)
+    Xlist = data["solset"][0][0][2]
+    Flist = data["solset"][0][0][3]
+    sortF = np.sort(np.unique(Flist.flatten()))
+    bFlist = np.zeros([ndesol])
+    bXlist = np.zeros([ndesol, Xlist.shape[2]])
+    for ind in range(ndesol):
+        bFlist[ind] = sortF[desol_ind[ind]]
+        [ind1, ind2] = np.where(Flist == bFlist[ind])
+        Xt = Xlist[ind1, ind2, :]
+        Xt2 = np.unique(Xt, axis=0)
+        bXlist[ind, :] = np.power(10, Xt2.flatten())
+    return bFlist, bXlist
