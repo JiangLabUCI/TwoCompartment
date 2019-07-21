@@ -440,3 +440,139 @@ def get_bF_bX(
         Xt2 = np.unique(Xt, axis=0)
         bXlist[ind, :] = np.power(10, Xt2.flatten())
     return bFlist, bXlist
+
+
+def compute_devs_brute(
+    filename="results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat",
+    npts: int = 2,
+    nrep: int = 10,
+    seed: int = 0,
+    desol_ind: List[int] = [0],
+    nstep: int = 200_000,
+    problem_type: int = 1,
+    n_procs: int = 2,
+    lims: dict = {"d1l": 0, "d1u": 5, "b2l": 0, "b2u": 5},
+    nb2=2,
+    nd1=2,
+):
+    """Optimize for deviances of the DEMC solutions.
+
+    Runs the optimization and saves the outputs for brute force optimization.
+
+    Parameters
+    ----------
+    filename
+        DE solution file name.
+    npts
+        Number of doses to calculate deviance at.
+    nrep
+        Number of simulations per (b1,d2) pair to calculate deviance.
+    seed
+        Seed of the `NumPy` random generator, different from the seed 
+        of `numba`.
+    desol_ind
+        Indices of the DE solutions to evaluate deviance.
+    nstep
+        Maximum number of steps to run each simulation.
+    problem_type
+        If 1, optimize for b2 and d1. If 2, optimize only for d1 with b2 = 0.
+    n_procs
+        Number of parallel processes to evaluate the objective at.
+    lims
+        Dictionary of upper and lower limits of b2 and d1.
+    nb2
+        Number of b2 solutions to go over.
+    nd1
+        Number of d1 solutions to go over.
+    """
+
+    print("Seed is : ", seed)
+    print("Nstep : ", nstep)
+    print("Number of points is : ", npts)
+    ndesol = len(desol_ind)  # number of DE solutions to investigate
+    bFlist, bXlist = get_bF_bX(filename=filename, desol_ind=desol_ind)
+    print("Best F values : ", bFlist)
+    print("Best parameters : ", bXlist)
+    # The suffix u denotes untransformed variables.
+    b2listu = np.linspace(lims["b2l"], lims["b2u"], nb2)
+    d1listu = np.linspace(lims["d1l"], lims["d1u"], nd1)
+    np.random.seed(seed)
+    seeds = np.random.randint(low=0, high=1e5, size=nrep)
+
+    optim_objs = []
+    all_devs = []
+    all_statuses = []
+    tot_devs = []
+
+    if problem_type == 1:
+        minimization_objective = carrier_obj_wrapper
+        initial_guess = (2.5, 30)
+        print("Initial_guess is : ", initial_guess)
+
+    print("Creating pool with", n_procs, " processes\n")
+    pool = mp.Pool(n_procs)
+    print("pool = %s", pool)
+
+    t0 = timer()
+    for ind1 in range(ndesol):
+        r1, r2, r3, Imax, modno = get_consts_bX(
+            bXlist=bXlist, ind=ind1, filename=filename
+        )
+        t1 = timer()
+        for b2u in b2listu:
+            for d1u in d1listu:
+                print(f"Starting loop for b2u={b2u:.2e}, d1u={d1u:.2f}")
+                devs, _, _, statuses = carrier_obj_wrapper(
+                    x=[b2u, d1u],
+                    r1=r1,
+                    r2=r2,
+                    r3=r3,
+                    Imax=Imax,
+                    npts=npts,
+                    nrep=nrep,
+                    nstep=nstep,
+                    seed=seed,
+                    pool=pool,
+                    obj_flag=False,
+                )
+                all_devs.append(devs)
+                all_statuses.append(statuses)
+                tot_devs.append(np.sum(devs))
+        print(np.min(tot_devs))
+        t2 = timer()
+        print("1 DE solution took : ", t2 - t1, "s")
+    print("Totally took : ", t2 - t0, "s")
+    ind1 = 0
+    ind2 = filename.find("_DE")
+    jname = filename[ind1:ind2]
+    solstr = "to".join([str(min(desol_ind)), str(max(desol_ind))])
+    op_filename = (
+        jname
+        + "_"
+        + str(nrep)
+        + "rep"
+        + str(seed)
+        + "se"
+        + "_"
+        + solstr
+        + "b2d1_1o4_cpu.npz"
+    )
+    print("Output filename : ", op_filename)
+
+    with open(op_filename, "wb") as f:
+        np.savez(
+            f,
+            seed=seed,
+            desol_ind=desol_ind,
+            bXlist=bXlist,
+            bFlist=bFlist,
+            nstep=nstep,
+            modno=modno,
+            all_devs=all_devs,
+            tot_devs=tot_devs,
+            all_statuses=all_statuses,
+            b2listu=b2listu,
+            d1listu=d1listu,
+            nb2=nb2,
+            nd1=nd1,
+        )
