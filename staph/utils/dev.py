@@ -222,7 +222,7 @@ def compute_devs_min(
     npts: int = 2,
     nrep: int = 10,
     seed: int = 0,
-    desol_ind: List[float] = [0],
+    desol_ind: List[int] = [0],
     nstep: int = 200_000,
     method: str = "Powell",
     niter: int = 4,
@@ -244,7 +244,7 @@ def compute_devs_min(
     seed
         Seed of the `NumPy` random generator, different from the seed 
         of `numba`
-    desol_ind: list of int
+    desol_ind
         Indices of the DE solutions to evaluate deviance
     nstep
         Maximum number of steps to run each simulation
