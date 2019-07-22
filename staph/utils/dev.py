@@ -189,7 +189,7 @@ def carrier_obj_wrapper(
         # threshold. Higher doses will have p_inf = 1, resulting in
         # even higher objectives.
 
-        if np.sum(devs) > 150:
+        if obj_flag and np.sum(devs) > 150:
             print("Stopping early.")
             objval = 150
             return objval
