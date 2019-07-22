@@ -207,10 +207,10 @@ def carrier_obj_wrapper(
         if np.any(this_status == 0):
             print("Zero status detected, rates, dose =  ", rates, h0[choice])
 
+    objval = np.sum(devs)
+    print("Objective is : ", objval)
+    print("------------------------------------------")
     if obj_flag:
-        objval = np.sum(devs)
-        print("Objective is : ", objval)
-        print("------------------------------------------")
         return objval
     else:
         return (devs, extflags, endts, statuses)
