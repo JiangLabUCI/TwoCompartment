@@ -1,6 +1,7 @@
 import numpy as np
 from ..staph.utils.dev import compute_deviance, carrier_obj_wrapper
 from ..staph.utils.dev import compute_devs_min as cdmin
+from ..staph.utils.dev import compute_devs_brute as cdbrute
 from ..staph.utils.data import get_singh_data
 
 
@@ -34,3 +35,7 @@ def test_minimize():
 
 def test_cdmin():
     cdmin()
+
+
+def test_cdbrute():
+    cdbrute()
