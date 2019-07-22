@@ -11,14 +11,9 @@ def test_compute_deviance():
         compute_deviance(norig[ind] / ntot, ind) == 0
 
     assert compute_deviance(0.5, 5) == -2 * 20 * np.log(0.5)
-    assert (
-        compute_deviance(0, 0)
-        == -2
-        * (
-            4 * np.log(0.01 * ntot / 4)
-            + (ntot - 4) * np.log((1 - 0.01) * ntot / (ntot - 4))
-        )
-        + 1e3
+    assert compute_deviance(0, 0) == -2 * (
+        4 * np.log(0.01 * ntot / 4)
+        + (ntot - 4) * np.log((1 - 0.01) * ntot / (ntot - 4))
     )
     assert compute_deviance(1, 0) == -2 * (
         4 * np.log(0.99 * ntot / 4)
