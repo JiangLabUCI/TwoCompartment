@@ -498,10 +498,7 @@ def compute_devs_brute(
     # The suffix u denotes untransformed variables.
     b2listu = np.linspace(lims["b2l"], lims["b2u"], nb2)
     d1listu = np.linspace(lims["d1l"], lims["d1u"], nd1)
-    np.random.seed(seed)
-    seeds = np.random.randint(low=0, high=1e5, size=nrep)
 
-    optim_objs = []
     all_devs = []
     all_statuses = []
     tot_devs = []
@@ -524,7 +521,7 @@ def compute_devs_brute(
         for b2u in b2listu:
             for d1u in d1listu:
                 print(f"Starting loop for b2u={b2u:.2e}, d1u={d1u:.2f}")
-                devs, _, _, statuses = carrier_obj_wrapper(
+                devs, _, _, statuses = minimization_objective(
                     x=[b2u, d1u],
                     r1=r1,
                     r2=r2,
