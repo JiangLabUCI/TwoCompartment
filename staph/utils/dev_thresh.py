@@ -11,7 +11,7 @@ from .tau_twocomp import tau_twocomp_carrier
 from .dev import compute_deviance
 
 
-@njit(cache=True)
+@njit(cache=False)
 def get_best_thresh(
     final_loads: np.ndarray, low: int = 10, high: int = 20
 ) -> Tuple[int, float, np.ndarray, np.ndarray]:

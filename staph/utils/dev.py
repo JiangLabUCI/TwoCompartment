@@ -10,7 +10,7 @@ from .tau_twocomp import tau_twocomp_carrier
 from typing import List, Tuple, Any, Union
 
 
-@njit(cache=True)
+@njit(cache=False)
 def compute_deviance(p_inf: float, dose_index: int) -> float:
     """Compute deviance from Singh data.
 

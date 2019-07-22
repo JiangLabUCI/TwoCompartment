@@ -4,7 +4,7 @@ from scipy.stats import truncnorm
 from numba import njit
 
 
-@njit(cache=True)
+@njit(cache=False)
 def get_singh_data() -> Tuple[List[int], List[int], int, float, float, Any]:
     """Return Singh 1971 data.
 

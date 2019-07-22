@@ -4,7 +4,7 @@ from typing import List, Tuple
 from .roulette import roulette
 
 
-@njit(cache=True)
+@njit(cache=False)
 def get_propensity(rates: np.ndarray, curH: int, curI: int) -> np.ndarray:
     """
     Returns the propensity for the two-comp model.
@@ -58,7 +58,7 @@ def get_propensity(rates: np.ndarray, curH: int, curI: int) -> np.ndarray:
     return prop
 
 
-@njit(cache=True)
+@njit(cache=False)
 def tau_twocomp_carrier_rmf(
     init_load: np.ndarray,
     rates: np.ndarray,

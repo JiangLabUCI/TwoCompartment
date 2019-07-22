@@ -3,7 +3,7 @@ from typing import List
 from numba import njit
 
 
-@njit(cache=True)
+@njit(cache=False)
 def roulette(prop_array: List[float]) -> int:
     """Perform roulette selection.
 
@@ -33,7 +33,7 @@ def roulette(prop_array: List[float]) -> int:
     return ind
 
 
-@njit(cache=True)
+@njit(cache=False)
 def simple_system(seed: int = 0) -> np.ndarray:
     """Run roulette after settind seed.
 
