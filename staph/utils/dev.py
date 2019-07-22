@@ -454,8 +454,8 @@ def compute_devs_brute(
     problem_type: int = 1,
     n_procs: int = 2,
     lims: dict = {"d1l": 0, "d1u": 5, "b2l": 0, "b2u": 5},
-    nb2=2,
-    nd1=2,
+    nb2: int = 2,
+    nd1: int = 2,
 ):
     """Optimize for deviances of the DEMC solutions.
 
