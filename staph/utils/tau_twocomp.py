@@ -315,6 +315,9 @@ def tau_twocomp_carrier(
         if curI < 0:
             if K[3] < 0 and rates[3] > 0:
                 status = 4
+            elif K[2] < 0 and rates[2] > 0:
+                print("Attention: b1 reaction overflow. Prop array is : ", prop_array)
+                status = 4
             else:
                 print("I don't think this should happen (curI < 0)")
                 status = -2
