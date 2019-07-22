@@ -8,6 +8,7 @@ from numba import njit
 from .data import get_singh_data, get_b1d2, calc_for_map
 from .tau_twocomp import tau_twocomp_carrier
 from typing import List, Tuple, Any, Union
+from collections import Counter
 
 
 @njit(cache=False)
@@ -199,10 +200,8 @@ def carrier_obj_wrapper(
         statuses.append(status)
         this_status = status
         print(
-            f"Seed = {seed}, pinf = {p_inf[choice]:.3f}, dev = {dev:.3f},  status histogram : ",
-            np.histogram(
-                this_status, bins=np.array([-2, -1, 0, 1, 2, 3, 4, 5, 6]) - 0.1
-            )[0],
+            f"Seed = {seed}, pinf = {p_inf[choice]:.3f}, dev = {dev:.3f},  status counts : ",
+            Counter(this_status),
         )
         if np.any(this_status == 0):
             print("Zero status detected, rates, dose =  ", rates, h0[choice])
