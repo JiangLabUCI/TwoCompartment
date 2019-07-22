@@ -50,7 +50,7 @@ if __name__ == "__main__":
             nstep=nstep,
             problem_type=1,
             n_procs=ncores,
-            lims={"d1l": 1.5, "d1u": 3.5, "b2l": 5, "b2u": 30},
-            nb2=5,
-            nd1=5,
+            lims={"d1l": 35, "d1u": 65, "b2l": 1.5, "b2u": 3.0},
+            nb2=12,
+            nd1=12,
         )
