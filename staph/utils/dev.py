@@ -95,6 +95,7 @@ def carrier_obj_wrapper(
     seed: int,
     pool: Any,
     obj_flag: bool,
+    t_type: str,
 ) -> Union[float, Tuple[List, List, List, List]]:
     """Wrapper objective function that returns total deviance.
     
@@ -125,6 +126,8 @@ def carrier_obj_wrapper(
     obj_flag
         If `True`, return only objective value. Else return Tuple with
         devs, extflags, endts and statuses.
+    t_type
+        Tranformation type to apply to b2.
 
     Returns
     -------
@@ -140,7 +143,7 @@ def carrier_obj_wrapper(
         return 3000
 
     # Compute b1 and d2 for simulation.
-    b2, d1 = transform_x(x)
+    b2, d1 = transform_x(x, t_type=t_type)
     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
     rates = np.array([r1, r2, b1, b2, d1, d2])
     np.random.seed(seed)
@@ -215,7 +218,7 @@ def carrier_obj_wrapper(
         return (devs, extflags, endts, statuses)
 
 
-def transform_x(x: List[float]) -> Tuple[float, float]:
+def transform_x(x: List[float], t_type: Union[None, str]) -> Tuple[float, float]:
     """Transform `x` to `b2` and `d1`.
 
     Transform `x` to `b2` and `d1`, used by `carrier_obj_wrapper`.
@@ -224,6 +227,8 @@ def transform_x(x: List[float]) -> Tuple[float, float]:
     ----------
     x
         The vector containing values used for transformation.
+    t_type
+        Specify the kind of transform. Leave blank or specify as "log".
     
     Returns
     -------
@@ -238,7 +243,10 @@ def transform_x(x: List[float]) -> Tuple[float, float]:
     -----
     Use this function to centralize the transform to avoid errors.
     """
-    b2 = 10 ** (-x[0])
+    if t_type == "log":
+        b2 = 10 ** (-x[0])
+    elif t_type is None:
+        b2 = x[0]
     d1 = x[1]
     return b2, d1
 
@@ -254,6 +262,7 @@ def compute_devs_min(
     niter: int = 4,
     problem_type: int = 1,
     n_procs: int = 2,
+    t_type: str = None,
 ):
     """Optimize for deviances of the DEMC solutions.
 
@@ -282,6 +291,8 @@ def compute_devs_min(
         If 1, optimize for b2 and d1. If 2, optimize only for d1 with b2 = 0.
     n_procs
         Number of parallel processes to evaluate the objective at.
+    t_type
+        Tranformation type to apply to b2.
     """
 
     print("Seed is : ", seed)
@@ -311,7 +322,7 @@ def compute_devs_min(
         min_obj = minimize(
             minimization_objective,
             initial_guess,
-            args=(r1, r2, r3, Imax, npts, nrep, nstep, seed, pool, True),
+            args=(r1, r2, r3, Imax, npts, nrep, nstep, seed, pool, True, t_type),
             options={"maxfev": niter},
             method=method,
         )
@@ -353,6 +364,7 @@ def compute_devs_min(
             nstep=nstep,
             optim_objs=optim_objs,
             modno=modno,
+            t_type=t_type,
         )
 
 
@@ -455,6 +467,7 @@ def compute_devs_brute(
     lims: dict = {"d1l": 0, "d1u": 5, "b2l": 0, "b2u": 5},
     nb2: int = 2,
     nd1: int = 2,
+    t_type: str = None,
 ):
     """Optimize for deviances of the DEMC solutions.
 
@@ -485,6 +498,8 @@ def compute_devs_brute(
         Number of b2 solutions to go over.
     nd1
         Number of d1 solutions to go over.
+    t_type
+        Tranformation type to apply to b2.
     """
 
     print("Seed is : ", seed)
@@ -532,6 +547,7 @@ def compute_devs_brute(
                     seed=seed,
                     pool=pool,
                     obj_flag=False,
+                    t_type=t_type,
                 )
                 all_devs.append(devs)
                 all_statuses.append(statuses)
@@ -573,4 +589,5 @@ def compute_devs_brute(
             d1listu=d1listu,
             nb2=nb2,
             nd1=nd1,
+            t_type=t_type,
         )
