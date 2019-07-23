@@ -372,7 +372,7 @@ def compute_devs_min(
 
 
 def get_consts_bX(
-    bXlist: np.ndarray, ind: int, filename: str
+    bXlist: np.ndarray, ind: int, filename: str, verbose: int = 1
 ) -> Tuple[float, float, float, float, int]:
     """Pre-process bX and return kinetic constants.
 
@@ -386,6 +386,8 @@ def get_consts_bX(
         The index of the solution to return constants for.
     filename
         The name of the file from which the indices were extracted.
+    verbose
+        Verbosity of output. 0(no output) or 1(more output).
     
     Returns
     -------
@@ -413,8 +415,10 @@ def get_consts_bX(
         Imax = bXlist[ind, 3]
     elif modno == 6:
         Imax = bXlist[ind, 3] / r3
-        print("bXlist, r3 and Imax are : ", bXlist[ind, 3], r3, Imax)
-    print("r3 * Imax is : ", r3 * Imax)
+        if verbose:
+            print("bXlist, r3 and Imax are : ", bXlist[ind, :], r3, Imax)
+    if verbose:
+        print("r3 * Imax is : ", r3 * Imax)
 
     return r1, r2, r3, Imax, modno
 
