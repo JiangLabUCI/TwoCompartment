@@ -263,6 +263,7 @@ def compute_devs_min(
     problem_type: int = 1,
     n_procs: int = 2,
     t_type: str = None,
+    initial_guess: Tuple[float, float] = (2.5, 30),
 ):
     """Optimize for deviances of the DEMC solutions.
 
@@ -293,6 +294,8 @@ def compute_devs_min(
         Number of parallel processes to evaluate the objective at.
     t_type
         Tranformation type to apply to b2.
+    initial_guess
+        Initial guess for the optimizer.
     """
 
     print("Seed is : ", seed)
@@ -306,7 +309,6 @@ def compute_devs_min(
 
     if problem_type == 1:
         minimization_objective = carrier_obj_wrapper
-        initial_guess = (2.5, 30)
         print("Initial_guess is : ", initial_guess)
 
     print("Creating pool with", n_procs, " processes\n")
@@ -365,6 +367,7 @@ def compute_devs_min(
             optim_objs=optim_objs,
             modno=modno,
             t_type=t_type,
+            initial_guess=initial_guess,
         )
 
 
@@ -519,8 +522,6 @@ def compute_devs_brute(
 
     if problem_type == 1:
         minimization_objective = carrier_obj_wrapper
-        initial_guess = (2.5, 30)
-        print("Initial_guess is : ", initial_guess)
 
     print("Creating pool with", n_procs, " processes\n")
     pool = mp.Pool(n_procs)
