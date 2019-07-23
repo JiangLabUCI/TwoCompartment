@@ -13,7 +13,7 @@ from collections import Counter
 
 @njit(cache=False)
 def compute_deviance(p_inf: float, dose_index: int) -> float:
-    """Compute deviance from Singh data.
+    """Smoothed deviance from Singh data.
 
     For a given infection probability and dose index, compute the deviance
     from Singh data.
@@ -30,8 +30,14 @@ def compute_deviance(p_inf: float, dose_index: int) -> float:
     dev
         Deviance of the given infection probability for that dose index.
 
+    See Also
+    --------
+    compute_deviance_hform : Compute deviance of Singh data.
+
     Notes
     -----
+    This version is smoother than that from [1]_.
+
     The formula for deviance is:
     -2 * (norig[dose_index] * np.log(p_inf * ntot / norig[dose_index])
     + (ntot - norig[dose_index])
@@ -49,6 +55,13 @@ def compute_deviance(p_inf: float, dose_index: int) -> float:
     Also add 1000 to the deviance for some forcing. This will not affect final
     results much because this condition (p_inf = 0) will not be met for good
     solutions obtained in the later stages of optimization.
+    
+    References
+    ----------
+    .. [1] Haas, C. N., Rose, J. B., & Gerba, C. P. (2014). Quantitative 
+    Microbial Risk Assessment. Quantitative Microbial Risk Assessment: 
+    Second Edition (Vol. 9781118145). Hoboken, New Jersey: John Wiley & Sons, 
+    Inc. https://doi.org/10.1002/9781118910030
     """
 
     # Import data
@@ -80,6 +93,53 @@ def compute_deviance(p_inf: float, dose_index: int) -> float:
             * np.log((1 - p_inf) * ntot / (ntot - norig[dose_index]))
         )
 
+    return dev
+
+
+def compute_deviance_hform(p_inf: float, dose_index: int) -> float:
+    """Non-smoothed deviance from Singh data.
+
+    For a given infection probability and dose index, compute the deviance
+    from Singh data.
+
+    Parameters
+    ----------
+    p_inf
+        Infection probability to compute deviance of.
+    dose_index
+        The index of the dose from the Singh data. Integer in [0, 5].
+
+    Returns
+    -------
+    dev
+        Deviance of the given infection probability for that dose index.
+
+    See Also
+    --------
+    compute_deviance : Compute deviance of Singh data.
+
+    Notes
+    -----
+    The formula for deviance is from [1]_, Chapter 8 (Page 315, Figure 8.14:
+    this has the code to compute deviance).
+
+    References
+    ----------
+    .. [1] Haas, C. N., Rose, J. B., & Gerba, C. P. (2014). Quantitative 
+    Microbial Risk Assessment. Quantitative Microbial Risk Assessment: 
+    Second Edition (Vol. 9781118145). Hoboken, New Jersey: John Wiley & Sons, 
+    Inc. https://doi.org/10.1002/9781118910030
+    """
+
+    # Import data
+    _, norig, ntot, _, _, _ = get_singh_data()
+
+    dev = 0
+    fpred = p_inf
+    fobs = norig[dose_index] / ntot
+    Y1 = norig[dose_index] * np.log((fpred + 1e-15) / (fobs + 1e-15))
+    Y2 = (ntot - norig[dose_index]) * np.log((1 - fpred) / (1 - fobs + 1e-15))
+    dev = -2 * (Y1 + Y2)
     return dev
 
 
