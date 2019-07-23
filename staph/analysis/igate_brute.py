@@ -42,7 +42,7 @@ def igate(filename: str):
     print(f"Best deviance = {best_dev}")
     for ind1 in range(nb2):
         for ind2 in range(nd1):
-            linear_ind = ind1 * nb2 + ind2
+            linear_ind = ind1 * nd1 + ind2
             b2, d1 = transform_x([b2listu[ind1], d1listu[ind2]])
             xx[ind1, ind2] = b2
             yy[ind1, ind2] = d1
