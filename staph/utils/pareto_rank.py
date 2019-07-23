@@ -2,7 +2,7 @@ import numpy as np
 from numba import njit
 
 
-@njit(cache=True)
+@njit(cache=False)
 def dominated(X, x):
     """dominated(X,x)
 
@@ -25,7 +25,7 @@ def dominated(X, x):
     return np.any(np.sum(X < x, axis=1) == len(x))
 
 
-@njit(cache=True)
+@njit(cache=False)
 def get_pareto_ranks(X):
     """get_pareto_ranks(X)
 
