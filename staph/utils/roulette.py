@@ -21,15 +21,11 @@ def roulette(prop_array: List[float]) -> int:
     """
     nprop = len(prop_array)
     prop_total = np.sum(prop_array)
-    roulette_sum = prop_array[0]
     r = np.random.rand()
+    roulette_sum = np.cumsum(prop_array) / prop_total
     for ind in range(nprop):
-        if r < roulette_sum / prop_total:
+        if r < roulette_sum[ind]:
             break
-        else:
-            roulette_sum += prop_array[ind]
-            if roulette_sum / prop_total >= 1:
-                break
     return ind
 
 
