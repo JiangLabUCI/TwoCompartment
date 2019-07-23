@@ -30,6 +30,7 @@ if __name__ == "__main__":
             niter=niter,
             problem_type=1,
             n_procs=ncores,
+            initial_guess=(1e-3, 160),
         )
     elif choice == 2:
         nrep = 1000
