@@ -42,6 +42,7 @@ def igate(
     choice = 2
     - Plot all solution paramter values.
     - Highlight better performers in red.
+    - Also plot select combinations of objectives and paramters.
     
     choice = 3
     - Compute pareto ranks of all solutions.
@@ -158,6 +159,25 @@ def igate(
             print("Possibly no solution has better deviance than RH")
         plt.plot(np.transpose(df2[df.Fst > rh_best_dev].values), "xkcd:grey", alpha=0.7)
         plt.xticks(range(len(df2.columns)), labels=colnames)
+        plt.figure(tight_layout=True)
+        plt.subplot(231)
+        plt.plot(df.d1, df.Fst, "ro")
+        plt.ylabel("Fst")
+        plt.subplot(232)
+        plt.plot(df.b2, df.Fst, "ro")
+        plt.subplot(233)
+        plt.plot(df.Fde, df.Fst, "ro")
+        plt.xlabel("Fde")
+        plt.subplot(234)
+        plt.plot(df.d1, df.Fde, "ro")
+        plt.xlabel("d1")
+        plt.ylabel("Fde")
+        plt.subplot(235)
+        plt.plot(df.b2, df.Fde, "ro")
+        plt.xlabel("b2")
+        plt.subplot(236)
+        plt.plot(df.Fst)
+        plt.ylabel("Fst")
     elif choice == 3:
         # Save rank 1 solutions in a numpy file
         Fvals = np.vstack([df.Fde, df.Fst]).transpose()
