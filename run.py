@@ -56,3 +56,31 @@ if __name__ == "__main__":
             nd1=10,
             t_type="log",
         )
+    elif choice == 3:
+        nrep = 1000
+        # For wide bounds
+        fname = "results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat"
+        ncores = np.int32(sys.argv[2])
+        ind = np.int32(sys.argv[3])
+        assert ind >= 1
+        desol_ind = np.arange(ind - 1, ind)
+        nstep = 200000
+        npts = 1
+        niter = 2
+        cdmin(
+            filename=fname,
+            npts=npts,
+            nrep=nrep,
+            seed=seed,
+            desol_ind=desol_ind,
+            nstep=nstep,
+            method="diffev",
+            niter=niter,
+            problem_type=1,
+            n_procs=ncores,
+            initial_guess=(1.1, 0.7),
+            bounds=[[0.5, 2], [0.5, 6]],
+            pop=5,
+            use_initial=True,
+        )
+
