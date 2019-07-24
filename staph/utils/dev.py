@@ -2,7 +2,7 @@ import numpy as np
 import scipy.io as sio
 import multiprocessing as mp
 from timeit import default_timer as timer
-from scipy.optimize import minimize
+from scipy.optimize import minimize, differential_evolution
 from functools import partial
 from numba import njit
 from .data import get_singh_data, get_b1d2, calc_for_map
@@ -324,6 +324,7 @@ def compute_devs_min(
     n_procs: int = 2,
     t_type: str = None,
     initial_guess: Tuple[float, float] = (2.5, 30),
+    **kwargs,
 ):
     """Optimize for deviances of the DEMC solutions.
 
@@ -356,6 +357,8 @@ def compute_devs_min(
         Tranformation type to apply to b2.
     initial_guess
         Initial guess for the optimizer.
+    **kwargs
+        Keyword arguments.
     """
 
     print("Seed is : ", seed)
@@ -381,13 +384,42 @@ def compute_devs_min(
             bXlist=bXlist, ind=ind, filename=filename
         )
         t1 = timer()
-        min_obj = minimize(
-            minimization_objective,
-            initial_guess,
-            args=(r1, r2, r3, Imax, npts, nrep, nstep, seed, pool, True, t_type),
-            options={"maxfev": niter},
-            method=method,
-        )
+        this_args = (r1, r2, r3, Imax, npts, nrep, nstep, seed, pool, True, t_type)
+        if method == "Powell":
+            min_obj = minimize(
+                minimization_objective,
+                initial_guess,
+                args=this_args,
+                options={"maxfev": niter},
+                method=method,
+            )
+            opt_str = method
+        elif method == "diffev":
+            pop = kwargs["pop"]
+            if kwargs["use_initial"]:
+                init = np.zeros((pop, 2))
+                np.random.seed(seed)
+                init[:, 0] = (
+                    initial_guess[0]
+                    + (np.random.random(pop) - 0.5) * initial_guess[0] * 0.2
+                )
+                init[:, 1] = (
+                    initial_guess[1]
+                    + (np.random.random(pop) - 0.5) * initial_guess[1] * 0.2
+                )
+                print(init)
+                opt_str = "de" + str(pop) + "p_init"
+            else:
+                init = "latinhypercube"
+                opt_str = "de" + str(pop) + "p_lhs"
+            min_obj = differential_evolution(
+                minimization_objective,
+                bounds=kwargs["bounds"],
+                args=this_args,
+                maxiter=niter,
+                popsize=pop,
+                polish=False,
+            )
         optim_objs.append(min_obj)
         print(min_obj)
         t2 = timer()
@@ -407,7 +439,7 @@ def compute_devs_min(
         + str(niter)
         + "ite"
         + "_"
-        + method
+        + opt_str
         + "_"
         + solstr
         + "b2d1_1o3_cpu.npz"
