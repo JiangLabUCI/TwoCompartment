@@ -42,6 +42,7 @@ def igate(
     choice = 2
     - Plot all solution paramter values.
     - Highlight better performers in red.
+    - Also plot select combinations of objectives and paramters.
     
     choice = 3
     - Compute pareto ranks of all solutions.
@@ -79,24 +80,24 @@ def igate(
                 if problem_type == 1:
                     b2s = np.vstack([b2s, optim_objs[ind].x[0]])
                     d1s = np.vstack([d1s, optim_objs[ind].x[1]])
-                    Fcu_cutoff = 18
+                    Fst_cutoff = 25
                 elif problem_type == 2:
                     d1s = np.vstack([d1s, optim_objs[ind].x])
-                    Fcu_cutoff = 18000
+                    Fst_cutoff = 18000
 
     if problem_type == 1:
         z = np.hstack([bXs, bFs, min_devs, d1s, b2s])
-        colnames = ["r1", "r2", "r3", "r3*Imax", "Fde", "Fcu", "d1", "b2"]
+        colnames = ["r1", "r2", "r3", "r3*Imax", "Fde", "Fst", "d1", "b2"]
     elif problem_type == 2:
         z = np.hstack([bXs, bFs, min_devs, d1s])
-        colnames = ["r1", "r2", "r3", "r3*Imax", "Fde", "Fcu", "d1"]
+        colnames = ["r1", "r2", "r3", "r3*Imax", "Fde", "Fst", "d1"]
     df = pd.DataFrame(z, columns=colnames)
     print("Dropping following row(s) due to negative values : ")
     print(df[df.d1 < 0])
     df = df[df.d1 > 0]
-    df = df[df.Fcu < Fcu_cutoff]
+    df = df[df.Fst < Fst_cutoff]
     if choice == 1:
-        d1b2_vals = np.vstack([df.Fde, df.Fcu]).transpose()
+        d1b2_vals = np.vstack([df.Fde, df.Fst]).transpose()
         df["ranks"] = get_pareto_ranks(d1b2_vals)
         ms = 10
         c1 = [237 / 255, 125 / 255, 49 / 255]  # Orange
@@ -107,7 +108,7 @@ def igate(
         ctr = 0
         for ind in range(1, int(max(df.ranks))):
             df2 = df[df.ranks == ind].sort_values("Fde")
-            xvals, yvals = list(df2.Fde), list(df2.Fcu)
+            xvals, yvals = list(df2.Fde), list(df2.Fst)
             if not (xvals == []):
                 if np.mod(ctr, 2) == 0:
                     plt.plot(xvals, yvals, color="xkcd:salmon")
@@ -141,7 +142,7 @@ def igate(
         plt.xlabel("Growth objective function")
         plt.ylabel("Dose-response objective function")
         plt.xlim([min(bFs), 0.8])
-        plt.ylim([min(min_devs) - 0.5, Fcu_cutoff])
+        plt.ylim([min(min_devs) - 0.5, Fst_cutoff])
         plt.legend(handles=[h1, h2, h3], loc="upper right")
 
         plt.savefig("results/imgs/pareto_plot.png")
@@ -152,15 +153,34 @@ def igate(
         df2 = (df2 - df2.min()) / (df2.max() - df2.min())
         try:
             plt.plot(
-                np.transpose(df2[df.Fcu < rh_best_dev].values), "xkcd:red", alpha=0.7
+                np.transpose(df2[df.Fst < rh_best_dev].values), "xkcd:red", alpha=0.7
             )
         except:
             print("Possibly no solution has better deviance than RH")
-        plt.plot(np.transpose(df2[df.Fcu > rh_best_dev].values), "xkcd:grey", alpha=0.7)
+        plt.plot(np.transpose(df2[df.Fst > rh_best_dev].values), "xkcd:grey", alpha=0.7)
         plt.xticks(range(len(df2.columns)), labels=colnames)
+        plt.figure(tight_layout=True)
+        plt.subplot(231)
+        plt.plot(df.d1, df.Fst, "ro")
+        plt.ylabel("Fst")
+        plt.subplot(232)
+        plt.plot(df.b2, df.Fst, "ro")
+        plt.subplot(233)
+        plt.plot(df.Fde, df.Fst, "ro")
+        plt.xlabel("Fde")
+        plt.subplot(234)
+        plt.plot(df.d1, df.Fde, "ro")
+        plt.xlabel("d1")
+        plt.ylabel("Fde")
+        plt.subplot(235)
+        plt.plot(df.b2, df.Fde, "ro")
+        plt.xlabel("b2")
+        plt.subplot(236)
+        plt.plot(df.Fst)
+        plt.ylabel("Fst")
     elif choice == 3:
         # Save rank 1 solutions in a numpy file
-        Fvals = np.vstack([df.Fde, df.Fcu]).transpose()
+        Fvals = np.vstack([df.Fde, df.Fst]).transpose()
         df["ranks"] = get_pareto_ranks(Fvals)
         output_filename = "results/all_solutions.npz"
         with open(output_filename, "wb") as f:
