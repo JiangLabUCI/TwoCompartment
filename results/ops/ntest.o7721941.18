@@ -1,0 +1,1527 @@
+staph.utils
+Seed is :  0
+Nstep :  200000
+Number of points is :  6
+Best F values :  [0.62894642]
+Best parameters :  [[2.63770552e+00 5.24191920e-02 2.10809625e-07 2.79320409e+00]]
+Initial_guess is :  (1.3, 0.55)
+Creating pool with 16  processes
+
+pool = %s <multiprocessing.pool.Pool object at 0x2b0015457e10>
+bXlist, r3 and Imax are :  [2.63770552e+00 5.24191920e-02 2.10809625e-07 2.79320409e+00] 2.108096246576333e-07 13249888.831219953
+r3 * Imax is :  2.7932040912648457
+Rates are :   [2.63770552 0.05241919 3.34320409 1.3        0.55       1.30000014]
+Seed = 0, pinf = 0.036, dev = 7.751,  status counts :  Counter({2.0: 802, 1.0: 162, 3.0: 31, 4.0: 5})
+Seed = 0, pinf = 0.127, dev = 9.356,  status counts :  Counter({2.0: 873, 3.0: 96, 4.0: 31})
+Seed = 0, pinf = 0.362, dev = 6.813,  status counts :  Counter({2.0: 638, 3.0: 292, 4.0: 70})
+Seed = 0, pinf = 0.809, dev = 1.366,  status counts :  Counter({3.0: 692, 2.0: 191, 4.0: 117})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 834, 4.0: 134, 2.0: 32})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 841, 4.0: 146, 2.0: 13})
+Objective is :  25.988907309781855
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.3        0.55       1.30000014]
+Seed = 0, pinf = 0.036, dev = 7.751,  status counts :  Counter({2.0: 802, 1.0: 162, 3.0: 31, 4.0: 5})
+Seed = 0, pinf = 0.127, dev = 9.356,  status counts :  Counter({2.0: 873, 3.0: 96, 4.0: 31})
+Seed = 0, pinf = 0.362, dev = 6.813,  status counts :  Counter({2.0: 638, 3.0: 292, 4.0: 70})
+Seed = 0, pinf = 0.809, dev = 1.366,  status counts :  Counter({3.0: 692, 2.0: 191, 4.0: 117})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 834, 4.0: 134, 2.0: 32})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 841, 4.0: 146, 2.0: 13})
+Objective is :  25.988907309781855
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 2.3        0.55       2.30000014]
+Seed = 0, pinf = 0.019, dev = 12.304,  status counts :  Counter({2.0: 783, 1.0: 198, 4.0: 10, 3.0: 9})
+Seed = 0, pinf = 0.079, dev = 15.668,  status counts :  Counter({2.0: 915, 3.0: 58, 4.0: 21, 1.0: 6})
+Seed = 0, pinf = 0.179, dev = 21.593,  status counts :  Counter({2.0: 821, 3.0: 148, 4.0: 31})
+Seed = 0, pinf = 0.562, dev = 1.607,  status counts :  Counter({3.0: 441, 2.0: 438, 4.0: 121})
+Seed = 0, pinf = 0.837, dev = 2.449,  status counts :  Counter({3.0: 670, 4.0: 167, 2.0: 163})
+Seed = 0, pinf = 0.939, dev = 2.518,  status counts :  Counter({3.0: 747, 4.0: 192, 2.0: 61})
+Objective is :  56.1381514530979
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.3        0.55       1.30000014]
+Seed = 0, pinf = 0.036, dev = 7.751,  status counts :  Counter({2.0: 802, 1.0: 162, 3.0: 31, 4.0: 5})
+Seed = 0, pinf = 0.127, dev = 9.356,  status counts :  Counter({2.0: 873, 3.0: 96, 4.0: 31})
+Seed = 0, pinf = 0.362, dev = 6.813,  status counts :  Counter({2.0: 638, 3.0: 292, 4.0: 70})
+Seed = 0, pinf = 0.809, dev = 1.366,  status counts :  Counter({3.0: 692, 2.0: 191, 4.0: 117})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 834, 4.0: 134, 2.0: 32})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 841, 4.0: 146, 2.0: 13})
+Objective is :  25.988907309781855
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 0.68196603 0.55       0.68196617]
+Seed = 0, pinf = 0.053, dev = 5.226,  status counts :  Counter({2.0: 798, 1.0: 149, 3.0: 41, 4.0: 12})
+Seed = 0, pinf = 0.178, dev = 5.399,  status counts :  Counter({2.0: 821, 3.0: 150, 4.0: 28, 1.0: 1})
+Seed = 0, pinf = 0.519, dev = 1.401,  status counts :  Counter({2.0: 481, 3.0: 446, 4.0: 73})
+Seed = 0, pinf = 0.946, dev = 12.145,  status counts :  Counter({3.0: 849, 4.0: 97, 2.0: 54})
+Seed = 0, pinf = 0.995, dev = 2.847,  status counts :  Counter({3.0: 897, 4.0: 98, 2.0: 5})
+Seed = 0, pinf = 0.997, dev = 0.120,  status counts :  Counter({3.0: 917, 4.0: 80, 2.0: 3})
+Objective is :  27.138069508620124
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.681966   0.55       1.68196614]
+Seed = 0, pinf = 0.028, dev = 9.497,  status counts :  Counter({2.0: 787, 1.0: 185, 3.0: 20, 4.0: 8})
+Seed = 0, pinf = 0.093, dev = 13.425,  status counts :  Counter({2.0: 904, 3.0: 71, 4.0: 22, 1.0: 3})
+Seed = 0, pinf = 0.275, dev = 12.170,  status counts :  Counter({2.0: 725, 3.0: 219, 4.0: 56})
+Seed = 0, pinf = 0.729, dev = 0.083,  status counts :  Counter({3.0: 607, 2.0: 271, 4.0: 122})
+Seed = 0, pinf = 0.915, dev = 0.365,  status counts :  Counter({3.0: 755, 4.0: 160, 2.0: 85})
+Seed = 0, pinf = 0.978, dev = 0.890,  status counts :  Counter({3.0: 809, 4.0: 169, 2.0: 22})
+Objective is :  36.43007759010986
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.02282753 0.55       1.02282767]
+Seed = 0, pinf = 0.034, dev = 8.142,  status counts :  Counter({2.0: 813, 1.0: 153, 3.0: 30, 4.0: 4})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.393, dev = 5.374,  status counts :  Counter({2.0: 607, 3.0: 325, 4.0: 68})
+Seed = 0, pinf = 0.878, dev = 4.453,  status counts :  Counter({3.0: 760, 2.0: 122, 4.0: 118})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 840, 4.0: 136, 2.0: 24})
+Seed = 0, pinf = 0.994, dev = 0.241,  status counts :  Counter({3.0: 862, 4.0: 132, 2.0: 6})
+Objective is :  25.753721298068566
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.10800944 0.55       1.10800959]
+Seed = 0, pinf = 0.044, dev = 6.412,  status counts :  Counter({2.0: 797, 1.0: 159, 3.0: 32, 4.0: 12})
+Seed = 0, pinf = 0.129, dev = 9.161,  status counts :  Counter({2.0: 870, 3.0: 96, 4.0: 33, 1.0: 1})
+Seed = 0, pinf = 0.403, dev = 4.953,  status counts :  Counter({2.0: 597, 3.0: 321, 4.0: 82})
+Seed = 0, pinf = 0.847, dev = 2.743,  status counts :  Counter({3.0: 723, 2.0: 153, 4.0: 124})
+Seed = 0, pinf = 0.960, dev = 0.048,  status counts :  Counter({3.0: 821, 4.0: 139, 2.0: 40})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 866, 4.0: 125, 2.0: 9})
+Objective is :  23.679609957105587
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.15818118 0.55       1.15818132]
+Seed = 0, pinf = 0.040, dev = 7.041,  status counts :  Counter({2.0: 800, 1.0: 160, 3.0: 32, 4.0: 8})
+Seed = 0, pinf = 0.135, dev = 8.600,  status counts :  Counter({2.0: 864, 3.0: 105, 4.0: 30, 1.0: 1})
+Seed = 0, pinf = 0.388, dev = 5.592,  status counts :  Counter({2.0: 612, 3.0: 316, 4.0: 72})
+Seed = 0, pinf = 0.854, dev = 3.074,  status counts :  Counter({3.0: 732, 2.0: 146, 4.0: 122})
+Seed = 0, pinf = 0.970, dev = 0.230,  status counts :  Counter({3.0: 835, 4.0: 135, 2.0: 30})
+Seed = 0, pinf = 0.995, dev = 0.201,  status counts :  Counter({3.0: 833, 4.0: 162, 2.0: 5})
+Objective is :  24.737751960799525
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.10168369 0.55       1.10168383]
+Seed = 0, pinf = 0.044, dev = 6.412,  status counts :  Counter({2.0: 798, 1.0: 158, 3.0: 34, 4.0: 10})
+Seed = 0, pinf = 0.130, dev = 9.065,  status counts :  Counter({2.0: 869, 3.0: 100, 4.0: 30, 1.0: 1})
+Seed = 0, pinf = 0.374, dev = 6.231,  status counts :  Counter({2.0: 626, 3.0: 324, 4.0: 50})
+Seed = 0, pinf = 0.872, dev = 4.069,  status counts :  Counter({3.0: 761, 2.0: 128, 4.0: 111})
+Seed = 0, pinf = 0.967, dev = 0.157,  status counts :  Counter({3.0: 831, 4.0: 136, 2.0: 33})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 852, 4.0: 138, 2.0: 10})
+Objective is :  26.33671874058222
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.10992935 0.55       1.10992949]
+Seed = 0, pinf = 0.041, dev = 6.877,  status counts :  Counter({2.0: 799, 1.0: 160, 3.0: 32, 4.0: 9})
+Seed = 0, pinf = 0.126, dev = 9.455,  status counts :  Counter({2.0: 873, 3.0: 104, 4.0: 22, 1.0: 1})
+Seed = 0, pinf = 0.384, dev = 5.770,  status counts :  Counter({2.0: 616, 3.0: 312, 4.0: 72})
+Seed = 0, pinf = 0.853, dev = 3.025,  status counts :  Counter({3.0: 718, 2.0: 147, 4.0: 135})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 863, 4.0: 105, 2.0: 32})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 846, 4.0: 145, 2.0: 9})
+Objective is :  25.668630776367277
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.10559322 0.55       1.10559336]
+Seed = 0, pinf = 0.052, dev = 5.345,  status counts :  Counter({2.0: 789, 1.0: 159, 3.0: 38, 4.0: 14})
+Seed = 0, pinf = 0.149, dev = 7.413,  status counts :  Counter({2.0: 850, 3.0: 122, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.377, dev = 6.090,  status counts :  Counter({2.0: 623, 3.0: 317, 4.0: 60})
+Seed = 0, pinf = 0.850, dev = 2.881,  status counts :  Counter({3.0: 736, 2.0: 150, 4.0: 114})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 833, 4.0: 142, 2.0: 25})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 839, 4.0: 151, 2.0: 10})
+Objective is :  22.530489430508887
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.10364915 0.55       1.10364929]
+Seed = 0, pinf = 0.039, dev = 7.210,  status counts :  Counter({2.0: 802, 1.0: 159, 3.0: 34, 4.0: 5})
+Seed = 0, pinf = 0.142, dev = 7.986,  status counts :  Counter({2.0: 857, 3.0: 118, 4.0: 24, 1.0: 1})
+Seed = 0, pinf = 0.376, dev = 6.137,  status counts :  Counter({2.0: 624, 3.0: 312, 4.0: 64})
+Seed = 0, pinf = 0.870, dev = 3.947,  status counts :  Counter({3.0: 729, 4.0: 141, 2.0: 130})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 840, 4.0: 132, 2.0: 28})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 858, 4.0: 130, 2.0: 12})
+Objective is :  26.05336667428173
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.10559322 0.55       1.10559336]
+Seed = 0, pinf = 0.052, dev = 5.345,  status counts :  Counter({2.0: 789, 1.0: 159, 3.0: 38, 4.0: 14})
+Seed = 0, pinf = 0.149, dev = 7.413,  status counts :  Counter({2.0: 850, 3.0: 122, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.377, dev = 6.090,  status counts :  Counter({2.0: 623, 3.0: 317, 4.0: 60})
+Seed = 0, pinf = 0.850, dev = 2.881,  status counts :  Counter({3.0: 736, 2.0: 150, 4.0: 114})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 833, 4.0: 142, 2.0: 25})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 839, 4.0: 151, 2.0: 10})
+Objective is :  22.530489430508887
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 4.34320409 1.10559322 1.55       1.10559336]
+Seed = 0, pinf = 0.044, dev = 6.412,  status counts :  Counter({2.0: 708, 1.0: 248, 3.0: 35, 4.0: 9})
+Seed = 0, pinf = 0.137, dev = 8.420,  status counts :  Counter({2.0: 860, 3.0: 114, 4.0: 23, 1.0: 3})
+Seed = 0, pinf = 0.369, dev = 6.469,  status counts :  Counter({2.0: 631, 3.0: 316, 4.0: 53})
+Seed = 0, pinf = 0.864, dev = 3.600,  status counts :  Counter({3.0: 757, 2.0: 136, 4.0: 107})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 843, 4.0: 129, 2.0: 28})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 869, 4.0: 120, 2.0: 11})
+Objective is :  25.63364443742353
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320409 1.10559322 0.55       1.10559336]
+Seed = 0, pinf = 0.052, dev = 5.345,  status counts :  Counter({2.0: 789, 1.0: 159, 3.0: 38, 4.0: 14})
+Seed = 0, pinf = 0.149, dev = 7.413,  status counts :  Counter({2.0: 850, 3.0: 122, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.377, dev = 6.090,  status counts :  Counter({2.0: 623, 3.0: 317, 4.0: 60})
+Seed = 0, pinf = 0.850, dev = 2.881,  status counts :  Counter({3.0: 736, 2.0: 150, 4.0: 114})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 833, 4.0: 142, 2.0: 25})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 839, 4.0: 151, 2.0: 10})
+Objective is :  22.530489430508887
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.72517009 1.10559322 0.931966   1.10559336]
+Seed = 0, pinf = 0.050, dev = 5.591,  status counts :  Counter({2.0: 750, 1.0: 200, 3.0: 35, 4.0: 15})
+Seed = 0, pinf = 0.138, dev = 8.332,  status counts :  Counter({2.0: 860, 3.0: 107, 4.0: 31, 1.0: 2})
+Seed = 0, pinf = 0.383, dev = 5.815,  status counts :  Counter({2.0: 617, 3.0: 321, 4.0: 62})
+Seed = 0, pinf = 0.866, dev = 3.713,  status counts :  Counter({3.0: 734, 2.0: 134, 4.0: 132})
+Seed = 0, pinf = 0.967, dev = 0.157,  status counts :  Counter({3.0: 847, 4.0: 120, 2.0: 33})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 851, 4.0: 139, 2.0: 10})
+Objective is :  24.009816179668423
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.53378546 1.10559322 0.74058137 1.10559336]
+Seed = 0, pinf = 0.034, dev = 8.142,  status counts :  Counter({2.0: 780, 1.0: 186, 3.0: 23, 4.0: 11})
+Seed = 0, pinf = 0.139, dev = 8.244,  status counts :  Counter({2.0: 861, 3.0: 109, 4.0: 30})
+Seed = 0, pinf = 0.389, dev = 5.548,  status counts :  Counter({2.0: 611, 3.0: 332, 4.0: 57})
+Seed = 0, pinf = 0.867, dev = 3.770,  status counts :  Counter({3.0: 752, 2.0: 133, 4.0: 115})
+Seed = 0, pinf = 0.967, dev = 0.157,  status counts :  Counter({3.0: 828, 4.0: 139, 2.0: 33})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 855, 4.0: 135, 2.0: 10})
+Objective is :  26.263221102010984
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.10713613 1.10559322 0.31393203 1.10559336]
+Seed = 0, pinf = 0.034, dev = 8.142,  status counts :  Counter({2.0: 841, 1.0: 125, 3.0: 29, 4.0: 5})
+Seed = 0, pinf = 0.148, dev = 7.492,  status counts :  Counter({2.0: 852, 3.0: 122, 4.0: 26})
+Seed = 0, pinf = 0.379, dev = 5.998,  status counts :  Counter({2.0: 621, 3.0: 309, 4.0: 70})
+Seed = 0, pinf = 0.851, dev = 2.929,  status counts :  Counter({3.0: 731, 2.0: 149, 4.0: 120})
+Seed = 0, pinf = 0.967, dev = 0.157,  status counts :  Counter({3.0: 810, 4.0: 157, 2.0: 33})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 856, 4.0: 130, 2.0: 14})
+Objective is :  25.281772155664562
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.45711115 1.10559322 0.66390706 1.10559336]
+Seed = 0, pinf = 0.044, dev = 6.412,  status counts :  Counter({2.0: 788, 1.0: 168, 3.0: 32, 4.0: 12})
+Seed = 0, pinf = 0.134, dev = 8.691,  status counts :  Counter({2.0: 865, 3.0: 108, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.380, dev = 5.952,  status counts :  Counter({2.0: 620, 3.0: 326, 4.0: 54})
+Seed = 0, pinf = 0.852, dev = 2.977,  status counts :  Counter({3.0: 724, 2.0: 148, 4.0: 128})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 846, 4.0: 126, 2.0: 28})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 838, 4.0: 150, 2.0: 12})
+Objective is :  24.80447826326407
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.25303415 1.10559322 0.45983006 1.10559336]
+Seed = 0, pinf = 0.034, dev = 8.142,  status counts :  Counter({2.0: 824, 1.0: 142, 3.0: 24, 4.0: 10})
+Seed = 0, pinf = 0.134, dev = 8.691,  status counts :  Counter({2.0: 864, 3.0: 109, 4.0: 25, 1.0: 2})
+Seed = 0, pinf = 0.403, dev = 4.953,  status counts :  Counter({2.0: 597, 3.0: 339, 4.0: 64})
+Seed = 0, pinf = 0.856, dev = 3.174,  status counts :  Counter({3.0: 719, 2.0: 144, 4.0: 137})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 854, 4.0: 115, 2.0: 31})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 853, 4.0: 133, 2.0: 14})
+Objective is :  25.728050290040482
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.38671271 1.10559322 0.59350862 1.10559336]
+Seed = 0, pinf = 0.040, dev = 7.041,  status counts :  Counter({2.0: 803, 1.0: 157, 3.0: 31, 4.0: 9})
+Seed = 0, pinf = 0.140, dev = 8.157,  status counts :  Counter({2.0: 860, 3.0: 112, 4.0: 28})
+Seed = 0, pinf = 0.407, dev = 4.790,  status counts :  Counter({2.0: 593, 3.0: 336, 4.0: 71})
+Seed = 0, pinf = 0.855, dev = 3.124,  status counts :  Counter({3.0: 737, 2.0: 145, 4.0: 118})
+Seed = 0, pinf = 0.967, dev = 0.157,  status counts :  Counter({3.0: 849, 4.0: 118, 2.0: 33})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 859, 4.0: 131, 2.0: 10})
+Objective is :  23.671832994961946
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.30876224 1.10559322 0.51555815 1.10559336]
+Seed = 0, pinf = 0.044, dev = 6.412,  status counts :  Counter({2.0: 804, 1.0: 152, 3.0: 34, 4.0: 10})
+Seed = 0, pinf = 0.139, dev = 8.244,  status counts :  Counter({2.0: 860, 3.0: 111, 4.0: 28, 1.0: 1})
+Seed = 0, pinf = 0.366, dev = 6.615,  status counts :  Counter({2.0: 634, 3.0: 282, 4.0: 84})
+Seed = 0, pinf = 0.849, dev = 2.835,  status counts :  Counter({3.0: 738, 2.0: 151, 4.0: 111})
+Seed = 0, pinf = 0.965, dev = 0.118,  status counts :  Counter({3.0: 818, 4.0: 147, 2.0: 35})
+Seed = 0, pinf = 0.993, dev = 0.281,  status counts :  Counter({3.0: 868, 4.0: 125, 2.0: 7})
+Objective is :  24.50507680633094
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.35982291 1.10559322 0.56661881 1.10559336]
+Seed = 0, pinf = 0.033, dev = 8.348,  status counts :  Counter({2.0: 810, 1.0: 157, 3.0: 22, 4.0: 11})
+Seed = 0, pinf = 0.143, dev = 7.902,  status counts :  Counter({2.0: 857, 3.0: 118, 4.0: 25})
+Seed = 0, pinf = 0.402, dev = 4.994,  status counts :  Counter({2.0: 598, 3.0: 339, 4.0: 63})
+Seed = 0, pinf = 0.859, dev = 3.329,  status counts :  Counter({3.0: 737, 2.0: 141, 4.0: 122})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 824, 4.0: 144, 2.0: 32})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 824, 4.0: 165, 2.0: 11})
+Objective is :  25.19448173313826
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.33004848 1.10559322 0.53684438 1.10559336]
+Seed = 0, pinf = 0.031, dev = 8.782,  status counts :  Counter({2.0: 813, 1.0: 156, 3.0: 23, 4.0: 8})
+Seed = 0, pinf = 0.157, dev = 6.803,  status counts :  Counter({2.0: 842, 3.0: 129, 4.0: 28, 1.0: 1})
+Seed = 0, pinf = 0.380, dev = 5.952,  status counts :  Counter({2.0: 620, 3.0: 317, 4.0: 63})
+Seed = 0, pinf = 0.852, dev = 2.977,  status counts :  Counter({3.0: 744, 2.0: 148, 4.0: 108})
+Seed = 0, pinf = 0.964, dev = 0.101,  status counts :  Counter({3.0: 843, 4.0: 121, 2.0: 36})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 854, 4.0: 133, 2.0: 13})
+Objective is :  25.137346913274456
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34955191 1.10559322 0.55634782 1.10559336]
+Seed = 0, pinf = 0.037, dev = 7.565,  status counts :  Counter({2.0: 804, 1.0: 159, 3.0: 26, 4.0: 11})
+Seed = 0, pinf = 0.129, dev = 9.161,  status counts :  Counter({2.0: 870, 3.0: 102, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.410, dev = 4.671,  status counts :  Counter({2.0: 590, 3.0: 343, 4.0: 67})
+Seed = 0, pinf = 0.857, dev = 3.225,  status counts :  Counter({3.0: 740, 2.0: 143, 4.0: 117})
+Seed = 0, pinf = 0.962, dev = 0.072,  status counts :  Counter({3.0: 844, 4.0: 118, 2.0: 38})
+Seed = 0, pinf = 0.996, dev = 0.160,  status counts :  Counter({3.0: 852, 4.0: 144, 2.0: 4})
+Objective is :  24.85438686271437
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.33817909 1.10559322 0.544975   1.10559336]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 795, 1.0: 158, 3.0: 38, 4.0: 9})
+Seed = 0, pinf = 0.130, dev = 9.065,  status counts :  Counter({2.0: 869, 3.0: 107, 4.0: 23, 1.0: 1})
+Seed = 0, pinf = 0.375, dev = 6.184,  status counts :  Counter({2.0: 625, 3.0: 306, 4.0: 69})
+Seed = 0, pinf = 0.871, dev = 4.008,  status counts :  Counter({3.0: 759, 2.0: 129, 4.0: 112})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 844, 4.0: 128, 2.0: 28})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 856, 4.0: 133, 2.0: 11})
+Objective is :  25.974383108421797
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34562874 1.10559322 0.55242465 1.10559336]
+Seed = 0, pinf = 0.039, dev = 7.210,  status counts :  Counter({2.0: 803, 1.0: 158, 3.0: 27, 4.0: 12})
+Seed = 0, pinf = 0.130, dev = 9.065,  status counts :  Counter({2.0: 869, 3.0: 104, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.376, dev = 6.137,  status counts :  Counter({2.0: 624, 3.0: 311, 4.0: 65})
+Seed = 0, pinf = 0.857, dev = 3.225,  status counts :  Counter({3.0: 739, 2.0: 143, 4.0: 118})
+Seed = 0, pinf = 0.970, dev = 0.230,  status counts :  Counter({3.0: 837, 4.0: 133, 2.0: 30})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 862, 4.0: 126, 2.0: 12})
+Objective is :  26.350819854148952
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34128471 1.10559322 0.54808062 1.10559336]
+Seed = 0, pinf = 0.045, dev = 6.266,  status counts :  Counter({2.0: 796, 1.0: 159, 3.0: 34, 4.0: 11})
+Seed = 0, pinf = 0.145, dev = 7.736,  status counts :  Counter({2.0: 854, 3.0: 123, 4.0: 22, 1.0: 1})
+Seed = 0, pinf = 0.371, dev = 6.373,  status counts :  Counter({2.0: 629, 3.0: 312, 4.0: 59})
+Seed = 0, pinf = 0.862, dev = 3.489,  status counts :  Counter({3.0: 752, 2.0: 138, 4.0: 110})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 851, 4.0: 121, 2.0: 28})
+Seed = 0, pinf = 0.993, dev = 0.281,  status counts :  Counter({3.0: 842, 4.0: 151, 2.0: 7})
+Objective is :  24.434978835918482
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34413023 1.10559322 0.55092613 1.10559336]
+Seed = 0, pinf = 0.037, dev = 7.565,  status counts :  Counter({2.0: 804, 1.0: 159, 3.0: 30, 4.0: 7})
+Seed = 0, pinf = 0.126, dev = 9.455,  status counts :  Counter({2.0: 873, 3.0: 103, 4.0: 23, 1.0: 1})
+Seed = 0, pinf = 0.406, dev = 4.831,  status counts :  Counter({2.0: 594, 3.0: 341, 4.0: 65})
+Seed = 0, pinf = 0.868, dev = 3.829,  status counts :  Counter({3.0: 738, 2.0: 132, 4.0: 130})
+Seed = 0, pinf = 0.964, dev = 0.101,  status counts :  Counter({3.0: 837, 4.0: 127, 2.0: 36})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 855, 4.0: 134, 2.0: 11})
+Objective is :  26.223399911479095
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34247095 1.10559322 0.54926686 1.10559336]
+Seed = 0, pinf = 0.040, dev = 7.041,  status counts :  Counter({2.0: 801, 1.0: 159, 3.0: 31, 4.0: 9})
+Seed = 0, pinf = 0.132, dev = 8.876,  status counts :  Counter({2.0: 867, 3.0: 98, 4.0: 34, 1.0: 1})
+Seed = 0, pinf = 0.380, dev = 5.952,  status counts :  Counter({2.0: 620, 3.0: 317, 4.0: 63})
+Seed = 0, pinf = 0.870, dev = 3.947,  status counts :  Counter({3.0: 711, 4.0: 159, 2.0: 130})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 844, 4.0: 125, 2.0: 31})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 848, 4.0: 139, 2.0: 13})
+Objective is :  26.543743474410714
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34355784 1.10559322 0.55035375 1.10559336]
+Seed = 0, pinf = 0.033, dev = 8.348,  status counts :  Counter({2.0: 808, 1.0: 159, 3.0: 26, 4.0: 7})
+Seed = 0, pinf = 0.124, dev = 9.656,  status counts :  Counter({2.0: 875, 3.0: 99, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.392, dev = 5.417,  status counts :  Counter({2.0: 608, 3.0: 330, 4.0: 62})
+Seed = 0, pinf = 0.870, dev = 3.947,  status counts :  Counter({3.0: 749, 2.0: 130, 4.0: 121})
+Seed = 0, pinf = 0.966, dev = 0.137,  status counts :  Counter({3.0: 818, 4.0: 148, 2.0: 34})
+Seed = 0, pinf = 0.995, dev = 0.201,  status counts :  Counter({3.0: 847, 4.0: 148, 2.0: 5})
+Objective is :  27.70581662864924
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34292406 1.10559322 0.54971997 1.10559336]
+Seed = 0, pinf = 0.045, dev = 6.266,  status counts :  Counter({2.0: 796, 1.0: 159, 3.0: 33, 4.0: 12})
+Seed = 0, pinf = 0.136, dev = 8.510,  status counts :  Counter({2.0: 863, 3.0: 111, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.415, dev = 4.475,  status counts :  Counter({2.0: 585, 3.0: 340, 4.0: 75})
+Seed = 0, pinf = 0.865, dev = 3.656,  status counts :  Counter({3.0: 743, 2.0: 135, 4.0: 122})
+Seed = 0, pinf = 0.964, dev = 0.101,  status counts :  Counter({3.0: 833, 4.0: 131, 2.0: 36})
+Seed = 0, pinf = 0.994, dev = 0.241,  status counts :  Counter({3.0: 872, 4.0: 122, 2.0: 6})
+Objective is :  23.247842258805253
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34333921 1.10559322 0.55013512 1.10559336]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 799, 1.0: 159, 3.0: 36, 4.0: 6})
+Seed = 0, pinf = 0.130, dev = 9.065,  status counts :  Counter({2.0: 869, 3.0: 105, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.390, dev = 5.504,  status counts :  Counter({2.0: 610, 3.0: 329, 4.0: 61})
+Seed = 0, pinf = 0.862, dev = 3.489,  status counts :  Counter({3.0: 737, 2.0: 138, 4.0: 125})
+Seed = 0, pinf = 0.971, dev = 0.259,  status counts :  Counter({3.0: 852, 4.0: 119, 2.0: 29})
+Seed = 0, pinf = 0.992, dev = 0.321,  status counts :  Counter({3.0: 870, 4.0: 122, 2.0: 8})
+Objective is :  25.356427663741215
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34309713 1.10559322 0.54989304 1.10559336]
+Seed = 0, pinf = 0.040, dev = 7.041,  status counts :  Counter({2.0: 801, 1.0: 159, 3.0: 31, 4.0: 9})
+Seed = 0, pinf = 0.129, dev = 9.161,  status counts :  Counter({2.0: 870, 3.0: 106, 4.0: 23, 1.0: 1})
+Seed = 0, pinf = 0.366, dev = 6.615,  status counts :  Counter({2.0: 634, 3.0: 309, 4.0: 57})
+Seed = 0, pinf = 0.867, dev = 3.770,  status counts :  Counter({3.0: 746, 2.0: 133, 4.0: 121})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 839, 4.0: 129, 2.0: 32})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 832, 4.0: 155, 2.0: 13})
+Objective is :  27.290823687939092
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.3432557  1.10559322 0.55005161 1.10559336]
+Seed = 0, pinf = 0.048, dev = 5.850,  status counts :  Counter({2.0: 793, 1.0: 159, 3.0: 37, 4.0: 11})
+Seed = 0, pinf = 0.120, dev = 10.072,  status counts :  Counter({2.0: 879, 3.0: 103, 4.0: 17, 1.0: 1})
+Seed = 0, pinf = 0.363, dev = 6.763,  status counts :  Counter({2.0: 637, 3.0: 305, 4.0: 58})
+Seed = 0, pinf = 0.856, dev = 3.174,  status counts :  Counter({3.0: 726, 2.0: 144, 4.0: 130})
+Seed = 0, pinf = 0.971, dev = 0.259,  status counts :  Counter({3.0: 851, 4.0: 120, 2.0: 29})
+Seed = 0, pinf = 0.993, dev = 0.281,  status counts :  Counter({3.0: 874, 4.0: 119, 2.0: 7})
+Objective is :  26.399170079338187
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34316323 1.10559322 0.54995914 1.10559336]
+Seed = 0, pinf = 0.038, dev = 7.385,  status counts :  Counter({2.0: 803, 1.0: 159, 3.0: 34, 4.0: 4})
+Seed = 0, pinf = 0.137, dev = 8.420,  status counts :  Counter({2.0: 862, 3.0: 115, 4.0: 22, 1.0: 1})
+Seed = 0, pinf = 0.397, dev = 5.203,  status counts :  Counter({2.0: 603, 3.0: 332, 4.0: 65})
+Seed = 0, pinf = 0.882, dev = 4.726,  status counts :  Counter({3.0: 756, 4.0: 126, 2.0: 118})
+Seed = 0, pinf = 0.966, dev = 0.137,  status counts :  Counter({3.0: 845, 4.0: 121, 2.0: 34})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 857, 4.0: 130, 2.0: 13})
+Objective is :  26.394331417560267
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34322381 1.10559322 0.55001971 1.10559336]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 799, 1.0: 159, 3.0: 31, 4.0: 11})
+Seed = 0, pinf = 0.142, dev = 7.986,  status counts :  Counter({2.0: 857, 3.0: 111, 4.0: 31, 1.0: 1})
+Seed = 0, pinf = 0.391, dev = 5.460,  status counts :  Counter({2.0: 609, 3.0: 334, 4.0: 57})
+Seed = 0, pinf = 0.873, dev = 4.131,  status counts :  Counter({3.0: 741, 4.0: 132, 2.0: 127})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 839, 4.0: 130, 2.0: 31})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 857, 4.0: 130, 2.0: 13})
+Objective is :  25.02231465900473
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34318849 1.10559322 0.54998439 1.10559336]
+Seed = 0, pinf = 0.038, dev = 7.385,  status counts :  Counter({2.0: 803, 1.0: 159, 3.0: 28, 4.0: 10})
+Seed = 0, pinf = 0.133, dev = 8.783,  status counts :  Counter({2.0: 866, 3.0: 108, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.356, dev = 7.116,  status counts :  Counter({2.0: 644, 3.0: 298, 4.0: 58})
+Seed = 0, pinf = 0.863, dev = 3.544,  status counts :  Counter({3.0: 751, 2.0: 137, 4.0: 112})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 837, 4.0: 132, 2.0: 31})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 857, 4.0: 130, 2.0: 13})
+Objective is :  27.555787896958535
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34321162 1.10559322 0.55000753 1.10559336]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 33, 4.0: 13})
+Seed = 0, pinf = 0.134, dev = 8.691,  status counts :  Counter({2.0: 865, 3.0: 108, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.412, dev = 4.592,  status counts :  Counter({2.0: 588, 3.0: 335, 4.0: 77})
+Seed = 0, pinf = 0.848, dev = 2.788,  status counts :  Counter({3.0: 736, 2.0: 152, 4.0: 112})
+Seed = 0, pinf = 0.965, dev = 0.118,  status counts :  Counter({3.0: 823, 4.0: 142, 2.0: 35})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 853, 4.0: 136, 2.0: 11})
+Objective is :  22.755267048662382
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34319813 1.10559322 0.54999404 1.10559336]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 794, 1.0: 159, 3.0: 38, 4.0: 9})
+Seed = 0, pinf = 0.137, dev = 8.420,  status counts :  Counter({2.0: 862, 3.0: 110, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.389, dev = 5.548,  status counts :  Counter({2.0: 611, 3.0: 323, 4.0: 66})
+Seed = 0, pinf = 0.864, dev = 3.600,  status counts :  Counter({3.0: 749, 2.0: 136, 4.0: 115})
+Seed = 0, pinf = 0.971, dev = 0.259,  status counts :  Counter({3.0: 829, 4.0: 142, 2.0: 29})
+Seed = 0, pinf = 0.984, dev = 0.645,  status counts :  Counter({3.0: 849, 4.0: 135, 2.0: 16})
+Objective is :  24.456800971570424
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320697 1.10559322 0.55000288 1.10559336]
+Seed = 0, pinf = 0.043, dev = 6.563,  status counts :  Counter({2.0: 798, 1.0: 159, 3.0: 33, 4.0: 10})
+Seed = 0, pinf = 0.140, dev = 8.157,  status counts :  Counter({2.0: 859, 3.0: 111, 4.0: 29, 1.0: 1})
+Seed = 0, pinf = 0.394, dev = 5.331,  status counts :  Counter({2.0: 606, 3.0: 326, 4.0: 68})
+Seed = 0, pinf = 0.861, dev = 3.435,  status counts :  Counter({3.0: 748, 2.0: 139, 4.0: 113})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 830, 4.0: 138, 2.0: 32})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 853, 4.0: 135, 2.0: 12})
+Objective is :  24.148314600380452
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320181 1.10559322 0.54999772 1.10559336]
+Seed = 0, pinf = 0.048, dev = 5.850,  status counts :  Counter({2.0: 793, 1.0: 159, 3.0: 37, 4.0: 11})
+Seed = 0, pinf = 0.140, dev = 8.157,  status counts :  Counter({2.0: 859, 3.0: 106, 4.0: 34, 1.0: 1})
+Seed = 0, pinf = 0.392, dev = 5.417,  status counts :  Counter({2.0: 608, 3.0: 332, 4.0: 60})
+Seed = 0, pinf = 0.857, dev = 3.225,  status counts :  Counter({3.0: 749, 2.0: 143, 4.0: 108})
+Seed = 0, pinf = 0.973, dev = 0.323,  status counts :  Counter({3.0: 830, 4.0: 143, 2.0: 27})
+Seed = 0, pinf = 0.992, dev = 0.321,  status counts :  Counter({3.0: 859, 4.0: 133, 2.0: 8})
+Objective is :  23.29446403971536
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320519 1.10559322 0.5500011  1.10559336]
+Seed = 0, pinf = 0.043, dev = 6.563,  status counts :  Counter({2.0: 798, 1.0: 159, 3.0: 33, 4.0: 10})
+Seed = 0, pinf = 0.150, dev = 7.334,  status counts :  Counter({2.0: 849, 3.0: 120, 4.0: 30, 1.0: 1})
+Seed = 0, pinf = 0.395, dev = 5.288,  status counts :  Counter({2.0: 605, 3.0: 334, 4.0: 61})
+Seed = 0, pinf = 0.850, dev = 2.881,  status counts :  Counter({3.0: 724, 2.0: 150, 4.0: 126})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 844, 4.0: 125, 2.0: 31})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 851, 4.0: 140, 2.0: 9})
+Objective is :  22.63142876259427
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320322 1.10559322 0.54999913 1.10559336]
+Seed = 0, pinf = 0.043, dev = 6.563,  status counts :  Counter({2.0: 798, 1.0: 159, 3.0: 32, 4.0: 11})
+Seed = 0, pinf = 0.148, dev = 7.492,  status counts :  Counter({2.0: 851, 3.0: 115, 4.0: 33, 1.0: 1})
+Seed = 0, pinf = 0.368, dev = 6.518,  status counts :  Counter({2.0: 632, 3.0: 311, 4.0: 57})
+Seed = 0, pinf = 0.860, dev = 3.382,  status counts :  Counter({3.0: 748, 2.0: 140, 4.0: 112})
+Seed = 0, pinf = 0.961, dev = 0.059,  status counts :  Counter({3.0: 830, 4.0: 131, 2.0: 39})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 849, 4.0: 137, 2.0: 14})
+Objective is :  24.57804458229955
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320451 1.10559322 0.55000042 1.10559336]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 799, 1.0: 159, 3.0: 35, 4.0: 7})
+Seed = 0, pinf = 0.161, dev = 6.514,  status counts :  Counter({2.0: 838, 3.0: 129, 4.0: 32, 1.0: 1})
+Seed = 0, pinf = 0.386, dev = 5.681,  status counts :  Counter({2.0: 614, 3.0: 334, 4.0: 52})
+Seed = 0, pinf = 0.855, dev = 3.124,  status counts :  Counter({3.0: 732, 2.0: 145, 4.0: 123})
+Seed = 0, pinf = 0.964, dev = 0.101,  status counts :  Counter({3.0: 838, 4.0: 126, 2.0: 36})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 843, 4.0: 142, 2.0: 15})
+Objective is :  22.742123961682047
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320376 1.10559322 0.54999967 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 40, 4.0: 9})
+Seed = 0, pinf = 0.145, dev = 7.736,  status counts :  Counter({2.0: 854, 3.0: 116, 4.0: 29, 1.0: 1})
+Seed = 0, pinf = 0.374, dev = 6.231,  status counts :  Counter({2.0: 626, 3.0: 314, 4.0: 60})
+Seed = 0, pinf = 0.864, dev = 3.600,  status counts :  Counter({3.0: 745, 2.0: 136, 4.0: 119})
+Seed = 0, pinf = 0.967, dev = 0.157,  status counts :  Counter({3.0: 834, 4.0: 133, 2.0: 33})
+Seed = 0, pinf = 0.992, dev = 0.321,  status counts :  Counter({3.0: 838, 4.0: 154, 2.0: 8})
+Objective is :  23.763534111771797
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.048, dev = 5.850,  status counts :  Counter({2.0: 793, 1.0: 159, 3.0: 36, 4.0: 12})
+Seed = 0, pinf = 0.155, dev = 6.951,  status counts :  Counter({2.0: 844, 3.0: 129, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.394, dev = 5.331,  status counts :  Counter({2.0: 606, 3.0: 341, 4.0: 53})
+Seed = 0, pinf = 0.855, dev = 3.124,  status counts :  Counter({3.0: 745, 2.0: 145, 4.0: 110})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 845, 4.0: 131, 2.0: 24})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 836, 4.0: 150, 2.0: 14})
+Objective is :  22.26205621404056
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320435 1.10559322 0.55000026 1.10559336]
+Seed = 0, pinf = 0.045, dev = 6.266,  status counts :  Counter({2.0: 796, 1.0: 159, 3.0: 34, 4.0: 11})
+Seed = 0, pinf = 0.159, dev = 6.657,  status counts :  Counter({2.0: 840, 3.0: 128, 4.0: 31, 1.0: 1})
+Seed = 0, pinf = 0.374, dev = 6.231,  status counts :  Counter({2.0: 626, 3.0: 314, 4.0: 60})
+Seed = 0, pinf = 0.846, dev = 2.698,  status counts :  Counter({3.0: 736, 2.0: 154, 4.0: 110})
+Seed = 0, pinf = 0.973, dev = 0.323,  status counts :  Counter({3.0: 832, 4.0: 141, 2.0: 27})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 827, 4.0: 164, 2.0: 9})
+Objective is :  22.536546613585426
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320422 1.10559322 0.55000013 1.10559336]
+Seed = 0, pinf = 0.045, dev = 6.266,  status counts :  Counter({2.0: 796, 1.0: 159, 3.0: 32, 4.0: 13})
+Seed = 0, pinf = 0.149, dev = 7.413,  status counts :  Counter({2.0: 850, 3.0: 122, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.382, dev = 5.861,  status counts :  Counter({2.0: 618, 3.0: 322, 4.0: 60})
+Seed = 0, pinf = 0.858, dev = 3.277,  status counts :  Counter({3.0: 743, 2.0: 142, 4.0: 115})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 839, 4.0: 135, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 835, 4.0: 151, 2.0: 14})
+Objective is :  23.739870658343516
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 794, 1.0: 159, 3.0: 35, 4.0: 12})
+Seed = 0, pinf = 0.155, dev = 6.951,  status counts :  Counter({2.0: 844, 3.0: 128, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.390, dev = 5.504,  status counts :  Counter({2.0: 610, 3.0: 338, 4.0: 52})
+Seed = 0, pinf = 0.856, dev = 3.174,  status counts :  Counter({3.0: 747, 2.0: 144, 4.0: 109})
+Seed = 0, pinf = 0.979, dev = 0.592,  status counts :  Counter({3.0: 850, 4.0: 129, 2.0: 21})
+Seed = 0, pinf = 0.984, dev = 0.645,  status counts :  Counter({3.0: 834, 4.0: 150, 2.0: 16})
+Objective is :  22.852063380367976
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320424 1.10559322 0.55000015 1.10559336]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 33, 4.0: 13})
+Seed = 0, pinf = 0.155, dev = 6.951,  status counts :  Counter({2.0: 844, 3.0: 126, 4.0: 29, 1.0: 1})
+Seed = 0, pinf = 0.388, dev = 5.592,  status counts :  Counter({2.0: 612, 3.0: 328, 4.0: 60})
+Seed = 0, pinf = 0.850, dev = 2.881,  status counts :  Counter({3.0: 735, 2.0: 150, 4.0: 115})
+Seed = 0, pinf = 0.977, dev = 0.488,  status counts :  Counter({3.0: 836, 4.0: 141, 2.0: 23})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 834, 4.0: 154, 2.0: 12})
+Objective is :  22.5189851513675
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 794, 1.0: 159, 3.0: 34, 4.0: 13})
+Seed = 0, pinf = 0.151, dev = 7.256,  status counts :  Counter({2.0: 848, 3.0: 126, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.394, dev = 5.331,  status counts :  Counter({2.0: 606, 3.0: 336, 4.0: 58})
+Seed = 0, pinf = 0.845, dev = 2.653,  status counts :  Counter({3.0: 722, 2.0: 155, 4.0: 123})
+Seed = 0, pinf = 0.980, dev = 0.651,  status counts :  Counter({3.0: 833, 4.0: 147, 2.0: 20})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 839, 4.0: 149, 2.0: 12})
+Objective is :  22.359159769246446
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 128, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 338, 4.0: 62})
+Seed = 0, pinf = 0.849, dev = 2.835,  status counts :  Counter({3.0: 733, 2.0: 151, 4.0: 116})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 834, 4.0: 140, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 836, 4.0: 150, 2.0: 14})
+Objective is :  21.580751845999142
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320441 0.91118644 0.55000032 0.91118658]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 803, 1.0: 151, 3.0: 34, 4.0: 12})
+Seed = 0, pinf = 0.164, dev = 6.305,  status counts :  Counter({2.0: 835, 3.0: 136, 4.0: 28, 1.0: 1})
+Seed = 0, pinf = 0.443, dev = 3.464,  status counts :  Counter({2.0: 557, 3.0: 370, 4.0: 73})
+Seed = 0, pinf = 0.883, dev = 4.796,  status counts :  Counter({3.0: 788, 2.0: 117, 4.0: 95})
+Seed = 0, pinf = 0.981, dev = 0.715,  status counts :  Counter({3.0: 871, 4.0: 110, 2.0: 19})
+Seed = 0, pinf = 0.995, dev = 0.201,  status counts :  Counter({3.0: 881, 4.0: 114, 2.0: 5})
+Objective is :  21.604076616121397
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 128, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 338, 4.0: 62})
+Seed = 0, pinf = 0.849, dev = 2.835,  status counts :  Counter({3.0: 733, 2.0: 151, 4.0: 116})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 834, 4.0: 140, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 836, 4.0: 150, 2.0: 14})
+Objective is :  21.580751845999142
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320441 0.91118644 0.55000032 0.91118658]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 803, 1.0: 151, 3.0: 34, 4.0: 12})
+Seed = 0, pinf = 0.164, dev = 6.305,  status counts :  Counter({2.0: 835, 3.0: 136, 4.0: 28, 1.0: 1})
+Seed = 0, pinf = 0.443, dev = 3.464,  status counts :  Counter({2.0: 557, 3.0: 370, 4.0: 73})
+Seed = 0, pinf = 0.883, dev = 4.796,  status counts :  Counter({3.0: 788, 2.0: 117, 4.0: 95})
+Seed = 0, pinf = 0.981, dev = 0.715,  status counts :  Counter({3.0: 871, 4.0: 110, 2.0: 19})
+Seed = 0, pinf = 0.995, dev = 0.201,  status counts :  Counter({3.0: 881, 4.0: 114, 2.0: 5})
+Objective is :  21.604076616121397
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320399 1.42015    0.5499999  1.42015014]
+Seed = 0, pinf = 0.030, dev = 9.011,  status counts :  Counter({2.0: 804, 1.0: 166, 3.0: 26, 4.0: 4})
+Seed = 0, pinf = 0.113, dev = 10.843,  status counts :  Counter({2.0: 887, 3.0: 96, 4.0: 17})
+Seed = 0, pinf = 0.322, dev = 9.006,  status counts :  Counter({2.0: 678, 3.0: 254, 4.0: 68})
+Seed = 0, pinf = 0.805, dev = 1.256,  status counts :  Counter({3.0: 679, 2.0: 195, 4.0: 126})
+Seed = 0, pinf = 0.945, dev = 0.010,  status counts :  Counter({3.0: 799, 4.0: 146, 2.0: 55})
+Seed = 0, pinf = 0.984, dev = 0.645,  status counts :  Counter({3.0: 836, 4.0: 148, 2.0: 16})
+Objective is :  30.771407757234677
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 128, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 338, 4.0: 62})
+Seed = 0, pinf = 0.849, dev = 2.835,  status counts :  Counter({3.0: 733, 2.0: 151, 4.0: 116})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 834, 4.0: 140, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 836, 4.0: 150, 2.0: 14})
+Objective is :  21.580751845999142
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320415 1.22574322 0.55000006 1.22574336]
+Seed = 0, pinf = 0.029, dev = 9.249,  status counts :  Counter({2.0: 811, 1.0: 160, 3.0: 25, 4.0: 4})
+Seed = 0, pinf = 0.110, dev = 11.193,  status counts :  Counter({2.0: 890, 3.0: 84, 4.0: 26})
+Seed = 0, pinf = 0.370, dev = 6.421,  status counts :  Counter({2.0: 630, 3.0: 316, 4.0: 54})
+Seed = 0, pinf = 0.840, dev = 2.438,  status counts :  Counter({3.0: 728, 2.0: 160, 4.0: 112})
+Seed = 0, pinf = 0.951, dev = 0.000,  status counts :  Counter({3.0: 816, 4.0: 135, 2.0: 49})
+Seed = 0, pinf = 0.992, dev = 0.321,  status counts :  Counter({3.0: 833, 4.0: 159, 2.0: 8})
+Objective is :  29.623247736491777
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320431 1.03133644 0.55000022 1.03133658]
+Seed = 0, pinf = 0.040, dev = 7.041,  status counts :  Counter({2.0: 806, 1.0: 154, 3.0: 32, 4.0: 8})
+Seed = 0, pinf = 0.139, dev = 8.244,  status counts :  Counter({2.0: 860, 3.0: 113, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.411, dev = 4.631,  status counts :  Counter({2.0: 589, 3.0: 342, 4.0: 69})
+Seed = 0, pinf = 0.874, dev = 4.194,  status counts :  Counter({3.0: 751, 2.0: 126, 4.0: 123})
+Seed = 0, pinf = 0.970, dev = 0.230,  status counts :  Counter({3.0: 857, 4.0: 113, 2.0: 30})
+Seed = 0, pinf = 0.993, dev = 0.281,  status counts :  Counter({3.0: 893, 4.0: 100, 2.0: 7})
+Objective is :  24.62100859252033
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10535547 0.55000016 1.10535561]
+Seed = 0, pinf = 0.041, dev = 6.877,  status counts :  Counter({2.0: 800, 1.0: 159, 3.0: 32, 4.0: 9})
+Seed = 0, pinf = 0.120, dev = 10.072,  status counts :  Counter({2.0: 879, 3.0: 92, 4.0: 28, 1.0: 1})
+Seed = 0, pinf = 0.395, dev = 5.288,  status counts :  Counter({2.0: 605, 3.0: 314, 4.0: 81})
+Seed = 0, pinf = 0.885, dev = 4.940,  status counts :  Counter({3.0: 753, 4.0: 132, 2.0: 115})
+Seed = 0, pinf = 0.966, dev = 0.137,  status counts :  Counter({3.0: 823, 4.0: 143, 2.0: 34})
+Seed = 0, pinf = 0.993, dev = 0.281,  status counts :  Counter({3.0: 850, 4.0: 143, 2.0: 7})
+Objective is :  27.594530151091014
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320421 1.15148643 0.55000012 1.15148657]
+Seed = 0, pinf = 0.026, dev = 10.024,  status counts :  Counter({2.0: 812, 1.0: 162, 3.0: 24, 4.0: 2})
+Seed = 0, pinf = 0.139, dev = 8.244,  status counts :  Counter({2.0: 860, 3.0: 117, 4.0: 22, 1.0: 1})
+Seed = 0, pinf = 0.382, dev = 5.861,  status counts :  Counter({2.0: 618, 3.0: 320, 4.0: 62})
+Seed = 0, pinf = 0.859, dev = 3.329,  status counts :  Counter({3.0: 726, 2.0: 141, 4.0: 133})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 819, 4.0: 153, 2.0: 28})
+Seed = 0, pinf = 0.995, dev = 0.201,  status counts :  Counter({3.0: 847, 4.0: 148, 2.0: 5})
+Objective is :  27.947809094843
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320424 1.12312287 0.55000014 1.12312301]
+Seed = 0, pinf = 0.038, dev = 7.385,  status counts :  Counter({2.0: 802, 1.0: 160, 3.0: 30, 4.0: 8})
+Seed = 0, pinf = 0.131, dev = 8.970,  status counts :  Counter({2.0: 868, 3.0: 104, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.369, dev = 6.469,  status counts :  Counter({2.0: 631, 3.0: 315, 4.0: 54})
+Seed = 0, pinf = 0.877, dev = 4.387,  status counts :  Counter({3.0: 761, 2.0: 123, 4.0: 116})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 839, 4.0: 136, 2.0: 25})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 865, 4.0: 121, 2.0: 14})
+Objective is :  28.175079476416812
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320424 1.11228895 0.55000015 1.11228909]
+Seed = 0, pinf = 0.040, dev = 7.041,  status counts :  Counter({2.0: 800, 1.0: 160, 3.0: 28, 4.0: 12})
+Seed = 0, pinf = 0.139, dev = 8.244,  status counts :  Counter({2.0: 860, 3.0: 106, 4.0: 33, 1.0: 1})
+Seed = 0, pinf = 0.415, dev = 4.475,  status counts :  Counter({2.0: 585, 3.0: 349, 4.0: 66})
+Seed = 0, pinf = 0.870, dev = 3.947,  status counts :  Counter({3.0: 752, 2.0: 130, 4.0: 118})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 837, 4.0: 132, 2.0: 31})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 844, 4.0: 145, 2.0: 11})
+Objective is :  24.353070539750213
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10815076 0.55000016 1.1081509 ]
+Seed = 0, pinf = 0.035, dev = 7.943,  status counts :  Counter({2.0: 806, 1.0: 159, 3.0: 25, 4.0: 10})
+Seed = 0, pinf = 0.129, dev = 9.161,  status counts :  Counter({2.0: 870, 3.0: 103, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.405, dev = 4.871,  status counts :  Counter({2.0: 595, 3.0: 340, 4.0: 65})
+Seed = 0, pinf = 0.871, dev = 4.008,  status counts :  Counter({3.0: 741, 4.0: 130, 2.0: 129})
+Seed = 0, pinf = 0.970, dev = 0.230,  status counts :  Counter({3.0: 849, 4.0: 121, 2.0: 30})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 868, 4.0: 121, 2.0: 11})
+Objective is :  26.65629993563543
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10657012 0.55000016 1.10657026]
+Seed = 0, pinf = 0.034, dev = 8.142,  status counts :  Counter({2.0: 807, 1.0: 159, 3.0: 30, 4.0: 4})
+Seed = 0, pinf = 0.122, dev = 9.862,  status counts :  Counter({2.0: 877, 3.0: 102, 4.0: 20, 1.0: 1})
+Seed = 0, pinf = 0.373, dev = 6.278,  status counts :  Counter({2.0: 627, 3.0: 311, 4.0: 62})
+Seed = 0, pinf = 0.873, dev = 4.131,  status counts :  Counter({3.0: 737, 4.0: 136, 2.0: 127})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 870, 4.0: 104, 2.0: 26})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 847, 4.0: 143, 2.0: 10})
+Objective is :  29.174922681477632
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10596636 0.55000016 1.1059665 ]
+Seed = 0, pinf = 0.037, dev = 7.565,  status counts :  Counter({2.0: 804, 1.0: 159, 3.0: 30, 4.0: 7})
+Seed = 0, pinf = 0.140, dev = 8.157,  status counts :  Counter({2.0: 859, 3.0: 118, 4.0: 22, 1.0: 1})
+Seed = 0, pinf = 0.388, dev = 5.592,  status counts :  Counter({2.0: 612, 3.0: 321, 4.0: 67})
+Seed = 0, pinf = 0.852, dev = 2.977,  status counts :  Counter({3.0: 721, 2.0: 148, 4.0: 131})
+Seed = 0, pinf = 0.980, dev = 0.651,  status counts :  Counter({3.0: 838, 4.0: 142, 2.0: 20})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 861, 4.0: 128, 2.0: 11})
+Objective is :  25.38435101697538
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10573575 0.55000016 1.10573589]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 799, 1.0: 159, 3.0: 36, 4.0: 6})
+Seed = 0, pinf = 0.133, dev = 8.783,  status counts :  Counter({2.0: 866, 3.0: 108, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.374, dev = 6.231,  status counts :  Counter({2.0: 626, 3.0: 319, 4.0: 55})
+Seed = 0, pinf = 0.856, dev = 3.174,  status counts :  Counter({3.0: 754, 2.0: 144, 4.0: 102})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 851, 4.0: 121, 2.0: 28})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 849, 4.0: 139, 2.0: 12})
+Objective is :  25.678525065961836
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10550241 0.55000016 1.10550255]
+Seed = 0, pinf = 0.034, dev = 8.142,  status counts :  Counter({2.0: 807, 1.0: 159, 3.0: 31, 4.0: 3})
+Seed = 0, pinf = 0.135, dev = 8.600,  status counts :  Counter({2.0: 864, 3.0: 109, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.395, dev = 5.288,  status counts :  Counter({2.0: 605, 3.0: 331, 4.0: 64})
+Seed = 0, pinf = 0.842, dev = 2.523,  status counts :  Counter({3.0: 720, 2.0: 158, 4.0: 122})
+Seed = 0, pinf = 0.971, dev = 0.259,  status counts :  Counter({3.0: 843, 4.0: 128, 2.0: 29})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 847, 4.0: 138, 2.0: 15})
+Objective is :  25.415752246392792
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10564766 0.55000016 1.1056478 ]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 794, 1.0: 159, 3.0: 38, 4.0: 9})
+Seed = 0, pinf = 0.135, dev = 8.600,  status counts :  Counter({2.0: 864, 3.0: 105, 4.0: 30, 1.0: 1})
+Seed = 0, pinf = 0.389, dev = 5.548,  status counts :  Counter({2.0: 611, 3.0: 331, 4.0: 58})
+Seed = 0, pinf = 0.862, dev = 3.489,  status counts :  Counter({3.0: 743, 2.0: 138, 4.0: 119})
+Seed = 0, pinf = 0.967, dev = 0.157,  status counts :  Counter({3.0: 847, 4.0: 120, 2.0: 33})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 844, 4.0: 141, 2.0: 15})
+Objective is :  24.38405784441078
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10555853 0.55000016 1.10555867]
+Seed = 0, pinf = 0.041, dev = 6.877,  status counts :  Counter({2.0: 800, 1.0: 159, 3.0: 28, 4.0: 13})
+Seed = 0, pinf = 0.135, dev = 8.600,  status counts :  Counter({2.0: 864, 3.0: 111, 4.0: 24, 1.0: 1})
+Seed = 0, pinf = 0.393, dev = 5.374,  status counts :  Counter({2.0: 607, 3.0: 327, 4.0: 66})
+Seed = 0, pinf = 0.850, dev = 2.881,  status counts :  Counter({3.0: 743, 2.0: 150, 4.0: 107})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 856, 4.0: 119, 2.0: 25})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 859, 4.0: 129, 2.0: 12})
+Objective is :  24.614282649394433
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10561402 0.55000016 1.10561416]
+Seed = 0, pinf = 0.038, dev = 7.385,  status counts :  Counter({2.0: 803, 1.0: 159, 3.0: 31, 4.0: 7})
+Seed = 0, pinf = 0.157, dev = 6.803,  status counts :  Counter({2.0: 842, 3.0: 126, 4.0: 31, 1.0: 1})
+Seed = 0, pinf = 0.391, dev = 5.460,  status counts :  Counter({2.0: 609, 3.0: 330, 4.0: 61})
+Seed = 0, pinf = 0.867, dev = 3.770,  status counts :  Counter({3.0: 761, 2.0: 133, 4.0: 106})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 852, 4.0: 120, 2.0: 28})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 863, 4.0: 128, 2.0: 9})
+Objective is :  24.069720220547133
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10557997 0.55000016 1.10558011]
+Seed = 0, pinf = 0.039, dev = 7.210,  status counts :  Counter({2.0: 802, 1.0: 159, 3.0: 28, 4.0: 11})
+Seed = 0, pinf = 0.134, dev = 8.691,  status counts :  Counter({2.0: 865, 3.0: 124, 4.0: 10, 1.0: 1})
+Seed = 0, pinf = 0.394, dev = 5.331,  status counts :  Counter({2.0: 606, 3.0: 317, 4.0: 77})
+Seed = 0, pinf = 0.873, dev = 4.131,  status counts :  Counter({3.0: 751, 2.0: 127, 4.0: 122})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 829, 4.0: 143, 2.0: 28})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 855, 4.0: 136, 2.0: 9})
+Objective is :  26.01491208482437
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10560116 0.55000016 1.1056013 ]
+Seed = 0, pinf = 0.033, dev = 8.348,  status counts :  Counter({2.0: 808, 1.0: 159, 3.0: 28, 4.0: 5})
+Seed = 0, pinf = 0.130, dev = 9.065,  status counts :  Counter({2.0: 869, 3.0: 109, 4.0: 21, 1.0: 1})
+Seed = 0, pinf = 0.371, dev = 6.373,  status counts :  Counter({2.0: 629, 3.0: 315, 4.0: 56})
+Seed = 0, pinf = 0.842, dev = 2.523,  status counts :  Counter({3.0: 722, 2.0: 158, 4.0: 120})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 838, 4.0: 130, 2.0: 32})
+Seed = 0, pinf = 0.995, dev = 0.201,  status counts :  Counter({3.0: 850, 4.0: 145, 2.0: 5})
+Objective is :  26.688782698144173
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10558816 0.55000016 1.1055883 ]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 799, 1.0: 159, 3.0: 30, 4.0: 12})
+Seed = 0, pinf = 0.136, dev = 8.510,  status counts :  Counter({2.0: 863, 3.0: 114, 4.0: 22, 1.0: 1})
+Seed = 0, pinf = 0.393, dev = 5.374,  status counts :  Counter({2.0: 607, 3.0: 328, 4.0: 65})
+Seed = 0, pinf = 0.862, dev = 3.489,  status counts :  Counter({3.0: 742, 2.0: 138, 4.0: 120})
+Seed = 0, pinf = 0.971, dev = 0.259,  status counts :  Counter({3.0: 833, 4.0: 138, 2.0: 29})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 854, 4.0: 135, 2.0: 11})
+Objective is :  24.791529988135114
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559626 0.55000016 1.1055964 ]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 34, 4.0: 12})
+Seed = 0, pinf = 0.141, dev = 8.071,  status counts :  Counter({2.0: 858, 3.0: 104, 4.0: 37, 1.0: 1})
+Seed = 0, pinf = 0.395, dev = 5.288,  status counts :  Counter({2.0: 605, 3.0: 328, 4.0: 67})
+Seed = 0, pinf = 0.866, dev = 3.713,  status counts :  Counter({3.0: 750, 2.0: 134, 4.0: 116})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 830, 4.0: 139, 2.0: 31})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 860, 4.0: 131, 2.0: 9})
+Objective is :  23.760980551429434
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559129 0.55000016 1.10559143]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 799, 1.0: 159, 3.0: 33, 4.0: 9})
+Seed = 0, pinf = 0.124, dev = 9.656,  status counts :  Counter({2.0: 875, 3.0: 100, 4.0: 24, 1.0: 1})
+Seed = 0, pinf = 0.392, dev = 5.417,  status counts :  Counter({2.0: 608, 3.0: 326, 4.0: 66})
+Seed = 0, pinf = 0.858, dev = 3.277,  status counts :  Counter({3.0: 744, 2.0: 142, 4.0: 114})
+Seed = 0, pinf = 0.963, dev = 0.086,  status counts :  Counter({3.0: 855, 4.0: 108, 2.0: 37})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 850, 4.0: 139, 2.0: 11})
+Objective is :  25.596144485428567
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559438 0.55000016 1.10559452]
+Seed = 0, pinf = 0.040, dev = 7.041,  status counts :  Counter({2.0: 801, 1.0: 159, 3.0: 29, 4.0: 11})
+Seed = 0, pinf = 0.138, dev = 8.332,  status counts :  Counter({2.0: 861, 3.0: 115, 4.0: 23, 1.0: 1})
+Seed = 0, pinf = 0.365, dev = 6.664,  status counts :  Counter({2.0: 635, 3.0: 301, 4.0: 64})
+Seed = 0, pinf = 0.857, dev = 3.225,  status counts :  Counter({3.0: 740, 2.0: 143, 4.0: 117})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 846, 4.0: 123, 2.0: 31})
+Seed = 0, pinf = 0.984, dev = 0.645,  status counts :  Counter({3.0: 857, 4.0: 127, 2.0: 16})
+Objective is :  26.111025757854826
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559248 0.55000016 1.10559262]
+Seed = 0, pinf = 0.039, dev = 7.210,  status counts :  Counter({2.0: 802, 1.0: 159, 3.0: 36, 4.0: 3})
+Seed = 0, pinf = 0.141, dev = 8.071,  status counts :  Counter({2.0: 858, 3.0: 114, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.396, dev = 5.246,  status counts :  Counter({2.0: 604, 3.0: 336, 4.0: 60})
+Seed = 0, pinf = 0.844, dev = 2.609,  status counts :  Counter({3.0: 739, 2.0: 156, 4.0: 105})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 846, 4.0: 122, 2.0: 32})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 858, 4.0: 127, 2.0: 15})
+Objective is :  23.920062358261745
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559366 0.55000016 1.1055938 ]
+Seed = 0, pinf = 0.043, dev = 6.563,  status counts :  Counter({2.0: 798, 1.0: 159, 3.0: 36, 4.0: 7})
+Seed = 0, pinf = 0.139, dev = 8.244,  status counts :  Counter({2.0: 860, 3.0: 115, 4.0: 24, 1.0: 1})
+Seed = 0, pinf = 0.374, dev = 6.231,  status counts :  Counter({2.0: 626, 3.0: 313, 4.0: 61})
+Seed = 0, pinf = 0.846, dev = 2.698,  status counts :  Counter({3.0: 719, 2.0: 154, 4.0: 127})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 839, 4.0: 133, 2.0: 28})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 842, 4.0: 143, 2.0: 15})
+Objective is :  24.62937100515189
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559294 0.55000016 1.10559308]
+Seed = 0, pinf = 0.045, dev = 6.266,  status counts :  Counter({2.0: 796, 1.0: 159, 3.0: 33, 4.0: 12})
+Seed = 0, pinf = 0.147, dev = 7.573,  status counts :  Counter({2.0: 852, 3.0: 115, 4.0: 32, 1.0: 1})
+Seed = 0, pinf = 0.385, dev = 5.725,  status counts :  Counter({2.0: 615, 3.0: 322, 4.0: 63})
+Seed = 0, pinf = 0.854, dev = 3.074,  status counts :  Counter({3.0: 743, 2.0: 146, 4.0: 111})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 848, 4.0: 121, 2.0: 31})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 855, 4.0: 133, 2.0: 12})
+Objective is :  23.32471371650542
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559339 0.55000016 1.10559353]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 38, 4.0: 11})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 124, 4.0: 28, 1.0: 1})
+Seed = 0, pinf = 0.397, dev = 5.203,  status counts :  Counter({2.0: 603, 3.0: 333, 4.0: 64})
+Seed = 0, pinf = 0.859, dev = 3.329,  status counts :  Counter({3.0: 740, 2.0: 141, 4.0: 119})
+Seed = 0, pinf = 0.971, dev = 0.259,  status counts :  Counter({3.0: 835, 4.0: 136, 2.0: 29})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 855, 4.0: 136, 2.0: 9})
+Objective is :  22.050008597128055
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559324 0.55000016 1.10559338]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 794, 1.0: 159, 3.0: 34, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 121, 4.0: 31, 1.0: 1})
+Seed = 0, pinf = 0.386, dev = 5.681,  status counts :  Counter({2.0: 614, 3.0: 328, 4.0: 58})
+Seed = 0, pinf = 0.862, dev = 3.489,  status counts :  Counter({3.0: 746, 2.0: 138, 4.0: 116})
+Seed = 0, pinf = 0.979, dev = 0.592,  status counts :  Counter({3.0: 834, 4.0: 145, 2.0: 21})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 834, 4.0: 155, 2.0: 11})
+Objective is :  23.368661676107973
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559311 0.55000016 1.10559325]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 799, 1.0: 159, 3.0: 32, 4.0: 10})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 122, 4.0: 30, 1.0: 1})
+Seed = 0, pinf = 0.377, dev = 6.090,  status counts :  Counter({2.0: 623, 3.0: 326, 4.0: 51})
+Seed = 0, pinf = 0.855, dev = 3.124,  status counts :  Counter({3.0: 731, 2.0: 145, 4.0: 124})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 856, 4.0: 119, 2.0: 25})
+Seed = 0, pinf = 0.993, dev = 0.281,  status counts :  Counter({3.0: 853, 4.0: 140, 2.0: 7})
+Objective is :  23.790672237108296
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559318 0.55000016 1.10559332]
+Seed = 0, pinf = 0.045, dev = 6.266,  status counts :  Counter({2.0: 796, 1.0: 159, 3.0: 35, 4.0: 10})
+Seed = 0, pinf = 0.159, dev = 6.657,  status counts :  Counter({2.0: 840, 3.0: 132, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.377, dev = 6.090,  status counts :  Counter({2.0: 623, 3.0: 325, 4.0: 52})
+Seed = 0, pinf = 0.849, dev = 2.835,  status counts :  Counter({3.0: 730, 2.0: 151, 4.0: 119})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 821, 4.0: 155, 2.0: 24})
+Seed = 0, pinf = 0.992, dev = 0.321,  status counts :  Counter({3.0: 856, 4.0: 136, 2.0: 8})
+Objective is :  22.61127443702105
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559321 0.55000016 1.10559335]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 35, 4.0: 11})
+Seed = 0, pinf = 0.161, dev = 6.514,  status counts :  Counter({2.0: 838, 3.0: 129, 4.0: 32, 1.0: 1})
+Seed = 0, pinf = 0.383, dev = 5.815,  status counts :  Counter({2.0: 617, 3.0: 329, 4.0: 54})
+Seed = 0, pinf = 0.867, dev = 3.770,  status counts :  Counter({3.0: 742, 2.0: 133, 4.0: 125})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 826, 4.0: 149, 2.0: 25})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 829, 4.0: 156, 2.0: 15})
+Objective is :  23.2273623667503
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.050, dev = 5.591,  status counts :  Counter({2.0: 791, 1.0: 159, 3.0: 37, 4.0: 13})
+Seed = 0, pinf = 0.157, dev = 6.803,  status counts :  Counter({2.0: 842, 3.0: 127, 4.0: 30, 1.0: 1})
+Seed = 0, pinf = 0.387, dev = 5.636,  status counts :  Counter({2.0: 613, 3.0: 325, 4.0: 62})
+Seed = 0, pinf = 0.859, dev = 3.329,  status counts :  Counter({3.0: 735, 2.0: 141, 4.0: 124})
+Seed = 0, pinf = 0.977, dev = 0.488,  status counts :  Counter({3.0: 840, 4.0: 137, 2.0: 23})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 848, 4.0: 141, 2.0: 11})
+Objective is :  22.289494431958797
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559323 0.55000016 1.10559337]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 33, 4.0: 13})
+Seed = 0, pinf = 0.155, dev = 6.951,  status counts :  Counter({2.0: 844, 3.0: 126, 4.0: 29, 1.0: 1})
+Seed = 0, pinf = 0.390, dev = 5.504,  status counts :  Counter({2.0: 610, 3.0: 330, 4.0: 60})
+Seed = 0, pinf = 0.841, dev = 2.480,  status counts :  Counter({3.0: 722, 2.0: 159, 4.0: 119})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 837, 4.0: 138, 2.0: 25})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 845, 4.0: 146, 2.0: 9})
+Objective is :  21.819791926562694
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.050, dev = 5.591,  status counts :  Counter({2.0: 791, 1.0: 159, 3.0: 37, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 127, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.392, dev = 5.417,  status counts :  Counter({2.0: 608, 3.0: 337, 4.0: 55})
+Seed = 0, pinf = 0.857, dev = 3.225,  status counts :  Counter({3.0: 740, 2.0: 143, 4.0: 117})
+Seed = 0, pinf = 0.981, dev = 0.715,  status counts :  Counter({3.0: 842, 4.0: 139, 2.0: 19})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 837, 4.0: 151, 2.0: 12})
+Objective is :  22.457389339113334
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 33, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 126, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.390, dev = 5.504,  status counts :  Counter({2.0: 610, 3.0: 335, 4.0: 55})
+Seed = 0, pinf = 0.849, dev = 2.835,  status counts :  Counter({3.0: 719, 2.0: 151, 4.0: 130})
+Seed = 0, pinf = 0.979, dev = 0.592,  status counts :  Counter({3.0: 838, 4.0: 141, 2.0: 21})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 837, 4.0: 150, 2.0: 13})
+Objective is :  22.680159139211675
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.048, dev = 5.850,  status counts :  Counter({2.0: 793, 1.0: 159, 3.0: 36, 4.0: 12})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 128, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.391, dev = 5.460,  status counts :  Counter({2.0: 609, 3.0: 341, 4.0: 50})
+Seed = 0, pinf = 0.845, dev = 2.653,  status counts :  Counter({3.0: 728, 2.0: 155, 4.0: 117})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 839, 4.0: 136, 2.0: 25})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 836, 4.0: 149, 2.0: 15})
+Objective is :  21.993840015516895
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 125, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.402, dev = 4.994,  status counts :  Counter({2.0: 598, 3.0: 342, 4.0: 60})
+Seed = 0, pinf = 0.845, dev = 2.653,  status counts :  Counter({3.0: 724, 2.0: 155, 4.0: 121})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 836, 4.0: 140, 2.0: 24})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 833, 4.0: 153, 2.0: 14})
+Objective is :  21.550928020581548
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 33, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 126, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.399, dev = 5.119,  status counts :  Counter({2.0: 601, 3.0: 339, 4.0: 60})
+Seed = 0, pinf = 0.846, dev = 2.698,  status counts :  Counter({3.0: 720, 2.0: 154, 4.0: 126})
+Seed = 0, pinf = 0.979, dev = 0.592,  status counts :  Counter({3.0: 834, 4.0: 145, 2.0: 21})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 836, 4.0: 152, 2.0: 12})
+Objective is :  22.117609462124882
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.399, dev = 5.119,  status counts :  Counter({2.0: 601, 3.0: 338, 4.0: 61})
+Seed = 0, pinf = 0.848, dev = 2.788,  status counts :  Counter({3.0: 731, 2.0: 152, 4.0: 117})
+Seed = 0, pinf = 0.978, dev = 0.538,  status counts :  Counter({3.0: 835, 4.0: 143, 2.0: 22})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 831, 4.0: 154, 2.0: 15})
+Objective is :  21.8711521662522
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 126, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.399, dev = 5.119,  status counts :  Counter({2.0: 601, 3.0: 339, 4.0: 60})
+Seed = 0, pinf = 0.849, dev = 2.835,  status counts :  Counter({3.0: 726, 2.0: 151, 4.0: 123})
+Seed = 0, pinf = 0.977, dev = 0.488,  status counts :  Counter({3.0: 838, 4.0: 139, 2.0: 23})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 836, 4.0: 150, 2.0: 14})
+Objective is :  21.903343402799948
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 126, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 337, 4.0: 63})
+Seed = 0, pinf = 0.847, dev = 2.743,  status counts :  Counter({3.0: 732, 2.0: 153, 4.0: 115})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 828, 4.0: 146, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 833, 4.0: 153, 2.0: 14})
+Objective is :  21.56477545276837
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.151, dev = 7.256,  status counts :  Counter({2.0: 848, 3.0: 126, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.396, dev = 5.246,  status counts :  Counter({2.0: 604, 3.0: 334, 4.0: 62})
+Seed = 0, pinf = 0.846, dev = 2.698,  status counts :  Counter({3.0: 729, 2.0: 154, 4.0: 117})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 831, 4.0: 145, 2.0: 24})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 830, 4.0: 156, 2.0: 14})
+Objective is :  21.92402401941003
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 126, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 339, 4.0: 61})
+Seed = 0, pinf = 0.847, dev = 2.743,  status counts :  Counter({3.0: 728, 2.0: 153, 4.0: 119})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 835, 4.0: 141, 2.0: 24})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 831, 4.0: 157, 2.0: 12})
+Objective is :  21.642458218407143
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 125, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.403, dev = 4.953,  status counts :  Counter({2.0: 597, 3.0: 341, 4.0: 62})
+Seed = 0, pinf = 0.847, dev = 2.743,  status counts :  Counter({3.0: 729, 2.0: 153, 4.0: 118})
+Seed = 0, pinf = 0.978, dev = 0.538,  status counts :  Counter({3.0: 834, 4.0: 144, 2.0: 22})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 830, 4.0: 156, 2.0: 14})
+Objective is :  21.69564872029354
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 126, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 339, 4.0: 61})
+Seed = 0, pinf = 0.843, dev = 2.566,  status counts :  Counter({3.0: 725, 2.0: 157, 4.0: 118})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 832, 4.0: 144, 2.0: 24})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 832, 4.0: 153, 2.0: 15})
+Objective is :  21.586950500173394
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.151, dev = 7.256,  status counts :  Counter({2.0: 848, 3.0: 125, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 341, 4.0: 59})
+Seed = 0, pinf = 0.847, dev = 2.743,  status counts :  Counter({3.0: 726, 2.0: 153, 4.0: 121})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 833, 4.0: 143, 2.0: 24})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 832, 4.0: 155, 2.0: 13})
+Objective is :  21.76029028301756
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 125, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.402, dev = 4.994,  status counts :  Counter({2.0: 598, 3.0: 342, 4.0: 60})
+Seed = 0, pinf = 0.845, dev = 2.653,  status counts :  Counter({3.0: 724, 2.0: 155, 4.0: 121})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 836, 4.0: 140, 2.0: 24})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 833, 4.0: 153, 2.0: 14})
+Objective is :  21.550928020581548
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 4.34320425 1.10559322 1.55000016 1.10559336]
+Seed = 0, pinf = 0.043, dev = 6.563,  status counts :  Counter({2.0: 709, 1.0: 248, 3.0: 37, 4.0: 6})
+Seed = 0, pinf = 0.138, dev = 8.332,  status counts :  Counter({2.0: 859, 3.0: 114, 4.0: 24, 1.0: 3})
+Seed = 0, pinf = 0.382, dev = 5.861,  status counts :  Counter({2.0: 618, 3.0: 327, 4.0: 55})
+Seed = 0, pinf = 0.872, dev = 4.069,  status counts :  Counter({3.0: 769, 2.0: 128, 4.0: 103})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 839, 4.0: 129, 2.0: 32})
+Seed = 0, pinf = 0.993, dev = 0.281,  status counts :  Counter({3.0: 880, 4.0: 113, 2.0: 7})
+Objective is :  25.284402097330492
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 125, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.402, dev = 4.994,  status counts :  Counter({2.0: 598, 3.0: 342, 4.0: 60})
+Seed = 0, pinf = 0.845, dev = 2.653,  status counts :  Counter({3.0: 724, 2.0: 155, 4.0: 121})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 836, 4.0: 140, 2.0: 24})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 833, 4.0: 153, 2.0: 14})
+Objective is :  21.550928020581548
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.72517025 1.10559322 0.93196616 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 751, 1.0: 200, 3.0: 33, 4.0: 16})
+Seed = 0, pinf = 0.131, dev = 8.970,  status counts :  Counter({2.0: 867, 3.0: 101, 4.0: 30, 1.0: 2})
+Seed = 0, pinf = 0.358, dev = 7.014,  status counts :  Counter({2.0: 642, 3.0: 301, 4.0: 57})
+Seed = 0, pinf = 0.870, dev = 3.947,  status counts :  Counter({3.0: 757, 2.0: 130, 4.0: 113})
+Seed = 0, pinf = 0.973, dev = 0.323,  status counts :  Counter({3.0: 843, 4.0: 130, 2.0: 27})
+Seed = 0, pinf = 0.992, dev = 0.321,  status counts :  Counter({3.0: 866, 4.0: 126, 2.0: 8})
+Objective is :  26.29574101629581
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.53290176 1.10559322 0.73969767 1.10559336]
+Seed = 0, pinf = 0.045, dev = 6.266,  status counts :  Counter({2.0: 769, 1.0: 186, 3.0: 38, 4.0: 7})
+Seed = 0, pinf = 0.134, dev = 8.691,  status counts :  Counter({2.0: 866, 3.0: 114, 4.0: 20})
+Seed = 0, pinf = 0.393, dev = 5.374,  status counts :  Counter({2.0: 607, 3.0: 330, 4.0: 63})
+Seed = 0, pinf = 0.854, dev = 3.074,  status counts :  Counter({3.0: 746, 2.0: 146, 4.0: 108})
+Seed = 0, pinf = 0.966, dev = 0.137,  status counts :  Counter({3.0: 843, 4.0: 123, 2.0: 34})
+Seed = 0, pinf = 0.992, dev = 0.321,  status counts :  Counter({3.0: 829, 4.0: 163, 2.0: 8})
+Objective is :  23.863241627423545
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.10713628 1.10559322 0.31393219 1.10559336]
+Seed = 0, pinf = 0.034, dev = 8.142,  status counts :  Counter({2.0: 841, 1.0: 125, 3.0: 26, 4.0: 8})
+Seed = 0, pinf = 0.142, dev = 7.986,  status counts :  Counter({2.0: 858, 3.0: 117, 4.0: 25})
+Seed = 0, pinf = 0.381, dev = 5.906,  status counts :  Counter({2.0: 619, 3.0: 319, 4.0: 62})
+Seed = 0, pinf = 0.865, dev = 3.656,  status counts :  Counter({3.0: 734, 2.0: 135, 4.0: 131})
+Seed = 0, pinf = 0.957, dev = 0.023,  status counts :  Counter({3.0: 813, 4.0: 144, 2.0: 43})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 864, 4.0: 127, 2.0: 9})
+Objective is :  26.074306169306787
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.35528229 1.10559322 0.5620782  1.10559336]
+Seed = 0, pinf = 0.024, dev = 10.599,  status counts :  Counter({2.0: 819, 1.0: 157, 3.0: 19, 4.0: 5})
+Seed = 0, pinf = 0.137, dev = 8.420,  status counts :  Counter({2.0: 863, 3.0: 112, 4.0: 25})
+Seed = 0, pinf = 0.393, dev = 5.374,  status counts :  Counter({2.0: 607, 3.0: 326, 4.0: 67})
+Seed = 0, pinf = 0.867, dev = 3.770,  status counts :  Counter({3.0: 743, 2.0: 133, 4.0: 124})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 835, 4.0: 134, 2.0: 31})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 864, 4.0: 127, 2.0: 9})
+Objective is :  28.728430243175467
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.25303431 1.10559322 0.45983022 1.10559336]
+Seed = 0, pinf = 0.036, dev = 7.751,  status counts :  Counter({2.0: 822, 1.0: 142, 3.0: 25, 4.0: 11})
+Seed = 0, pinf = 0.128, dev = 9.258,  status counts :  Counter({2.0: 870, 3.0: 100, 4.0: 28, 1.0: 2})
+Seed = 0, pinf = 0.395, dev = 5.288,  status counts :  Counter({2.0: 605, 3.0: 336, 4.0: 59})
+Seed = 0, pinf = 0.853, dev = 3.025,  status counts :  Counter({3.0: 731, 2.0: 147, 4.0: 122})
+Seed = 0, pinf = 0.967, dev = 0.157,  status counts :  Counter({3.0: 841, 4.0: 126, 2.0: 33})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 865, 4.0: 126, 2.0: 9})
+Objective is :  25.84132663035299
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.3087624  1.10559322 0.51555831 1.10559336]
+Seed = 0, pinf = 0.048, dev = 5.850,  status counts :  Counter({2.0: 800, 1.0: 152, 3.0: 37, 4.0: 11})
+Seed = 0, pinf = 0.133, dev = 8.783,  status counts :  Counter({2.0: 866, 3.0: 107, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.365, dev = 6.664,  status counts :  Counter({2.0: 635, 3.0: 290, 4.0: 75})
+Seed = 0, pinf = 0.846, dev = 2.698,  status counts :  Counter({3.0: 737, 2.0: 154, 4.0: 109})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 820, 4.0: 152, 2.0: 28})
+Seed = 0, pinf = 0.992, dev = 0.321,  status counts :  Counter({3.0: 876, 4.0: 116, 2.0: 8})
+Objective is :  24.606536904709035
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.33004863 1.10559322 0.53684454 1.10559336]
+Seed = 0, pinf = 0.036, dev = 7.751,  status counts :  Counter({2.0: 808, 1.0: 156, 3.0: 27, 4.0: 9})
+Seed = 0, pinf = 0.151, dev = 7.256,  status counts :  Counter({2.0: 848, 3.0: 121, 4.0: 30, 1.0: 1})
+Seed = 0, pinf = 0.388, dev = 5.592,  status counts :  Counter({2.0: 612, 3.0: 328, 4.0: 60})
+Seed = 0, pinf = 0.865, dev = 3.656,  status counts :  Counter({3.0: 746, 2.0: 135, 4.0: 119})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 852, 4.0: 123, 2.0: 25})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 858, 4.0: 131, 2.0: 11})
+Objective is :  25.09642202740718
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.33817925 1.10559322 0.54497516 1.10559336]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 800, 1.0: 158, 3.0: 35, 4.0: 7})
+Seed = 0, pinf = 0.129, dev = 9.161,  status counts :  Counter({2.0: 870, 3.0: 100, 4.0: 29, 1.0: 1})
+Seed = 0, pinf = 0.396, dev = 5.246,  status counts :  Counter({2.0: 604, 3.0: 327, 4.0: 69})
+Seed = 0, pinf = 0.865, dev = 3.656,  status counts :  Counter({3.0: 750, 2.0: 135, 4.0: 115})
+Seed = 0, pinf = 0.977, dev = 0.488,  status counts :  Counter({3.0: 833, 4.0: 144, 2.0: 23})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 868, 4.0: 117, 2.0: 15})
+Objective is :  25.873085545392595
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34781765 1.10559322 0.55461356 1.10559336]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 38, 4.0: 8})
+Seed = 0, pinf = 0.130, dev = 9.065,  status counts :  Counter({2.0: 869, 3.0: 107, 4.0: 23, 1.0: 1})
+Seed = 0, pinf = 0.390, dev = 5.504,  status counts :  Counter({2.0: 610, 3.0: 334, 4.0: 56})
+Seed = 0, pinf = 0.854, dev = 3.074,  status counts :  Counter({3.0: 727, 2.0: 146, 4.0: 127})
+Seed = 0, pinf = 0.969, dev = 0.204,  status counts :  Counter({3.0: 831, 4.0: 138, 2.0: 31})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 851, 4.0: 140, 2.0: 9})
+Objective is :  24.332694473126907
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34128487 1.10559322 0.54808078 1.10559336]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 794, 1.0: 159, 3.0: 35, 4.0: 12})
+Seed = 0, pinf = 0.142, dev = 7.986,  status counts :  Counter({2.0: 857, 3.0: 123, 4.0: 19, 1.0: 1})
+Seed = 0, pinf = 0.387, dev = 5.636,  status counts :  Counter({2.0: 613, 3.0: 326, 4.0: 61})
+Seed = 0, pinf = 0.870, dev = 3.947,  status counts :  Counter({3.0: 762, 2.0: 130, 4.0: 108})
+Seed = 0, pinf = 0.964, dev = 0.101,  status counts :  Counter({3.0: 843, 4.0: 121, 2.0: 36})
+Seed = 0, pinf = 0.994, dev = 0.241,  status counts :  Counter({3.0: 860, 4.0: 134, 2.0: 6})
+Objective is :  23.896697124567172
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34496641 1.10559322 0.55176232 1.10559336]
+Seed = 0, pinf = 0.035, dev = 7.943,  status counts :  Counter({2.0: 806, 1.0: 159, 3.0: 28, 4.0: 7})
+Seed = 0, pinf = 0.133, dev = 8.783,  status counts :  Counter({2.0: 866, 3.0: 104, 4.0: 29, 1.0: 1})
+Seed = 0, pinf = 0.381, dev = 5.906,  status counts :  Counter({2.0: 619, 3.0: 297, 4.0: 84})
+Seed = 0, pinf = 0.832, dev = 2.121,  status counts :  Counter({3.0: 713, 2.0: 168, 4.0: 119})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 843, 4.0: 129, 2.0: 28})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 860, 4.0: 125, 2.0: 15})
+Objective is :  25.647521823913085
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34247111 1.10559322 0.54926702 1.10559336]
+Seed = 0, pinf = 0.040, dev = 7.041,  status counts :  Counter({2.0: 801, 1.0: 159, 3.0: 28, 4.0: 12})
+Seed = 0, pinf = 0.130, dev = 9.065,  status counts :  Counter({2.0: 869, 3.0: 99, 4.0: 31, 1.0: 1})
+Seed = 0, pinf = 0.363, dev = 6.763,  status counts :  Counter({2.0: 637, 3.0: 306, 4.0: 57})
+Seed = 0, pinf = 0.872, dev = 4.069,  status counts :  Counter({3.0: 720, 4.0: 152, 2.0: 128})
+Seed = 0, pinf = 0.971, dev = 0.259,  status counts :  Counter({3.0: 843, 4.0: 128, 2.0: 29})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 847, 4.0: 140, 2.0: 13})
+Objective is :  27.72085199608524
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34387734 1.10559322 0.55067324 1.10559336]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 799, 1.0: 159, 3.0: 26, 4.0: 16})
+Seed = 0, pinf = 0.128, dev = 9.258,  status counts :  Counter({2.0: 871, 3.0: 109, 4.0: 19, 1.0: 1})
+Seed = 0, pinf = 0.388, dev = 5.592,  status counts :  Counter({2.0: 612, 3.0: 321, 4.0: 67})
+Seed = 0, pinf = 0.864, dev = 3.600,  status counts :  Counter({3.0: 729, 2.0: 136, 4.0: 135})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 851, 4.0: 124, 2.0: 25})
+Seed = 0, pinf = 0.993, dev = 0.281,  status counts :  Counter({3.0: 853, 4.0: 140, 2.0: 7})
+Objective is :  25.84785066834995
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34292422 1.10559322 0.54972013 1.10559336]
+Seed = 0, pinf = 0.043, dev = 6.563,  status counts :  Counter({2.0: 798, 1.0: 159, 3.0: 28, 4.0: 15})
+Seed = 0, pinf = 0.134, dev = 8.691,  status counts :  Counter({2.0: 865, 3.0: 112, 4.0: 22, 1.0: 1})
+Seed = 0, pinf = 0.416, dev = 4.436,  status counts :  Counter({2.0: 584, 3.0: 344, 4.0: 72})
+Seed = 0, pinf = 0.860, dev = 3.382,  status counts :  Counter({3.0: 742, 2.0: 140, 4.0: 118})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 841, 4.0: 127, 2.0: 32})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 864, 4.0: 126, 2.0: 10})
+Objective is :  23.65293655575714
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34346135 1.10559322 0.55025725 1.10559336]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 799, 1.0: 159, 3.0: 33, 4.0: 9})
+Seed = 0, pinf = 0.131, dev = 8.970,  status counts :  Counter({2.0: 868, 3.0: 110, 4.0: 21, 1.0: 1})
+Seed = 0, pinf = 0.392, dev = 5.417,  status counts :  Counter({2.0: 608, 3.0: 334, 4.0: 58})
+Seed = 0, pinf = 0.837, dev = 2.316,  status counts :  Counter({3.0: 723, 2.0: 163, 4.0: 114})
+Seed = 0, pinf = 0.956, dev = 0.016,  status counts :  Counter({3.0: 826, 4.0: 130, 2.0: 44})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 878, 4.0: 112, 2.0: 10})
+Objective is :  23.839067683076852
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34318711 1.10559322 0.54998302 1.10559336]
+Seed = 0, pinf = 0.039, dev = 7.210,  status counts :  Counter({2.0: 802, 1.0: 159, 3.0: 35, 4.0: 4})
+Seed = 0, pinf = 0.139, dev = 8.244,  status counts :  Counter({2.0: 860, 3.0: 116, 4.0: 23, 1.0: 1})
+Seed = 0, pinf = 0.397, dev = 5.203,  status counts :  Counter({2.0: 603, 3.0: 326, 4.0: 71})
+Seed = 0, pinf = 0.856, dev = 3.174,  status counts :  Counter({3.0: 730, 2.0: 144, 4.0: 126})
+Seed = 0, pinf = 0.977, dev = 0.488,  status counts :  Counter({3.0: 842, 4.0: 135, 2.0: 23})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 857, 4.0: 129, 2.0: 14})
+Objective is :  24.88388109143825
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34330245 1.10559322 0.55009836 1.10559336]
+Seed = 0, pinf = 0.038, dev = 7.385,  status counts :  Counter({2.0: 803, 1.0: 159, 3.0: 22, 4.0: 16})
+Seed = 0, pinf = 0.117, dev = 10.395,  status counts :  Counter({2.0: 882, 3.0: 90, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.393, dev = 5.374,  status counts :  Counter({2.0: 607, 3.0: 336, 4.0: 57})
+Seed = 0, pinf = 0.859, dev = 3.329,  status counts :  Counter({3.0: 742, 2.0: 141, 4.0: 117})
+Seed = 0, pinf = 0.965, dev = 0.118,  status counts :  Counter({3.0: 834, 4.0: 131, 2.0: 35})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 862, 4.0: 126, 2.0: 12})
+Objective is :  27.083943118720402
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34324176 1.10559322 0.55003767 1.10559336]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 39, 4.0: 7})
+Seed = 0, pinf = 0.133, dev = 8.783,  status counts :  Counter({2.0: 866, 3.0: 106, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.391, dev = 5.460,  status counts :  Counter({2.0: 609, 3.0: 322, 4.0: 69})
+Seed = 0, pinf = 0.869, dev = 3.888,  status counts :  Counter({3.0: 759, 2.0: 131, 4.0: 110})
+Seed = 0, pinf = 0.971, dev = 0.259,  status counts :  Counter({3.0: 838, 4.0: 133, 2.0: 29})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 872, 4.0: 114, 2.0: 14})
+Objective is :  25.077686471308617
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34321858 1.10559322 0.55001449 1.10559336]
+Seed = 0, pinf = 0.038, dev = 7.385,  status counts :  Counter({2.0: 803, 1.0: 159, 3.0: 30, 4.0: 8})
+Seed = 0, pinf = 0.131, dev = 8.970,  status counts :  Counter({2.0: 868, 3.0: 105, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.378, dev = 6.044,  status counts :  Counter({2.0: 622, 3.0: 316, 4.0: 62})
+Seed = 0, pinf = 0.866, dev = 3.713,  status counts :  Counter({3.0: 756, 2.0: 134, 4.0: 110})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 820, 4.0: 152, 2.0: 28})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 836, 4.0: 151, 2.0: 13})
+Objective is :  26.925115488894388
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.3431977  1.10559322 0.54999361 1.10559336]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 37, 4.0: 9})
+Seed = 0, pinf = 0.126, dev = 9.455,  status counts :  Counter({2.0: 873, 3.0: 109, 4.0: 17, 1.0: 1})
+Seed = 0, pinf = 0.374, dev = 6.231,  status counts :  Counter({2.0: 626, 3.0: 313, 4.0: 61})
+Seed = 0, pinf = 0.872, dev = 4.069,  status counts :  Counter({3.0: 760, 2.0: 128, 4.0: 112})
+Seed = 0, pinf = 0.973, dev = 0.323,  status counts :  Counter({3.0: 839, 4.0: 134, 2.0: 27})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 880, 4.0: 111, 2.0: 9})
+Objective is :  26.563974578242338
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320972 1.10559322 0.55000563 1.10559336]
+Seed = 0, pinf = 0.052, dev = 5.345,  status counts :  Counter({2.0: 789, 1.0: 159, 3.0: 38, 4.0: 14})
+Seed = 0, pinf = 0.134, dev = 8.691,  status counts :  Counter({2.0: 865, 3.0: 108, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 337, 4.0: 63})
+Seed = 0, pinf = 0.858, dev = 3.277,  status counts :  Counter({3.0: 741, 2.0: 142, 4.0: 117})
+Seed = 0, pinf = 0.966, dev = 0.137,  status counts :  Counter({3.0: 846, 4.0: 120, 2.0: 34})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 855, 4.0: 135, 2.0: 10})
+Objective is :  22.928610181708944
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320175 1.10559322 0.54999766 1.10559336]
+Seed = 0, pinf = 0.044, dev = 6.412,  status counts :  Counter({2.0: 797, 1.0: 159, 3.0: 35, 4.0: 9})
+Seed = 0, pinf = 0.139, dev = 8.244,  status counts :  Counter({2.0: 860, 3.0: 105, 4.0: 34, 1.0: 1})
+Seed = 0, pinf = 0.388, dev = 5.592,  status counts :  Counter({2.0: 612, 3.0: 328, 4.0: 60})
+Seed = 0, pinf = 0.851, dev = 2.929,  status counts :  Counter({3.0: 744, 2.0: 149, 4.0: 107})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 834, 4.0: 141, 2.0: 25})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 854, 4.0: 134, 2.0: 12})
+Objective is :  24.05906511670468
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320634 1.10559322 0.55000225 1.10559336]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 794, 1.0: 159, 3.0: 37, 4.0: 10})
+Seed = 0, pinf = 0.123, dev = 9.759,  status counts :  Counter({2.0: 876, 3.0: 103, 4.0: 20, 1.0: 1})
+Seed = 0, pinf = 0.401, dev = 5.036,  status counts :  Counter({2.0: 599, 3.0: 334, 4.0: 67})
+Seed = 0, pinf = 0.852, dev = 2.977,  status counts :  Counter({3.0: 729, 2.0: 148, 4.0: 123})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 842, 4.0: 133, 2.0: 25})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 844, 4.0: 143, 2.0: 13})
+Objective is :  24.678874077922
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320329 1.10559322 0.5499992  1.10559336]
+Seed = 0, pinf = 0.042, dev = 6.718,  status counts :  Counter({2.0: 799, 1.0: 159, 3.0: 35, 4.0: 7})
+Seed = 0, pinf = 0.134, dev = 8.691,  status counts :  Counter({2.0: 865, 3.0: 106, 4.0: 28, 1.0: 1})
+Seed = 0, pinf = 0.362, dev = 6.813,  status counts :  Counter({2.0: 638, 3.0: 306, 4.0: 56})
+Seed = 0, pinf = 0.854, dev = 3.074,  status counts :  Counter({3.0: 748, 2.0: 146, 4.0: 106})
+Seed = 0, pinf = 0.968, dev = 0.179,  status counts :  Counter({3.0: 828, 4.0: 140, 2.0: 32})
+Seed = 0, pinf = 0.991, dev = 0.362,  status counts :  Counter({3.0: 846, 4.0: 145, 2.0: 9})
+Objective is :  25.83678465416567
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320505 1.10559322 0.55000096 1.10559336]
+Seed = 0, pinf = 0.044, dev = 6.412,  status counts :  Counter({2.0: 797, 1.0: 159, 3.0: 36, 4.0: 8})
+Seed = 0, pinf = 0.151, dev = 7.256,  status counts :  Counter({2.0: 848, 3.0: 124, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.383, dev = 5.815,  status counts :  Counter({2.0: 617, 3.0: 324, 4.0: 59})
+Seed = 0, pinf = 0.863, dev = 3.544,  status counts :  Counter({3.0: 729, 2.0: 137, 4.0: 134})
+Seed = 0, pinf = 0.978, dev = 0.538,  status counts :  Counter({3.0: 844, 4.0: 134, 2.0: 22})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 854, 4.0: 136, 2.0: 10})
+Objective is :  23.967879200066314
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320388 1.10559322 0.54999979 1.10559336]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 794, 1.0: 159, 3.0: 38, 4.0: 9})
+Seed = 0, pinf = 0.150, dev = 7.334,  status counts :  Counter({2.0: 849, 3.0: 127, 4.0: 23, 1.0: 1})
+Seed = 0, pinf = 0.383, dev = 5.815,  status counts :  Counter({2.0: 617, 3.0: 309, 4.0: 74})
+Seed = 0, pinf = 0.860, dev = 3.382,  status counts :  Counter({3.0: 759, 2.0: 140, 4.0: 101})
+Seed = 0, pinf = 0.978, dev = 0.538,  status counts :  Counter({3.0: 835, 4.0: 143, 2.0: 22})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 846, 4.0: 142, 2.0: 12})
+Objective is :  23.53730883104969
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320455 1.10559322 0.55000046 1.10559336]
+Seed = 0, pinf = 0.039, dev = 7.210,  status counts :  Counter({2.0: 802, 1.0: 159, 3.0: 31, 4.0: 8})
+Seed = 0, pinf = 0.155, dev = 6.951,  status counts :  Counter({2.0: 844, 3.0: 129, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.386, dev = 5.681,  status counts :  Counter({2.0: 614, 3.0: 329, 4.0: 57})
+Seed = 0, pinf = 0.857, dev = 3.225,  status counts :  Counter({3.0: 735, 2.0: 143, 4.0: 122})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 838, 4.0: 137, 2.0: 25})
+Seed = 0, pinf = 0.990, dev = 0.402,  status counts :  Counter({3.0: 852, 4.0: 138, 2.0: 10})
+Objective is :  23.86842961623019
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320411 1.10559322 0.55000002 1.10559336]
+Seed = 0, pinf = 0.048, dev = 5.850,  status counts :  Counter({2.0: 793, 1.0: 159, 3.0: 35, 4.0: 13})
+Seed = 0, pinf = 0.150, dev = 7.334,  status counts :  Counter({2.0: 849, 3.0: 124, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.382, dev = 5.861,  status counts :  Counter({2.0: 618, 3.0: 326, 4.0: 56})
+Seed = 0, pinf = 0.839, dev = 2.397,  status counts :  Counter({3.0: 731, 2.0: 161, 4.0: 108})
+Seed = 0, pinf = 0.978, dev = 0.538,  status counts :  Counter({3.0: 834, 4.0: 144, 2.0: 22})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 831, 4.0: 154, 2.0: 15})
+Objective is :  22.584485258650375
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320437 1.10559322 0.55000028 1.10559336]
+Seed = 0, pinf = 0.048, dev = 5.850,  status counts :  Counter({2.0: 793, 1.0: 159, 3.0: 36, 4.0: 12})
+Seed = 0, pinf = 0.161, dev = 6.514,  status counts :  Counter({2.0: 838, 3.0: 132, 4.0: 29, 1.0: 1})
+Seed = 0, pinf = 0.379, dev = 5.998,  status counts :  Counter({2.0: 621, 3.0: 330, 4.0: 49})
+Seed = 0, pinf = 0.847, dev = 2.743,  status counts :  Counter({3.0: 734, 2.0: 153, 4.0: 113})
+Seed = 0, pinf = 0.978, dev = 0.538,  status counts :  Counter({3.0: 849, 4.0: 129, 2.0: 22})
+Seed = 0, pinf = 0.992, dev = 0.321,  status counts :  Counter({3.0: 845, 4.0: 147, 2.0: 8})
+Objective is :  21.96461231523487
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320427 1.10559322 0.55000018 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 37, 4.0: 12})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 123, 4.0: 31, 1.0: 1})
+Seed = 0, pinf = 0.382, dev = 5.861,  status counts :  Counter({2.0: 618, 3.0: 332, 4.0: 50})
+Seed = 0, pinf = 0.843, dev = 2.566,  status counts :  Counter({3.0: 727, 2.0: 157, 4.0: 116})
+Seed = 0, pinf = 0.978, dev = 0.538,  status counts :  Counter({3.0: 835, 4.0: 143, 2.0: 22})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 830, 4.0: 159, 2.0: 11})
+Objective is :  22.151912951535802
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.3432042  1.10559322 0.55000011 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 35, 4.0: 14})
+Seed = 0, pinf = 0.149, dev = 7.413,  status counts :  Counter({2.0: 850, 3.0: 122, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.374, dev = 6.231,  status counts :  Counter({2.0: 626, 3.0: 318, 4.0: 56})
+Seed = 0, pinf = 0.858, dev = 3.277,  status counts :  Counter({3.0: 750, 2.0: 142, 4.0: 108})
+Seed = 0, pinf = 0.981, dev = 0.715,  status counts :  Counter({3.0: 827, 4.0: 154, 2.0: 19})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 827, 4.0: 161, 2.0: 12})
+Objective is :  23.837276852384676
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320423 1.10559322 0.55000014 1.10559336]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 34, 4.0: 12})
+Seed = 0, pinf = 0.149, dev = 7.413,  status counts :  Counter({2.0: 850, 3.0: 121, 4.0: 28, 1.0: 1})
+Seed = 0, pinf = 0.381, dev = 5.906,  status counts :  Counter({2.0: 619, 3.0: 320, 4.0: 61})
+Seed = 0, pinf = 0.849, dev = 2.835,  status counts :  Counter({3.0: 735, 2.0: 151, 4.0: 114})
+Seed = 0, pinf = 0.977, dev = 0.488,  status counts :  Counter({3.0: 835, 4.0: 142, 2.0: 23})
+Seed = 0, pinf = 0.989, dev = 0.442,  status counts :  Counter({3.0: 832, 4.0: 157, 2.0: 11})
+Objective is :  23.207728013485017
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320424 1.10559322 0.55000015 1.10559336]
+Seed = 0, pinf = 0.046, dev = 6.124,  status counts :  Counter({2.0: 795, 1.0: 159, 3.0: 33, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 124, 4.0: 30, 1.0: 1})
+Seed = 0, pinf = 0.388, dev = 5.592,  status counts :  Counter({2.0: 612, 3.0: 331, 4.0: 57})
+Seed = 0, pinf = 0.835, dev = 2.236,  status counts :  Counter({3.0: 721, 2.0: 165, 4.0: 114})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 828, 4.0: 144, 2.0: 28})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 833, 4.0: 155, 2.0: 12})
+Objective is :  21.750518761203434
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320426 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.050, dev = 5.591,  status counts :  Counter({2.0: 791, 1.0: 159, 3.0: 37, 4.0: 13})
+Seed = 0, pinf = 0.155, dev = 6.951,  status counts :  Counter({2.0: 844, 3.0: 127, 4.0: 28, 1.0: 1})
+Seed = 0, pinf = 0.392, dev = 5.417,  status counts :  Counter({2.0: 608, 3.0: 335, 4.0: 57})
+Seed = 0, pinf = 0.850, dev = 2.881,  status counts :  Counter({3.0: 734, 2.0: 150, 4.0: 116})
+Seed = 0, pinf = 0.978, dev = 0.538,  status counts :  Counter({3.0: 845, 4.0: 133, 2.0: 22})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 835, 4.0: 152, 2.0: 13})
+Objective is :  21.902056036492596
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 794, 1.0: 159, 3.0: 34, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 125, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.397, dev = 5.203,  status counts :  Counter({2.0: 603, 3.0: 338, 4.0: 59})
+Seed = 0, pinf = 0.844, dev = 2.609,  status counts :  Counter({3.0: 717, 2.0: 156, 4.0: 127})
+Seed = 0, pinf = 0.978, dev = 0.538,  status counts :  Counter({3.0: 832, 4.0: 146, 2.0: 22})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 834, 4.0: 152, 2.0: 14})
+Objective is :  22.078142093364246
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.155, dev = 6.951,  status counts :  Counter({2.0: 844, 3.0: 130, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.398, dev = 5.161,  status counts :  Counter({2.0: 602, 3.0: 341, 4.0: 57})
+Seed = 0, pinf = 0.842, dev = 2.523,  status counts :  Counter({3.0: 731, 2.0: 158, 4.0: 111})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 839, 4.0: 136, 2.0: 25})
+Seed = 0, pinf = 0.983, dev = 0.686,  status counts :  Counter({3.0: 827, 4.0: 156, 2.0: 17})
+Objective is :  21.43868512241268
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.047, dev = 5.985,  status counts :  Counter({2.0: 794, 1.0: 159, 3.0: 35, 4.0: 12})
+Seed = 0, pinf = 0.156, dev = 6.876,  status counts :  Counter({2.0: 843, 3.0: 129, 4.0: 27, 1.0: 1})
+Seed = 0, pinf = 0.393, dev = 5.374,  status counts :  Counter({2.0: 607, 3.0: 336, 4.0: 57})
+Seed = 0, pinf = 0.846, dev = 2.698,  status counts :  Counter({3.0: 735, 2.0: 154, 4.0: 111})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 845, 4.0: 130, 2.0: 25})
+Seed = 0, pinf = 0.984, dev = 0.645,  status counts :  Counter({3.0: 836, 4.0: 148, 2.0: 16})
+Objective is :  21.97760452837238
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 128, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.399, dev = 5.119,  status counts :  Counter({2.0: 601, 3.0: 338, 4.0: 61})
+Seed = 0, pinf = 0.842, dev = 2.523,  status counts :  Counter({3.0: 723, 2.0: 158, 4.0: 119})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 835, 4.0: 140, 2.0: 25})
+Seed = 0, pinf = 0.984, dev = 0.645,  status counts :  Counter({3.0: 834, 4.0: 150, 2.0: 16})
+Objective is :  21.431219153411412
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.155, dev = 6.951,  status counts :  Counter({2.0: 844, 3.0: 129, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.398, dev = 5.161,  status counts :  Counter({2.0: 602, 3.0: 337, 4.0: 61})
+Seed = 0, pinf = 0.843, dev = 2.566,  status counts :  Counter({3.0: 724, 2.0: 157, 4.0: 119})
+Seed = 0, pinf = 0.977, dev = 0.488,  status counts :  Counter({3.0: 840, 4.0: 137, 2.0: 23})
+Seed = 0, pinf = 0.984, dev = 0.645,  status counts :  Counter({3.0: 830, 4.0: 154, 2.0: 16})
+Objective is :  21.529864691256858
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 129, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 337, 4.0: 63})
+Seed = 0, pinf = 0.843, dev = 2.566,  status counts :  Counter({3.0: 725, 2.0: 157, 4.0: 118})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 834, 4.0: 141, 2.0: 25})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 834, 4.0: 151, 2.0: 15})
+Objective is :  21.39177822029087
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.403, dev = 4.953,  status counts :  Counter({2.0: 597, 3.0: 341, 4.0: 62})
+Seed = 0, pinf = 0.842, dev = 2.523,  status counts :  Counter({3.0: 725, 2.0: 158, 4.0: 117})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 833, 4.0: 141, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 832, 4.0: 154, 2.0: 14})
+Objective is :  21.22057236434976
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 127, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.402, dev = 4.994,  status counts :  Counter({2.0: 598, 3.0: 343, 4.0: 59})
+Seed = 0, pinf = 0.843, dev = 2.566,  status counts :  Counter({3.0: 726, 2.0: 157, 4.0: 117})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 832, 4.0: 142, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 830, 4.0: 156, 2.0: 14})
+Objective is :  21.304694009933655
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.403, dev = 4.953,  status counts :  Counter({2.0: 597, 3.0: 341, 4.0: 62})
+Seed = 0, pinf = 0.842, dev = 2.523,  status counts :  Counter({3.0: 725, 2.0: 158, 4.0: 117})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 834, 4.0: 140, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 832, 4.0: 154, 2.0: 14})
+Objective is :  21.22057236434976
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.402, dev = 4.994,  status counts :  Counter({2.0: 598, 3.0: 341, 4.0: 61})
+Seed = 0, pinf = 0.842, dev = 2.523,  status counts :  Counter({3.0: 725, 2.0: 158, 4.0: 117})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 834, 4.0: 140, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 832, 4.0: 154, 2.0: 14})
+Objective is :  21.261737703056557
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.403, dev = 4.953,  status counts :  Counter({2.0: 597, 3.0: 341, 4.0: 62})
+Seed = 0, pinf = 0.842, dev = 2.523,  status counts :  Counter({3.0: 725, 2.0: 158, 4.0: 117})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 834, 4.0: 140, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 832, 4.0: 154, 2.0: 14})
+Objective is :  21.22057236434976
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.048, dev = 5.850,  status counts :  Counter({2.0: 793, 1.0: 159, 3.0: 35, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 126, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.396, dev = 5.246,  status counts :  Counter({2.0: 604, 3.0: 335, 4.0: 61})
+Seed = 0, pinf = 0.847, dev = 2.743,  status counts :  Counter({3.0: 724, 2.0: 153, 4.0: 123})
+Seed = 0, pinf = 0.977, dev = 0.488,  status counts :  Counter({3.0: 834, 4.0: 143, 2.0: 23})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 837, 4.0: 149, 2.0: 14})
+Objective is :  22.06932499900616
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.048, dev = 5.850,  status counts :  Counter({2.0: 793, 1.0: 159, 3.0: 36, 4.0: 12})
+Seed = 0, pinf = 0.155, dev = 6.951,  status counts :  Counter({2.0: 844, 3.0: 129, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.394, dev = 5.331,  status counts :  Counter({2.0: 606, 3.0: 340, 4.0: 54})
+Seed = 0, pinf = 0.844, dev = 2.609,  status counts :  Counter({3.0: 723, 2.0: 156, 4.0: 121})
+Seed = 0, pinf = 0.975, dev = 0.399,  status counts :  Counter({3.0: 835, 4.0: 140, 2.0: 25})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 838, 4.0: 149, 2.0: 13})
+Objective is :  21.66392332114045
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.403, dev = 4.953,  status counts :  Counter({2.0: 597, 3.0: 341, 4.0: 62})
+Seed = 0, pinf = 0.842, dev = 2.523,  status counts :  Counter({3.0: 725, 2.0: 158, 4.0: 117})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 834, 4.0: 140, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 832, 4.0: 154, 2.0: 14})
+Objective is :  21.22057236434976
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.048, dev = 5.850,  status counts :  Counter({2.0: 793, 1.0: 159, 3.0: 36, 4.0: 12})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 128, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.398, dev = 5.161,  status counts :  Counter({2.0: 602, 3.0: 338, 4.0: 60})
+Seed = 0, pinf = 0.837, dev = 2.316,  status counts :  Counter({3.0: 718, 2.0: 163, 4.0: 119})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 834, 4.0: 138, 2.0: 28})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 835, 4.0: 150, 2.0: 15})
+Objective is :  21.247232494808962
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 126, 4.0: 26, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 336, 4.0: 64})
+Seed = 0, pinf = 0.845, dev = 2.653,  status counts :  Counter({3.0: 726, 2.0: 155, 4.0: 119})
+Seed = 0, pinf = 0.978, dev = 0.538,  status counts :  Counter({3.0: 837, 4.0: 141, 2.0: 22})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 832, 4.0: 155, 2.0: 13})
+Objective is :  21.689545665271222
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 129, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.402, dev = 4.994,  status counts :  Counter({2.0: 598, 3.0: 338, 4.0: 64})
+Seed = 0, pinf = 0.843, dev = 2.566,  status counts :  Counter({3.0: 729, 2.0: 157, 4.0: 114})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 830, 4.0: 144, 2.0: 26})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 834, 4.0: 151, 2.0: 15})
+Objective is :  21.26939969191636
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 127, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.401, dev = 5.036,  status counts :  Counter({2.0: 599, 3.0: 336, 4.0: 65})
+Seed = 0, pinf = 0.844, dev = 2.609,  status counts :  Counter({3.0: 727, 2.0: 156, 4.0: 117})
+Seed = 0, pinf = 0.976, dev = 0.442,  status counts :  Counter({3.0: 831, 4.0: 145, 2.0: 24})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 835, 4.0: 152, 2.0: 13})
+Objective is :  21.507731036514578
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 129, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.403, dev = 4.953,  status counts :  Counter({2.0: 597, 3.0: 341, 4.0: 62})
+Seed = 0, pinf = 0.843, dev = 2.566,  status counts :  Counter({3.0: 726, 2.0: 157, 4.0: 117})
+Seed = 0, pinf = 0.973, dev = 0.323,  status counts :  Counter({3.0: 830, 4.0: 143, 2.0: 27})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 834, 4.0: 152, 2.0: 14})
+Objective is :  21.15119957537015
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 129, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.397, dev = 5.203,  status counts :  Counter({2.0: 603, 3.0: 337, 4.0: 60})
+Seed = 0, pinf = 0.838, dev = 2.356,  status counts :  Counter({3.0: 723, 2.0: 162, 4.0: 115})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 829, 4.0: 143, 2.0: 28})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 829, 4.0: 156, 2.0: 15})
+Objective is :  21.198495175829123
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.401, dev = 5.036,  status counts :  Counter({2.0: 599, 3.0: 342, 4.0: 59})
+Seed = 0, pinf = 0.836, dev = 2.276,  status counts :  Counter({3.0: 720, 2.0: 164, 4.0: 116})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 830, 4.0: 142, 2.0: 28})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 834, 4.0: 153, 2.0: 13})
+Objective is :  20.94543120509794
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.400, dev = 5.077,  status counts :  Counter({2.0: 600, 3.0: 338, 4.0: 62})
+Seed = 0, pinf = 0.840, dev = 2.438,  status counts :  Counter({3.0: 721, 2.0: 160, 4.0: 119})
+Seed = 0, pinf = 0.973, dev = 0.323,  status counts :  Counter({3.0: 831, 4.0: 142, 2.0: 27})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 831, 4.0: 155, 2.0: 14})
+Objective is :  21.22386496486558
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 127, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.397, dev = 5.203,  status counts :  Counter({2.0: 603, 3.0: 336, 4.0: 61})
+Seed = 0, pinf = 0.840, dev = 2.438,  status counts :  Counter({3.0: 727, 2.0: 160, 4.0: 113})
+Seed = 0, pinf = 0.972, dev = 0.290,  status counts :  Counter({3.0: 831, 4.0: 141, 2.0: 28})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 831, 4.0: 155, 2.0: 14})
+Objective is :  21.39271339726355
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.152, dev = 7.179,  status counts :  Counter({2.0: 847, 3.0: 127, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.398, dev = 5.161,  status counts :  Counter({2.0: 602, 3.0: 336, 4.0: 62})
+Seed = 0, pinf = 0.839, dev = 2.397,  status counts :  Counter({3.0: 723, 2.0: 161, 4.0: 116})
+Seed = 0, pinf = 0.974, dev = 0.360,  status counts :  Counter({3.0: 832, 4.0: 142, 2.0: 26})
+Seed = 0, pinf = 0.986, dev = 0.564,  status counts :  Counter({3.0: 833, 4.0: 153, 2.0: 14})
+Objective is :  21.37923464633666
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.154, dev = 7.026,  status counts :  Counter({2.0: 845, 3.0: 129, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.399, dev = 5.119,  status counts :  Counter({2.0: 601, 3.0: 338, 4.0: 61})
+Seed = 0, pinf = 0.839, dev = 2.397,  status counts :  Counter({3.0: 725, 2.0: 161, 4.0: 114})
+Seed = 0, pinf = 0.973, dev = 0.323,  status counts :  Counter({3.0: 832, 4.0: 141, 2.0: 27})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 836, 4.0: 151, 2.0: 13})
+Objective is :  21.10778878495345
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.399, dev = 5.119,  status counts :  Counter({2.0: 601, 3.0: 338, 4.0: 61})
+Seed = 0, pinf = 0.841, dev = 2.480,  status counts :  Counter({3.0: 724, 2.0: 159, 4.0: 117})
+Seed = 0, pinf = 0.973, dev = 0.323,  status counts :  Counter({3.0: 830, 4.0: 143, 2.0: 27})
+Seed = 0, pinf = 0.987, dev = 0.523,  status counts :  Counter({3.0: 829, 4.0: 158, 2.0: 13})
+Objective is :  21.26700689520261
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.402, dev = 4.994,  status counts :  Counter({2.0: 598, 3.0: 343, 4.0: 59})
+Seed = 0, pinf = 0.839, dev = 2.397,  status counts :  Counter({3.0: 723, 2.0: 161, 4.0: 116})
+Seed = 0, pinf = 0.973, dev = 0.323,  status counts :  Counter({3.0: 830, 4.0: 143, 2.0: 27})
+Seed = 0, pinf = 0.988, dev = 0.483,  status counts :  Counter({3.0: 834, 4.0: 154, 2.0: 12})
+Objective is :  21.01846637084313
+------------------------------------------
+Rates are :   [2.63770552 0.05241919 3.34320425 1.10559322 0.55000016 1.10559336]
+Seed = 0, pinf = 0.049, dev = 5.719,  status counts :  Counter({2.0: 792, 1.0: 159, 3.0: 36, 4.0: 13})
+Seed = 0, pinf = 0.153, dev = 7.102,  status counts :  Counter({2.0: 846, 3.0: 128, 4.0: 25, 1.0: 1})
+Seed = 0, pinf = 0.401, dev = 5.036,  status counts :  Counter({2.0: 599, 3.0: 341, 4.0: 60})
+Seed = 0, pinf = 0.837, dev = 2.316,  status counts :  Counter({3.0: 723, 2.0: 163, 4.0: 114})
+Seed = 0, pinf = 0.973, dev = 0.323,  status counts :  Counter({3.0: 832, 4.0: 141, 2.0: 27})
+Seed = 0, pinf = 0.985, dev = 0.605,  status counts :  Counter({3.0: 832, 4.0: 153, 2.0: 15})
+Objective is :  21.10014978719946
+------------------------------------------
+   direc: array([[ 0.00000000e+00,  1.00000000e+00],
+       [ 8.17017705e-10, -6.66293518e-16]])
+     fun: 20.94543120509794
+ message: 'Maximum number of function evaluations has been exceeded.'
+    nfev: 172
+     nit: 2
+  status: 1
+ success: False
+       x: array([1.10559322, 0.55000016])
+1 DE solution took :  1988.3557524990028 s
+Totally took :  1988.3563277130015 s
+Output filename :  results/6021324_1000rep0se100ite_Powell_17to17b2d1_1o3_cpu.npz
