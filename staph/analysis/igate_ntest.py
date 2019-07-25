@@ -47,8 +47,11 @@ def igate(filenames=List[str], option1: int = 1):
             best_ind = np.argmin(dev)
             print(f"{dev[best_ind]:.2f}, {b2[best_ind]:.2f}, {d1[best_ind]:.2f}")
         elif option1 == 2:
+            plt.figure()
             plt.subplot(231)
-            plt.title(f"Best dev = {min(dev):.2f}")
+            plt.title(
+                f"Best dev = {min(dev):.2f} (ite = {np.argmin(dev)} of {len(dev)})"
+            )
             plt.plot(dev)
             plt.plot(dev, ".")
             plt.subplot(232)
@@ -70,6 +73,8 @@ def igate(filenames=List[str], option1: int = 1):
             sdata = get_singh_data()
             qstr = "Objective is :  " + str(np.min(dev))
             for ind1, line in enumerate(d):
+                if line.startswith("Best F values :"):
+                    Fde = line
                 if line.startswith(qstr):
                     roi = d[ind1 - 6 : ind1]
                     break
@@ -77,15 +82,22 @@ def igate(filenames=List[str], option1: int = 1):
             for ind1, this_roi in enumerate(roi):
                 temp = this_roi.replace(",", "").split()
                 pinf.append(float(temp[5]))
+            Fde = Fde[:-1].replace("[", "").split()
+            Fde = float(Fde[4])
             rh = get_rh_fit_data()
             lab_data = "Singh data"
             lab_2c = f"2C (dev = {np.min(dev):.2f})"
             lab_rh = f"RH (dev = {rh[1]:.2f})"
+            title = f"SSE={Fde:.2f} (RH SSE={rh[0]:.2f})"
+            plt.figure()
             plt.plot(
                 np.log10(sdata[0]), np.array(sdata[1]) / sdata[2], "ko", label=lab_data
             )
             plt.plot(np.log10(sdata[0]), 1 - np.exp(-rh[2] / rh[3]), "rx", label=lab_rh)
             plt.plot(np.log10(sdata[0]), pinf, "gs", label=lab_2c)
+            plt.title(title)
+            plt.xlabel("log10(dose)")
+            plt.ylabel("p(respons)")
             plt.legend()
 
     plt.show()
