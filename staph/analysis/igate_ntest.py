@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import List
+from ..utils.data import get_singh_data
+from ..utils.rh_data import get_rh_fit_data
 
 
 def igate(filenames=List[str], option1: int = 1):
@@ -19,6 +21,7 @@ def igate(filenames=List[str], option1: int = 1):
     1 : print all best deviances and rate constants.
     2 : Plot deviance, rate constants vs iterations. Also plot each vs. the
     other.
+    3 : Plot best fit dose-response.
     """
     for ind1, filename in enumerate(filenames):
         with open(filename) as f:
@@ -63,5 +66,26 @@ def igate(filenames=List[str], option1: int = 1):
             plt.subplot(236)
             plt.plot(b2, d1, "r.")
             plt.plot(init_guess[0], init_guess[1], "ko")
+        elif option1 == 3:
+            sdata = get_singh_data()
+            qstr = "Objective is :  " + str(np.min(dev))
+            for ind1, line in enumerate(d):
+                if line.startswith(qstr):
+                    roi = d[ind1 - 6 : ind1]
+                    break
+            pinf = []
+            for ind1, this_roi in enumerate(roi):
+                temp = this_roi.replace(",", "").split()
+                pinf.append(float(temp[5]))
+            rh = get_rh_fit_data()
+            lab_data = "Singh data"
+            lab_2c = f"2C (dev = {np.min(dev):.2f})"
+            lab_rh = f"RH (dev = {rh[1]:.2f})"
+            plt.plot(
+                np.log10(sdata[0]), np.array(sdata[1]) / sdata[2], "ko", label=lab_data
+            )
+            plt.plot(np.log10(sdata[0]), 1 - np.exp(-rh[2] / rh[3]), "rx", label=lab_rh)
+            plt.plot(np.log10(sdata[0]), pinf, "gs", label=lab_2c)
+            plt.legend()
 
     plt.show()
