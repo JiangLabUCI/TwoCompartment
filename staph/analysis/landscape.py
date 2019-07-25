@@ -50,7 +50,7 @@ def igate(
     - Save rank 1 solutions in a file.
     """
     # h0, norig, ntot, tiny, A, H0 = get_singh_data()
-    rh_best_sse, rh_best_dev = get_rh_fit_data()
+    rh_best_sse, rh_best_dev, _, _ = get_rh_fit_data()
 
     # Preprocess data
     min_devs = []
