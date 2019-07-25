@@ -8,7 +8,7 @@ from numba import njit
 def get_singh_data() -> Tuple[List[int], List[int], int, float, float, Any]:
     """Return Singh 1971 data.
 
-    Return h0, norig, tiny, A and H0.
+    Return h0, norig, ntot, tiny, A and H0.
 
     Returns
     -------
