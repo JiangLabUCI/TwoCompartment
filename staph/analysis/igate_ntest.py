@@ -26,6 +26,7 @@ def igate(filenames=List[str]):
                     line.replace(",", "").replace("(", "").replace(")", "").split()
                 )
                 init_guess = float(this_line[3]), float(this_line[4])
+        plt.subplots()
         plt.subplot(231)
         plt.title(f"Best dev = {min(dev):.2f}")
         plt.plot(dev)
