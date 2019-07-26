@@ -186,7 +186,9 @@ def igate(
         with open(output_filename, "wb") as f:
             np.savez(f, df=df)
         df = df[df.ranks == 1]
-        output_filename = "results/rank_1_solutions.npz"
-        with open(output_filename, "wb") as f:
-            np.savez(f, df=df)
+        df["desol_inds"] = list(df.axes[0])
+        print("Rank 1 dataframe is : ")
+        print(df)
+        output_filename = "results/rank_1_solutions.csv"
+        df.to_csv(output_filename)
     plt.show()

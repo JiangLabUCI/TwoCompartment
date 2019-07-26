@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from ..utils.data import get_kinetic_data_params
 from ..utils.rh_data import get_rh_fit_data
@@ -22,9 +23,8 @@ def growth_obj(col: List[str], solinds: List[int] = [0]):
     solinds
         Indices of the rank 1 solutions to plot.
     """
-    fname = "results//rank_1_solutions.npz"
-    with np.load(fname) as data:
-        df = data["df"]
+    fname = "results//rank_1_solutions.csv"
+    df = pd.read_csv(fname)
 
     p = get_kinetic_data_params()
     sse_rh = get_rh_fit_data()
@@ -56,11 +56,11 @@ def growth_obj(col: List[str], solinds: List[int] = [0]):
     # For each solution index
     for ind1 in range(len(solinds)):
         this_sol_ind = solinds[ind1]
-        p["r1"] = df[this_sol_ind, 0]
-        p["r2"] = df[this_sol_ind, 1]
-        p["r3"] = df[this_sol_ind, 2]
-        p["r3Imax"] = df[this_sol_ind, 3]
-        rmse_2c = df[this_sol_ind, 4]
+        p["r1"] = df.r1[this_sol_ind]
+        p["r2"] = df.r2[this_sol_ind]
+        p["r3"] = df.r3[this_sol_ind]
+        p["r3Imax"] = df["r3*Imax"][this_sol_ind]
+        sse_2c = df.Fde[this_sol_ind]
 
         # Solve integration problems
         twoc_t = []
@@ -80,7 +80,7 @@ def growth_obj(col: List[str], solinds: List[int] = [0]):
                     twoc_t[ind2],
                     twoc_y[ind2],
                     color=col[ind1],
-                    label=f"2C (SSE = {round(rmse_2c,2)})",
+                    label=f"2C (SSE = {round(sse_2c,2)})",
                 )
             else:
                 plt.plot(twoc_t[ind2], twoc_y[ind2], color=col[ind1])
