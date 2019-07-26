@@ -1,13 +1,67 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from ..utils.data import get_kinetic_data_params
-from ..utils.rh_data import get_rh_fit_data
 from scipy.integrate import solve_ivp
 from typing import List, Dict
+from ..utils.data import get_kinetic_data_params, get_singh_data
+from ..utils.rh_data import get_rh_fit_data
 
 col_mo = ["#984ea3", "#ff7f00"]
 annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
+
+
+def dr_obj(col, solinds=[0]):
+    """Plot dose-response data and fits.
+
+    Plots the dose-response data of SA, best fit RH model and two rank 1
+    solutions of the 2C model.
+
+    Parameters
+    ----------
+    col
+        Colors of the 2C solutions.
+    solinds
+        Indices of the rank 1 solutions to plot.
+    """
+    # Get requisite data
+    h0, norig, ntot, tiny, A, H0 = get_singh_data()
+    _, dev_rh, int_dose, k = get_rh_fit_data()
+    pinf_rh = 1 - np.exp(-int_dose / k)
+    df = pd.read_csv("results/rank_1_solutions.csv")
+    print(df)
+    # Empty container for 2c response probabilities
+    pinfs = np.zeros((len(solinds), 6))
+
+    # Get infection probabilities from output files
+    for ind1, this_sol_ind in enumerate(solinds):
+        fname = "results/ops/ntest.o7721941." + str(df["desol_inds"][this_sol_ind] + 1)
+        with open(fname) as f:
+            d = f.read()
+        d = d.split("\n")
+        qstr = "Objective is :  " + str(df.Fst[this_sol_ind])[:-4]
+        for ind2, line in enumerate(d):
+            if line.startswith(qstr):
+                roi = d[ind2 - 6 : ind2]
+                break
+        pinf = []
+        for ind2, this_roi in enumerate(roi):
+            temp = this_roi.replace(",", "").split()
+            pinf.append(float(temp[5]))
+        pinfs[ind1] = pinf
+
+    plt.plot(np.log10(H0), np.array(norig) / 20, "ko", label="Data")
+    this_label = f"RH (dev = {round(dev_rh, 2)})"
+    plt.plot(np.log10(H0), pinf_rh, "--", label=this_label, color="grey")
+    for ind1 in range(len(solinds)):
+        this_ind = solinds[ind1]
+        this_pinf = pinfs[ind1, :]
+        this_dev = df.Fst[this_ind]
+        this_label = f"2C (dev = {round(this_dev,2):.2f})"
+        plt.plot(np.log10(H0), this_pinf, label=this_label, color=col[ind1])
+    plt.legend(loc="lower right")
+    plt.xlabel("$Log_{10}$(dose)")
+    plt.ylabel("$P_{response}$")
+    plt.show()
 
 
 def growth_obj(col: List[str], solinds: List[int] = [0]):
