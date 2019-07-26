@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Tuple, List, Any
+from typing import Tuple, List, Any, Dict
 from scipy.stats import truncnorm
 from numba import njit
 
@@ -38,6 +38,39 @@ def get_singh_data() -> Tuple[List[int], List[int], int, float, float, Any]:
     H0 = np.array(h0, dtype=np.int32) * np.int32(A)  # CFU
 
     return h0, norig, ntot, tiny, A, H0
+
+
+def get_kinetic_data_params() -> Dict:
+    """Get kinetic data and params.
+
+    Returns
+    -------
+    p
+        Dictionary with kinetic data and parameters.
+    """
+    # From Singh 1971
+    data = np.genfromtxt("staph/data/singh1971_fig1.csv", delimiter=",")
+    data = np.round(data, 2)
+    p = {}
+    p["t1"] = [0, 1, 2, 3, 4, 6]  # days
+    p["y01"] = np.log10(4e2)
+    p["y1"] = np.array([p["y01"], *data[1:6, 1]])  # log bacteria/cm^2
+    p["t2"] = [0, 1, 2, 3, 4]  # days
+    p["y02"] = np.log10(1.5e4)
+    p["y2"] = [p["y02"], *data[7:11, 1]]  # log bacteria/cm^2
+    p["t3"] = [0, 1, 2, 3, 4, 6]  # days
+    p["y03"] = np.log10(2e7)
+    p["y3"] = [p["y03"], *data[12:17, 1]]  # log bacteria/cm^2
+
+    # From Rose and Haas 1999
+    p["k1"] = 1.8175e18
+    p["k2"] = 3.8103e17
+    p["k3"] = 3.2136e-7
+    p["Nmax"] = 8_930_893
+    p["initial_rh"] = 10 ** np.array([p["y01"], p["y02"], p["y03"]])
+    p["initial_2c"] = 10 ** np.array([[p["y01"], 0], [p["y02"], 0], [p["y03"], 0]])
+
+    return p
 
 
 def get_b1d2(b2: float, d1: float, r3: float, r3Imax: float) -> Tuple[float, float]:
