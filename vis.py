@@ -10,8 +10,7 @@ if option1 == 1:
     fnames = []
     for ind in range(100):
         fnames.append(
-            # "results/6021324_1000rep0se30ite_Powell_"
-            "results/6021324_1000rep0se100ite_Powell_"
+            "results/opt/6021324_1000rep0se100ite_Powell_"
             + str(ind)
             + "to"
             + str(ind)
