@@ -3,7 +3,7 @@ import sys
 import time
 from staph.utils.dev import compute_devs_min as cdmin
 from staph.utils.dev import compute_devs_brute as cdbrute
-
+from staph.utils.predict import predict_fit
 
 if __name__ == "__main__":
     choice = np.int32(sys.argv[1])
@@ -83,4 +83,12 @@ if __name__ == "__main__":
             pop=5,
             use_initial=True,
         )
-
+    elif choice == 4:
+        predict_fit(
+            nrep=1000,
+            nstep=200000,
+            hyp="base",
+            inoc_time="base",
+            rank_1_sol_inds=[0],
+            doselist=np.int32(np.power(10, np.arange(1, 6.3, 0.3))),
+        )
