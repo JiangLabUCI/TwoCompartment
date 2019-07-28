@@ -143,7 +143,7 @@ def predict_fit(
             for ind3 in range(nrep):
                 init_load = np.array([doselist[ind2]], dtype=np.int32)
                 arg_list.append(
-                    (init_load, rates, Imax * A, nstep, seeds[ind2], 6.0, False)
+                    (init_load, rates, Imax * A, nstep, seeds[ind3], 6.0, False)
                 )
             # Run parallel simulation
             partial_func = partial(calc_for_map, func=simfunc)
