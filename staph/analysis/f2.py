@@ -220,3 +220,30 @@ def twocomp_model(t: float, y: List[float], p: Dict) -> float:
     didt = p["r2"] * y[0] + p["r3Imax"] * y[1] - p["r3"] * y[1] * y[1]
     return [dhdt, didt]
 
+
+def pareto_plot(col, solinds=[0]):
+    """Pareto front plot.
+
+    Plot all the solutions and the pareto front.
+
+    Parameters
+    ----------
+    col
+        Colors of the 2C solutions.
+    solinds
+        Indices of the rank 1 solutions to plot.
+    """
+    fname = "results/all_solutions.csv"
+    df_all = pd.read_csv(fname)
+    fname = "results/rank_1_solutions.csv"
+    df_r1 = pd.read_csv(fname)
+
+    df_nr1 = df_all[df_all.ranks != 1]
+    plt.plot(df_r1.Fde, df_r1.Fst, "o", color="k", label="Rank 1 solutions")
+    plt.plot(df_r1.Fde, df_r1.Fst, "-", color="k", label="Pareto front")
+    for ind in range(len(solinds)):
+        plt.plot(df_r1.Fde[solinds[ind]], df_r1.Fst[solinds[ind]], "o", color=col[ind])
+    plt.plot(df_nr1.Fde, df_nr1.Fst, ".", color="k", label="Rank >1 solutions")
+    plt.legend()
+    plt.xlabel("Growth objective")
+    plt.ylabel("Dose-response objective")
