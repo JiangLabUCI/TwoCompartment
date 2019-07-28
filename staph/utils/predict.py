@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import multiprocessing as mp
 from functools import partial
-from typing import List
+from typing import List, Tuple
 from .dev import carrier_obj_wrapper, status_to_pinf
 from .data import calc_for_map, get_b1d2, get_singh_data
 from .tau_twocomp import tau_twocomp_carrier
@@ -109,32 +109,9 @@ def predict_fit(
     for ind1, r1sind in enumerate(rank_1_sol_inds):
         np.random.seed(seed)
         seeds = np.random.randint(low=0, high=1e5, size=nrep)
-        print("ind1", ind1, r1sind)
-        r1 = df.r1[r1sind]
-        r2 = df.r2[r1sind]
-        r3 = df.r3[r1sind]
-        r3Imax = df["r3*Imax"][r1sind]
-        d1 = df.d1[r1sind]
-        b2 = df.b2[r1sind]
-        Imax = r3Imax / r3
-        b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
-        # TODO Make a function to get rates and simfunc.
-        # Write tests for that function
-        if hyp == "r1s":
-            r1_star = float(
-                pdf[(pdf.Hyp == 2) & (pdf.Parameterset == r1sind + 1)].Parameter
-            )
-            rates = np.array([r1_star, r2, b1, b2, d1, d2])
-            simfunc = tau_twocomp_carrier
-        elif hyp == "rmf":
-            rmf = float(
-                pdf[(pdf.Hyp == 6) & (pdf.Parameterset == r1sind + 1)].Parameter
-            )
-            rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
-            simfunc = tau_twocomp_carrier_rmf
-        elif hyp == "base":
-            rates = np.array([r1, r2, b1, b2, d1, d2])
-            simfunc = tau_twocomp_carrier
+        rates, simfunc, Imax, = get_rates_simfunc(
+            df=df, pdf=pdf, r1sind=r1sind, hyp=hyp
+        )
 
         for ind2 in range(ndose):
             arg_list = []
@@ -158,3 +135,61 @@ def predict_fit(
 
     with open("results/preds" + hyp + inoc_time + ".npz", "wb") as f:
         np.savez(f, df=df, pinf=pinf, pcar=pcar, ps=ps, rank_1_sol_inds=rank_1_sol_inds)
+
+
+def get_rates_simfunc(
+    df: pd.DataFrame, pdf: pd.DataFrame, r1sind: int, hyp: str
+) -> Tuple[List[float], callable, float]:
+    """Get rates and simulation function.
+
+    Use the hypothesis to get the corresponding rates and simulation functions.
+    Intended for use by `predict_fit`.
+
+    Parameters
+    ----------
+    df
+        Dataframe with rank 1 solutions.
+    pdf
+        Dataframe with fitted constants.
+    r1sind
+        Index of rank 1 solution.
+    hyp
+        Hypothesis.
+    
+    Returns
+    -------
+    rates
+        Rates for stochastic simulation.
+    simfunc
+        Model for stochastic simulation.
+    Imax
+        Imax value used for threshold of stochastic simulation.
+
+    See Also
+    --------
+    predict_fit : Predict outcome probabilities.
+
+    """
+    r1 = df.r1[r1sind]
+    r2 = df.r2[r1sind]
+    r3 = df.r3[r1sind]
+    r3Imax = df["r3*Imax"][r1sind]
+    d1 = df.d1[r1sind]
+    b2 = df.b2[r1sind]
+    Imax = r3Imax / r3
+    b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
+    if hyp == "r1s":
+        r1_star = float(
+            pdf[(pdf.Hyp == 2) & (pdf.Parameterset == r1sind + 1)].Parameter
+        )
+        rates = np.array([r1_star, r2, b1, b2, d1, d2])
+        simfunc = tau_twocomp_carrier
+    elif hyp == "rmf":
+        rmf = float(pdf[(pdf.Hyp == 6) & (pdf.Parameterset == r1sind + 1)].Parameter)
+        rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
+        simfunc = tau_twocomp_carrier_rmf
+    elif hyp == "base":
+        rates = np.array([r1, r2, b1, b2, d1, d2])
+        simfunc = tau_twocomp_carrier
+
+    return rates, simfunc, Imax
