@@ -134,7 +134,15 @@ def predict_fit(
             pcar[ind1, ind2] = 1 - (pinf[ind1, ind2] + ps[ind1, ind2])
 
     with open("results/preds" + hyp + inoc_time + ".npz", "wb") as f:
-        np.savez(f, df=df, pinf=pinf, pcar=pcar, ps=ps, rank_1_sol_inds=rank_1_sol_inds)
+        np.savez(
+            f,
+            df=df,
+            pinf=pinf,
+            pcar=pcar,
+            ps=ps,
+            rank_1_sol_inds=rank_1_sol_inds,
+            doselist=doselist,
+        )
 
 
 def get_rates_simfunc(
