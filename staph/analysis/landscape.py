@@ -50,7 +50,7 @@ def igate(
     - Save rank 1 solutions in a file.
     """
     # h0, norig, ntot, tiny, A, H0 = get_singh_data()
-    rh_best_sse, rh_best_dev = get_rh_fit_data()
+    rh_best_sse, rh_best_dev, _, _ = get_rh_fit_data()
 
     # Preprocess data
     min_devs = []
@@ -182,11 +182,12 @@ def igate(
         # Save rank 1 solutions in a numpy file
         Fvals = np.vstack([df.Fde, df.Fst]).transpose()
         df["ranks"] = get_pareto_ranks(Fvals)
-        output_filename = "results/all_solutions.npz"
-        with open(output_filename, "wb") as f:
-            np.savez(f, df=df)
+        output_filename = "results/all_solutions.csv"
+        df.to_csv(output_filename)
         df = df[df.ranks == 1]
-        output_filename = "results/rank_1_solutions.npz"
-        with open(output_filename, "wb") as f:
-            np.savez(f, df=df)
+        df["desol_inds"] = list(df.axes[0])
+        print("Rank 1 dataframe is : ")
+        print(df)
+        output_filename = "results/rank_1_solutions.csv"
+        df.to_csv(output_filename)
     plt.show()

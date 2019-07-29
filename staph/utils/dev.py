@@ -240,12 +240,7 @@ def carrier_obj_wrapper(
             extflag[ind1] = r[0]
             endt[ind1] = r[1]
             status[ind1] = r[4]
-        # p_inf = prob (I(t) > Imax)
-        # Population exceeds Imax if I(t) > Imax (status == 3) or
-        # if I(t) overflows.
-        # 3 : Succesful completion, terminated when I(t) > Imax.
-        # 4 : Succesful completion, curI overflow.
-        p_inf[choice] = np.mean((status == 3) + (status == 4) + (status == 5))
+        p_inf[choice] = status_to_pinf(status)
         dev = compute_deviance(p_inf=p_inf[choice], dose_index=choice)
         devs.append(dev)
 
@@ -276,6 +271,32 @@ def carrier_obj_wrapper(
         return objval
     else:
         return (devs, extflags, endts, statuses)
+
+
+def status_to_pinf(status: List[int]) -> float:
+    """Calculate pinf from status.
+
+    Parameters
+    ----------
+    status
+        List of simulation statuses.
+    
+    Return
+    ------
+    pinf
+        Response probability.
+    
+    Notes
+    -----
+    p_inf = prob (I(t) > Imax) + prob(H(t) > Imax)
+    Population exceeds Imax if I(t) > Imax (status == 3) or
+    if I(t) overflows or H(t) overflows.
+    3 : Succesful completion, terminated when I(t) > Imax.
+    4 : Succesful completion, curI overflow.
+    5 : Succesful completion, curH overflow.
+    """
+    pinf = np.mean((status == 3) + (status == 4) + (status == 5))
+    return pinf
 
 
 def transform_x(x: List[float], t_type: Union[None, str]) -> Tuple[float, float]:

@@ -3,14 +3,14 @@ from .dev import compute_deviance
 from typing import Tuple
 
 
-def get_rh_fit_data() -> Tuple[float, float]:
+def get_rh_fit_data() -> Tuple[float, float, np.array, float]:
     """Get Rose and Haas best fit sse and deviance.
 
     Returns
     -------
     x
-        Tuple with 2 floats representing best fit sse and best fit dev
-        for the parameters presented in Rose and Haas.
+        Tuple with 4 floats representing best fit sse, best fit dev, 
+        integrated dose and best fit k presented in Rose and Haas.
 
     References
     ----------
@@ -28,5 +28,5 @@ def get_rh_fit_data() -> Tuple[float, float]:
     for ind in range(len(integrated_dose)):
         response = 1 - np.exp(-integrated_dose[ind] / k)
         rh_best_dev += compute_deviance(response, ind)
-    x = rh_best_sse, rh_best_dev
+    x = rh_best_sse, rh_best_dev, integrated_dose, k
     return x
