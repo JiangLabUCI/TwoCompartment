@@ -7,8 +7,50 @@ from typing import List, Dict
 from ..utils.data import get_kinetic_data_params, get_singh_data
 from ..utils.rh_data import get_rh_fit_data
 
-col_mo = ["#984ea3", "#ff7f00"]
-annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
+
+def f2():
+    """Assemble figure 2.
+
+    Assemble figure by calling the appropriate functions.
+    """
+    part_cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
+    col_mo = ["#984ea3", "#ff7f00"]
+    sol_inds = [0, 5]
+    annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
+
+    plt.figure(figsize=(9, 8))
+    plt.subplot(221)
+    growth_obj(col_mo, solinds=sol_inds)
+    x1, x2 = plt.xlim()
+    _, y2 = plt.ylim()
+    plt.text(x1 - 0.15 * (x2 - x1), y2, "A", annotation_args)
+
+    plt.subplot(222)
+    dr_obj(col_mo, solinds=sol_inds)
+    x1, x2 = plt.xlim()
+    _, y2 = plt.ylim()
+    plt.text(x1 - 0.15 * (x2 - x1), y2, "B", annotation_args)
+
+    ax = plt.subplot(223)
+    filename = "results/predsbasebase.npz"
+    with np.load(filename) as data:
+        dose = data["doselist"]
+        pinf = data["pinf"]
+        pcar = data["pcar"]
+        ps = data["ps"]
+    partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=part_cols)
+    x1, x2 = plt.xlim()
+    _, y2 = plt.ylim()
+    plt.text(x1 - 0.15 * (x2 - x1), y2, "C", annotation_args)
+
+    plt.subplot(224)
+    pareto_plot(col_mo, solinds=sol_inds)
+    x1, x2 = plt.xlim()
+    _, y2 = plt.ylim()
+    plt.text(x1 - 0.15 * (x2 - x1), y2, "D", annotation_args)
+
+    plt.savefig("results/figs/f2.pdf", bbox_inches="tight")
+    plt.show()
 
 
 def dr_obj(col, solinds=[0]):
@@ -62,7 +104,6 @@ def dr_obj(col, solinds=[0]):
     plt.legend(loc="lower right")
     plt.xlabel("$Log_{10}$(dose)")
     plt.ylabel("$P_{response}$")
-    plt.show()
 
 
 def growth_obj(col: List[str], solinds: List[int] = [0]):
@@ -152,7 +193,6 @@ def growth_obj(col: List[str], solinds: List[int] = [0]):
     handles, labels = plt.gca().get_legend_handles_labels()
     order = [3, 0, 1, 2]
     plt.legend([handles[idx] for idx in order], [labels[idx] for idx in order])
-    plt.show()
 
 
 def rh_growth_model(t: float, y: float, p: Dict) -> float:
