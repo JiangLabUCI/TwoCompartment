@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
+from matplotlib.patches import Polygon
 from typing import List, Dict
 from ..utils.data import get_kinetic_data_params, get_singh_data
 from ..utils.rh_data import get_rh_fit_data
@@ -219,6 +220,54 @@ def twocomp_model(t: float, y: List[float], p: Dict) -> float:
     dhdt = -p["r1"] * y[0] - p["r2"] * y[0]
     didt = p["r2"] * y[0] + p["r3Imax"] * y[1] - p["r3"] * y[1] * y[1]
     return [dhdt, didt]
+
+
+def partition_plot(
+    dose: np.ndarray, pinf: np.ndarray, pcar: np.ndarray, ps: np.ndarray, ax, **kwargs
+):
+    """Plot outcome probabilities.
+
+    Make a partition plot of the outcome probabilities.
+
+    Parameters
+    ----------
+    dose
+        List of doses.
+    pinf
+        List of infection probabilities.
+    pcar
+        List of carrier probabilities.
+    ps
+        List of unaffected probabilities.
+    ax
+        Axis to plot on.
+    """
+
+    if "cols" not in kwargs.keys():
+        cols = ["xkcd:green", "xkcd:orange", "xkcd:red"]
+    else:
+        cols = kwargs["cols"]
+
+    vertices = [
+        [0, 0],
+        [0, 1],
+        *zip(np.log10(dose), pinf + pcar + ps),
+        [np.log10(dose[-1]), 0],
+    ]
+    area = Polygon(vertices, color=cols[0], label="Unaffected")
+    ax.add_patch(area)
+    vertices = [[0, 0], *zip(np.log10(dose), pinf + pcar), [np.log10(dose[-1]), 0]]
+    area = Polygon(vertices, color=cols[1], label="Carrier")
+    ax.add_patch(area)
+    vertices = [[0, 0], *zip(np.log10(dose), pinf), [np.log10(dose[-1]), 0]]
+    area = Polygon(vertices, color=cols[2], label="Ill")
+    ax.add_patch(area)
+    plt.xlim([0, np.log10(dose[-1])])
+    plt.legend(loc="lower right")
+    if not ("xlab" in kwargs.keys() and kwargs["xlab"] is False):
+        plt.xlabel(r"$\log_{10}$(dose)")
+    if not ("ylab" in kwargs.keys() and kwargs["ylab"] is False):
+        plt.ylabel("Probability")
 
 
 def pareto_plot(col, solinds=[0]):
