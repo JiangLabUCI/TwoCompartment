@@ -39,6 +39,18 @@ def test_stp():
     assert status_to_pinf(status) == 0.5
 
 
+def test_get_bF_bX():
+    filename = "results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat"
+    bFlist, bXlist = get_bF_bX(filename=filename, desol_ind=[0])
+    tol = 1e-12
+    assert abs(bXlist[0, 0] - 1.941837212691128) < tol
+    assert abs(bXlist[0, 1] - 0.014735846051069906) < tol
+    assert abs(bXlist[0, 2] - 2.7098279779742947e-07) < tol
+    assert abs(bXlist[0, 3] - 3.1908412905384753) < tol
+    for ind in range(len(bFlist) - 1):
+        assert bFlist[ind] <= bFlist[ind + 1]
+
+
 def test_get_consts_bX():
     filename = "results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat"
     bFlist, bXlist = get_bF_bX(filename=filename, desol_ind=[0])
