@@ -2,7 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 from typing import List
-from ..utils.data import get_soap_data, twocomp_rmf_model
+from ..utils.data import get_soap_data
+from ..utils.det_models import twocomp_rmf_model
 from .f2 import rh_growth_model, twocomp_model, partition_plot
 
 
