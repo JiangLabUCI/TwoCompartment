@@ -84,6 +84,7 @@ if __name__ == "__main__":
             use_initial=True,
         )
     elif choice == 4:
+        ncores = np.int32(sys.argv[2])
         predict_fit(
             nrep=1000,
             nstep=200000,
@@ -91,4 +92,5 @@ if __name__ == "__main__":
             inoc_time="base",
             rank_1_sol_inds=[0],
             doselist=np.int32(np.power(10, np.arange(1, 6.3, 0.3))),
+            n_cores=ncores,
         )
