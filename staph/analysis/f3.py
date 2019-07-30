@@ -3,7 +3,44 @@ import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 from typing import List
 from ..utils.data import get_soap_data, twocomp_rmf_model
-from .f2 import rh_growth_model, twocomp_model
+from .f2 import rh_growth_model, twocomp_model, partition_plot
+
+
+def f3_24h():
+    """Assemble figure 3.
+
+    Assemble figure 3 by calling appropriate functions.
+    """
+    fnames = ["results/predsr1s24h.npz", "results/predsrmf24h.npz"]
+    col_mo = ["#984ea3", "#ff7f00"]
+    annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
+    plt.subplots(nrows=2, ncols=2, sharex="all", figsize=(9, 8))
+    cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
+    plt.subplot(221)
+    soap_obj(col_mo)
+    x1, x2 = plt.xlim()
+    _, y2 = plt.ylim()
+    plt.text(x1 - 0.15 * (x2 - x1), y2, "A", annotation_args)
+
+    labs = ["B", "C"]
+    for ind1, filename in enumerate(fnames):
+        with np.load(filename) as data:
+            dose = data["doselist"]
+            pinf = data["pinf"]
+            pcar = data["pcar"]
+            ps = data["ps"]
+            print(pinf.shape)
+            # r1 = data["r1"]
+            # r2 = data["r2"]
+        ax = plt.subplot(2, 2, ind1 + 2)
+        if ind1 == 0:
+            partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols)
+        elif ind1 == 1:
+            partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols)
+        x1, x2 = plt.xlim()
+        _, y2 = plt.ylim()
+        plt.text(x1 - 0.15 * (x2 - x1), y2, labs[ind1], annotation_args)
+    plt.show()
 
 
 def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = False):
@@ -110,4 +147,3 @@ def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = Fa
     plt.xlabel("Time (days)")
     plt.ylabel("Staph. density (CFU/cm$^2$)")
     plt.legend()
-    plt.show()
