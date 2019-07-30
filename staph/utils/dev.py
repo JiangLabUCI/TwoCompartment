@@ -121,7 +121,8 @@ def compute_deviance_hform(p_inf: float, dose_index: int) -> float:
     Notes
     -----
     The formula for deviance is from [1]_, Chapter 8 (Page 315, Figure 8.14:
-    this has the code to compute deviance).
+    this has the code to compute deviance). Small modification: add small 
+    positive to fpred as well.
 
     References
     ----------
@@ -138,7 +139,7 @@ def compute_deviance_hform(p_inf: float, dose_index: int) -> float:
     fpred = p_inf
     fobs = norig[dose_index] / ntot
     Y1 = norig[dose_index] * np.log((fpred + 1e-15) / (fobs + 1e-15))
-    Y2 = (ntot - norig[dose_index]) * np.log((1 - fpred) / (1 - fobs + 1e-15))
+    Y2 = (ntot - norig[dose_index]) * np.log((1 - fpred + 1e-15) / (1 - fobs + 1e-15))
     dev = -2 * (Y1 + Y2)
     return dev
 
