@@ -136,7 +136,7 @@ def tau_twocomp_carrier(
     eps = 0.03
     u, t = 0.0, 0.0
     bflag = 0
-    pop_array = np.zeros((2, nstep + 1), dtype=np.int32)
+    pop_array = np.zeros((2, nstep + 1), dtype=np.int64)
     pop_array[0, 0], pop_array[1, 0] = curH, curI
     t_array = np.zeros(nstep + 1)
 
@@ -248,6 +248,15 @@ def tau_twocomp_carrier(
                         break
                     else:
                         print("I don't think this should happen (curH < 0)")
+                # if curI < 0:
+                #     print("got here")
+                #     if prop_array[reaction_index + 1] < 0:
+                #         status = 4
+                #         extflag = 0
+                #         bflag = 1
+                #         break
+                #     else:
+                #         print("I don't think this should happen (curH < 0)")
 
                 if curH + curI == 0:
                     status = 1

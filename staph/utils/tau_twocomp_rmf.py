@@ -143,7 +143,7 @@ def tau_twocomp_carrier_rmf(
     eps = 0.03
     u, t = 0.0, 0.0
     bflag = 0
-    pop_array = np.zeros((2, nstep + 1), dtype=np.int32)
+    pop_array = np.zeros((2, nstep + 1), dtype=np.int64)
     pop_array[0, 0], pop_array[1, 0] = curH, curI
     t_array = np.zeros(nstep + 1)
 
