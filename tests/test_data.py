@@ -1,5 +1,6 @@
 import numpy as np
 from ..staph.utils.data import get_singh_data, get_b1d2, get_fcs_fcr, get_k_ec
+from ..staph.utils.data import get_kinetic_data_params, get_soap_data
 
 
 def test_singh():
@@ -38,3 +39,27 @@ def test_fcs_fcr():
         assert fcs == ks / 2
         fcs, fcr = get_fcs_fcr(C=EC50r, strain=strain)
         assert fcr == kr / 2
+
+
+def test_kinetic():
+    p = get_kinetic_data_params()
+    for ind in range(3):
+        this_t = p["t" + str(ind + 1)]
+        for each_t in this_t:
+            assert each_t in [0, 1, 2, 3, 4, 6]
+
+
+def test_soap():
+    p24 = get_soap_data(dsno=1)
+    pimm = get_soap_data(dsno=2)
+    assert p24["y0"] > pimm["y0"]
+    for each in range(len(p24["y"])):
+        assert p24["y"][each] > pimm["y"][each]
+    assert p24["sse_rh"] < p24["sse_r1"]
+    assert p24["sse_rh"] < p24["sse_rmf"]
+    assert p24["aicc_rh"] > p24["aicc_r1"]
+    assert p24["aicc_rh"] > p24["aicc_rmf"]
+    assert pimm["sse_rh"] < pimm["sse_r1"]
+    assert pimm["sse_rh"] < pimm["sse_rmf"]
+    assert pimm["aicc_rh"] > pimm["aicc_r1"]
+    assert pimm["aicc_rh"] > pimm["aicc_rmf"]
