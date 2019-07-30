@@ -1,9 +1,9 @@
 import numpy as np
 from ..staph.utils.dev import compute_deviance, carrier_obj_wrapper
-from ..staph.utils.dev import compute_deviance_hform
+from ..staph.utils.dev import compute_deviance_hform, get_bF_bX
 from ..staph.utils.dev import compute_devs_min as cdmin
 from ..staph.utils.dev import compute_devs_brute as cdbrute
-from ..staph.utils.dev import transform_x, status_to_pinf
+from ..staph.utils.dev import transform_x, status_to_pinf, get_consts_bX
 from ..staph.utils.data import get_singh_data
 
 
@@ -37,6 +37,31 @@ def test_stp():
     assert status_to_pinf(status) == 0.5
     status = np.array([6, 7, 8, 3, 4, 5])
     assert status_to_pinf(status) == 0.5
+
+
+def test_get_consts_bX():
+    filename = "results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat"
+    bFlist, bXlist = get_bF_bX(filename=filename, desol_ind=[0])
+    r1, r2, r3, Imax, modno = get_consts_bX(
+        bXlist, ind=[0], filename=filename, verbose=0
+    )
+    tol = 1e-12
+    assert modno == 6
+    assert abs(r1 - 1.941837212691128) < tol
+    assert abs(r2 - 0.014735846051069906) < tol
+    assert abs(r3 - 2.7098279779742947e-07) < tol
+    assert abs(Imax - 3.1908412905384753 / 2.7098279779742947e-07) < tol
+    bFlist, bXlist = get_bF_bX(filename=filename, desol_ind=[74])
+    r1, r2, r3, Imax, _ = get_consts_bX(bXlist, ind=[0], filename=filename, verbose=0)
+    assert abs(r1 - 1.6948745105357776) < tol
+    assert abs(r2 - 0.010170711716411323) < tol
+    assert abs(r3 - 3.9085594907079334e-07) < tol
+    filename = filename.replace("6", "3")
+    r1, r2, r3, Imax, _ = get_consts_bX(bXlist, ind=[0], filename=filename, verbose=0)
+    assert abs(r1 - 1.6948745105357776) < tol
+    assert abs(r2 - 0.010170711716411323) < tol
+    assert abs(r3 - 3.9085594907079334e-07) < tol
+    assert abs(Imax - 3.400300160074247) < tol
 
 
 def test_minimize():
