@@ -22,6 +22,7 @@ def igate(filenames=List[str], option1: int = 1):
     2 : Plot deviance, rate constants vs iterations. Also plot each vs. the
     other.
     3 : Plot best fit dose-response.
+    4 : Return best fit's deviance, b2, d1 and pinf.
     """
     for ind1, filename in enumerate(filenames):
         with open(filename) as f:
@@ -99,5 +100,17 @@ def igate(filenames=List[str], option1: int = 1):
             plt.xlabel("log10(dose)")
             plt.ylabel("p(respons)")
             plt.legend()
-
+        elif option1 == 4:
+            min_ind = np.argmin(dev)
+            qstr = "Objective is :  " + str(np.min(dev))
+            for ind1, line in enumerate(d):
+                if line.startswith(qstr):
+                    print(ind1, "many")
+                    roi = d[ind1 - 6 : ind1]
+                    # break
+            pinf = []
+            for ind1, this_roi in enumerate(roi):
+                temp = this_roi.replace(",", "").split()
+                pinf.append(np.float(temp[5]))
+            return dev[min_ind], b2[min_ind], d1[min_ind], pinf
     plt.show()
