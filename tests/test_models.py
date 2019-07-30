@@ -91,7 +91,7 @@ def test_sm():
     assert np.all(pop_array >= 0)
     for ind in range(1, len(t_array)):
         assert t_array[ind - 1] <= t_array[ind]
-        assert pop_array[0, ind] + pop_array[1, ind]  == n0
+        assert pop_array[0, ind] + pop_array[1, ind] == n0
 
     # r2 and d1 fire --> extinction
     r1, r2, b1, b2, d1, d2 = 0, 1, 0, 0, 1, 0
@@ -108,8 +108,8 @@ def test_sm():
         assert t_array[ind - 1] <= t_array[ind]
         assert pop_array[0, ind - 1] >= pop_array[0, ind]
         if pop_array[0, ind - 1] == pop_array[0, ind]:
-            assert pop_array[1, ind-1] > pop_array[1, ind]
-    
+            assert pop_array[1, ind - 1] > pop_array[1, ind]
+
     # r2 and d1,d2 fire --> extinction
     r1, r2, b1, b2, d1, d2 = 0, 1, 0, 0, 1, 1
     rates = np.array([r1, r2, b1, b2, d1, d2])
@@ -125,15 +125,15 @@ def test_sm():
         assert t_array[ind - 1] <= t_array[ind]
         assert pop_array[0, ind - 1] >= pop_array[0, ind]
         if pop_array[0, ind - 1] == pop_array[0, ind]:
-            assert pop_array[1, ind-1] > pop_array[1, ind]
-    
+            assert pop_array[1, ind - 1] > pop_array[1, ind]
+
     # r2 and b1 fire --> explosion/overflow
     r1, r2, b1, b2, d1, d2 = 0, 1, 1, 0, 0, 0
     rates = np.array([r1, r2, b1, b2, d1, d2])
     n0 = 15
     init_load = np.array([n0], dtype=np.int32)
     (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier(
-        init_load=init_load, rates=rates, Imax=float(1e7), nstep=1500, seed=0, t_max = 300,
+        init_load=init_load, rates=rates, Imax=float(1e7), nstep=1500, seed=0, t_max=300
     )
     assert extflag == 0
     assert status in [3, 5]
@@ -141,15 +141,15 @@ def test_sm():
     for ind in range(1, len(t_array)):
         assert t_array[ind - 1] <= t_array[ind]
         assert pop_array[0, ind - 1] >= pop_array[0, ind]
-        assert pop_array[1, ind-1] <= pop_array[1, ind]
-    
+        assert pop_array[1, ind - 1] <= pop_array[1, ind]
+
     # r2 and b2 fire --> explosion/overflow
     r1, r2, b1, b2, d1, d2 = 0, 1, 0, 1, 0, 0
     rates = np.array([r1, r2, b1, b2, d1, d2])
     n0 = 15
     init_load = np.array([n0], dtype=np.int32)
     (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier(
-        init_load=init_load, rates=rates, Imax=float(1e7), nstep=1500, seed=0, t_max = 300,
+        init_load=init_load, rates=rates, Imax=float(1e7), nstep=1500, seed=0, t_max=300
     )
     assert extflag == 0
     assert status in [3, 5]
@@ -157,4 +157,4 @@ def test_sm():
     for ind in range(1, len(t_array)):
         assert t_array[ind - 1] <= t_array[ind]
         assert pop_array[0, ind - 1] >= pop_array[0, ind]
-        assert pop_array[1, ind-1] <= pop_array[1, ind]
+        assert pop_array[1, ind - 1] <= pop_array[1, ind]
