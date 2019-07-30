@@ -3,7 +3,7 @@ from ..staph.utils.dev import compute_deviance, carrier_obj_wrapper
 from ..staph.utils.dev import compute_deviance_hform
 from ..staph.utils.dev import compute_devs_min as cdmin
 from ..staph.utils.dev import compute_devs_brute as cdbrute
-from ..staph.utils.dev import transform_x
+from ..staph.utils.dev import transform_x, status_to_pinf
 from ..staph.utils.data import get_singh_data
 
 
@@ -22,6 +22,21 @@ def test_compute_deviance():
         4 * np.log(0.99 * ntot / 4)
         + (ntot - 4) * np.log((1 - 0.99) * ntot / (ntot - 4))
     )
+
+
+def test_stp():
+    status = np.zeros(10)
+    assert status_to_pinf(status) == 0
+    status = np.ones(10) * 3
+    assert status_to_pinf(status) == 1.0
+    status = np.ones(10) * 4
+    assert status_to_pinf(status) == 1.0
+    status = np.ones(10) * 5
+    assert status_to_pinf(status) == 1.0
+    status = np.array([0, 1, 2, 3, 4, 5])
+    assert status_to_pinf(status) == 0.5
+    status = np.array([6, 7, 8, 3, 4, 5])
+    assert status_to_pinf(status) == 0.5
 
 
 def test_minimize():
