@@ -127,7 +127,9 @@ def test_sm():
         if pop_array[0, ind - 1] == pop_array[0, ind]:
             assert pop_array[1, ind - 1] > pop_array[1, ind]
 
-    # r2 and b1 fire --> explosion/overflow
+
+def test_sm_explosion():
+    # r2 and b1 fire --> explosion
     r1, r2, b1, b2, d1, d2 = 0, 1, 1, 0, 0, 0
     rates = np.array([r1, r2, b1, b2, d1, d2])
     n0 = 15
@@ -136,14 +138,14 @@ def test_sm():
         init_load=init_load, rates=rates, Imax=float(1e7), nstep=1500, seed=0, t_max=300
     )
     assert extflag == 0
-    assert status in [3, 5]
+    assert status == 3
     assert np.all(pop_array >= 0)
     for ind in range(1, len(t_array)):
         assert t_array[ind - 1] <= t_array[ind]
         assert pop_array[0, ind - 1] >= pop_array[0, ind]
         assert pop_array[1, ind - 1] <= pop_array[1, ind]
 
-    # r2 and b2 fire --> explosion/overflow
+    # r2 and b2 fire --> explosion
     r1, r2, b1, b2, d1, d2 = 0, 1, 0, 1, 0, 0
     rates = np.array([r1, r2, b1, b2, d1, d2])
     n0 = 15
@@ -152,7 +154,7 @@ def test_sm():
         init_load=init_load, rates=rates, Imax=float(1e7), nstep=1500, seed=0, t_max=300
     )
     assert extflag == 0
-    assert status in [3, 5]
+    assert status == 3
     assert np.all(pop_array >= 0)
     for ind in range(1, len(t_array)):
         assert t_array[ind - 1] <= t_array[ind]
