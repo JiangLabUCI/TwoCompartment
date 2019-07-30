@@ -31,7 +31,7 @@ def get_singh_data() -> Tuple[List[int], List[int], int, float, float, Any]:
     -----
     H0 = h0 * A
     """
-    h0 = [40, 220, 2000, 105000, 1600000, 10000000]  # CFU/cm^2
+    h0 = [40, 220, 2000, 105_000, 1_600_000, 10_000_000]  # CFU/cm^2
     norig = [4, 8, 13, 14, 19, 20]
     ntot = 20
     tiny = 1e-12
@@ -419,3 +419,34 @@ def get_soap_data(dsno: int = 1, parno: int = 5) -> Dict:
     p["r3Imax"] = float(data3.iloc[parno]["r3*Imax"])
 
     return p
+
+
+def twocomp_rmf_model(t: float, y: List[float], p: Dict) -> float:
+    """2C model with rmf.
+
+    Returns the derivative of SA density at a given time `t`.
+
+    Parameters
+    ----------
+    t
+        Time at which derivative is needed.
+    y
+        SA density (CFU/cm^2).
+    p
+        Dictionary containing the parameters r1, r2, r3, r3Imax and rmf.
+    
+    Returns
+    -------
+    dy
+        Derivative of SA density.
+
+    Notes
+    -----
+    The model for SA density is given by
+
+    .. math:: \frac{dy_0}{dt} = -r_1 y_0 - r_2 y_0
+    .. math:: \frac{dy_1}{dt} = r_2 y_0 + r_3I_{max} y_1 - r_3 y_1^2 - rmf y_1
+    """
+    dhdt = -p["r1"] * y[0] - p["r2"] * y[0] - p["rmf"] * y[0]
+    didt = p["r2"] * y[0] + p["r3Imax"] * y[1] - p["r3"] * y[1] * y[1] - p["rmf"] * y[1]
+    return [dhdt, didt]
