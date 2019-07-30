@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from typing import Tuple, List, Any, Dict
 from scipy.stats import truncnorm
 from numba import njit
@@ -350,3 +351,71 @@ def get_bedrail_data(
         times.append(t)
         loads.append(load)
     return times, loads
+
+
+def get_soap_data(dsno: int = 1, parno: int = 5) -> Dict:
+    """Data from Rose 1999.
+
+    Get the original data, RH fitted constants and 2C fitted constants.
+
+    Parameters
+    ----------
+    dsno
+        Dataset number. 1 (control soap, 24h before inoculation), 
+        2 (control soap, immediate inoculation)
+    parno
+        Index of rank 1 solutions in [0,5]. 
+    
+    Returns
+    p
+        Dictionary of relevant parameters and data.
+    
+    """
+    # Helper constants
+    permin_to_perday = 60 * 24  # (min/hr) * (hr/day) = min/day
+    min_to_day = 1 / 60 * 1 / 24  # (hr/min) * (day/hr) = day/min
+
+    p = {}
+
+    # Original data
+    # Times at which data was collected
+    p["tmins"] = np.array([0, 30, 120, 300])  # minutes
+    p["t"] = p["tmins"] * min_to_day  # min * day/min -> day
+
+    # Experimentally observed data
+    data = np.genfromtxt("results/rose1999_fig5.csv", delimiter=",")
+    data = np.round(data, 2)
+    if dsno == 1:
+        p["y0"] = np.log10(data[0, 1])  # Initial load
+        p["y"] = np.log10(data[:4, 1])
+    elif dsno == 2:
+        p["y0"] = np.log10(data[4, 1])  # Initial load
+        p["y"] = np.log10(data[4:, 1])
+
+    # RH fitted constants
+    p["k1_imm"] = 0.105 * permin_to_perday  # /min * min/day = /day
+    p["k2_imm"] = 0.0383 * permin_to_perday  # /min * min/day = /day
+    p["k1_24h"] = 0.167 * permin_to_perday  # /min * min/day = /day
+    p["k2_24h"] = 0.0586 * permin_to_perday  # /min * min/day = /day
+    p["k3"] = 3.2136e-7  # cm^2/(# * day)
+    p["Nmax"] = 8_930_893  # #/cm^2
+
+    data2 = pd.read_csv("results/pred_consts.csv")
+    p["sse_rh"] = float(data2[(data2.Dataset == dsno) & (data2.Hyp == -1)].SSE)
+    p["aicc_rh"] = np.inf
+
+    # 2C fitted constants
+    data2 = data2[(data2.Dataset == dsno) & (data2.Parameterset == parno + 1)]
+    p["r1*"] = float(data2[data2.Hyp == 2].Parameter)
+    p["sse_r1"] = float(data2[data2.Hyp == 2].SSE)
+    p["aicc_r1"] = float(data2[data2.Hyp == 2].AICc)
+    p["rmf"] = float(data2[data2.Hyp == 6].Parameter)
+    p["sse_rmf"] = float(data2[data2.Hyp == 6].SSE)
+    p["aicc_rmf"] = float(data2[data2.Hyp == 6].AICc)
+
+    data3 = pd.read_csv("results/rank_1_solutions.csv")
+    p["r2"] = float(data3.iloc[parno].r2)
+    p["r3"] = float(data3.iloc[parno].r3)
+    p["r3Imax"] = float(data3.iloc[parno]["r3*Imax"])
+
+    return p
