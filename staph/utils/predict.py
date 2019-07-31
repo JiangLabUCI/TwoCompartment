@@ -343,7 +343,9 @@ def sim_multi(
     If pinf = 0, extinction = 0.
     """
     n = len(dose_intervals)
-    dose_intervals = dose_intervals + [t_max]
+    dose_intervals = np.hstack(
+        [dose_intervals, np.max([0, t_max - np.sum(dose_intervals[1:])])]
+    )
     pop_array = [0 for ind in range(n)]
     t_array = [0 for ind in range(n)]
     np.random.seed(seed)
