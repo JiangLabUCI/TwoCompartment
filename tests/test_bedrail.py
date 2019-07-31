@@ -3,8 +3,7 @@ import matplotlib.pyplot as plt
 from ..staph.utils.data import get_bedrail_data, get_occurence_dist
 from ..staph.utils.tau_twocomp import tau_twocomp_carrier
 from ..staph.utils.tau_twocomp_rmf import tau_twocomp_carrier_rmf
-
-# from ..staph.analysis.predict_carrier import sim_multi, get_rates
+from ..staph.utils.predict import get_rates
 
 
 def test_bedrail_data():
@@ -30,6 +29,19 @@ def test_contact_freq():
     lam = 3
     inter_times = np.random.exponential(scale=1 / lam, size=100)
     assert (sum(inter_times) / 100 - lam) < 1e-2
+
+
+def test_get_rates():
+    rates_rmf, Imax_rmf = get_rates(hyp="rmf")
+    rates_r1, Imax_r1 = get_rates(hyp="r1*")
+    assert len(rates_rmf) == 7
+    assert len(rates_r1) == 6
+    assert rates_rmf[1] == rates_r1[1]  # r2
+    assert rates_rmf[2] == rates_r1[2]  # b1
+    assert rates_rmf[3] == rates_r1[3]  # b2
+    assert rates_rmf[4] == rates_r1[4]  # d1
+    assert rates_rmf[5] == rates_r1[5]  # d2
+    assert Imax_rmf == Imax_r1
 
 
 # def test_sim_multi():
