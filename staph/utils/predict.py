@@ -516,3 +516,50 @@ def predict_bedrail(
         )
 
     print("Output file name : ", output_name)
+
+
+def get_stat_time_course(
+    tsim: np.ndarray, pop: np.ndarray, tref: np.ndarray, thresh: int
+) -> np.ndarray:
+    """Return ssimulation status.
+
+    Return the simulation status for a time series at given reference times.
+
+    Parameters
+    ----------
+    tsim
+        Simulation times.
+    pop
+        Population values at tsim.
+    tref
+        Reference times.
+    thresh
+        Threshold for deciding simulation status.
+    
+    Returns
+    -------
+    stat
+        Simulation statuses.
+    
+    Notes
+    -----
+    stat values can be:
+    -1 : Never set, error.
+    1 : Population extinct/never set.
+    2 : Population in (0, threshold).
+    3 : Population >= threshold.
+    """
+    nref = len(tref)
+    stat = np.ones(nref) * -1
+    for ind in range(nref):
+        this_t = tref[ind]
+        sim_ind = np.max(np.where(tsim <= this_t))
+        this_pop = pop[sim_ind]
+        if pop[sim_ind] == 0:
+            stat[ind] = 1
+        elif pop[sim_ind] < thresh:
+            stat[ind] = 2
+        elif pop[sim_ind] >= thresh:
+            stat[ind] = 3
+
+    return stat
