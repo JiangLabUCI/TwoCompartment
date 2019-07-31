@@ -142,7 +142,22 @@ def predict_fit(
             ps[ind1, ind2] = np.mean(extflag)
             pcar[ind1, ind2] = 1 - (pinf[ind1, ind2] + ps[ind1, ind2])
 
-    with open("results/preds" + hyp + inoc_time + ".npz", "wb") as f:
+    de_str = ""
+    for r1sind in rank_1_sol_inds:
+        de_str += str(r1sind)
+    with open(
+        "results/preds"
+        + hyp
+        + inoc_time
+        + str(sum(doselist))
+        + "dl"
+        + de_str
+        + "r1_"
+        + str(nrep)
+        + "rep"
+        + ".npz",
+        "wb",
+    ) as f:
         np.savez(
             f,
             df=df,
