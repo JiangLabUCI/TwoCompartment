@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 import multiprocessing as mp
 from functools import partial
-from typing import List, Tuple
+from typing import List, Tuple, Callable
+from scipy import interpolate
 from .dev import carrier_obj_wrapper, status_to_pinf
 from .data import calc_for_map, get_b1d2, get_singh_data
 from .tau_twocomp import tau_twocomp_carrier
@@ -289,3 +290,115 @@ def get_rates(hyp: str = "r1*") -> Tuple[List[np.float32], np.float32]:
     Imax = r3Imax / r3
     return rates, Imax
 
+
+def sim_multi(
+    simfunc: Callable,
+    rates: List[np.float32],
+    dose_intervals: List,
+    dose_loads: List,
+    Imax: float,
+    nstep: int = 200_000,
+    seed: int = 0,
+) -> List[np.ndarray, np.ndarray, List[np.ndarray], int, int]:
+    """Simulate multiple inoculations.
+
+    Simulate multiple inoculations with specified intervals and loads.
+
+    Parameters
+    ----------
+    simfunc
+        Simulation function for the simulations.
+    rates
+        Rates corresponding to the simulation function.
+    dose_intervals
+        Time intervals between inoculations.
+    dose_loads
+        Bacterial load at inoculation time.
+    Imax
+        Imax value to be used for simulation.
+    nstep
+        Number of steps to execute the simulation for.
+    seed
+        Seed for random number generator.
+    
+    Returns
+    -------
+    pop
+        Time course of populations.
+    t
+        Time course.
+    t_array
+        List of time courses, directly from simulation.
+    explosion
+        Flag, = 1 if population explodes, = 0 otherwise.
+    extinction
+        Flag, = 1 if population goes extinct, = 0 otherwise.
+    
+    Notes
+    -----
+    Extinction is set by `status_to_pinf`. If pinf = 1, extinction = 1.
+    If pinf = 0, extinction = 0.
+    """
+    n = len(dose_intervals)
+    pop_array = [0 for ind in range(n)]
+    t_array = [0 for ind in range(n)]
+    np.random.seed(seed)
+    seeds = np.random.randint(0, 1e5, size=n)
+    explosion = 0
+    for ind in range(n):
+        init_load = np.array([dose_loads[ind], 0])
+        if ind != 0:
+            init_load += pop_array[ind - 1][:, -1]
+        _, endt, pop_array[ind], t_array[ind], this_status = simfunc(
+            init_load=init_load,
+            rates=rates,
+            Imax=np.int32(Imax),
+            nstep=nstep,
+            seed=seeds[ind],
+            t_max=dose_intervals[ind],
+            store_flag=True,
+        )
+
+        if endt >= dose_intervals[ind]:
+            # Simulation overshooting
+            # Interpolate intermediate population
+            inds_to_keep = np.where(t_array[ind] <= dose_intervals[ind])
+            i = np.max(inds_to_keep)
+            t_i = t_array[ind][i]
+            t_ip1 = t_array[ind][i + 1]
+            p_i = pop_array[ind][:, i]
+            p_ip1 = pop_array[ind][:, i + 1]
+            f = interpolate.interp1d(x=[t_i, t_ip1], y=[p_i, p_ip1], axis=0)
+            p_interp = f(dose_intervals[ind])
+            p_interp = np.array([np.int(p_interp[0]), np.int(p_interp[1])])
+            # Drop extra points
+            t_array[ind] = t_array[ind][inds_to_keep]
+            pop_array[ind] = pop_array[ind][:, inds_to_keep].reshape(2, -1)
+            # Append exposure time point and interpolated population
+            t_array[ind] = np.hstack([t_array[ind], dose_intervals[ind]])
+            pop_array[ind] = np.hstack([pop_array[ind], p_interp.reshape(2, -1)])
+        # Dropping extra points may result in undershooting
+        endt = np.max(t_array[ind])
+        if endt < dose_intervals[ind]:
+            # Simulation undershooting, due to extinction
+            # Append zeros to population
+            t_array[ind] = np.hstack([t_array[ind], dose_intervals[ind]])
+            pop_array[ind] = np.hstack([pop_array[ind], np.array([[0], [0]])])
+        if ind == 0:
+            pop = pop_array[ind]
+            t = t_array[ind]
+        else:
+            pop = np.hstack([pop, pop_array[ind]])
+            t = np.hstack([t, np.max(t) + t_array[ind]])
+        # explosion = 1 if pinf = 1, explosion = 0 if pinf = 0
+        explosion = status_to_pinf(np.array([this_status]))
+        print("explosion, status", explosion, this_status)
+        if explosion:
+            pop = pop[:, :-1]
+            t = t[:-1]
+            break
+    if np.sum(pop[:, -1]):
+        extinction = 0
+    else:
+        extinction = 1
+    return pop, t, t_array, explosion, extinction
