@@ -227,3 +227,65 @@ def get_rates_simfunc(
         simfunc = tau_twocomp_carrier
 
     return rates, simfunc, Imax
+
+
+def get_rates(hyp: str = "r1*") -> Tuple[List[np.float32], np.float32]:
+    """Get the rates for r1* or rmf hypotheses.
+
+    Parameters
+    ----------
+    hyp
+        Hypothesis the rates are needed for, either "r1*" or "rmf".
+
+    Returns
+    -------
+    rates
+        The list of rates used for simulation.
+
+    Notes
+    -----
+    Information is read from "pred_consts.txt". 
+    If `hyp` is "r1*", six rate constants are returned in a list 
+    (r1, r2, b1, b2, d1 and d2).This is then used for simulation with the 
+    `tau_twocomp_carrier` function.
+
+    If `hyp` is "rmf" seven rate constants are returned in a list 
+    (r1, r2, b1, b2, d1, d2 and rmf). This is then used for simulation with 
+    the `tau_twocomp_carrier_rmf` function.
+
+    """
+    dsno = 1
+    parno = 6
+    filename = "results/pred_consts.csv"
+    data = pd.read_csv(filename)
+    if hyp == "rmf":
+        hypno = 6
+        rmf = data[
+            (data.Dataset == dsno) & (data.Parameterset == parno) & (data.Hyp == hypno)
+        ].Parameter.values[0]
+    elif hyp == "r1*":
+        hypno = 2
+        r1 = float(
+            data[
+                (data.Dataset == dsno)
+                & (data.Parameterset == parno)
+                & (data.Hyp == hypno)
+            ].Parameter
+        )
+
+    data = pd.read_csv("results/rank_1_solutions.csv")
+    data = data.iloc[parno - 1]
+    r2 = data.r2
+    r3 = data.r3
+    r3Imax = data["r3*Imax"]
+    b2 = data.b2
+    d1 = data.d1
+    b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3Imax)
+    if hyp == "rmf":
+        r1 = data.r1
+        rates = [r1, r2, b1, b2, d1, d2, rmf]
+    elif hyp == "r1*":
+        rates = [r1, r2, b1, b2, d1, d2]
+    Imax = r3Imax / r3
+    return rates, Imax
+
