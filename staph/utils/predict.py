@@ -19,7 +19,8 @@ def predict_fit(
     doselist: np.ndarray = np.arange(0, 1),
     hyp: str = "base",
     inoc_time: str = "base",
-):
+    pop_array_flag: bool = False,
+) -> [None, List[np.ndarray]]:
     """Predict outcome probabilities.
 
     This function predicts the outcome probabilties at user provided 
@@ -46,6 +47,8 @@ def predict_fit(
         One of "base", "r1s" or "rmf".
     inoc_time
         One of "base", "imm" or "24h".
+    pop_array_flag
+        Whether or not to return population arrays.
 
     Notes
     -----
@@ -106,6 +109,9 @@ def predict_fit(
     pinf = np.zeros([nrank1sols, ndose])
     pcar = np.zeros([nrank1sols, ndose])
     ps = np.zeros([nrank1sols, ndose])
+    if pop_array_flag:
+        pop_array = []
+        t_array = []
     for ind1, r1sind in enumerate(rank_1_sol_inds):
         np.random.seed(seed)
         seeds = np.random.randint(low=0, high=1e5, size=nrep)
@@ -120,7 +126,7 @@ def predict_fit(
             for ind3 in range(nrep):
                 init_load = np.array([doselist[ind2]], dtype=np.int32)
                 arg_list.append(
-                    (init_load, rates, Imax * A, nstep, seeds[ind3], 6.0, False)
+                    (init_load, rates, Imax * A, nstep, seeds[ind3], 6.0, True)
                 )
             # Run parallel simulation
             partial_func = partial(calc_for_map, func=simfunc)
@@ -128,6 +134,9 @@ def predict_fit(
             for ind3, r in enumerate(results):
                 extflag[ind3] = r[0]
                 status[ind3] = r[4]
+                if pop_array_flag:
+                    pop_array.append(r[2])
+                    t_array.append(r[3])
 
             pinf[ind1, ind2] = status_to_pinf(status)
             ps[ind1, ind2] = np.mean(extflag)
@@ -143,6 +152,8 @@ def predict_fit(
             rank_1_sol_inds=rank_1_sol_inds,
             doselist=doselist,
         )
+    if pop_array_flag:
+        return pop_array, t_array
 
 
 def get_rates_simfunc(
