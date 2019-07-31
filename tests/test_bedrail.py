@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from ..staph.utils.data import get_bedrail_data, get_occurence_dist
 from ..staph.utils.tau_twocomp import tau_twocomp_carrier
 from ..staph.utils.tau_twocomp_rmf import tau_twocomp_carrier_rmf
-from ..staph.utils.predict import get_rates, sim_multi
+from ..staph.utils.predict import get_rates, sim_multi, get_stat_time_course
 
 
 def test_bedrail_data():
@@ -103,3 +103,39 @@ def test_sim_multi_rmf():
         assert np.abs((np.max(t_array[ind]) - t_final)) < 1e-5
     assert explosion == 0
     assert extinction == 1
+
+
+def test_stat_time_course():
+    tsim = np.linspace(0, 3, 20)
+    tref = np.linspace(0, 5, 10)
+    pop = np.zeros(len(tsim))
+    sstat = get_stat_time_course(tsim=tsim, pop=pop, tref=tref, thresh=10)
+    assert (sstat == 1).all()
+    assert len(sstat) == len(tref)
+
+    pop = np.ones(len(tsim)) * 5
+    sstat = get_stat_time_course(tsim=tsim, pop=pop, tref=tref, thresh=10)
+    assert (sstat == 2).all()
+    assert len(sstat) == len(tref)
+    sstat = get_stat_time_course(tsim=tsim, pop=pop, tref=tref, thresh=2)
+    assert (sstat == 3).all()
+    assert len(sstat) == len(tref)
+
+    tsim = np.linspace(0, 3, 12)
+    tref = np.linspace(0, 3, 6)
+    pop = np.array([0, 0, 5, 5, 15, 15, 0, 0, 5, 5, 15, 15])
+    sstat = get_stat_time_course(tsim=tsim, pop=pop, tref=tref, thresh=10)
+    assert (sstat == [1, 2, 3, 1, 2, 3]).all()
+
+    tsim = np.linspace(0, 5, 11)
+    tref = np.linspace(0, 10, 6) + 0.1
+    pop = np.array([0, 0, 5, 5, 15, 20, 25, 30, 35, 40, 40])
+    # print("")
+    # print(list(zip(tsim, pop)))
+    # print(tref)
+    sstat = get_stat_time_course(tsim=tsim, pop=pop, tref=tref, thresh=10)
+    assert (sstat == [1, 3, 3, 3, 3, 3]).all()
+
+    pop = np.array([0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0])
+    sstat = get_stat_time_course(tsim=tsim, pop=pop, tref=tref, thresh=10)
+    assert (sstat == [1, 1, 1, 1, 1, 1]).all()
