@@ -283,9 +283,9 @@ def get_rates(hyp: str = "r1*") -> Tuple[List[np.float32], np.float32]:
     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3Imax)
     if hyp == "rmf":
         r1 = data.r1
-        rates = [r1, r2, b1, b2, d1, d2, rmf]
+        rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
     elif hyp == "r1*":
-        rates = [r1, r2, b1, b2, d1, d2]
+        rates = np.array([r1, r2, b1, b2, d1, d2])
     Imax = r3Imax / r3
     return rates, Imax
 
