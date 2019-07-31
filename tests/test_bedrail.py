@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from ..staph.utils.data import get_bedrail_data, get_occurence_dist
 from ..staph.utils.tau_twocomp import tau_twocomp_carrier
 from ..staph.utils.tau_twocomp_rmf import tau_twocomp_carrier_rmf
-from ..staph.utils.predict import get_rates
+from ..staph.utils.predict import get_rates, sim_multi
 
 
 def test_bedrail_data():
@@ -44,45 +44,50 @@ def test_get_rates():
     assert Imax_rmf == Imax_r1
 
 
-# def test_sim_multi():
-#     rates, Imax = get_rates("r1*")
-#     dose_intervals = [0.1, 2.0, 3.0]
-#     print(type(Imax))
-#     pop, t, t_array, explosion, extinction = sim_multi(
-#         tau_twocomp_carrier,
-#         rates=rates,
-#         dose_intervals=dose_intervals,
-#         dose_loads=[100_000, 200_000, 200_000],
-#         Imax=Imax,
-#     )
+def test_sim_multi():
+    rates, Imax = get_rates("r1*")
+    dose_intervals = [0.1, 2.0, 3.0]
+    pop, t, t_array, explosion, extinction = sim_multi(
+        tau_twocomp_carrier,
+        rates=rates,
+        dose_intervals=dose_intervals,
+        dose_loads=[100_000, 200_000, 200_000],
+        Imax=Imax,
+    )
+    tdiff = t[1:] - t[:-1]
+    # plt.plot(t, pop[0, :])
+    # plt.plot(t, pop[1, :])
+    # for ind in range(len(t) - 1):
+    #     if t[ind] == t[ind + 1]:
+    #         plt.plot(t[ind + 1], pop[1, ind + 1], "ro")
+    # plt.show()
+    assert t.shape[0] == pop.shape[1]
+    assert (tdiff >= 0).all()
+    for ind in range(len(t_array)):
+        assert np.abs((np.max(t_array[ind]) - dose_intervals[ind])) < 1e-5
+    assert explosion == 1
+    assert extinction == 0
 
-#     tdiff = t[1:] - t[:-1]
-#     # plt.plot(t, pop[0, :])
-#     # plt.plot(t, pop[1, :])
-#     # plt.show()
-#     assert (tdiff >= 0).all()
-#     for ind in range(len(t_array)):
-#         assert np.abs((np.max(t_array[ind]) - dose_intervals[ind])) < 1e-5
-#     assert explosion == 0
-#     assert extinction == 0
+    rates, Imax = get_rates("rmf")
+    dose_intervals = [0.1, 2.0, 3.0]
+    pop, t, t_array, explosion, extinction = sim_multi(
+        tau_twocomp_carrier_rmf,
+        rates=rates,
+        dose_intervals=dose_intervals,
+        dose_loads=[100_000, 200_000, 200_000],
+        Imax=Imax,
+    )
 
-#     rates, Imax = get_rates("rmf")
-#     dose_intervals = [0.1, 2.0, 3.0]
-#     print(type(Imax))
-#     pop, t, t_array, explosion, extinction = sim_multi(
-#         tau_twocomp_carrier_rmf,
-#         rates=rates,
-#         dose_intervals=dose_intervals,
-#         dose_loads=[100_000, 200_000, 200_000],
-#         Imax=Imax,
-#     )
-
-#     tdiff = t[1:] - t[:-1]
-#     # plt.plot(t, pop[0, :])
-#     # plt.plot(t, pop[1, :])
-#     # plt.show()
-#     assert (tdiff >= 0).all()
-#     for ind in range(len(t_array)):
-#         assert np.abs((np.max(t_array[ind]) - dose_intervals[ind])) < 1e-5
-#     assert explosion == 0
-#     assert extinction == 1
+    tdiff = t[1:] - t[:-1]
+    # plt.plot(t, pop[0, :])
+    # plt.plot(t, pop[1, :])
+    # for ind in range(len(t) - 1):
+    #     if t[ind] == t[ind + 1]:
+    #         plt.plot(t[ind + 1], pop[1, ind + 1], "ro")
+    # plt.show()
+    assert t.shape[0] == pop.shape[1]
+    assert (tdiff >= 0).all()
+    for ind in range(len(t_array)):
+        assert np.abs((np.max(t_array[ind]) - dose_intervals[ind])) < 1e-5
+    assert explosion == 0
+    assert extinction == 1
