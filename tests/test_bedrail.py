@@ -44,7 +44,7 @@ def test_get_rates():
     assert Imax_rmf == Imax_r1
 
 
-def test_sim_multi():
+def test_sim_multi_r1():
     rates, Imax = get_rates("r1*")
     dose_intervals = [0.1, 2.0, 3.0]
     pop, t, t_array, explosion, extinction = sim_multi(
@@ -72,6 +72,8 @@ def test_sim_multi():
     assert explosion == 1
     assert extinction == 0
 
+
+def test_sim_multi_rmf():
     rates, Imax = get_rates("rmf")
     dose_intervals = [0.1, 2.0, 2.0]
     t_max = 10
