@@ -563,3 +563,29 @@ def get_stat_time_course(
             stat[ind] = 3
 
     return stat
+
+
+def stat_ocprob(stat: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Get outcome probabilities.
+
+    Get outcome probabilities from simulation status.
+
+    Parameters
+    ----------
+    stat
+        Status matrix (nrep, nt).
+    
+    Returns
+    -------
+    pres
+        Response probability (nt,).
+    pcar
+        Carrier probability (nt,).
+    ps
+        Unaffected probability (nt,).
+    """
+    pres = np.mean(stat == 3, axis=0)
+    pcar = np.mean(stat == 2, axis=0)
+    ps = np.mean(stat == 1, axis=0)
+
+    return pres, pcar, ps
