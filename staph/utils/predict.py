@@ -299,7 +299,7 @@ def sim_multi(
     Imax: float,
     nstep: int = 200_000,
     seed: int = 0,
-) -> List[np.ndarray, np.ndarray, List[np.ndarray], int, int]:
+) -> Tuple[np.ndarray, np.ndarray, List[np.ndarray], int, int]:
     """Simulate multiple inoculations.
 
     Simulate multiple inoculations with specified intervals and loads.
