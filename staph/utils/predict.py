@@ -5,7 +5,7 @@ from functools import partial
 from typing import List, Tuple, Callable
 from scipy import interpolate
 from .dev import carrier_obj_wrapper, status_to_pinf
-from .data import calc_for_map, get_b1d2, get_singh_data
+from .data import calc_for_map, get_b1d2, get_singh_data, get_bedrail_data
 from .tau_twocomp import tau_twocomp_carrier
 from .tau_twocomp_rmf import tau_twocomp_carrier_rmf
 
@@ -413,3 +413,106 @@ def sim_multi(
     else:
         extinction = 1
     return pop, t, t_array, explosion, extinction
+
+
+def predict_bedrail(
+    n_cores: int = 2,
+    nrep: int = 10,
+    nstep: int = 200,
+    seed: int = 0,
+    hyp: str = "r1*",
+    sex: str = "F",
+) -> None:
+    """Predicts outcome probabilities for bedrail case study.
+
+    This function predicts the outcome probabilties and population time courses
+    for the bedrail case study.
+
+    Parameters
+    ----------
+    n_cores
+        The number of cores to run predictions on.
+    nrep
+        The number of repetitions to run the predictions for.
+    nstep
+        The maximum number of simulation steps to run the algorithm for.
+    seed
+        Initial of the random number generator.
+    hyp
+        Hypothesis, either "r1*" or "rmf".
+    sex
+        For hand size, is "F" or "M".
+    """
+
+    seeds = np.random.randint(low=0, high=1e5, size=nrep)
+    pool = mp.Pool(n_cores)
+
+    rates, Imax = get_rates(hyp)
+    if hyp == "r1*":
+        simfunc = tau_twocomp_carrier
+    elif hyp == "rmf":
+        simfunc = tau_twocomp_carrier_rmf
+    dose_intervals, dose_loads = get_bedrail_data(nrep, tmax=6.0)
+    pop = [0 for x in range(nrep)]
+    popH = [0 for x in range(nrep)]
+    popI = [0 for x in range(nrep)]
+    t = [0 for x in range(nrep)]
+    explosion = [0 for x in range(nrep)]
+    extinction = [0 for x in range(nrep)]
+    arg_list = []
+    for ind1 in range(nrep):
+        # Assemble the argument list for multiprocessing.
+        arg_list.append(
+            (
+                simfunc,
+                rates,
+                dose_intervals[ind1],
+                dose_loads[ind1],
+                Imax,
+                nstep,
+                seeds[ind1],
+            )
+        )
+    partial_func = partial(calc_for_map, func=sim_multi)
+    results = pool.map(partial_func, arg_list)
+    for ind2, r in enumerate(results):
+        pop[ind2] = r[0]
+        popH[ind2] = r[0][0, :]
+        popI[ind2] = r[0][1, :]
+        t[ind2] = r[1]
+        explosion[ind2] = r[3]
+        extinction[ind2] = r[4]
+
+    pinf = np.mean(explosion)
+    ps = np.mean(extinction)
+    pcar = 1 - (pinf + ps)
+
+    # Output file name
+    output_name = (
+        "results/pred_"
+        + str(nrep)
+        + "rep"
+        + str(nstep)
+        + "nst"
+        + hyp.replace("*", "")
+        + "hyp"
+        + sex
+        + "_multi.npz"
+    )
+
+    with open(output_name, "wb") as f:
+        np.savez(
+            f,
+            t=t,
+            pinf=pinf,
+            ps=ps,
+            pcar=pcar,
+            popH=popH,
+            popI=popI,
+            nstep=nstep,
+            nrep=nrep,
+            sex=sex,
+            seed=seed,
+        )
+
+    print("Output file name : ", output_name)
