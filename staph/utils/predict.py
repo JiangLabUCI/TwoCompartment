@@ -299,6 +299,7 @@ def sim_multi(
     Imax: float,
     nstep: int = 200_000,
     seed: int = 0,
+    t_max: float = 6.0,
 ) -> Tuple[np.ndarray, np.ndarray, List[np.ndarray], int, int]:
     """Simulate multiple inoculations.
 
@@ -320,6 +321,8 @@ def sim_multi(
         Number of steps to execute the simulation for.
     seed
         Seed for random number generator.
+    t_max
+        Maximum time to simulate for.
     
     Returns
     -------
@@ -340,6 +343,7 @@ def sim_multi(
     If pinf = 0, extinction = 0.
     """
     n = len(dose_intervals)
+    dose_intervals = dose_intervals + [t_max]
     pop_array = [0 for ind in range(n)]
     t_array = [0 for ind in range(n)]
     np.random.seed(seed)
@@ -349,40 +353,46 @@ def sim_multi(
         init_load = np.array([dose_loads[ind], 0])
         if ind != 0:
             init_load += pop_array[ind - 1][:, -1]
+        t_final = dose_intervals[ind + 1]
         _, endt, pop_array[ind], t_array[ind], this_status = simfunc(
             init_load=init_load,
             rates=rates,
             Imax=np.int32(Imax),
             nstep=nstep,
             seed=seeds[ind],
-            t_max=dose_intervals[ind],
+            t_max=t_final,
             store_flag=True,
         )
+        if ind == 0:
+            t_array[ind] = np.hstack(
+                [[0, dose_intervals[0]], dose_intervals[0] + t_array[ind]]
+            )
+            pop_array[ind] = np.hstack([np.array([[0, 0], [0, 0]]), pop_array[ind]])
 
-        if endt >= dose_intervals[ind]:
+        if endt >= t_final:
             # Simulation overshooting
             # Interpolate intermediate population
-            inds_to_keep = np.where(t_array[ind] <= dose_intervals[ind])
+            inds_to_keep = np.where(t_array[ind] <= t_final)
             i = np.max(inds_to_keep)
             t_i = t_array[ind][i]
             t_ip1 = t_array[ind][i + 1]
             p_i = pop_array[ind][:, i]
             p_ip1 = pop_array[ind][:, i + 1]
             f = interpolate.interp1d(x=[t_i, t_ip1], y=[p_i, p_ip1], axis=0)
-            p_interp = f(dose_intervals[ind])
+            p_interp = f(t_final)
             p_interp = np.array([np.int(p_interp[0]), np.int(p_interp[1])])
             # Drop extra points
             t_array[ind] = t_array[ind][inds_to_keep]
             pop_array[ind] = pop_array[ind][:, inds_to_keep].reshape(2, -1)
             # Append exposure time point and interpolated population
-            t_array[ind] = np.hstack([t_array[ind], dose_intervals[ind]])
+            t_array[ind] = np.hstack([t_array[ind], t_final])
             pop_array[ind] = np.hstack([pop_array[ind], p_interp.reshape(2, -1)])
         # Dropping extra points may result in undershooting
         endt = np.max(t_array[ind])
-        if endt < dose_intervals[ind]:
+        if endt < t_final:
             # Simulation undershooting, due to extinction
             # Append zeros to population
-            t_array[ind] = np.hstack([t_array[ind], dose_intervals[ind]])
+            t_array[ind] = np.hstack([t_array[ind], t_final])
             pop_array[ind] = np.hstack([pop_array[ind], np.array([[0], [0]])])
         if ind == 0:
             pop = pop_array[ind]
@@ -392,7 +402,6 @@ def sim_multi(
             t = np.hstack([t, np.max(t) + t_array[ind]])
         # explosion = 1 if pinf = 1, explosion = 0 if pinf = 0
         explosion = status_to_pinf(np.array([this_status]))
-        print("explosion, status", explosion, this_status)
         if explosion:
             pop = pop[:, :-1]
             t = t[:-1]
