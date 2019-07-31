@@ -12,7 +12,10 @@ def f3_24h():
 
     Assemble figure 3 by calling appropriate functions.
     """
-    fnames = ["results/predsr1s24h.npz", "results/predsrmf24h.npz"]
+    fnames = [
+        "results/predsr1s24h2523823dl5r1_1000rep.npz",
+        "results/predsrmf24h2523823dl5r1_1000rep.npz",
+    ]
     col_mo = ["#984ea3", "#ff7f00"]
     annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
     plt.subplots(nrows=2, ncols=2, sharex="all", figsize=(9, 8))

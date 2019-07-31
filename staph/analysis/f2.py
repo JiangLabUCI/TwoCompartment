@@ -33,7 +33,7 @@ def f2():
     plt.text(x1 - 0.15 * (x2 - x1), y2, "B", annotation_args)
 
     ax = plt.subplot(223)
-    filename = "results/predsbasebase.npz"
+    filename = "results/predsbasebase2523823dl5r1_1000rep.npz"
     with np.load(filename) as data:
         dose = data["doselist"]
         pinf = data["pinf"]
