@@ -64,7 +64,11 @@ def test_sim_multi():
     assert t.shape[0] == pop.shape[1]
     assert (tdiff >= 0).all()
     for ind in range(len(t_array)):
-        assert np.abs((np.max(t_array[ind]) - dose_intervals[ind])) < 1e-5
+        if ind == len(t_array) - 1:
+            t_final = np.max(t_array[ind])
+        else:
+            t_final = dose_intervals[ind + 1]
+        assert np.abs((np.max(t_array[ind]) - t_final)) < 1e-5
     assert explosion == 1
     assert extinction == 0
 
@@ -83,11 +87,15 @@ def test_sim_multi():
     # plt.plot(t, pop[1, :])
     # for ind in range(len(t) - 1):
     #     if t[ind] == t[ind + 1]:
-    #         plt.plot(t[ind + 1], pop[1, ind + 1], "ro")
+    #         plt.plot(t[ind + 1], pop[0, ind + 1], "ro")
     # plt.show()
     assert t.shape[0] == pop.shape[1]
     assert (tdiff >= 0).all()
     for ind in range(len(t_array)):
-        assert np.abs((np.max(t_array[ind]) - dose_intervals[ind])) < 1e-5
+        if ind == len(t_array) - 1:
+            t_final = 6
+        else:
+            t_final = dose_intervals[ind + 1]
+        assert np.abs((np.max(t_array[ind]) - t_final)) < 1e-5
     assert explosion == 0
     assert extinction == 1
