@@ -73,13 +73,15 @@ def test_sim_multi():
     assert extinction == 0
 
     rates, Imax = get_rates("rmf")
-    dose_intervals = [0.1, 2.0, 3.0]
+    dose_intervals = [0.1, 2.0, 2.0]
+    t_max = 10
     pop, t, t_array, explosion, extinction = sim_multi(
         tau_twocomp_carrier_rmf,
         rates=rates,
         dose_intervals=dose_intervals,
         dose_loads=[100_000, 200_000, 200_000],
         Imax=Imax,
+        t_max=t_max,
     )
 
     tdiff = t[1:] - t[:-1]
@@ -93,7 +95,7 @@ def test_sim_multi():
     assert (tdiff >= 0).all()
     for ind in range(len(t_array)):
         if ind == len(t_array) - 1:
-            t_final = 6
+            t_final = t_max - np.sum(dose_intervals[1:])
         else:
             t_final = dose_intervals[ind + 1]
         assert np.abs((np.max(t_array[ind]) - t_final)) < 1e-5
