@@ -39,7 +39,7 @@ def f2():
         pinf = data["pinf"]
         pcar = data["pcar"]
         ps = data["ps"]
-    partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=part_cols)
+    partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=part_cols, log=True)
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
     plt.text(x1 - 0.15 * (x2 - x1), y2, "C", annotation_args)
@@ -197,7 +197,7 @@ def growth_obj(col: List[str], solinds: List[int] = [0]):
 
 
 def partition_plot(
-    dose: np.ndarray, pinf: np.ndarray, pcar: np.ndarray, ps: np.ndarray, ax, **kwargs
+    x: np.ndarray, pinf: np.ndarray, pcar: np.ndarray, ps: np.ndarray, ax, **kwargs
 ):
     """Plot outcome probabilities.
 
@@ -205,8 +205,8 @@ def partition_plot(
 
     Parameters
     ----------
-    dose
-        List of doses.
+    x
+        List of x. x can be dose or time.
     pinf
         List of infection probabilities.
     pcar
@@ -215,6 +215,9 @@ def partition_plot(
         List of unaffected probabilities.
     ax
         Axis to plot on.
+
+    Notes
+    -----
     """
 
     if "cols" not in kwargs.keys():
@@ -222,21 +225,19 @@ def partition_plot(
     else:
         cols = kwargs["cols"]
 
-    vertices = [
-        [0, 0],
-        [0, 1],
-        *zip(np.log10(dose), pinf + pcar + ps),
-        [np.log10(dose[-1]), 0],
-    ]
+    if "log" in kwargs.keys():
+        x = np.log10(x)
+
+    vertices = [[0, 0], [0, 1], *zip(x, pinf + pcar + ps), [x[-1], 0]]
     area = Polygon(vertices, color=cols[0], label="Unaffected")
     ax.add_patch(area)
-    vertices = [[0, 0], *zip(np.log10(dose), pinf + pcar), [np.log10(dose[-1]), 0]]
+    vertices = [[0, 0], *zip(x, pinf + pcar), [x[-1], 0]]
     area = Polygon(vertices, color=cols[1], label="Carrier")
     ax.add_patch(area)
-    vertices = [[0, 0], *zip(np.log10(dose), pinf), [np.log10(dose[-1]), 0]]
+    vertices = [[0, 0], *zip(x, pinf), [x[-1], 0]]
     area = Polygon(vertices, color=cols[2], label="Ill")
     ax.add_patch(area)
-    plt.xlim([0, np.log10(dose[-1])])
+    plt.xlim([0, x[-1]])
     plt.legend(loc="lower right")
     if not ("xlab" in kwargs.keys() and kwargs["xlab"] is False):
         plt.xlabel(r"$\log_{10}$(dose)")
