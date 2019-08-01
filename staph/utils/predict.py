@@ -412,7 +412,7 @@ def sim_multi(
         extinction = 0
     else:
         extinction = 1
-    return pop, t, t_array, explosion, extinction
+    return pop, t, t_array, explosion, extinction, this_status
 
 
 def predict_bedrail(
@@ -464,6 +464,7 @@ def predict_bedrail(
     t = [0 for x in range(nrep)]
     explosion = [0 for x in range(nrep)]
     extinction = [0 for x in range(nrep)]
+    status = [0 for x in range(nrep)]
     arg_list = []
     for ind1 in range(nrep):
         # Assemble the argument list for multiprocessing.
@@ -488,6 +489,7 @@ def predict_bedrail(
             t[ind2] = r[1]
         explosion[ind2] = r[3]
         extinction[ind2] = r[4]
+        status[ind2] = r[5]
         sstat[ind2, :] = get_stat_time_course(
             tsim=r[1], pop=np.sum(pop[ind2], axis=0), tref=tref, thresh=Imax
         )
@@ -529,6 +531,7 @@ def predict_bedrail(
             extinction=extinction,
             tref=tref,
             pop_flag=pop_flag,
+            status=status,
         )
 
     print("Output file name : ", output_name)
