@@ -38,9 +38,9 @@ def f3_24h():
             # r2 = data["r2"]
         ax = plt.subplot(2, 2, ind1 + 2)
         if ind1 == 0:
-            partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols)
+            partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
         elif ind1 == 1:
-            partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols)
+            partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
         x1, x2 = plt.xlim()
         _, y2 = plt.ylim()
         plt.text(x1 - 0.15 * (x2 - x1), y2, labs[ind1], annotation_args)
