@@ -4,6 +4,7 @@ from ..staph.utils.data import get_bedrail_data, get_occurence_dist
 from ..staph.utils.tau_twocomp import tau_twocomp_carrier
 from ..staph.utils.tau_twocomp_rmf import tau_twocomp_carrier_rmf
 from ..staph.utils.predict import get_rates, sim_multi, get_stat_time_course
+from ..staph.utils.predict import stat_ocprob
 
 
 def test_bedrail_data():
@@ -139,3 +140,11 @@ def test_stat_time_course():
     pop = np.array([0, 0, 5, 5, 0, 0, 0, 0, 0, 0, 0])
     sstat = get_stat_time_course(tsim=tsim, pop=pop, tref=tref, thresh=10)
     assert (sstat == [1, 1, 1, 1, 1, 1]).all()
+
+
+def test_stat_ocprob():
+    x = np.array([[1, 2, 3, 1], [1, 2, 3, 2], [1, 2, 3, 3]])
+    pres, pcar, ps = stat_ocprob(x)
+    assert (pres == np.array([0, 0, 1, 1 / 3])).all()
+    assert (pcar == np.array([0, 1, 0, 1 / 3])).all()
+    assert (ps == np.array([1, 0, 0, 1 / 3])).all()
