@@ -446,7 +446,7 @@ def predict_bedrail(
     pop_flag
         If `True`, save the population. If `False`, don't save population.
     """
-
+    np.random.seed(seed)
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
     tref = np.linspace(0, 6, 20)
     sstat = np.zeros((nrep, tref.shape[0]))
