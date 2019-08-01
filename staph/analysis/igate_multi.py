@@ -27,9 +27,9 @@ def igate(fname="results/pred_10rep200nstr1hypF_multi.npz", option1=2):
             for ind in range(len(popH)):
                 y = popH[ind] + popI[ind]
                 if extinction[ind]:
-                    plt.plot(t[ind], y, color="darkred", alpha=0.3)
+                    plt.plot(t[ind], y, color="green", alpha=0.3)
                 elif explosion[ind]:
-                    plt.plot(t[ind], y, color="yellow")
+                    plt.plot(t[ind], y, color="darkred", alpha=0.3)
                 else:
                     plt.plot(t[ind], y, color="darkblue", alpha=0.3)
             plt.show()
