@@ -422,6 +422,7 @@ def predict_bedrail(
     seed: int = 0,
     hyp: str = "r1*",
     sex: str = "F",
+    pop_flag: bool = True,
 ) -> None:
     """Predicts outcome probabilities for bedrail case study.
 
@@ -442,9 +443,13 @@ def predict_bedrail(
         Hypothesis, either "r1*" or "rmf".
     sex
         For hand size, is "F" or "M".
+    pop_flag
+        If `True`, save the population. If `False`, don't save population.
     """
 
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
+    tref = np.linspace(0, 6, 20)
+    sstat = np.zeros((nrep, tref.shape[0]))
     pool = mp.Pool(n_cores)
 
     rates, Imax = get_rates(hyp)
@@ -477,15 +482,17 @@ def predict_bedrail(
     results = pool.map(partial_func, arg_list)
     for ind2, r in enumerate(results):
         pop[ind2] = r[0]
-        popH[ind2] = r[0][0, :]
-        popI[ind2] = r[0][1, :]
-        t[ind2] = r[1]
+        if pop_flag:
+            popH[ind2] = r[0][0, :]
+            popI[ind2] = r[0][1, :]
+            t[ind2] = r[1]
         explosion[ind2] = r[3]
         extinction[ind2] = r[4]
+        sstat[ind2, :] = get_stat_time_course(
+            tsim=r[1], pop=np.sum(pop[ind2], axis=0), tref=tref, thresh=Imax
+        )
 
-    pinf = np.mean(explosion)
-    ps = np.mean(extinction)
-    pcar = 1 - (pinf + ps)
+    pres, pcar, ps = stat_ocprob(stat=sstat)
 
     # Output file name
     output_name = (
@@ -500,11 +507,16 @@ def predict_bedrail(
         + "_multi.npz"
     )
 
+    if not pop_flag:
+        popH = -1
+        popI = -1
+        t = -1
+
     with open(output_name, "wb") as f:
         np.savez(
             f,
             t=t,
-            pinf=pinf,
+            pres=pres,
             ps=ps,
             pcar=pcar,
             popH=popH,
@@ -513,6 +525,10 @@ def predict_bedrail(
             nrep=nrep,
             sex=sex,
             seed=seed,
+            explosion=explosion,
+            extinction=extinction,
+            tref=tref,
+            pop_flag=pop_flag,
         )
 
     print("Output file name : ", output_name)
