@@ -574,11 +574,11 @@ def get_stat_time_course(
         this_t = tref[ind]
         sim_ind = np.max(np.where(tsim <= this_t))
         this_pop = pop[sim_ind]
-        if pop[sim_ind] == 0:
+        if this_pop == 0:
             stat[ind] = 1
-        elif pop[sim_ind] < thresh:
+        elif this_pop < thresh:
             stat[ind] = 2
-        elif pop[sim_ind] >= thresh:
+        elif this_pop >= thresh:
             stat[ind] = 3
 
     return stat
