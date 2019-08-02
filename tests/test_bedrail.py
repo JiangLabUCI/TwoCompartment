@@ -66,28 +66,30 @@ def test_sim_multi_r1():
     # plt.show()
     assert t.shape[0] == pop.shape[1]
     assert (tdiff >= 0).all()
-    assert np.max(t) < t_max
+    assert np.max(t) <= t_max
     for ind in range(len(t_array)):
         if ind == len(t_array) - 1:
-            t_final = np.max(t_array[ind])
+            t_final = t_max - np.sum(dose_intervals)
         else:
             t_final = dose_intervals[ind + 1]
         assert np.abs((np.max(t_array[ind]) - t_final)) < 1e-5
-    assert explosion == 1
+    assert explosion == 0
     assert extinction == 0
 
 
 def test_sim_multi_rmf():
     rates, Imax = get_rates("rmf")
-    dose_intervals = [0.1, 2.0, 2.0]
+    dose_intervals = np.array([0.3, 2.0, 2.0])
+    dose_loads = np.array([100_000, 200_000, 200_000])
     t_max = 10
     pop, t, t_array, explosion, extinction, stat = sim_multi(
         tau_twocomp_carrier_rmf,
         rates=rates,
         dose_intervals=dose_intervals,
-        dose_loads=[100_000, 200_000, 200_000],
+        dose_loads=dose_loads,
         Imax=Imax,
         t_max=t_max,
+        nstep=200_000,
     )
 
     tdiff = t[1:] - t[:-1]
@@ -102,7 +104,7 @@ def test_sim_multi_rmf():
     assert np.max(t) == t_max
     for ind in range(len(t_array)):
         if ind == len(t_array) - 1:
-            t_final = t_max - np.sum(dose_intervals[1:])
+            t_final = t_max - np.sum(dose_intervals)
         else:
             t_final = dose_intervals[ind + 1]
         assert np.abs((np.max(t_array[ind]) - t_final)) < 1e-5
