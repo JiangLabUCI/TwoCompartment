@@ -344,7 +344,7 @@ def sim_multi(
     """
     n = len(dose_intervals)
     dose_intervals = np.hstack(
-        [dose_intervals, np.max([0, t_max - np.sum(dose_intervals[1:])])]
+        [dose_intervals, np.max([0, t_max - np.sum(dose_intervals)])]
     )
     pop_array = [0 for ind in range(n)]
     t_array = [0 for ind in range(n)]
@@ -365,11 +365,6 @@ def sim_multi(
             t_max=t_final,
             store_flag=True,
         )
-        if ind == 0:
-            t_array[ind] = np.hstack(
-                [[0, dose_intervals[0]], dose_intervals[0] + t_array[ind]]
-            )
-            pop_array[ind] = np.hstack([np.array([[0, 0], [0, 0]]), pop_array[ind]])
 
         if endt >= t_final:
             # Simulation overshooting
@@ -408,6 +403,9 @@ def sim_multi(
             pop = pop[:, :-1]
             t = t[:-1]
             break
+    # Right shift the simulations
+    t = np.hstack([0, dose_intervals[0], dose_intervals[0] + t])
+    pop = np.hstack([np.array([[0, 0], [0, 0]]), pop])
     if np.sum(pop[:, -1]):
         extinction = 0
     else:
