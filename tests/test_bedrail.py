@@ -110,6 +110,35 @@ def test_sim_multi_rmf():
     assert extinction == 1
 
 
+def test_sim_multi_overshoot():
+    # Reproduces bug which counts a carrier as an extinction.
+
+    hyp = "rmf"
+    simfunc = tau_twocomp_carrier_rmf
+    seed = 0
+    nrep = 100
+    nstep = 200_000
+
+    np.random.seed(seed)
+    seeds = np.random.randint(low=0, high=1e5, size=nrep)
+    rates, Imax = get_rates(hyp)
+    dose_intervals, dose_loads = get_bedrail_data(nrep, tmax=6.0)
+    ind1 = 59
+    print(dose_intervals[ind1].dtype, dose_loads[ind1].dtype)
+    pop, t, _, explosion, extinction, _ = sim_multi(
+        simfunc, rates, dose_intervals[ind1], dose_loads[ind1], Imax, nstep, seeds[ind1]
+    )
+    # plt.plot(t, pop[0, :])
+    # plt.plot(t, pop[1, :])
+    # for ind in range(len(t) - 1):
+    #     if t[ind] == t[ind + 1]:
+    #         plt.plot(t[ind + 1], pop[0, ind + 1], "ro")
+    # plt.show()
+    assert (np.max(t) - 6) < 1e-3
+    assert extinction == 0
+    assert explosion == 0
+
+
 def test_stat_time_course():
     tsim = np.linspace(0, 3, 20)
     tref = np.linspace(0, 5, 10)
