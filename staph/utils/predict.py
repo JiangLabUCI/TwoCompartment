@@ -421,6 +421,7 @@ def predict_bedrail(
     hyp: str = "r1*",
     sex: str = "F",
     pop_flag: bool = True,
+    t_max: float = 6.0,
 ) -> None:
     """Predicts outcome probabilities for bedrail case study.
 
@@ -443,10 +444,12 @@ def predict_bedrail(
         For hand size, is "F" or "M".
     pop_flag
         If `True`, save the population. If `False`, don't save population.
+    t_max
+        Maximum time to run the simulations for.
     """
     np.random.seed(seed)
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
-    tref = np.linspace(0, 6, 20)
+    tref = np.linspace(0, t_max, 20)
     sstat = np.zeros((nrep, tref.shape[0]))
     pool = mp.Pool(n_cores)
 
@@ -455,7 +458,7 @@ def predict_bedrail(
         simfunc = tau_twocomp_carrier
     elif hyp == "rmf":
         simfunc = tau_twocomp_carrier_rmf
-    dose_intervals, dose_loads = get_bedrail_data(nrep, tmax=6.0)
+    dose_intervals, dose_loads = get_bedrail_data(nrep, tmax=t_max)
     pop = [0 for x in range(nrep)]
     popH = [0 for x in range(nrep)]
     popI = [0 for x in range(nrep)]
@@ -504,6 +507,7 @@ def predict_bedrail(
         + hyp.replace("*", "")
         + "hyp"
         + sex
+        + str(int(t_max))
         + "_multi.npz"
     )
 
@@ -530,6 +534,7 @@ def predict_bedrail(
             tref=tref,
             pop_flag=pop_flag,
             status=status,
+            t_max=t_max,
         )
 
     print("Output file name : ", output_name)
