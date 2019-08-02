@@ -39,9 +39,7 @@ def f3_24h():
         "results/predsrmf24h2523823dl5r1_1000rep.npz",
     ]
     col_mo = ["#984ea3", "#ff7f00"]
-    annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
     cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
-    x = np.random.rand(1000)
 
     fig = plt.figure(1, figsize=(9, 8))
 
@@ -71,32 +69,33 @@ def f3_24h():
         "results/pred_1000rep200000nstr1hypF6_multi.npz",
         "results/pred_1000rep200000nstrmfhypF6_multi.npz",
     ]
-    labs = ["F", "G"]
+    labs1 = ["D", "E"]
+    labs2 = ["F", "G"]
     for ind1, filename in enumerate(fnames):
         with np.load(filename) as data:
             pres = data["pres"]
             pcar = data["pcar"]
             ps = data["ps"]
             tref = data["tref"]
-            explosion = data["explosion"]
-            extinction = data["extinction"]
-            pop_flag = data["pop_flag"]
-            status = data["status"]
+            popH = data["popH"]
+            popI = data["popI"]
+            t = data["t"]
+            new_ext = data["new_ext"]
+            new_exp = data["new_exp"]
+
+        # Plot population vs. time
+        ax = plt.subplot(4, 2, (ind1 + 2) * 2 + 1)
+        pop_time(t, popH, popI, new_ext, new_exp, log=True, alpha=0.5, nplot=2)
+        label(xlab="Time (days)", ylab="Log10(Pop)", label=labs1[ind1])
+
+        # Plot probability vs. time
         ax = plt.subplot(4, 2, (ind1 + 3) * 2)
         if ind1 == 0:
             partition_plot(tref, pres, pcar, ps, ax, cols=cols)
         elif ind1 == 1:
             partition_plot(tref, pres, pcar, ps, ax, cols=cols)
         ax.legend_.remove()
-        label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs[ind1])
-
-    plt.subplot(4, 2, 5)
-    plt.hist(x)
-    label("x", "y", "D")
-
-    plt.subplot(4, 2, 7)
-    plt.hist(x)
-    label("x", "y", "E")
+        label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
 
     fig.tight_layout()
     plt.savefig("results/f3.png")
