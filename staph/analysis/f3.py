@@ -7,6 +7,28 @@ from ..utils.det_models import twocomp_rmf_model
 from .f2 import rh_growth_model, twocomp_model, partition_plot
 
 
+def label(xlab: str = "", ylab: str = "", label: str = ""):
+    """Label plots.
+
+    Handy function to label plots.
+
+    Parameters
+    ----------
+    xlab
+        X axis label for the plot.
+    ylab
+        Y axis label for the plot.
+    label
+        Subfigure label for the plot.
+    """
+    annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
+    plt.xlabel(xlab)
+    plt.ylabel(ylab)
+    x1, x2 = plt.xlim()
+    _, y2 = plt.ylim()
+    plt.text(x1 - 0.15 * (x2 - x1), y2, label, annotation_args)
+
+
 def f3_24h():
     """Assemble figure 3.
 
