@@ -40,13 +40,14 @@ def f3_24h():
     ]
     col_mo = ["#984ea3", "#ff7f00"]
     annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
-    plt.subplots(nrows=2, ncols=2, sharex="all", figsize=(9, 8))
     cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
-    plt.subplot(221)
+    x = np.random.rand(1000)
+
+    fig = plt.figure(1, figsize=(9, 8))
+
+    ax = plt.subplot(4, 2, (1, 3))
     soap_obj(col_mo)
-    x1, x2 = plt.xlim()
-    _, y2 = plt.ylim()
-    plt.text(x1 - 0.15 * (x2 - x1), y2, "A", annotation_args)
+    label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label="A")
 
     labs = ["B", "C"]
     for ind1, filename in enumerate(fnames):
@@ -58,14 +59,47 @@ def f3_24h():
             print(pinf.shape)
             # r1 = data["r1"]
             # r2 = data["r2"]
-        ax = plt.subplot(2, 2, ind1 + 2)
+        ax = plt.subplot(4, 2, (ind1 + 1) * 2)
         if ind1 == 0:
             partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
         elif ind1 == 1:
             partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
-        x1, x2 = plt.xlim()
-        _, y2 = plt.ylim()
-        plt.text(x1 - 0.15 * (x2 - x1), y2, labs[ind1], annotation_args)
+            ax.legend_.remove()
+        label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label=labs[ind1])
+
+    fnames = [
+        "results/pred_1000rep200000nstr1hypF6_multi.npz",
+        "results/pred_1000rep200000nstrmfhypF6_multi.npz",
+    ]
+    labs = ["F", "G"]
+    for ind1, filename in enumerate(fnames):
+        with np.load(filename) as data:
+            pres = data["pres"]
+            pcar = data["pcar"]
+            ps = data["ps"]
+            tref = data["tref"]
+            explosion = data["explosion"]
+            extinction = data["extinction"]
+            pop_flag = data["pop_flag"]
+            status = data["status"]
+        ax = plt.subplot(4, 2, (ind1 + 3) * 2)
+        if ind1 == 0:
+            partition_plot(tref, pres, pcar, ps, ax, cols=cols)
+        elif ind1 == 1:
+            partition_plot(tref, pres, pcar, ps, ax, cols=cols)
+        ax.legend_.remove()
+        label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs[ind1])
+
+    plt.subplot(4, 2, 5)
+    plt.hist(x)
+    label("x", "y", "D")
+
+    plt.subplot(4, 2, 7)
+    plt.hist(x)
+    label("x", "y", "E")
+
+    fig.tight_layout()
+    plt.savefig("results/f3.png")
     plt.show()
 
 
