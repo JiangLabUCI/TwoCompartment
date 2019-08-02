@@ -103,6 +103,66 @@ def f3_24h():
     plt.show()
 
 
+def pop_time(
+    t: List[np.ndarray],
+    popH: List[np.ndarray],
+    popI: List[np.ndarray],
+    extinction: List[int],
+    explosion: List[int],
+    nplot: int = 1,
+    cols: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"],
+    alpha: float = 1.0,
+    log: bool = False,
+):
+    """Plot time course.
+
+    Plot the time course of populations for each outcome type.
+
+    Parameters
+    ----------
+    t
+        List of time points.
+    popH
+        List of H time courses.
+    popI
+        List of I time courses.
+    extinction
+        List of ultimate extinction flags. 1 if pop finally went extinct for 
+        that repetition, 0 otherwise.
+    explosion
+        List of ultimate explosion flags. 1 if pop finally exploded for
+        that repetition, 0 otherwise.
+    nplot
+        Number of time courses of each outcome type to plot.
+    cols
+        Colors to be used for each outcome type.
+    alpha
+        Transparency of each time course.
+    log
+        If `True`, plot the log of the population. If `False`, plot the population.
+    """
+    nrep = len(t)
+    extcount, expcount, carcount = 0, 0, 0
+    for ind in range(nrep):
+        y = popH[ind] + popI[ind]
+        if log and np.min(y) >= 0:
+            y = np.log10(y + 1)
+        if extinction[ind] and (extcount < nplot):
+            extcount += 1
+            print(np.min(y))
+            plt.step(t[ind], y, color=cols[0], alpha=alpha)
+        elif explosion[ind] and (expcount < nplot):
+            expcount += 1
+            print(np.min(y))
+            plt.step(t[ind], y, color=cols[2], alpha=alpha)
+        elif carcount < nplot:
+            carcount += 1
+            print(np.min(y))
+            plt.plot(t[ind], y, color=cols[1], alpha=alpha)
+    if log:
+        plt.ylim([0, 7])
+
+
 def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = False):
     """Plot soap fit data.
 
