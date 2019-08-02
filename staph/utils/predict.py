@@ -422,6 +422,7 @@ def predict_bedrail(
     sex: str = "F",
     pop_flag: bool = True,
     t_max: float = 6.0,
+    n_to_save: int = 10,
 ) -> None:
     """Predicts outcome probabilities for bedrail case study.
 
@@ -446,6 +447,8 @@ def predict_bedrail(
         If `True`, save the population. If `False`, don't save population.
     t_max
         Maximum time to run the simulations for.
+    n_to_save
+        Number of time courses of each outcome type to save.
     """
     np.random.seed(seed)
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
@@ -484,10 +487,9 @@ def predict_bedrail(
     results = pool.map(partial_func, arg_list)
     for ind2, r in enumerate(results):
         pop[ind2] = r[0]
-        if pop_flag:
-            popH[ind2] = r[0][0, :]
-            popI[ind2] = r[0][1, :]
-            t[ind2] = r[1]
+        popH[ind2] = r[0][0, :]
+        popI[ind2] = r[0][1, :]
+        t[ind2] = r[1]
         explosion[ind2] = r[3]
         extinction[ind2] = r[4]
         status[ind2] = r[5]
@@ -512,10 +514,43 @@ def predict_bedrail(
     )
 
     if not pop_flag:
-        popH = -1
-        popI = -1
-        t = -1
-
+        extcount, expcount, carcount = 0, 0, 0
+        tempH, tempI, tempt = [], [], []
+        new_exp = [0 for x in range(n_to_save * 3)]
+        new_ext = [0 for x in range(n_to_save * 3)]
+        for ind in range(nrep):
+            if extinction[ind] and (extcount < n_to_save):
+                tempH.append(popH[ind])
+                tempI.append(popI[ind])
+                tempt.append(t[ind])
+                new_ext[extcount + expcount + carcount] = 1
+                extcount += 1
+            if explosion[ind] and (expcount < n_to_save):
+                tempH.append(popH[ind])
+                tempI.append(popI[ind])
+                tempt.append(t[ind])
+                new_exp[extcount + expcount + carcount] = 1
+                expcount += 1
+            if carcount < n_to_save:
+                tempH.append(popH[ind])
+                tempI.append(popI[ind])
+                tempt.append(t[ind])
+                carcount += 1
+            if (
+                (extcount >= n_to_save)
+                and (expcount >= n_to_save)
+                and (carcount >= n_to_save)
+            ):
+                break
+        popH = tempH
+        popI = tempI
+        t = tempt
+        print(f"Extinction : ps = {ps[-1]}, saved = {extcount}")
+        print(f"Explosion : pres = {pres[-1]}, saved = {expcount}")
+        print(f"Carrier : pcar = {pcar[-1]}, saved = {carcount}")
+    else:
+        new_exp = explosion
+        new_ext = extinction
     with open(output_name, "wb") as f:
         np.savez(
             f,
@@ -535,6 +570,8 @@ def predict_bedrail(
             pop_flag=pop_flag,
             status=status,
             t_max=t_max,
+            new_exp=new_exp,
+            new_ext=new_ext,
         )
 
     print("Output file name : ", output_name)
