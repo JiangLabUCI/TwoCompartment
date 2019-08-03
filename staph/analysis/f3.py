@@ -5,6 +5,7 @@ from typing import List
 from ..utils.data import get_soap_data
 from ..utils.det_models import twocomp_rmf_model
 from .f2 import rh_growth_model, twocomp_model, partition_plot
+import matplotlib as mpl
 
 
 def label(xlab: str = "", ylab: str = "", label: str = ""):
@@ -21,7 +22,12 @@ def label(xlab: str = "", ylab: str = "", label: str = ""):
     label
         Subfigure label for the plot.
     """
-    annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
+    annotation_args = {
+        "va": "bottom",
+        "weight": "bold",
+        "fontsize": "12",
+        "family": "arial",
+    }
     plt.xlabel(xlab)
     plt.ylabel(ylab)
     x1, x2 = plt.xlim()
@@ -40,7 +46,9 @@ def f3_24h():
     ]
     col_mo = ["#984ea3", "#ff7f00"]
     cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
+    cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
 
+    mpl.rcParams["font.family"] = "arial"
     fig = plt.figure(1, figsize=(9, 8))
 
     ax = plt.subplot(4, 2, (1, 3))
@@ -98,7 +106,7 @@ def f3_24h():
         label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
 
     fig.tight_layout()
-    plt.savefig("results/f3.png")
+    plt.savefig("results/imgs/f3.png")
     plt.show()
 
 
