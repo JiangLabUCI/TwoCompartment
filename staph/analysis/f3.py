@@ -35,6 +35,39 @@ def label(xlab: str = "", ylab: str = "", label: str = ""):
     plt.text(x1 - 0.15 * (x2 - x1), y2, label, annotation_args)
 
 
+def f3_layout():
+    x = np.random.rand(100)
+    fig = plt.figure(1, figsize=(9, 8))
+    ax = plt.subplot(4, 2, (1, 3))
+    ax.hist(x)
+    plt.xlabel("x1")
+    plt.ylabel("y1")
+
+    ax2 = plt.subplot(4, 2, 2)
+    ax2.hist(x)
+    # plt.xlabel("x1")
+    plt.ylabel("y1")
+    plt.xlim([-2, 2])
+
+    ax = plt.subplot(424, sharex=ax2)
+    # ax = plt.subplot(2, 2, 4)
+    ax.hist(x)
+    plt.xlabel("x1")
+    plt.ylabel("y1")
+
+    ax2 = plt.subplot(4, 2, 5)
+    ax2.hist(x)
+    # plt.xlabel("x1")
+    plt.ylabel("y1")
+
+    ax2 = plt.subplot(4, 2, 7)
+    ax2.hist(x)
+    # plt.xlabel("x1")
+    plt.ylabel("y1")
+
+    plt.show()
+
+
 def f3_24h():
     """Assemble figure 3.
 
