@@ -14,7 +14,8 @@ def f2():
 
     Assemble figure by calling the appropriate functions.
     """
-    part_cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
+    # part_cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
+    part_cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
     col_mo = ["#984ea3", "#ff7f00"]
     sol_inds = [0, 5]
     annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
