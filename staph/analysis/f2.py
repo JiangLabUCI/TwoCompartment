@@ -49,8 +49,8 @@ def f2():
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
     plt.text(x1 - 0.15 * (x2 - x1), y2, "D", annotation_args)
-
-    plt.savefig("results/figs/f2.pdf", bbox_inches="tight")
+    plt.tight_layout()
+    plt.savefig("results/figs/f2.pdf")
     plt.show()
 
 
