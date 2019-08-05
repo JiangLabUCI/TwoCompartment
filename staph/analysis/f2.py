@@ -236,7 +236,7 @@ def partition_plot(
     area = Polygon(vertices, color=cols[1], label="Carrier")
     ax.add_patch(area)
     vertices = [[0, 0], *zip(x, pinf), [x[-1], 0]]
-    area = Polygon(vertices, color=cols[2], label="Ill")
+    area = Polygon(vertices, color=cols[2], label="Response")
     ax.add_patch(area)
     plt.xlim([0, x[-1]])
     plt.legend(loc="lower right")
