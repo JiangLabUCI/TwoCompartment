@@ -6,6 +6,7 @@ from ..utils.data import get_soap_data
 from ..utils.det_models import twocomp_rmf_model
 from .f2 import rh_growth_model, twocomp_model, partition_plot
 import matplotlib as mpl
+from matplotlib.gridspec import GridSpec
 
 
 def label(xlab: str = "", ylab: str = "", label: str = ""):
@@ -45,15 +46,15 @@ def f3_v2():
         "results/predsrmf24h2523823dl5r1_1000rep.npz",
     ]
     col_mo = ["#984ea3", "#ff7f00"]
+    cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
     cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
 
     mpl.rcParams["font.family"] = "arial"
     x = np.random.rand(100)
 
     fig = plt.figure(1, figsize=(9, 8))
-    gs = fig.add_gridspec(4, 2, hspace=0.43, bottom=0.05, top=0.95, left=0.08, right=0.98)
-    
-    ax = fig.add_subplot(gs[0:2, 0])
+    gs1 = GridSpec(2, 2, top=0.97, bottom=0.55, left=0.08, right=0.99)
+    ax = fig.add_subplot(gs1[0:2, 0])
     soap_obj(col_mo)
     label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label="A")
 
@@ -64,15 +65,17 @@ def f3_v2():
             pinf = data["pinf"]
             pcar = data["pcar"]
             ps = data["ps"]
-        ax = fig.add_subplot(gs[ind1, 1])
+        ax = fig.add_subplot(gs1[ind1, 1])
         if ind1 == 0:
             partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
             label(ylab=ax.get_ylabel(), label=labs[ind1])
+            ax.get_xaxis().set_visible(False)
         elif ind1 == 1:
             partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
             label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label=labs[ind1])
             ax.legend_.remove()
 
+    gs2 = GridSpec(2, 2, top=0.47, bottom=0.05, left=0.08, right=0.99)
     fnames = [
         "results/pred_1000rep200000nstr1hypF6_multi.npz",
         "results/pred_1000rep200000nstrmfhypF6_multi.npz",
@@ -92,24 +95,26 @@ def f3_v2():
             new_exp = data["new_exp"]
 
         # Plot population vs. time
-        ax = fig.add_subplot(gs[2+ind1, 0])
+        ax = fig.add_subplot(gs2[ind1, 0])
         pop_time(t, popH, popI, new_ext, new_exp, log=True, alpha=0.5, nplot=2)
         if ind1 == 0:
             label(ylab=ax.get_ylabel(), label=labs1[ind1])
+            ax.get_xaxis().set_visible(False)
         elif ind1 == 1:
-            label(xlab="Time (days)", ylab="Log10(Pop)", label=labs1[ind1])
+            label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs1[ind1])
 
         # Plot probability vs. time
-        ax = fig.add_subplot(gs[2+ind1, 1])
+        ax = fig.add_subplot(gs2[ind1, 1])
         if ind1 == 0:
             partition_plot(tref, pres, pcar, ps, ax, cols=cols)
             label(ylab=ax.get_ylabel(), label=labs2[ind1])
+            ax.get_xaxis().set_visible(False)
         elif ind1 == 1:
             partition_plot(tref, pres, pcar, ps, ax, cols=cols)
             label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
         ax.legend_.remove()
 
-    plt.savefig("results/figs/layout.png")
+    plt.savefig("results/figs/f3_v2.png")
     plt.show()
 
 
