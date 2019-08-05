@@ -9,10 +9,15 @@ from ..utils.rh_data import get_rh_fit_data
 from ..utils.det_models import rh_growth_model, twocomp_model
 
 
-def f2():
+def f2(display: bool = False):
     """Assemble figure 2.
 
     Assemble figure by calling the appropriate functions.
+
+    Parameters
+    ----------
+    display
+        If `True`, display the plot.
     """
     # part_cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
     part_cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
@@ -52,7 +57,8 @@ def f2():
     plt.text(x1 - 0.15 * (x2 - x1), y2, "D", annotation_args)
     plt.tight_layout()
     plt.savefig("results/figs/f2.pdf")
-    plt.show()
+    if display:
+        plt.show()
 
 
 def dr_obj(col, solinds=[0]):

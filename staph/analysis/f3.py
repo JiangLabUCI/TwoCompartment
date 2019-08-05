@@ -36,10 +36,15 @@ def label(xlab: str = "", ylab: str = "", label: str = ""):
     plt.text(x1 - 0.15 * (x2 - x1), y2, label, annotation_args)
 
 
-def f3_v2():
+def f3_v2(display:bool=False):
     """Assemble figure 3.
 
     Assemble figure 3 using gridspec for improved layout.
+
+    Parameter
+    ---------
+    display
+        If `True`, display the plot.
     """
     fnames = [
         "results/predsr1s24h2523823dl5r1_1000rep.npz",
@@ -114,8 +119,9 @@ def f3_v2():
             label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
         ax.legend_.remove()
 
-    plt.savefig("results/figs/f3_v2.png")
-    plt.show()
+    plt.savefig("results/figs/f3_v2.pdf")
+    if display:
+        plt.show()
 
 
 def f3_24h():
