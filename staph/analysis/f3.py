@@ -35,36 +35,81 @@ def label(xlab: str = "", ylab: str = "", label: str = ""):
     plt.text(x1 - 0.15 * (x2 - x1), y2, label, annotation_args)
 
 
-def f3_layout():
+def f3_v2():
+    """Assemble figure 3.
+
+    Assemble figure 3 using gridspec for improved layout.
+    """
+    fnames = [
+        "results/predsr1s24h2523823dl5r1_1000rep.npz",
+        "results/predsrmf24h2523823dl5r1_1000rep.npz",
+    ]
+    col_mo = ["#984ea3", "#ff7f00"]
+    cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
+
+    mpl.rcParams["font.family"] = "arial"
     x = np.random.rand(100)
+
     fig = plt.figure(1, figsize=(9, 8))
-    ax = plt.subplot(4, 2, (1, 3))
-    ax.hist(x)
-    plt.xlabel("x1")
-    plt.ylabel("y1")
+    gs = fig.add_gridspec(4, 2, hspace=0.43, bottom=0.05, top=0.95, left=0.08, right=0.98)
+    
+    ax = fig.add_subplot(gs[0:2, 0])
+    soap_obj(col_mo)
+    label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label="A")
 
-    ax2 = plt.subplot(4, 2, 2)
-    ax2.hist(x)
-    # plt.xlabel("x1")
-    plt.ylabel("y1")
-    plt.xlim([-2, 2])
+    labs = ["B", "C"]
+    for ind1, filename in enumerate(fnames):
+        with np.load(filename) as data:
+            dose = data["doselist"]
+            pinf = data["pinf"]
+            pcar = data["pcar"]
+            ps = data["ps"]
+        ax = fig.add_subplot(gs[ind1, 1])
+        if ind1 == 0:
+            partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
+            label(ylab=ax.get_ylabel(), label=labs[ind1])
+        elif ind1 == 1:
+            partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
+            label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label=labs[ind1])
+            ax.legend_.remove()
 
-    ax = plt.subplot(424, sharex=ax2)
-    # ax = plt.subplot(2, 2, 4)
-    ax.hist(x)
-    plt.xlabel("x1")
-    plt.ylabel("y1")
+    fnames = [
+        "results/pred_1000rep200000nstr1hypF6_multi.npz",
+        "results/pred_1000rep200000nstrmfhypF6_multi.npz",
+    ]
+    labs1 = ["D", "E"]
+    labs2 = ["F", "G"]
+    for ind1, filename in enumerate(fnames):
+        with np.load(filename, allow_pickle=True) as data:
+            pres = data["pres"]
+            pcar = data["pcar"]
+            ps = data["ps"]
+            tref = data["tref"]
+            popH = data["popH"]
+            popI = data["popI"]
+            t = data["t"]
+            new_ext = data["new_ext"]
+            new_exp = data["new_exp"]
 
-    ax2 = plt.subplot(4, 2, 5)
-    ax2.hist(x)
-    # plt.xlabel("x1")
-    plt.ylabel("y1")
+        # Plot population vs. time
+        ax = fig.add_subplot(gs[2+ind1, 0])
+        pop_time(t, popH, popI, new_ext, new_exp, log=True, alpha=0.5, nplot=2)
+        if ind1 == 0:
+            label(ylab=ax.get_ylabel(), label=labs1[ind1])
+        elif ind1 == 1:
+            label(xlab="Time (days)", ylab="Log10(Pop)", label=labs1[ind1])
 
-    ax2 = plt.subplot(4, 2, 7)
-    ax2.hist(x)
-    # plt.xlabel("x1")
-    plt.ylabel("y1")
+        # Plot probability vs. time
+        ax = fig.add_subplot(gs[2+ind1, 1])
+        if ind1 == 0:
+            partition_plot(tref, pres, pcar, ps, ax, cols=cols)
+            label(ylab=ax.get_ylabel(), label=labs2[ind1])
+        elif ind1 == 1:
+            partition_plot(tref, pres, pcar, ps, ax, cols=cols)
+            label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
+        ax.legend_.remove()
 
+    plt.savefig("results/figs/layout.png")
     plt.show()
 
 
@@ -113,7 +158,7 @@ def f3_24h():
     labs1 = ["D", "E"]
     labs2 = ["F", "G"]
     for ind1, filename in enumerate(fnames):
-        with np.load(filename) as data:
+        with np.load(filename, allow_pickle=True) as data:
             pres = data["pres"]
             pcar = data["pcar"]
             ps = data["ps"]
@@ -139,7 +184,7 @@ def f3_24h():
         label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
 
     fig.tight_layout()
-    plt.savefig("results/imgs/f3.png")
+    plt.savefig("results/figs/f3.png")
     plt.show()
 
 
