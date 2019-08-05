@@ -251,6 +251,7 @@ def pop_time(
             plt.plot(t[ind], y, color=cols[1], alpha=alpha)
     if log:
         plt.ylim([0, 7])
+        plt.ylabel("$\log_{10}$(Staph.) (CFU)")
 
 
 def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = False):
