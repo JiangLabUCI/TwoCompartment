@@ -60,7 +60,7 @@ def f3(display: bool = False):
     hs = 0.1
 
     fig = plt.figure(1, figsize=(9, 4))
-    gs2 = GridSpec(2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs)
+    gs1 = GridSpec(2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs)
     ax = fig.add_subplot(gs1[0:2, 0])
     soap_obj(col_mo)
     label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label="A")
@@ -84,7 +84,7 @@ def f3(display: bool = False):
     plt.savefig("results/figs/f3.pdf")
 
     fig = plt.figure(2, figsize=(9, 4))
-    gs1 = GridSpec(2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs)
+    gs2 = GridSpec(2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs)
     fnames = [
         "results/pred_1000rep200000nstr1hypF6_multi.npz",
         "results/pred_1000rep200000nstrmfhypF6_multi.npz",
@@ -102,11 +102,21 @@ def f3(display: bool = False):
             t = data["t"]
             new_ext = data["new_ext"]
             new_exp = data["new_exp"]
+            imax = data["imax"]
 
         # Plot population vs. time
         ax = fig.add_subplot(gs2[ind1, 0])
         pop_time(
-            t, popH, popI, new_ext, new_exp, log=True, alpha=0.8, nplot=2, cols=cols
+            t,
+            popH,
+            popI,
+            new_ext,
+            new_exp,
+            log=True,
+            alpha=0.8,
+            nplot=2,
+            cols=cols,
+            imax=imax,
         )
         if ind1 == 0:
             label(ylab=ax.get_ylabel(), label=labs1[ind1])
@@ -136,6 +146,7 @@ def pop_time(
     popI: List[np.ndarray],
     extinction: List[int],
     explosion: List[int],
+    imax: float,
     nplot: int = 1,
     cols: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"],
     alpha: float = 1.0,
@@ -159,6 +170,8 @@ def pop_time(
     explosion
         List of ultimate explosion flags. 1 if pop finally exploded for
         that repetition, 0 otherwise.
+    imax
+        Threshold value of the simulation at which it is stopped.
     nplot
         Number of time courses of each outcome type to plot.
     cols
@@ -170,17 +183,19 @@ def pop_time(
     """
     nrep = len(t)
     extcount, expcount, carcount = 0, 0, 0
+    y_upper = 0
     for ind in range(nrep):
         y = popH[ind] + popI[ind]
+        y_upper = np.max([np.max(y), y_upper])
         if log and np.min(y) >= 0:
             y = np.log10(y + 1)
         if extinction[ind] and (extcount < nplot):
             extcount += 1
             print(np.min(y))
             plt.step(t[ind], y, color=cols[0], alpha=alpha)
-        elif explosion[ind] and (expcount < nplot):
+        elif explosion[ind] and (expcount < nplot) and (np.max(y) > np.log10(imax)):
             expcount += 1
-            print(np.min(y))
+            print(np.min(y), np.max(y), np.log10(imax))
             plt.step(t[ind], y, color=cols[2], alpha=alpha)
         elif carcount < nplot:
             carcount += 1
