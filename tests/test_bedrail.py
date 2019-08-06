@@ -9,8 +9,8 @@ from ..staph.utils.predict import stat_ocprob
 
 def test_bedrail_data():
     n = 3
-    times, loads = get_bedrail_data(n)
-    times2, loads2 = get_bedrail_data(n)
+    times, loads, A = get_bedrail_data(n)
+    times2, loads2, A = get_bedrail_data(n)
     for ind in range(n):
         assert np.all(times[ind].shape == loads[ind].shape)
         assert np.all(loads[ind].dtype == np.int32)
@@ -124,7 +124,7 @@ def test_sim_multi_overshoot():
     np.random.seed(seed)
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
     rates, Imax = get_rates(hyp)
-    dose_intervals, dose_loads = get_bedrail_data(nrep, tmax=6.0)
+    dose_intervals, dose_loads, A = get_bedrail_data(nrep, tmax=6.0)
     ind1 = 59
     print(dose_intervals[ind1].dtype, dose_loads[ind1].dtype)
     pop, t, _, explosion, extinction, _ = sim_multi(

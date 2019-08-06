@@ -119,6 +119,7 @@ def predict_fit(
         rates, simfunc, Imax, = get_rates_simfunc(
             df=df, pdf=pdf, r1sind=r1sind, hyp=hyp
         )
+        imax = Imax * A
 
         for ind2 in range(ndose):
             arg_list = []
@@ -126,9 +127,7 @@ def predict_fit(
             status = np.zeros(nrep)
             for ind3 in range(nrep):
                 init_load = np.array([doselist[ind2]], dtype=np.int32)
-                arg_list.append(
-                    (init_load, rates, Imax * A, nstep, seeds[ind3], 6.0, True)
-                )
+                arg_list.append((init_load, rates, imax, nstep, seeds[ind3], 6.0, True))
             # Run parallel simulation
             partial_func = partial(calc_for_map, func=simfunc)
             results = pool.map(partial_func, arg_list)
@@ -198,7 +197,8 @@ def get_rates_simfunc(
     simfunc
         Model for stochastic simulation.
     Imax
-        Imax value used for threshold of stochastic simulation.
+        Imax value used for calculating threshold of stochastic simulation. 
+        (Units of CFU/cm^2, has to be converted.)
 
     See Also
     --------
@@ -319,7 +319,7 @@ def sim_multi(
     dose_loads
         Bacterial load at inoculation time.
     Imax
-        Imax value to be used for simulation.
+        Imax value to be used for simulation. (units of CFU/cm^2)
     nstep
         Number of steps to execute the simulation for.
     seed
@@ -349,6 +349,7 @@ def sim_multi(
     """
     if A is None:
         _, _, _, _, A, _ = get_singh_data()
+    imax = Imax * A
     n = len(dose_intervals)
     dose_intervals = np.hstack(
         [dose_intervals, np.max([0, t_max - np.sum(dose_intervals)])]
@@ -366,7 +367,7 @@ def sim_multi(
         _, endt, pop_array[ind], t_array[ind], this_status = simfunc(
             init_load=init_load,
             rates=rates,
-            Imax=np.int32(Imax),
+            imax=imax,
             nstep=nstep,
             seed=seeds[ind],
             t_max=t_final,

@@ -206,6 +206,7 @@ def carrier_obj_wrapper(
     # Compute b1 and d2 for simulation.
     b2, d1 = transform_x(x, t_type=t_type)
     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
+    imax = Imax * A
     rates = np.array([r1, r2, b1, b2, d1, d2])
     np.random.seed(seed)
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
@@ -230,9 +231,7 @@ def carrier_obj_wrapper(
         arg_list = []
         for ind1 in range(nrep):
             init_load = np.array([H0[choice]], dtype=np.int32)
-            arg_list.append(
-                (init_load, rates, Imax * A, nstep, seeds[ind1], 6.0, False)
-            )
+            arg_list.append((init_load, rates, imax, nstep, seeds[ind1], 6.0, False))
         # Run parallel simulation
         partial_func = partial(calc_for_map, func=tau_twocomp_carrier)
         results = pool.map(partial_func, arg_list)

@@ -106,13 +106,14 @@ def thresh_obj_wrapper(
     """
 
     # Get data
-    h0, _, _, _, _, H0 = get_singh_data()
+    h0, _, _, _, A, H0 = get_singh_data()
 
     # Set b2 = d1 = 0. Compute b1 and d2 for simulation.
     b2 = 0
     d1 = 0
     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
     rates = np.array([r1, r2, b1, b2, d1, d2])
+    imax = Imax * A
 
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
     p_inf = [0 for choice in range(npts)]
@@ -139,7 +140,7 @@ def thresh_obj_wrapper(
         arg_list = []
         for ind2 in range(nrep):
             init_load = np.array([H0[ind1]], dtype=np.int32)
-            arg_list.append((init_load, rates, Imax, nstep, seeds[ind2], 6.0, False))
+            arg_list.append((init_load, rates, imax, nstep, seeds[ind2], 6.0, False))
         # Run parallel simulation
         partial_func = partial(calc_for_map, func=tau_twocomp_carrier)
         results = pool.map(partial_func, arg_list)

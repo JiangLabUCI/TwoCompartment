@@ -56,7 +56,7 @@ def test_sm():
     init_load = np.array([100], dtype=np.int32)
     # Not until extinction
     (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier(
-        init_load=init_load, rates=rates, Imax=float(1e7), nstep=10, seed=0
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=10, seed=0
     )
     assert extflag == 0
     assert status == -1
@@ -67,7 +67,7 @@ def test_sm():
         assert pop_array[1, ind] == 0
     # Until extinction
     (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier(
-        init_load=init_load, rates=rates, Imax=float(1e7), nstep=200, seed=0
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=200, seed=0
     )
     assert extflag == 1
     assert status == 1
@@ -84,7 +84,7 @@ def test_sm():
     n0 = 100
     init_load = np.array([n0], dtype=np.int32)
     (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier(
-        init_load=init_load, rates=rates, Imax=float(1e7), nstep=200, seed=0
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=200, seed=0
     )
     assert extflag == 0
     assert status == 2
@@ -99,7 +99,7 @@ def test_sm():
     n0 = 15
     init_load = np.array([n0], dtype=np.int32)
     (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier(
-        init_load=init_load, rates=rates, Imax=float(1e7), nstep=200, seed=0
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=200, seed=0
     )
     assert extflag == 1
     assert status == 1
@@ -116,7 +116,7 @@ def test_sm():
     n0 = 15
     init_load = np.array([n0], dtype=np.int32)
     (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier(
-        init_load=init_load, rates=rates, Imax=float(1e7), nstep=200, seed=0
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=200, seed=0
     )
     assert extflag == 1
     assert status == 1
@@ -135,7 +135,7 @@ def test_sm_explosion():
     n0 = 15
     init_load = np.array([n0], dtype=np.int32)
     (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier(
-        init_load=init_load, rates=rates, Imax=float(1e7), nstep=1500, seed=0, t_max=300
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=1500, seed=0, t_max=300
     )
     assert extflag == 0
     assert status == 3
@@ -151,7 +151,7 @@ def test_sm_explosion():
     n0 = 15
     init_load = np.array([n0], dtype=np.int32)
     (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier(
-        init_load=init_load, rates=rates, Imax=float(1e7), nstep=1500, seed=0, t_max=300
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=1500, seed=0, t_max=300
     )
     assert extflag == 0
     assert status == 3
