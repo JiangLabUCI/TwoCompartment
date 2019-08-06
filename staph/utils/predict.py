@@ -580,6 +580,7 @@ def predict_bedrail(
             t_max=t_max,
             new_exp=new_exp,
             new_ext=new_ext,
+            imax=Imax * A,
         )
 
     print("Output file name : ", output_name)
