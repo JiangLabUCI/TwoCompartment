@@ -230,13 +230,15 @@ def get_rates_simfunc(
     return rates, simfunc, Imax
 
 
-def get_rates(hyp: str = "r1*") -> Tuple[List[np.float32], np.float32]:
+def get_rates(hyp: str = "r1*", A: float = None) -> Tuple[List[np.float32], np.float32]:
     """Get the rates for r1* or rmf hypotheses.
 
     Parameters
     ----------
     hyp
         Hypothesis the rates are needed for, either "r1*" or "rmf".
+    A
+        Area of the inoculation region used to calculate the rates.
 
     Returns
     -------
@@ -281,7 +283,7 @@ def get_rates(hyp: str = "r1*") -> Tuple[List[np.float32], np.float32]:
     r3Imax = data["r3*Imax"]
     b2 = data.b2
     d1 = data.d1
-    b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3Imax)
+    b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3Imax, A=A)
     if hyp == "rmf":
         r1 = data.r1
         rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
@@ -300,6 +302,7 @@ def sim_multi(
     nstep: int = 200_000,
     seed: int = 0,
     t_max: float = 6.0,
+    A: float = None,
 ) -> Tuple[np.ndarray, np.ndarray, List[np.ndarray], int, int]:
     """Simulate multiple inoculations.
 
@@ -323,6 +326,8 @@ def sim_multi(
         Seed for random number generator.
     t_max
         Maximum time to simulate for.
+    A
+        Area of the hand.
     
     Returns
     -------
@@ -342,6 +347,8 @@ def sim_multi(
     Extinction is set by `status_to_pinf`. If pinf = 1, extinction = 1.
     If pinf = 0, extinction = 0.
     """
+    if A is None:
+        _, _, _, _, A, _ = get_singh_data()
     n = len(dose_intervals)
     dose_intervals = np.hstack(
         [dose_intervals, np.max([0, t_max - np.sum(dose_intervals)])]
@@ -456,12 +463,12 @@ def predict_bedrail(
     sstat = np.zeros((nrep, tref.shape[0]))
     pool = mp.Pool(n_cores)
 
-    rates, Imax = get_rates(hyp)
     if hyp == "r1*":
         simfunc = tau_twocomp_carrier
     elif hyp == "rmf":
         simfunc = tau_twocomp_carrier_rmf
-    dose_intervals, dose_loads = get_bedrail_data(nrep, tmax=t_max)
+    dose_intervals, dose_loads, A = get_bedrail_data(nrep, tmax=t_max)
+    rates, Imax = get_rates(hyp=hyp, A=A)
     pop = [0 for x in range(nrep)]
     popH = [0 for x in range(nrep)]
     popI = [0 for x in range(nrep)]
