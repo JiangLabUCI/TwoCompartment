@@ -27,6 +27,9 @@ def test_b1d2():
     assert b1 == 5
     assert d2 == 3
 
+    b1, d2 = get_b1d2(b2=3, d1=5, r3=1, r3Imax=0, A=2)
+    assert d2 == 4
+
 
 def test_fcs_fcr():
     for strain in [1, 2]:

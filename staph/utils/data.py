@@ -74,7 +74,9 @@ def get_kinetic_data_params() -> Dict:
     return p
 
 
-def get_b1d2(b2: float, d1: float, r3: float, r3Imax: float) -> Tuple[float, float]:
+def get_b1d2(
+    b2: float, d1: float, r3: float, r3Imax: float, A: float = None
+) -> Tuple[float, float]:
     """Find b1 and d2 given other paramters.
 
     Return b1 and d2 stochastic parameters given b1, d2, r3 and r3Imax.
@@ -93,6 +95,8 @@ def get_b1d2(b2: float, d1: float, r3: float, r3Imax: float) -> Tuple[float, flo
     r3Imax : float
         First order logistic rate of twocomp model. (deterministic,
         units = 1 / day)
+    A : float
+        If `None`, use from `get_singh_data`. Else use the value provided.
 
     Returns
     -------
@@ -111,7 +115,8 @@ def get_b1d2(b2: float, d1: float, r3: float, r3Imax: float) -> Tuple[float, flo
     d2 has same units as b2 (1 / (bacteria * day))
     """
 
-    _, _, _, _, A, _ = get_singh_data()
+    if A is None:
+        _, _, _, _, A, _ = get_singh_data()
     b1 = d1 + r3Imax
     d2 = b2 + 2 * r3 / A
     return b1, d2
@@ -252,7 +257,7 @@ def get_occurence_dist(n: int = 100) -> np.ndarray:
 
 def get_bedrail_data(
     n: int = 10, tmax: float = 6.0, sex: str = "F", seed: int = 0
-) -> Tuple[List[float], List[int]]:
+) -> Tuple[List[float], List[int], float]:
     """Return MRSA exposure time points and loads.
 
     Use data from several publications to construct samples of MRSA exposure 
@@ -278,6 +283,8 @@ def get_bedrail_data(
         A tuple of `n` MRSA exposure load sequences. Each sequence is 
         a `np.ndarray` of loads corresponding to the sequence of exposure time
         points in `times` parameter.
+    A
+        The area of the hand, to be used to calculate the rates.
 
     Notes
     -----
@@ -350,7 +357,7 @@ def get_bedrail_data(
         load = np.int32(np.round(this_mrsa_density * hand_size * this_transfer_eff))
         times.append(t)
         loads.append(load)
-    return times, loads
+    return times, loads, hand_size
 
 
 def get_soap_data(dsno: int = 1, parno: int = 5) -> Dict:
