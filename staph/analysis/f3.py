@@ -313,21 +313,21 @@ def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = Fa
         np.log10(solrh2.y.transpose()),
         color="grey",
         linestyle="--",
-        label=f"RH (SSE={sse}, AICc={aicc})",
+        label=f"RH (SSE={sse})",
     )
     sse, aicc = round(p2["sse_r1"], 3), round(p2["aicc_r1"], 2)
     plt.plot(
         sol2cr2.t,
         np.log10(sol2cr2.y.transpose().sum(axis=1)),
         color=col[0],
-        label="$r1$ " + f"(SSE={sse}, AICc={aicc})",
+        label="$r1$ " + f"(SSE={sse})",
     )
     sse, aicc = round(p2["sse_rmf"], 3), round(p2["aicc_rmf"], 2)
     plt.plot(
         sol2crmf2.t,
         np.log10(sol2crmf2.y.transpose().sum(axis=1)),
         color=col[1],
-        label="$r_{mf}$" + f"(SSE={sse}, AICc={aicc})",
+        label="$r_{mf}$" + f"(SSE={sse})",
     )
 
     if both:
