@@ -36,7 +36,7 @@ def label(xlab: str = "", ylab: str = "", label: str = ""):
     plt.text(x1 - 0.15 * (x2 - x1), y2, label, annotation_args)
 
 
-def f3_v2(display:bool=False):
+def f3(display: bool = False):
     """Assemble figure 3.
 
     Assemble figure 3 using gridspec for improved layout.
@@ -55,10 +55,12 @@ def f3_v2(display:bool=False):
     cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
 
     mpl.rcParams["font.family"] = "arial"
-    x = np.random.rand(100)
+    lef, rig = 0.08, 0.99
+    bot, top = 0.11, 0.95
+    hs = 0.1
 
-    fig = plt.figure(1, figsize=(9, 8))
-    gs1 = GridSpec(2, 2, top=0.97, bottom=0.55, left=0.08, right=0.99, hspace=0.1)
+    fig = plt.figure(1, figsize=(9, 4))
+    gs2 = GridSpec(2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs)
     ax = fig.add_subplot(gs1[0:2, 0])
     soap_obj(col_mo)
     label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label="A")
@@ -79,14 +81,16 @@ def f3_v2(display:bool=False):
             partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
             label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label=labs[ind1])
             ax.legend_.remove()
+    plt.savefig("results/figs/f3.pdf")
 
-    gs2 = GridSpec(2, 2, top=0.47, bottom=0.05, left=0.08, right=0.99, hspace=0.1)
+    fig = plt.figure(2, figsize=(9, 4))
+    gs1 = GridSpec(2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs)
     fnames = [
         "results/pred_1000rep200000nstr1hypF6_multi.npz",
         "results/pred_1000rep200000nstrmfhypF6_multi.npz",
     ]
-    labs1 = ["D", "E"]
-    labs2 = ["F", "G"]
+    labs1 = ["A", "B"]
+    labs2 = ["C", "D"]
     for ind1, filename in enumerate(fnames):
         with np.load(filename, allow_pickle=True) as data:
             pres = data["pres"]
@@ -101,7 +105,9 @@ def f3_v2(display:bool=False):
 
         # Plot population vs. time
         ax = fig.add_subplot(gs2[ind1, 0])
-        pop_time(t, popH, popI, new_ext, new_exp, log=True, alpha=0.8, nplot=2, cols=cols)
+        pop_time(
+            t, popH, popI, new_ext, new_exp, log=True, alpha=0.8, nplot=2, cols=cols
+        )
         if ind1 == 0:
             label(ylab=ax.get_ylabel(), label=labs1[ind1])
             ax.get_xaxis().set_visible(False)
@@ -119,7 +125,7 @@ def f3_v2(display:bool=False):
             label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
         ax.legend_.remove()
 
-    plt.savefig("results/figs/f3_v2.pdf")
+    plt.savefig("results/figs/f4.pdf")
     if display:
         plt.show()
 
