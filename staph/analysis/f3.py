@@ -205,6 +205,7 @@ def pop_time(
     nrep = len(t)
     extcount, expcount, carcount = 0, 0, 0
     y_upper = 0
+    handles = [0 for ind in range(3)]
     for ind in range(nrep):
         y = popH[ind] + popI[ind]
         y_upper = np.max([np.max(y), y_upper])
@@ -213,15 +214,21 @@ def pop_time(
         if extinction[ind] and (extcount < nplot):
             extcount += 1
             print(np.min(y))
-            plt.step(t[ind], y, color=cols[0], alpha=alpha)
+            handles[0], = plt.step(t[ind], y, color=cols[0], alpha=alpha)
         elif explosion[ind] and (expcount < nplot) and (np.max(y) > np.log10(imax)):
             expcount += 1
             print(np.min(y), np.max(y), np.log10(imax))
-            plt.step(t[ind], y, color=cols[2], alpha=alpha)
+            handles[2], = plt.step(t[ind], y, color=cols[2], alpha=alpha, label="y")
         elif carcount < nplot:
             carcount += 1
             print(np.min(y))
-            plt.plot(t[ind], y, color=cols[1], alpha=alpha)
+            handles[1], = plt.plot(t[ind], y, color=cols[1], alpha=alpha)
+    legend_flag = 1
+    for ind in range(len(handles)):
+        if handles[ind] == 0:
+            legend_flag = 0
+    if legend_flag:
+        plt.legend(handles, ["Unaffected", "Carrier", "Response"])
     if log:
         plt.ylim([0, 7])
         plt.ylabel("$\log_{10}$(Staph.) (CFU)")
