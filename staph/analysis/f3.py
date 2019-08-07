@@ -9,7 +9,7 @@ import matplotlib as mpl
 from matplotlib.gridspec import GridSpec
 
 
-def label(xlab: str = "", ylab: str = "", label: str = "", factor=0.15):
+def label(xlab: str = "", ylab: str = "", label: str = "", factor: float = 0.15):
     """Label plots.
 
     Handy function to label plots.
