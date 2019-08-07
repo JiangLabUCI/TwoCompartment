@@ -9,7 +9,7 @@ import matplotlib as mpl
 from matplotlib.gridspec import GridSpec
 
 
-def label(xlab: str = "", ylab: str = "", label: str = ""):
+def label(xlab: str = "", ylab: str = "", label: str = "", factor=0.15):
     """Label plots.
 
     Handy function to label plots.
@@ -22,6 +22,8 @@ def label(xlab: str = "", ylab: str = "", label: str = ""):
         Y axis label for the plot.
     label
         Subfigure label for the plot.
+    factor
+        Factor by which to left-shift label.
     """
     annotation_args = {
         "va": "bottom",
@@ -33,7 +35,7 @@ def label(xlab: str = "", ylab: str = "", label: str = ""):
     plt.ylabel(ylab)
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
-    plt.text(x1 - 0.15 * (x2 - x1), y2, label, annotation_args)
+    plt.text(x1 - factor * (x2 - x1), y2, label, annotation_args)
 
 
 def cm2inch(cm):
