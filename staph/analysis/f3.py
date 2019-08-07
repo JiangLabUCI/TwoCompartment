@@ -77,7 +77,7 @@ def f3(display: bool = False):
     mpl.rcParams["font.family"] = "arial"
     lef, rig = 0.08, 0.99
     bot, top = 0.11, 0.95
-    hs = 0.1
+    hs = 0.3
 
     fig = plt.figure(1, figsize=(9, 4))
     gs1 = GridSpec(2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs)
@@ -104,7 +104,10 @@ def f3(display: bool = False):
     plt.savefig("results/figs/f3.pdf")
 
     fig = plt.figure(2, figsize=(9, 4))
-    gs2 = GridSpec(2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs)
+    right_fact = 0.11
+    gs2 = GridSpec(
+        2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs, wspace=0.15
+    )
     fnames = [
         "results/pred_1000rep200000nstr1hypF6_multi.npz",
         "results/pred_1000rep200000nstrmfhypF6_multi.npz",
@@ -125,7 +128,7 @@ def f3(display: bool = False):
             imax = data["imax"]
 
         # Plot population vs. time
-        ax = fig.add_subplot(gs2[ind1, 0])
+        ax = fig.add_subplot(gs2[0, ind1])
         pop_time(
             t,
             popH,
@@ -139,20 +142,18 @@ def f3(display: bool = False):
             imax=imax,
         )
         if ind1 == 0:
-            label(ylab=ax.get_ylabel(), label=labs1[ind1])
-            ax.get_xaxis().set_visible(False)
-        elif ind1 == 1:
             label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs1[ind1])
+        elif ind1 == 1:
+            label(xlab="Time (days)", label=labs1[ind1], factor=right_fact)
 
         # Plot probability vs. time
-        ax = fig.add_subplot(gs2[ind1, 1])
+        ax = fig.add_subplot(gs2[1, ind1])
         if ind1 == 0:
             partition_plot(tref, pres, pcar, ps, ax, cols=cols)
-            label(ylab=ax.get_ylabel(), label=labs2[ind1])
-            ax.get_xaxis().set_visible(False)
+            label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
         elif ind1 == 1:
             partition_plot(tref, pres, pcar, ps, ax, cols=cols)
-            label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
+            label(xlab=ax.get_xlabel(), label=labs2[ind1], factor=right_fact)
         ax.legend_.remove()
 
     plt.savefig("results/figs/f4.pdf")
