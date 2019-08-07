@@ -36,6 +36,24 @@ def label(xlab: str = "", ylab: str = "", label: str = ""):
     plt.text(x1 - 0.15 * (x2 - x1), y2, label, annotation_args)
 
 
+def cm2inch(cm):
+    """Convert cm to inch.
+
+    Parameters
+    ----------
+    cm
+        Value in centimeters.
+
+    Returns
+    -------
+    inch
+        Value in inches.
+
+    """
+    inch = cm / 2.54
+    return inch
+
+
 def f3(display: bool = False):
     """Assemble figure 3.
 
