@@ -27,18 +27,24 @@ def f2(display: bool = False):
 
     plt.figure(figsize=(9, 8))
     plt.subplot(221)
-    growth_obj(col_mo, solinds=sol_inds)
+    pareto_plot(col_mo, solinds=sol_inds)
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
     plt.text(x1 - 0.15 * (x2 - x1), y2, "A", annotation_args)
 
     plt.subplot(222)
-    dr_obj(col_mo, solinds=sol_inds)
+    growth_obj(col_mo, solinds=sol_inds)
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
     plt.text(x1 - 0.15 * (x2 - x1), y2, "B", annotation_args)
 
     ax = plt.subplot(223)
+    dr_obj(col_mo, solinds=sol_inds)
+    x1, x2 = plt.xlim()
+    _, y2 = plt.ylim()
+    plt.text(x1 - 0.15 * (x2 - x1), y2, "C", annotation_args)
+
+    ax = plt.subplot(224)
     filename = "results/predsbasebase2523823dl5r1_1000rep.npz"
     with np.load(filename) as data:
         dose = data["doselist"]
@@ -48,13 +54,8 @@ def f2(display: bool = False):
     partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=part_cols, log=True)
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
-    plt.text(x1 - 0.15 * (x2 - x1), y2, "C", annotation_args)
-
-    plt.subplot(224)
-    pareto_plot(col_mo, solinds=sol_inds)
-    x1, x2 = plt.xlim()
-    _, y2 = plt.ylim()
     plt.text(x1 - 0.15 * (x2 - x1), y2, "D", annotation_args)
+
     plt.tight_layout()
     plt.savefig("results/figs/f2.pdf")
     if display:
