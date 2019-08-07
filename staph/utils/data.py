@@ -183,43 +183,6 @@ def get_fcs_fcr(C: float, strain: int = 1) -> Tuple[float, float]:
     return fcs, fcr
 
 
-def get_oie_data(n: int = 10) -> np.ndarray:
-    """Get sample of MRSA load in bed-sheets.
-
-    Return MRSA load (CFU) in 100cm^2 of bed-sheets.
-
-    Parameters
-    ----------
-    n
-        The number of samples.
-
-    Returns
-    -------
-    x
-        The MRSA load samples.
-
-    Notes
-    -----
-    From [1]_, Table 1.
-    
-    References
-    ----------
-    .. [1] Oie, S., Suenaga, S., Sawa, A., & Kamiya, A. (2007). Association
-    between isolation sites of methicillin-resistant Staphylococcus aureus 
-    (MRSA) in patients with MRSA-positive body sites and MRSA contamination in
-    their surrounding environmental surfaces. Japanese Journal of Infectious 
-    Diseases, 60(6), 367–369.
-
-    """
-    mu = 380.2  # CFU
-    sigma = 2198  # CFU
-    np.random.seed(0)
-    x = np.random.normal(mu, sigma, 10000)  # CFU
-    x = x[x > 0]
-    x = np.int32(x[:n])
-    return x
-
-
 def get_occurence_dist(n: int = 100) -> np.ndarray:
     """Return MRSA densities/cm^2.
 
