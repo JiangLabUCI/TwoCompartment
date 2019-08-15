@@ -13,21 +13,17 @@ from .dev import compute_deviance
 
 @njit(cache=False)
 def get_best_thresh(
-    final_loads: np.ndarray, low: int = 10, high: int = 20
+    final_loads: np.ndarray,
 ) -> Tuple[int, float, np.ndarray, np.ndarray]:
-    """Brute force best threshold search.
+    """Best threshold search.
 
     Return the threshold that provides the best deviance for the given 
-    `final_loads` array. Checks every value in [`low`, `high`).
+    `final_loads` array. Checks the unique values in `final_loads` + 1.
 
     Parameters
     ----------
     final_loads
         The bacterial loads at the end of the simulations.
-    low
-        Lower limit of the threshold.
-    high
-        Upper limit of the threshold.
     
     Returns
     -------
@@ -41,7 +37,7 @@ def get_best_thresh(
         The list of deviances for each point for each threshold.
     """
     npts = final_loads.shape[0]
-    thresh_array = np.arange(low, high)
+    thresh_array = np.sort(np.unique(final_loads)) + 1
     nthresh = thresh_array.shape[0]
     p_inf = np.zeros(npts)
     devs = np.zeros(thresh_array.shape[0])
