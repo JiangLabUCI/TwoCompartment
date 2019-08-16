@@ -1,5 +1,5 @@
 import numpy as np
-from ..staph.utils.dev_thresh import get_best_thresh
+from ..staph.utils.dev_thresh import get_best_thresh, thresh_minimizer
 from ..staph.utils.data import get_singh_data
 
 
@@ -36,3 +36,7 @@ def test_gb_thresh():
     assert devs.shape[0] == len(np.unique(fake_loads))
     assert best_thresh == 999
     assert np.abs(best_dev) < 1e-12
+
+
+def test_thresh_minimizer():
+    thresh_minimizer(nstep=100)
