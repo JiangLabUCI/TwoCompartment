@@ -7,6 +7,7 @@ from typing import List, Tuple, Any, Union
 from .data import get_singh_data, get_b1d2, calc_for_map
 from .tau_twocomp import tau_twocomp_carrier
 from .dev import compute_deviance, get_bF_bX, get_consts_bX, transform_x
+from collections import Counter
 
 
 @njit(cache=False)
@@ -144,7 +145,7 @@ def thresh_obj_wrapper(
         arg_list = []
         for ind2 in range(nrep):
             init_load = np.array([H0[ind1]], dtype=np.int32)
-            arg_list.append((init_load, rates, imax, nstep, seeds[ind2], 6.0, False))
+            arg_list.append((init_load, rates, imax, nstep, seeds[ind2], 6.0, True))
         # Run parallel simulation
         partial_func = partial(calc_for_map, func=tau_twocomp_carrier)
         results = pool.map(partial_func, arg_list)
@@ -153,28 +154,30 @@ def thresh_obj_wrapper(
             extflag[ind2] = r[0]
             endt[ind2] = r[1]
             status[ind2] = r[4]
-            final_loads[ind1, ind2] = 0
+            final_loads[ind1, ind2] = np.sum(r[2][-1, :])
 
         extflags.append(extflag)
         endts.append(endt)
         statuses.append(status)
         this_status = status
-        print(
-            f"Seed = {seed}, status histogram : ",
-            np.histogram(
-                this_status, bins=np.array([-2, -1, 0, 1, 2, 3, 4, 5, 6]) - 0.1
-            )[0],
-        )
+        print(f"Seed = {seed}, status counts : ", Counter(this_status))
         if np.any(this_status == 0):
             print("Zero status detected, rates, dose =  ", rates, h0[ind1])
 
         # p_inf = prob (H(t) + I(t) > thresh)
 
-    best_thresh = get_best_thresh(final_loads=final_loads)
-    print(best_thresh)
+    best_thresh, best_dev, devs, all_devs = get_best_thresh(final_loads=final_loads)
+    best_dev_index = np.argmin(devs)
+    p_res = np.zeros((npts))
+    for ind1 in range(npts):
+        p_res[ind1] = np.mean(final_loads[ind1, :] >= best_thresh)
+    print(f"Unique final loads : {np.unique(final_loads)}")
+    print(f"Best thresh is : {best_thresh:.8e}")
+    print(f"Which is sum of :  {all_devs[best_dev_index, :]}")
+    print(f"p_res is : {p_res}")
 
     if obj_flag:
-        objval = np.sum(devs)
+        objval = best_dev
         print("Objective is : ", objval)
         print("------------------------------------------")
         return objval
