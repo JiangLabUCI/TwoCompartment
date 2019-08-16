@@ -1,14 +1,12 @@
 import numpy as np
-import scipy.io as sio
 import multiprocessing as mp
 from timeit import default_timer as timer
-from scipy.optimize import minimize
 from functools import partial
 from numba import njit
 from typing import List, Tuple, Any, Union
 from .data import get_singh_data, get_b1d2, calc_for_map
 from .tau_twocomp import tau_twocomp_carrier
-from .dev import compute_deviance
+from .dev import compute_deviance, get_bF_bX, get_consts_bX, transform_x
 
 
 @njit(cache=False)
@@ -17,14 +15,14 @@ def get_best_thresh(
 ) -> Tuple[int, float, np.ndarray, np.ndarray]:
     """Best threshold search.
 
-    Return the threshold that provides the best deviance for the given 
+    Return the threshold that provides the best deviance for the given
     `final_loads` array. Checks the unique values in `final_loads` + 1.
 
     Parameters
     ----------
     final_loads
         The bacterial loads at the end of the simulations.
-    
+
     Returns
     -------
     best_thresh
@@ -55,188 +53,233 @@ def get_best_thresh(
     return best_thresh, best_dev, devs, all_devs
 
 
-# def thresh_obj_wrapper(
-#     r1: float,
-#     r2: float,
-#     r3: float,
-#     Imax: float,
-#     npts: int,
-#     nrep: int,
-#     nstep: int,
-#     seed: int,
-#     pool: Any,
-#     obj_flag: bool,
-# ) -> Union[float, Tuple[List, List, List, List]]:
-#     """Threshold wrapper objective function that returns total deviance.
+def thresh_obj_wrapper(
+    x: List[float],
+    r1: float,
+    r2: float,
+    r3: float,
+    Imax: float,
+    npts: int,
+    nrep: int,
+    nstep: int,
+    seed: int,
+    pool: Any,
+    obj_flag: bool,
+    t_type: str = None,
+) -> Union[float, Tuple[List, List, List, List]]:
+    """Threshold wrapper objective function that returns total deviance.
 
-#     Uses the `get_b1d2` function to compute b1 and d2 from r3, Imax, b2 and d1.
-#     Calls `calc_devlist_carrier` to compute the objective function value.
+    Uses the `get_b1d2` function to compute b1 and d2 from r3, Imax, b2 and d1.
+    Calls `calc_devlist_carrier` to compute the objective function value.
 
-#     Parameters
-#     ----------
-#     r1
-#         Rate constant with units (/day).
-#     r2
-#         Rate constant with units (/day).
-#     r3
-#         Rate constant with units (cm^2/(bacteria * day)).
-#     Imax
-#         Carrying capacity with units (bacteria/cm^2).
-#     npts
-#         Number of dose values to evaluate objective at. Only evaluating at
-#         all 6 doses matters. Lower `npts` are for testing purposes.
-#     nstep
-#         Number of steps to run the simulation for.
-#     seed
-#         Seed of the random number generator.
-#     pool : multiprocessing_pool
-#         Pool object used to evaluate the objectives in parallel.
-#     obj_flag
-#         If `True`, return only objective value. Else return Tuple with
-#         devs, extflags, endts and statuses.
+    Parameters
+    ----------
+    x
+        Input array to be optimized. Consists of rate constants b2 and d1.
+    r1
+        Rate constant with units (/day).
+    r2
+        Rate constant with units (/day).
+    r3
+        Rate constant with units (cm^2/(bacteria * day)).
+    Imax
+        Carrying capacity with units (bacteria/cm^2).
+    npts
+        Number of dose values to evaluate objective at. Only evaluating at
+        all 6 doses matters. Lower `npts` are for testing purposes.
+    nstep
+        Number of steps to run the simulation for.
+    seed
+        Seed of the random number generator.
+    pool : multiprocessing_pool
+        Pool object used to evaluate the objectives in parallel.
+    obj_flag
+        If `True`, return only objective value. Else return Tuple with
+        devs, extflags, endts and statuses.
+    t_type
+        Tranformation type to apply to b2.
 
-#     Returns
-#     -------
-#     objval
-#         Objective value used for optimization, which is the deviance.
-#     """
+    Returns
+    -------
+    objval
+        Objective value used for optimization, which is the deviance.
+    """
 
-#     # Get data
-#     h0, _, _, _, A, H0 = get_singh_data()
+    # Get data
+    h0, _, _, _, A, H0 = get_singh_data()
 
-#     # Set b2 = d1 = 0. Compute b1 and d2 for simulation.
-#     b2 = 0
-#     d1 = 0
-#     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
-#     rates = np.array([r1, r2, b1, b2, d1, d2])
-#     imax = Imax * A
+    # Return high objective values for negative rates.
+    if (x[0] < 0) or (x[1] < 0):
+        return 3000
 
-#     seeds = np.random.randint(low=0, high=1e5, size=nrep)
-#     p_inf = [0 for choice in range(npts)]
-#     devs = []
-#     extflags = []
-#     endts = []
-#     statuses = []
-#     final_loads = np.zeros([npts, nrep])
+    # Compute b1 and d2 for simulation.
+    b2, d1 = transform_x(x, t_type=t_type)
+    b2 = 0
+    d1 = 0
+    b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
+    rates = np.array([r1, r2, b1, b2, d1, d2])
+    imax = Imax * A
 
-#     # If any of supplied rates are negative.
-#     print("Rates are :  ", rates)
-#     if np.any(np.array(rates) < 0):
-#         return 3.2e3
-#     arg_list = []
+    seeds = np.random.randint(low=0, high=1e5, size=nrep)
+    devs = []
+    extflags = []
+    endts = []
+    statuses = []
+    final_loads = np.zeros([npts, nrep])
 
-#     # Retrieve final populations
-#     for ind1 in range(npts):
-#         # Holders for the return values of each dose
-#         extflag = np.zeros(nrep)
-#         endt = np.zeros(nrep)
-#         status = np.zeros(nrep)
+    # If any of supplied rates are negative.
+    print("Rates are :  ", rates)
+    if np.any(np.array(rates) < 0):
+        return 3.2e3
+    arg_list = []
 
-#         # Assemble the argument list for multiprocessing.
-#         arg_list = []
-#         for ind2 in range(nrep):
-#             init_load = np.array([H0[ind1]], dtype=np.int32)
-#             arg_list.append((init_load, rates, imax, nstep, seeds[ind2], 6.0, False))
-#         # Run parallel simulation
-#         partial_func = partial(calc_for_map, func=tau_twocomp_carrier)
-#         results = pool.map(partial_func, arg_list)
-#         for ind2, r in enumerate(results):
-#             # print("ind2 : ", ind2)
-#             extflag[ind2] = r[0]
-#             endt[ind2] = r[1]
-#             status[ind2] = r[4]
-#             final_loads[ind1, ind2] = 0
+    # Retrieve final populations
+    for ind1 in range(npts):
+        # Holders for the return values of each dose
+        extflag = np.zeros(nrep)
+        endt = np.zeros(nrep)
+        status = np.zeros(nrep)
 
-#         extflags.append(extflag)
-#         endts.append(endt)
-#         statuses.append(status)
-#         this_status = status
-#         print(
-#             f"Seed = {seed}, pinf = {p_inf[ind1]:.3f}, dev = {dev:.3f},  status histogram : ",
-#             np.histogram(
-#                 this_status, bins=np.array([-2, -1, 0, 1, 2, 3, 4, 5, 6]) - 0.1
-#             )[0],
-#         )
-#         if np.any(this_status == 0):
-#             print("Zero status detected, rates, dose =  ", rates, h0[ind1])
+        # Assemble the argument list for multiprocessing.
+        arg_list = []
+        for ind2 in range(nrep):
+            init_load = np.array([H0[ind1]], dtype=np.int32)
+            arg_list.append((init_load, rates, imax, nstep, seeds[ind2], 6.0, False))
+        # Run parallel simulation
+        partial_func = partial(calc_for_map, func=tau_twocomp_carrier)
+        results = pool.map(partial_func, arg_list)
+        for ind2, r in enumerate(results):
+            # print("ind2 : ", ind2)
+            extflag[ind2] = r[0]
+            endt[ind2] = r[1]
+            status[ind2] = r[4]
+            final_loads[ind1, ind2] = 0
 
-#         # p_inf = prob (H(t) + I(t) > thresh)
+        extflags.append(extflag)
+        endts.append(endt)
+        statuses.append(status)
+        this_status = status
+        print(
+            f"Seed = {seed}, status histogram : ",
+            np.histogram(
+                this_status, bins=np.array([-2, -1, 0, 1, 2, 3, 4, 5, 6]) - 0.1
+            )[0],
+        )
+        if np.any(this_status == 0):
+            print("Zero status detected, rates, dose =  ", rates, h0[ind1])
 
-#     best_thresh = get_best_thresh(
-#         final_loads=final_loads, low=H0[5] + 1, high=np.int(Imax * A)
-#     )
-#     print(best_thresh)
+        # p_inf = prob (H(t) + I(t) > thresh)
 
-#     if obj_flag:
-#         objval = np.sum(devs)
-#         print("Objective is : ", objval)
-#         print("------------------------------------------")
-#         return objval
-#     else:
-#         return (devs, extflags, endts, statuses)
+    best_thresh = get_best_thresh(final_loads=final_loads)
+    print(best_thresh)
+
+    if obj_flag:
+        objval = np.sum(devs)
+        print("Objective is : ", objval)
+        print("------------------------------------------")
+        return objval
+    else:
+        return (devs, extflags, endts, statuses)
 
 
-# def thresh_minimizer(
-#     filename="results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat",
-#     npts: int = 2,
-#     nrep: int = 10,
-#     seed: int = 0,
-#     desol_ind: List[float] = [0],
-#     nstep: int = 200_000,
-#     method: str = "sweep",
-#     niter: int = 4,
-#     problem_type: int = 1,
-#     n_procs: int = 2,
-# ):
-#     """Identify threshold that provides best fit.
-#     """
+def thresh_minimizer(
+    filename="results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat",
+    npts: int = 2,
+    nrep: int = 10,
+    seed: int = 0,
+    desol_ind: List[float] = [0],
+    nstep: int = 200_000,
+    n_procs: int = 2,
+    t_type: str = None,
+):
+    """Identify best fit threshold.
 
-#     print("Seed is : ", seed)
-#     print("Nstep : ", nstep)
-#     print("Number of points is : ", npts)
-#     ndesol = len(desol_ind)  # number of DE solutions to investigate
-#     data = sio.loadmat(filename)
-#     Xlist = data["solset"][0][0][2]
-#     Flist = data["solset"][0][0][3]
-#     sortF = np.sort(np.unique(Flist.flatten()))
-#     bFlist = np.zeros([ndesol])
-#     bXlist = np.zeros([ndesol, Xlist.shape[2]])
-#     for ind in range(ndesol):
-#         bFlist[ind] = sortF[desol_ind[ind]]
-#         [ind1, ind2] = np.where(Flist == bFlist[ind])
-#         Xt = Xlist[ind1, ind2, :]
-#         Xt2 = np.unique(Xt, axis=0)
-#         bXlist[ind, :] = np.power(10, Xt2.flatten())
-#     print("Best F values : ", bFlist)
-#     print("Best parameters : ", bXlist)
-#     optim_objs = []
+    Assume b2 = d1 = 0 and identify the best fit threshold.
 
-#     print("Creating pool with", n_procs, " processes\n")
-#     pool = mp.Pool(n_procs)
-#     print("pool = %s", pool)
+    Parameters
+    ----------
+    filename
+        DE solution file name
+    npts
+        Number of doses to calculate deviance at
+    nrep
+        Number of simulations per (b1,d2) pair to calculate deviance
+    seed
+        Seed of the `NumPy` random generator, different from the seed
+        of `numba`
+    desol_ind
+        Indices of the DE solutions to evaluate deviance
+    nstep
+        Maximum number of steps to run each simulation
+    n_procs
+        Number of parallel processes to evaluate the objective at.
+    t_type
+        Tranformation type to apply to b2.
+    """
 
-#     t0 = timer()
-#     for ind in range(ndesol):
-#         r1, r2, r3 = bXlist[ind, 0], bXlist[ind, 1], bXlist[ind, 2]
-#         modno = int(filename[filename.find("mod") - 1])
-#         if modno == 3:
-#             Imax = bXlist[ind, 3]
-#         elif modno == 6:
-#             Imax = bXlist[ind, 3] / r3
-#             print("bXlist, r3 and Imax are : ", bXlist[ind, 3], r3, Imax)
-#         print("r3 * Imax is : ", r3 * Imax)
-#         t1 = timer()
-#         min_obj = sweep_thresh(
-#             r1=r1, r2=r2, r3=r3, Imax=Imax, npts=npts, nrep=nstep, seed=seed, pool=pool
-#         )
-#         # min_obj = minimize(
-#         #     minimization_objective,
-#         #     initial_guess,
-#         #     args=(r1, r2, r3, Imax, npts, nrep, nstep, seed, pool, True),
-#         #     options={"maxfev": niter},
-#         #     method=method,
-#         # )
-#         optim_objs.append(min_obj)
-#         print(min_obj)
-#         t2 = timer()
-#         print("1 DE solution took : ", t2 - t1, "s")
+    print("Seed is : ", seed)
+    print("Nstep : ", nstep)
+    print("Number of points is : ", npts)
+    ndesol = len(desol_ind)  # number of DE solutions to investigate
+    bFlist, bXlist = get_bF_bX(filename=filename, desol_ind=desol_ind)
+
+    print("Best F values : ", bFlist)
+    print("Best parameters : ", bXlist)
+    optim_objs = []
+
+    print("Creating pool with", n_procs, " processes\n")
+    pool = mp.Pool(n_procs)
+    print("pool = %s", pool)
+
+    t0 = timer()
+    for ind in range(ndesol):
+        r1, r2, r3, Imax, modno = get_consts_bX(
+            bXlist=bXlist, ind=ind, filename=filename
+        )
+        min_obj = thresh_obj_wrapper(
+            x=np.array([0, 0]),
+            r1=r1,
+            r2=r2,
+            r3=r3,
+            Imax=Imax,
+            npts=npts,
+            nrep=nrep,
+            nstep=nstep,
+            seed=seed,
+            pool=pool,
+            obj_flag=True,
+        )
+        optim_objs.append(min_obj)
+        print(min_obj)
+    t1 = timer()
+    print("1 DE solution took : ", t1 - t0, "s")
+
+    ind1 = 0
+    ind2 = filename.find("_DE")
+    jname = filename[ind1:ind2]
+    solstr = "to".join([str(min(desol_ind)), str(max(desol_ind))])
+    op_filename = (
+        jname
+        + "_"
+        + str(nrep)
+        + "rep"
+        + str(seed)
+        + "se"
+        + "_"
+        + solstr
+        + "b2d1_1o5_cpu.npz"
+    )
+    print("Output filename : ", op_filename)
+
+    with open(op_filename, "wb") as f:
+        np.savez(
+            f,
+            seed=seed,
+            desol_ind=desol_ind,
+            bXlist=bXlist,
+            bFlist=bFlist,
+            nstep=nstep,
+            optim_objs=optim_objs,
+            modno=modno,
+            t_type=t_type,
+        )
