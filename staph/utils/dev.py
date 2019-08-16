@@ -42,9 +42,9 @@ def compute_deviance(p_inf: float, dose_index: int) -> float:
     -2 * (norig[dose_index] * np.log(p_inf * ntot / norig[dose_index])
     + (ntot - norig[dose_index])
     * np.log((1 - p_inf) * ntot / (ntot - norig[dose_index])))
-    
+
     For the case when all 20 people show response, second term drops off and
-    deviance is : -2 * norig[dose_index] * np.log(p_inf) = 
+    deviance is : -2 * norig[dose_index] * np.log(p_inf) =
     -2 * ntot * np.log(p_inf).
 
     When p_inf is predicted to be 1, set it to 0.99 and use the main formula.
@@ -55,12 +55,12 @@ def compute_deviance(p_inf: float, dose_index: int) -> float:
     Also add 1000 to the deviance for some forcing. This will not affect final
     results much because this condition (p_inf = 0) will not be met for good
     solutions obtained in the later stages of optimization.
-    
+
     References
     ----------
-    .. [1] Haas, C. N., Rose, J. B., & Gerba, C. P. (2014). Quantitative 
-    Microbial Risk Assessment. Quantitative Microbial Risk Assessment: 
-    Second Edition (Vol. 9781118145). Hoboken, New Jersey: John Wiley & Sons, 
+    .. [1] Haas, C. N., Rose, J. B., & Gerba, C. P. (2014). Quantitative
+    Microbial Risk Assessment. Quantitative Microbial Risk Assessment:
+    Second Edition (Vol. 9781118145). Hoboken, New Jersey: John Wiley & Sons,
     Inc. https://doi.org/10.1002/9781118910030
     """
 
@@ -121,14 +121,14 @@ def compute_deviance_hform(p_inf: float, dose_index: int) -> float:
     Notes
     -----
     The formula for deviance is from [1]_, Chapter 8 (Page 315, Figure 8.14:
-    this has the code to compute deviance). Small modification: add small 
+    this has the code to compute deviance). Small modification: add small
     positive to fpred as well.
 
     References
     ----------
-    .. [1] Haas, C. N., Rose, J. B., & Gerba, C. P. (2014). Quantitative 
-    Microbial Risk Assessment. Quantitative Microbial Risk Assessment: 
-    Second Edition (Vol. 9781118145). Hoboken, New Jersey: John Wiley & Sons, 
+    .. [1] Haas, C. N., Rose, J. B., & Gerba, C. P. (2014). Quantitative
+    Microbial Risk Assessment. Quantitative Microbial Risk Assessment:
+    Second Edition (Vol. 9781118145). Hoboken, New Jersey: John Wiley & Sons,
     Inc. https://doi.org/10.1002/9781118910030
     """
 
@@ -159,7 +159,7 @@ def carrier_obj_wrapper(
     t_type: str,
 ) -> Union[float, Tuple[List, List, List, List]]:
     """Wrapper objective function that returns total deviance.
-    
+
     Uses the `get_b1d2` function to compute b1 and d2 from r3, Imax, b2 and d1.
     Calls `calc_devlist_carrier` to compute the objective function value.
 
@@ -280,12 +280,12 @@ def status_to_pinf(status: List[int]) -> float:
     ----------
     status
         List of simulation statuses.
-    
+
     Return
     ------
     pinf
         Response probability.
-    
+
     Notes
     -----
     p_inf = prob (I(t) > Imax) + prob(H(t) > Imax)
@@ -310,7 +310,7 @@ def transform_x(x: List[float], t_type: Union[None, str]) -> Tuple[float, float]
         The vector containing values used for transformation.
     t_type
         Specify the kind of transform. Leave blank or specify as "log".
-    
+
     Returns
     -------
     b2 : float
@@ -360,7 +360,7 @@ def compute_devs_min(
     nrep
         Number of simulations per (b1,d2) pair to calculate deviance
     seed
-        Seed of the `NumPy` random generator, different from the seed 
+        Seed of the `NumPy` random generator, different from the seed
         of `numba`
     desol_ind
         Indices of the DE solutions to evaluate deviance
@@ -501,7 +501,7 @@ def get_consts_bX(
         The name of the file from which the indices were extracted.
     verbose
         Verbosity of output. 0(no output) or 1(more output).
-    
+
     Returns
     -------
     r1
@@ -513,7 +513,7 @@ def get_consts_bX(
     Imax
         Carrying capacity with units (bacteria/cm^2).
     modno
-        Model number. 3 means Imax was predicted in DEMC. 
+        Model number. 3 means Imax was predicted in DEMC.
         6 means r3Imax was predicted in DEMC.
 
     Notes
@@ -541,7 +541,7 @@ def get_bF_bX(
     desol_ind: List[int] = [0],
 ) -> Tuple[np.ndarray, np.ndarray]:
     """Get the best F and X values from DEMC solutions.
-    
+
     Read the solutions present in `filename` and extract the best objective
     values and the solutions giving best objective values to return.
 
@@ -551,7 +551,7 @@ def get_bF_bX(
         The file containing the DEMC solutions.
     desol_ind
         The indexes of the DE solutions to return objective and solutions at.
-    
+
     Returns
     -------
     bFlist
@@ -602,7 +602,7 @@ def compute_devs_brute(
     nrep
         Number of simulations per (b1,d2) pair to calculate deviance.
     seed
-        Seed of the `NumPy` random generator, different from the seed 
+        Seed of the `NumPy` random generator, different from the seed
         of `numba`.
     desol_ind
         Indices of the DE solutions to evaluate deviance.
