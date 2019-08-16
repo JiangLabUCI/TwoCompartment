@@ -1,6 +1,6 @@
 import numpy as np
-from numba import njit, jit
-from typing import List, Tuple
+from numba import njit
+from typing import Tuple
 from .roulette import roulette
 
 
@@ -11,7 +11,7 @@ def get_propensity(rates: np.ndarray, curH: int, curI: int) -> np.ndarray:
     Parameters
     ----------
     rates
-        The stochastic rate parameters in the following order: 
+        The stochastic rate parameters in the following order:
     r1, r2, b1, b2, d1, d2.
     curH
         The number of bacteria in the pre-infection compartment.
@@ -34,8 +34,8 @@ def get_propensity(rates: np.ndarray, curH: int, curI: int) -> np.ndarray:
     4 : I -d1-> \\phi
     5 : I + I -d2-> I
 
-    All rate constants are stochastic rate constants ($c_{\\mu}$ in Gillespie 
-    1976) unless specified otherwise. Units of $b_2$ and $d_2$ are 
+    All rate constants are stochastic rate constants ($c_{\\mu}$ in Gillespie
+    1976) unless specified otherwise. Units of $b_2$ and $d_2$ are
     1 / (bacteria * day))
     """
 
@@ -88,7 +88,7 @@ def tau_twocomp_carrier(
         Set to 1 if the bacteria go extinct.
     t
         The final time of the simulation.
-    pop_array : (4, iter,)
+    pop_array : (2, iter,)
         The population states over the course of the simulation.
     t_array : (iter,)
         The sampling times over the course of the simulation.

@@ -1,6 +1,6 @@
 import numpy as np
-from numba import njit, jit
-from typing import List, Tuple
+from numba import njit
+from typing import Tuple
 from .roulette import roulette
 
 
@@ -12,7 +12,7 @@ def get_propensity(rates: np.ndarray, curH: int, curI: int) -> np.ndarray:
     Parameters
     ----------
     rates
-        The stochastic rate parameters in the following order: 
+        The stochastic rate parameters in the following order:
         r1, r2, b1, b2, d1, d2, rmf.
     curH
         The number of bacteria in the pre-infection compartment.
@@ -37,8 +37,8 @@ def get_propensity(rates: np.ndarray, curH: int, curI: int) -> np.ndarray:
     6 : H -rmf-> \\phi
     7 : I -rmf-> \\phi
 
-    All rate constants are stochastic rate constants ($c_{\\mu}$ in Gillespie 
-    1976) unless specified otherwise. Units of $b_2$ and $d_2$ are 
+    All rate constants are stochastic rate constants ($c_{\\mu}$ in Gillespie
+    1976) unless specified otherwise. Units of $b_2$ and $d_2$ are
     1 / (bacteria * day))
     """
 
@@ -76,7 +76,7 @@ def tau_twocomp_carrier_rmf(
         The initial number of bacteria in the pre-infection compartment or
         both compartments.
     rates
-        The stochastic rate parameters in the following order: 
+        The stochastic rate parameters in the following order:
         r1, r2, b1, b2, d1, d2, rmf.
     imax
         The maximum population size (units of CFU).
