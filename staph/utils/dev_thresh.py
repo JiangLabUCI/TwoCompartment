@@ -115,8 +115,6 @@ def thresh_obj_wrapper(
 
     # Compute b1 and d2 for simulation.
     b2, d1 = transform_x(x, t_type=t_type)
-    b2 = 0
-    d1 = 0
     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
     rates = np.array([r1, r2, b1, b2, d1, d2])
     imax = Imax * A
@@ -171,8 +169,8 @@ def thresh_obj_wrapper(
     p_res = np.zeros((npts))
     for ind1 in range(npts):
         p_res[ind1] = np.mean(final_loads[ind1, :] >= best_thresh)
-    print(f"Unique final loads : {np.unique(final_loads)}")
     print(f"Best thresh is : {best_thresh:.8e}")
+    print(f"Which gives best dev of : {best_dev:.4f}")
     print(f"Which is sum of :  {all_devs[best_dev_index, :]}")
     print(f"p_res is : {p_res}")
 
@@ -182,7 +180,14 @@ def thresh_obj_wrapper(
         print("------------------------------------------")
         return objval
     else:
-        return (devs, extflags, endts, statuses)
+        return (
+            extflags,
+            endts,
+            statuses,
+            best_thresh,
+            best_dev,
+            all_devs[best_dev_index, :].flatten(),
+        )
 
 
 def thresh_minimizer(
@@ -193,11 +198,14 @@ def thresh_minimizer(
     desol_ind: List[float] = [0],
     nstep: int = 200_000,
     n_procs: int = 2,
+    lims: dict = {"d1l": 0, "d1u": 5, "b2l": 0, "b2u": 5},
+    nb2: int = 2,
+    nd1: int = 2,
     t_type: str = None,
 ):
     """Identify best fit threshold.
 
-    Assume b2 = d1 = 0 and identify the best fit threshold.
+    Brute search for b2 and d1 and identify the best fit threshold.
 
     Parameters
     ----------
@@ -216,6 +224,12 @@ def thresh_minimizer(
         Maximum number of steps to run each simulation
     n_procs
         Number of parallel processes to evaluate the objective at.
+    lims
+        Dictionary of upper and lower limits of b2 and d1.
+    nb2
+        Number of b2 solutions to go over.
+    nd1
+        Number of d1 solutions to go over.
     t_type
         Tranformation type to apply to b2.
     """
@@ -228,7 +242,13 @@ def thresh_minimizer(
 
     print("Best F values : ", bFlist)
     print("Best parameters : ", bXlist)
-    optim_objs = []
+    # The suffix u denotes untransformed variables.
+    b2listu = np.linspace(lims["b2l"], lims["b2u"], nb2)
+    d1listu = np.linspace(lims["d1l"], lims["d1u"], nd1)
+    all_statuses = []
+    optim_objs = np.zeros(nb2 * nd1)
+    optim_thresh = np.zeros(nb2 * nd1)
+    all_devs = np.zeros((nb2 * nd1, npts))
 
     print("Creating pool with", n_procs, " processes\n")
     pool = mp.Pool(n_procs)
@@ -239,21 +259,29 @@ def thresh_minimizer(
         r1, r2, r3, Imax, modno = get_consts_bX(
             bXlist=bXlist, ind=ind, filename=filename
         )
-        min_obj = thresh_obj_wrapper(
-            x=np.array([0, 0]),
-            r1=r1,
-            r2=r2,
-            r3=r3,
-            Imax=Imax,
-            npts=npts,
-            nrep=nrep,
-            nstep=nstep,
-            seed=seed,
-            pool=pool,
-            obj_flag=True,
-        )
-        optim_objs.append(min_obj)
-        print(min_obj)
+        for ind1, b2u in enumerate(b2listu):
+            for ind2, d1u in enumerate(d1listu):
+                print(f"Starting loop for b2u={b2u:.2e}, d1u={d1u:.2f}")
+                linear_ind = ind1 * nd1 + ind2
+                retval = thresh_obj_wrapper(
+                    x=[b2u, d1u],
+                    r1=r1,
+                    r2=r2,
+                    r3=r3,
+                    Imax=Imax,
+                    npts=npts,
+                    nrep=nrep,
+                    nstep=nstep,
+                    seed=seed,
+                    pool=pool,
+                    obj_flag=False,
+                )
+                all_statuses.append(retval[2])
+                optim_thresh[linear_ind] = retval[3]
+                optim_objs[linear_ind] = retval[4]
+                all_devs[linear_ind, :] = retval[5]
+    print("optim objs is : ", optim_objs)
+    print(f"Best fit is : {np.min(optim_objs)}")
     t1 = timer()
     print("1 DE solution took : ", t1 - t0, "s")
 
@@ -285,4 +313,11 @@ def thresh_minimizer(
             optim_objs=optim_objs,
             modno=modno,
             t_type=t_type,
+            lims=lims,
+            b2listu=b2listu,
+            d1listu=d1listu,
+            all_statuses=all_statuses,
+            all_devs=all_devs,
+            nb2=nb2,
+            nd1=nd1,
         )
