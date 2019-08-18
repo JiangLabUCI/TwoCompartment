@@ -190,7 +190,7 @@ def thresh_obj_wrapper(
         )
 
 
-def thresh_minimizer(
+def thresh_brute_min(
     filename="results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat",
     npts: int = 2,
     nrep: int = 10,

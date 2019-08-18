@@ -4,6 +4,7 @@ import time
 from staph.utils.dev import compute_devs_min as cdmin
 from staph.utils.dev import compute_devs_brute as cdbrute
 from staph.utils.predict import predict_fit, predict_bedrail
+from staph.utils.dev_thresh import thresh_brute_min as tmin
 
 if __name__ == "__main__":
     choice = np.int32(sys.argv[1])
