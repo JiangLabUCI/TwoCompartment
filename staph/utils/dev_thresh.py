@@ -2,7 +2,7 @@ import numpy as np
 import multiprocessing as mp
 from timeit import default_timer as timer
 from functools import partial
-from numba import njit
+from numba import njit, prange
 from typing import List, Tuple, Any, Union
 from .data import get_singh_data, get_b1d2, calc_for_map
 from .tau_twocomp import tau_twocomp_carrier
@@ -10,7 +10,7 @@ from .dev import compute_deviance, get_bF_bX, get_consts_bX, transform_x
 from collections import Counter
 
 
-@njit(cache=False)
+@njit(cache=False, parallel=True)
 def get_best_thresh(
     final_loads: np.ndarray,
 ) -> Tuple[int, float, np.ndarray, np.ndarray]:
@@ -42,7 +42,7 @@ def get_best_thresh(
     devs = np.zeros(thresh_array.shape[0])
     all_devs = np.zeros((thresh_array.shape[0], npts))
     for ind1 in range(npts):
-        for ind2 in range(nthresh):
+        for ind2 in prange(nthresh):
             this_thresh = thresh_array[ind2]
             p_inf[ind1] = np.mean(final_loads[ind1, :] >= this_thresh)
             all_devs[ind2, ind1] = compute_deviance(p_inf=p_inf[ind1], dose_index=ind1)
