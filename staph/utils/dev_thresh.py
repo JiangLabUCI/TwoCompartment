@@ -119,6 +119,7 @@ def thresh_obj_wrapper(
     rates = np.array([r1, r2, b1, b2, d1, d2])
     imax = Imax * A
 
+    np.random.seed(seed)
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
     devs = []
     extflags = []
