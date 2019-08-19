@@ -173,6 +173,7 @@ def thresh_obj_wrapper(
 
         # p_inf = prob (H(t) + I(t) > thresh)
 
+    max_load = np.max(final_loads)
     best_thresh, best_dev, devs, all_devs = get_best_thresh(final_loads=final_loads)
     best_dev_index = np.argmin(devs)
     p_res = np.zeros((npts))
@@ -196,6 +197,7 @@ def thresh_obj_wrapper(
             best_thresh,
             best_dev,
             all_devs[best_dev_index, :].flatten(),
+            max_load,
         )
 
 
@@ -260,6 +262,7 @@ def thresh_brute_min(
     all_statuses = []
     optim_objs = np.zeros(nb2 * nd1)
     optim_thresh = np.zeros(nb2 * nd1)
+    max_loads = np.zeros(nb2 * nd1)
     all_devs = np.zeros((nb2 * nd1, npts))
 
     print("Creating pool with", n_procs, " processes\n")
@@ -293,6 +296,7 @@ def thresh_brute_min(
                 optim_thresh[linear_ind] = retval[3]
                 optim_objs[linear_ind] = retval[4]
                 all_devs[linear_ind, :] = retval[5]
+                max_loads[linear_ind] = retval[6]
     print("optim objs is : ", optim_objs)
     print(f"Best fit is : {np.min(optim_objs)}")
     t1 = timer()
@@ -324,6 +328,8 @@ def thresh_brute_min(
             bFlist=bFlist,
             nstep=nstep,
             optim_objs=optim_objs,
+            optim_thresh=optim_thresh,
+            max_loads=max_loads,
             modno=modno,
             t_type=t_type,
             lims=lims,
