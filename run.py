@@ -1,6 +1,5 @@
 import numpy as np
 import sys
-import time
 from staph.utils.dev import compute_devs_min as cdmin
 from staph.utils.dev import compute_devs_brute as cdbrute
 from staph.utils.predict import predict_fit, predict_bedrail
@@ -98,3 +97,19 @@ if __name__ == "__main__":
     elif choice == 5:
         ncores = np.int32(sys.argv[2])
         predict_bedrail(n_cores=ncores, nstep=200000, nrep=1000, hyp="r1*")
+    elif choice == 6:
+        ncores = np.int32(sys.argv[2])
+        ind = np.int32(sys.argv[3])
+        assert ind >= 1
+        desol_ind = np.arange(ind - 1, ind)
+        tmin(
+            npts=6,
+            nrep=1000,
+            seed=0,
+            desol_ind=desol_ind,
+            nstep=200_000,
+            n_procs=ncores,
+            nb2=10,
+            nd1=10,
+            lims={"d1l": 0, "d1u": 9, "b2l": 0, "b2u": 9},
+        )
