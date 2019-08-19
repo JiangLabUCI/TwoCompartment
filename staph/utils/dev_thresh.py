@@ -67,6 +67,7 @@ def thresh_obj_wrapper(
     pool: Any,
     obj_flag: bool,
     t_type: str = None,
+    sim_stop_thresh: float = None,
 ) -> Union[float, Tuple[List, List, List, List]]:
     """Threshold wrapper objective function that returns total deviance.
 
@@ -99,6 +100,9 @@ def thresh_obj_wrapper(
         devs, extflags, endts and statuses.
     t_type
         Tranformation type to apply to b2.
+    sim_stop_thresh
+        Population threshold to stop the simulation at. If `None`, use imax =
+        Imax * A.
 
     Returns
     -------
@@ -117,7 +121,9 @@ def thresh_obj_wrapper(
     b2, d1 = transform_x(x, t_type=t_type)
     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
     rates = np.array([r1, r2, b1, b2, d1, d2])
-    imax = Imax * A
+    if sim_stop_thresh is None:
+        sim_stop_thresh = Imax * A
+    print(f"Using a sim stop threshold of {sim_stop_thresh:.8e}")
 
     np.random.seed(seed)
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
@@ -144,7 +150,9 @@ def thresh_obj_wrapper(
         arg_list = []
         for ind2 in range(nrep):
             init_load = np.array([H0[ind1]], dtype=np.int32)
-            arg_list.append((init_load, rates, imax, nstep, seeds[ind2], 6.0, True))
+            arg_list.append(
+                (init_load, rates, sim_stop_thresh, nstep, seeds[ind2], 6.0, True)
+            )
         # Run parallel simulation
         partial_func = partial(calc_for_map, func=tau_twocomp_carrier)
         results = pool.map(partial_func, arg_list)
@@ -203,6 +211,7 @@ def thresh_brute_min(
     nb2: int = 2,
     nd1: int = 2,
     t_type: str = None,
+    sim_stop_thresh: float = None,
 ):
     """Identify best fit threshold.
 
@@ -233,6 +242,8 @@ def thresh_brute_min(
         Number of d1 solutions to go over.
     t_type
         Tranformation type to apply to b2.
+    sim_stop_thresh
+        Population threshold to stop the simulation at.
     """
 
     print("Seed is : ", seed)
@@ -276,6 +287,7 @@ def thresh_brute_min(
                     seed=seed,
                     pool=pool,
                     obj_flag=False,
+                    sim_stop_thresh=sim_stop_thresh,
                 )
                 all_statuses.append(retval[2])
                 optim_thresh[linear_ind] = retval[3]
@@ -321,4 +333,5 @@ def thresh_brute_min(
             all_devs=all_devs,
             nb2=nb2,
             nd1=nd1,
+            sim_stop_thresh=sim_stop_thresh,
         )
