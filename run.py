@@ -107,7 +107,7 @@ if __name__ == "__main__":
             nrep=1000,
             seed=0,
             desol_ind=desol_ind,
-            nstep=200_000,
+            nstep=400_000,
             n_procs=ncores,
             nb2=10,
             nd1=10,
