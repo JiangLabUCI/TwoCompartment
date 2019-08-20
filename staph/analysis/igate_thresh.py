@@ -24,6 +24,10 @@ def igate(filename: str, option1: int = 1):
         nb2 = data["nb2"]
         nd1 = data["nd1"]
         t_type = data["t_type"]
+        optim_objs = data["optim_objs"]
+        optim_thresh = data["optim_thresh"]
+        max_loads = data["max_loads"]
+        sim_stop_thresh = data["sim_stop_thresh"]
         print("ttype is : ", t_type)
         if t_type is None:
             print("ttype is none")
@@ -59,6 +63,10 @@ def igate(filename: str, option1: int = 1):
     b_dev = z[b_index]
     title_str = f"Bdev = {b_dev:.3f} @ b2 = {b_b2:.3f}, d1 = {b_d1:.3f}"
     print(title_str)
+    b_index_linear = np.argmin(optim_objs)
+    print(f"Best threshold = {optim_thresh[b_index_linear]:.8e}")
+    print(f"Max pop for that threshold = {max_loads[b_index_linear]:.8e}")
+    print(f"Simulation stop threshold = {sim_stop_thresh:.8e}")
 
     if option1 == 1:
         fig = plt.figure()
