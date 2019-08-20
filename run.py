@@ -112,4 +112,5 @@ if __name__ == "__main__":
             nb2=10,
             nd1=10,
             lims={"d1l": 0, "d1u": 9, "b2l": 0, "b2u": 9},
+            sim_stop_thresh=1e10,
         )
