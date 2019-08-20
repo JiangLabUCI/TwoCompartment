@@ -16,7 +16,7 @@ if __name__ == "__main__":
         ind = np.int32(sys.argv[3])
         assert ind >= 1
         desol_ind = np.arange(ind - 1, ind)
-        nstep = 200000
+        nstep = 200_000
         npts = 2
         niter = 5
         cdmin(
@@ -40,7 +40,7 @@ if __name__ == "__main__":
         ind = np.int32(sys.argv[3])
         assert ind >= 1
         desol_ind = np.arange(ind - 1, ind)
-        nstep = 200000
+        nstep = 200_000
         npts = 6
         cdbrute(
             filename=fname,
@@ -64,7 +64,7 @@ if __name__ == "__main__":
         ind = np.int32(sys.argv[3])
         assert ind >= 1
         desol_ind = np.arange(ind - 1, ind)
-        nstep = 200000
+        nstep = 200_000
         npts = 1
         niter = 2
         cdmin(
@@ -87,7 +87,7 @@ if __name__ == "__main__":
         ncores = np.int32(sys.argv[2])
         predict_fit(
             nrep=1000,
-            nstep=200000,
+            nstep=200_000,
             hyp="base",
             inoc_time="base",
             rank_1_sol_inds=[0],
@@ -96,7 +96,7 @@ if __name__ == "__main__":
         )
     elif choice == 5:
         ncores = np.int32(sys.argv[2])
-        predict_bedrail(n_cores=ncores, nstep=200000, nrep=1000, hyp="r1*")
+        predict_bedrail(n_cores=ncores, nstep=200_000, nrep=1000, hyp="r1*")
     elif choice == 6:
         ncores = np.int32(sys.argv[2])
         ind = np.int32(sys.argv[3])
