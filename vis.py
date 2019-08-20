@@ -2,6 +2,8 @@ import sys
 from staph.analysis.landscape import igate as b2d1_igate
 from staph.analysis.igate_brute import igate as bru_igate
 from staph.analysis.igate_ntest import igate as igate_ntest
+from staph.analysis.igate_thresh import igate as igate_thresh
+
 
 option1 = int(sys.argv[1])
 
@@ -34,3 +36,14 @@ elif option1 == 3:
     for ind in flist:
         fnames.append("results/ntest.o7721941." + str(ind))
     igate_ntest(filenames=fnames)
+elif option1 == 4:
+    fnames = []
+    for ind1 in range(9):
+        fnames.append(
+            "results/opt/6021324_1000rep0se_"
+            + str(ind1)
+            + "to"
+            + str(ind1)
+            + "b2d1_1o5_cpu.npz"
+        )
+    igate_thresh(filenames=fnames)
