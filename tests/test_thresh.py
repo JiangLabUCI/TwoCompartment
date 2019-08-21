@@ -1,5 +1,5 @@
 import numpy as np
-from ..staph.utils.dev_thresh import get_best_thresh, thresh_minimizer
+from ..staph.utils.dev_thresh import get_best_thresh, thresh_brute_min
 from ..staph.utils.data import get_singh_data
 
 
@@ -39,4 +39,4 @@ def test_gb_thresh():
 
 
 def test_thresh_minimizer():
-    thresh_minimizer(nstep=100)
+    thresh_brute_min(nstep=100)
