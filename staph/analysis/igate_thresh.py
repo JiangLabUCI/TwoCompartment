@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from ..utils.dev import transform_x
 import pandas as pd
+from ..utils.dev import transform_x
+from ..utils.pareto_rank import get_pareto_ranks
 
 
 def igate(filenames: str, option1: int = 1):

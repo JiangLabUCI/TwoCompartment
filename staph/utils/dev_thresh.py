@@ -10,7 +10,7 @@ from .dev import compute_deviance, get_bF_bX, get_consts_bX, transform_x
 from collections import Counter
 
 
-@njit(cache=False, parallel=True)
+@njit(cache=False, parallel=False)
 def get_best_thresh(
     final_loads: np.ndarray,
 ) -> Tuple[int, float, np.ndarray, np.ndarray]:
