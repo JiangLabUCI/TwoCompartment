@@ -279,3 +279,28 @@ def pareto_plot(col, solinds=[0]):
     plt.legend()
     plt.xlabel("Growth objective")
     plt.ylabel("Dose-response objective")
+
+
+def get_filename(task_no: int = 0) -> Union[str, None]:
+    """Get output filename.
+
+    For a given task number, get the file name of where the output is saved.
+    Task number = DE solution number + 1.
+
+    Parameters
+    ----------
+    task_no
+        Task number.
+    
+    Returns
+    -------
+    filename
+        Output file name.
+    """
+    filenames = listdir("results/ops/")
+    filename = None
+    for a_file in filenames:
+        if a_file.endswith("." + str(task_no)):
+            filename = a_file
+            break
+    return filename
