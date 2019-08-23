@@ -259,7 +259,6 @@ def thresh_brute_min(
     # The suffix u denotes untransformed variables.
     b2listu = np.linspace(lims["b2l"], lims["b2u"], nb2)
     d1listu = np.linspace(lims["d1l"], lims["d1u"], nd1)
-    all_statuses = []
     optim_objs = np.zeros(nb2 * nd1)
     optim_thresh = np.zeros(nb2 * nd1)
     max_loads = np.zeros(nb2 * nd1)
@@ -292,7 +291,6 @@ def thresh_brute_min(
                     obj_flag=False,
                     sim_stop_thresh=sim_stop_thresh,
                 )
-                all_statuses.append(retval[2])
                 optim_thresh[linear_ind] = retval[3]
                 optim_objs[linear_ind] = retval[4]
                 all_devs[linear_ind, :] = retval[5]
@@ -335,7 +333,6 @@ def thresh_brute_min(
             lims=lims,
             b2listu=b2listu,
             d1listu=d1listu,
-            all_statuses=all_statuses,
             all_devs=all_devs,
             nb2=nb2,
             nd1=nd1,
