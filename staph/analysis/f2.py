@@ -3,7 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 from matplotlib.patches import Polygon
-from typing import List, Dict
+from typing import List, Dict, Union
+from os import listdir
 from ..utils.data import get_kinetic_data_params, get_singh_data
 from ..utils.rh_data import get_rh_fit_data
 from ..utils.det_models import rh_growth_model, twocomp_model
@@ -22,7 +23,7 @@ def f2(display: bool = False):
     # part_cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
     part_cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
     col_mo = ["#984ea3", "#ff7f00"]
-    sol_inds = [0, 5]
+    sol_inds = [0, 8]
     annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
 
     plt.figure(figsize=(9, 8))
@@ -86,19 +87,22 @@ def dr_obj(col, solinds=[0]):
 
     # Get infection probabilities from output files
     for ind1, this_sol_ind in enumerate(solinds):
-        fname = "results/ops/ntest.o7721941." + str(df["desol_inds"][this_sol_ind] + 1)
+        fname = "results/ops/" + get_filename(df["desol_inds"][this_sol_ind] + 1)
+        print(f"Fname is : {fname}")
         with open(fname) as f:
             d = f.read()
         d = d.split("\n")
-        qstr = "Objective is :  " + str(df.Fst[this_sol_ind])[:-4]
+        qstr = f"Which gives best dev of : {df.Fst[this_sol_ind]:.4f}"
         for ind2, line in enumerate(d):
             if line.startswith(qstr):
-                roi = d[ind2 - 6 : ind2]
+                roi = d[ind2 + 2]
                 break
-        pinf = []
-        for ind2, this_roi in enumerate(roi):
-            temp = this_roi.replace(",", "").split()
-            pinf.append(float(temp[5]))
+        print(ind1, qstr)
+        assert roi.startswith("p_res is : ")
+        roi = roi[12:]
+        roi = roi.replace("]", "").split()
+        print(roi)
+        pinf = [float(this_roi) for this_roi in roi]
         pinfs[ind1] = pinf
 
     plt.plot(np.log10(H0), np.array(norig) / 20, "ko", label="Data")
