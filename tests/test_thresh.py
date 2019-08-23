@@ -1,6 +1,7 @@
 import numpy as np
 from ..staph.utils.dev_thresh import get_best_thresh, thresh_brute_min
 from ..staph.utils.data import get_singh_data
+from ..staph.analysis.f2 import get_filename
 
 
 def test_gb_thresh():
@@ -40,3 +41,9 @@ def test_gb_thresh():
 
 def test_thresh_minimizer():
     thresh_brute_min(nstep=100)
+
+
+def test_get_filenames():
+    assert get_filename(1) == "ntest.o8381995.1"
+    assert get_filename(60) == "ntest.o8376290.60"
+    assert get_filename(160) is None
