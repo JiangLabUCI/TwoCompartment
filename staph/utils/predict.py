@@ -141,10 +141,10 @@ def predict_fit(
                 if pop_array_flag:
                     pop_array.append(r[2])
                     t_array.append(r[3])
-            pinf[ind1, ind2] = np.mean(final_loads[ind2, :] >= thresh)
+            pinf[ind1, ind2], pcar[ind1, ind2], ps[ind1, ind2] = get_ocprobs(
+                final_loads[ind2, :], thresh
+            )
             assert np.mean(final_loads[ind2, :] == 0) == np.mean(extflag)
-            ps[ind1, ind2] = np.mean(extflag)
-    pcar = 1 - (pinf + ps)
 
     de_str = ""
     for r1sind in rank_1_sol_inds:
@@ -173,6 +173,33 @@ def predict_fit(
         )
     if pop_array_flag:
         return pop_array, t_array
+
+
+def get_ocprobs(final_loads: np.ndarray, thresh: float) -> Tuple[float, float, float]:
+    """Compute outcome probabilities.
+
+    From the final loads and threshold, compute the outcome probability.
+
+    Parameters
+    ----------
+    final_loads
+        SA load at the end of the simulation (H+I).
+    thresh
+        Threshold to use for computation.
+    
+    Returns
+    -------
+    pres
+        Response probability.
+    pcar
+        Carrier probability.
+    ps
+        Unaffected probability.
+    """
+    pres = np.mean(final_loads >= thresh)
+    ps = np.mean(final_loads == 0)
+    pcar = 1 - (pres + ps)
+    return pres, pcar, ps
 
 
 def get_rates_simfunc(
