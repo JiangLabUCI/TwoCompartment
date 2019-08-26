@@ -263,7 +263,7 @@ def tau_twocomp_carrier(
                     extflag = 1
                     bflag = 1
                     break
-                if t > 6:
+                if t > t_max:
                     status = 2
                     bflag = 1
                     break
