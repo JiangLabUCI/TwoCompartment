@@ -55,9 +55,9 @@ def test_r_to_load():
     init_load = np.array([100], dtype=np.int32)
     rates = np.array([1.0, 0, 0, 0, 0, 0])  # r1, r2, b1, b2, d1, d2
     imax = 2000
-    nstep = 200
+    nstep = 250
     seed = 0
-    t_max = 10
+    t_max = 20
     store_flag = True
     r = tau_twocomp_carrier(
         init_load=init_load,
@@ -68,6 +68,22 @@ def test_r_to_load():
         t_max=t_max,
         store_flag=store_flag,
     )
-    assert r[2][-1, 0] == 0
-    assert r[2][-1, 1] == 0
+    print(r[2])
+    assert r[2][0, -1] == 0
+    assert r[2][0, -1] == 0
+    assert r_to_load(r) == 0
+
+    rates = np.array([0, 1.0, 0, 0, 1.0, 0])  # r1, r2, b1, b2, d1, d2
+    r = tau_twocomp_carrier(
+        init_load=init_load,
+        rates=rates,
+        imax=imax,
+        nstep=nstep,
+        seed=seed,
+        t_max=t_max,
+        store_flag=store_flag,
+    )
+    print(r[2], f"status = {r[4]}, end time = {r[1]}")
+    assert r[2][0, -1] == 0
+    assert r[2][0, -1] == 0
     assert r_to_load(r) == 0
