@@ -220,7 +220,7 @@ def r_to_load(r: Tuple[int, float, np.ndarray, np.ndarray, int]):
         The final load to be used for deviance computation.
 
     """
-    load = np.sum(r[2][-1, :])
+    load = np.sum(r[2][:, -1])
     return load
 
 
