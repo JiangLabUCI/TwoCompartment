@@ -161,7 +161,7 @@ def thresh_obj_wrapper(
             extflag[ind2] = r[0]
             endt[ind2] = r[1]
             status[ind2] = r[4]
-            final_loads[ind1, ind2] = np.sum(r[2][-1, :])
+            final_loads[ind1, ind2] = r_to_load(r)
 
         extflags.append(extflag)
         endts.append(endt)
@@ -199,6 +199,29 @@ def thresh_obj_wrapper(
             all_devs[best_dev_index, :].flatten(),
             max_load,
         )
+
+
+def r_to_load(r: Tuple[int, float, np.ndarray, np.ndarray, int]):
+    """Return load from `r`.
+
+    Using the output of the simulation `r`, return the final load used for 
+    deviance computation.
+
+    Parameters
+    ----------
+    r
+        The results of the simulation. Includes extinction flag, final time,
+        population from the simulation, time points from the simulation and
+        the status.
+
+    Returns
+    -------
+    load
+        The final load to be used for deviance computation.
+
+    """
+    load = np.sum(r[2][-1, :])
+    return load
 
 
 def thresh_brute_min(
