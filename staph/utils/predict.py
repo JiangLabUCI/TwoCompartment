@@ -8,6 +8,7 @@ from .dev import carrier_obj_wrapper, status_to_pinf
 from .data import calc_for_map, get_b1d2, get_singh_data, get_bedrail_data
 from .tau_twocomp import tau_twocomp_carrier
 from .tau_twocomp_rmf import tau_twocomp_carrier_rmf
+from .dev_thresh import r_to_load
 
 
 def predict_fit(
@@ -15,7 +16,7 @@ def predict_fit(
     n_cores: int = 2,
     nrep: int = 10,
     nstep: int = 200,
-    rank_1_sol_inds: List[int] = [0, 5],
+    rank_1_sol_inds: List[int] = [0, 8],
     seed: int = 0,
     doselist: np.ndarray = np.arange(0, 1),
     hyp: str = "base",
@@ -107,6 +108,7 @@ def predict_fit(
 
     nrank1sols = len(rank_1_sol_inds)
     ndose = len(doselist)
+    final_loads = np.zeros([ndose, nrep])
     pinf = np.zeros([nrank1sols, ndose])
     pcar = np.zeros([nrank1sols, ndose])
     ps = np.zeros([nrank1sols, ndose])
@@ -119,6 +121,7 @@ def predict_fit(
         rates, simfunc, Imax, = get_rates_simfunc(
             df=df, pdf=pdf, r1sind=r1sind, hyp=hyp
         )
+        thresh = df["thresh"][r1sind]
         imax = Imax * A
 
         for ind2 in range(ndose):
@@ -134,13 +137,14 @@ def predict_fit(
             for ind3, r in enumerate(results):
                 extflag[ind3] = r[0]
                 status[ind3] = r[4]
+                final_loads[ind2, ind3] = r_to_load(r)
                 if pop_array_flag:
                     pop_array.append(r[2])
                     t_array.append(r[3])
-
-            pinf[ind1, ind2] = status_to_pinf(status)
+            pinf[ind1, ind2] = np.mean(final_loads[ind2, :] >= thresh)
+            assert np.mean(final_loads[ind2, :] == 0) == np.mean(extflag)
             ps[ind1, ind2] = np.mean(extflag)
-            pcar[ind1, ind2] = 1 - (pinf[ind1, ind2] + ps[ind1, ind2])
+    pcar = 1 - (pinf + ps)
 
     de_str = ""
     for r1sind in rank_1_sol_inds:
