@@ -221,6 +221,8 @@ def r_to_load(r: Tuple[int, float, np.ndarray, np.ndarray, int]):
 
     """
     load = np.sum(r[2][:, -1])
+    if load < 0:
+        load = 1e10
     return load
 
 
