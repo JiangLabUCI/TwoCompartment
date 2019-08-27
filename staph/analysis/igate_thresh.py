@@ -17,7 +17,13 @@ def igate(filenames: str, option1: int = 1):
     filenames
         List of file names created by the output of optimization.
     option1
-        1 plots landscape.
+        One of 1, 2 or 3.
+    
+    Notes
+    -----
+    If option1 = 1, solution landscape is plotted.
+    If option1 = 2, create `rank_1_solutions.npz` and `all_solutions.csv`.
+    If option1 = 3, plot the final loads for each dose with threshold.
     """
     min_devs = []
     d1s = np.empty([0, 1])
@@ -63,8 +69,8 @@ def igate(filenames: str, option1: int = 1):
             x = np.zeros(len(all_devs))
             y = np.zeros(len(all_devs))
             z = np.zeros(len(all_devs))
-            for ind in range(len(all_devs)):
-                tot_devs[ind] = np.sum(all_devs[ind])
+            for ind1 in range(len(all_devs)):
+                tot_devs[ind1] = np.sum(all_devs[ind1])
             for ind1 in range(nb2):
                 for ind2 in range(nd1):
                     linear_ind = ind1 * nd1 + ind2
@@ -87,6 +93,32 @@ def igate(filenames: str, option1: int = 1):
             d1s = np.vstack([d1s, b_d1])
             min_devs = np.vstack([min_devs, b_dev])
             threshs = np.vstack([threshs, b_thresh])
+            if option1 == 3:
+                with np.load(filename, allow_pickle=True) as data:
+                    final_loads = data["final_loads"]
+                try:
+                    assert final_loads.shape != ()
+                except AssertionError:
+                    print("Final loads was not saved, returning!")
+                    return
+                this_loads = np.log10(final_loads[b_index, :, :].transpose() + 1)
+                x = np.ones(this_loads.shape[0])
+                for ind1 in range(6):
+                    g = this_loads[:, ind1] < np.log10(b_thresh)
+                    r = this_loads[:, ind1] >= np.log10(b_thresh)
+                    plt.plot(
+                        x[r] * ind1 + np.random.random(x[r].shape) * 0.5,
+                        this_loads[r, ind1],
+                        "r.",
+                    )
+                    plt.plot(
+                        x[g] * ind1 + np.random.random(x[g].shape) * 0.5,
+                        this_loads[g, ind1],
+                        "g.",
+                    )
+                plt.plot([0, 6], np.log10([b_thresh, b_thresh]))
+                plt.xlabel("Dose number")
+                plt.ylabel("$\log_{10}$(final load)")
 
     df = np.hstack([bXs, bFs, min_devs, d1s, b2s, threshs])
     colnames = ["r1", "r2", "r3", "r3*Imax", "Fde", "Fst", "d1", "b2", "thresh"]
