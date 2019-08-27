@@ -198,6 +198,7 @@ def thresh_obj_wrapper(
             best_dev,
             all_devs[best_dev_index, :].flatten(),
             max_load,
+            final_loads,
         )
 
 
@@ -239,6 +240,7 @@ def thresh_brute_min(
     nd1: int = 2,
     t_type: str = None,
     sim_stop_thresh: float = None,
+    save_final_loads: bool = False,
 ):
     """Identify best fit threshold.
 
@@ -271,6 +273,8 @@ def thresh_brute_min(
         Tranformation type to apply to b2.
     sim_stop_thresh
         Population threshold to stop the simulation at.
+    save_final_loads
+        Whether or not to save final loads.
     """
 
     print("Seed is : ", seed)
@@ -288,6 +292,7 @@ def thresh_brute_min(
     optim_thresh = np.zeros(nb2 * nd1)
     max_loads = np.zeros(nb2 * nd1)
     all_devs = np.zeros((nb2 * nd1, npts))
+    final_loads = np.zeros((nb2 * nd1, npts, nrep))
 
     print("Creating pool with", n_procs, " processes\n")
     pool = mp.Pool(n_procs)
@@ -320,6 +325,7 @@ def thresh_brute_min(
                 optim_objs[linear_ind] = retval[4]
                 all_devs[linear_ind, :] = retval[5]
                 max_loads[linear_ind] = retval[6]
+                final_loads[linear_ind, :, :] = retval[7]
     print("optim objs is : ", optim_objs)
     print(f"Best fit is : {np.min(optim_objs)}")
     t1 = timer()
@@ -342,6 +348,9 @@ def thresh_brute_min(
     )
     print("Output filename : ", op_filename)
 
+    if not save_final_loads:
+        final_loads = 0
+
     with open(op_filename, "wb") as f:
         np.savez(
             f,
@@ -362,4 +371,5 @@ def thresh_brute_min(
             nb2=nb2,
             nd1=nd1,
             sim_stop_thresh=sim_stop_thresh,
+            final_loads=final_loads,
         )
