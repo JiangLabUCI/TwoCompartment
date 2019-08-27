@@ -31,6 +31,7 @@ def igate(filenames=List[str], option1: int = 1):
         b2 = []
         d1 = []
         dev = []
+        thresh = []
         for ind1, line in enumerate(d):
             if line.startswith("Rates are :"):
                 if line.endswith("]"):
@@ -42,6 +43,9 @@ def igate(filenames=List[str], option1: int = 1):
             if line.startswith("Which gives"):
                 this_line = line.split()
                 dev.append(float(this_line[6]))
+            if line.startswith("Best thresh is : "):
+                this_line = line.split()
+                thresh.append(float(this_line[4]))
             if line.startswith("Initial_guess is :"):
                 this_line = (
                     line.replace(",", "").replace("(", "").replace(")", "").split()
@@ -49,7 +53,9 @@ def igate(filenames=List[str], option1: int = 1):
                 init_guess = float(this_line[3]), float(this_line[4])
         if option1 == 1:
             best_ind = np.argmin(dev)
-            print(f"{dev[best_ind]:.2f}, {b2[best_ind]:.2f}, {d1[best_ind]:.2f}")
+            print(
+                f"Dev = {dev[best_ind]:.2f}, b2 = {b2[best_ind]:.2f}, d1 = {d1[best_ind]:.2f}, thresh = {thresh[best_ind]:.3e}"
+            )
         elif option1 == 2:
             plt.figure()
             plt.subplot(231)
