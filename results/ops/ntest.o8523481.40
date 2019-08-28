@@ -1,0 +1,295 @@
+staph.utils
+Seed is :  0
+Nstep :  400000
+Number of points is :  6
+Best F values :  [0.66171107]
+Best parameters :  [[3.08357774e+00 5.66077578e-02 2.31190531e-07 2.87437360e+00]]
+Creating pool with 8  processes
+
+pool = %s <multiprocessing.pool.Pool object at 0x2b16813684e0>
+bXlist, r3 and Imax are :  [3.08357774e+00 5.66077578e-02 2.31190531e-07 2.87437360e+00] 2.3119053083907135e-07 12432920.975514662
+r3 * Imax is :  2.8743736002094593
+Starting loop for b2u=5.00e-01, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  0.5        0.         0.50000015]
+Seed = 0, status counts :  Counter({2.0: 873, 1.0: 109, 3.0: 10, 4.0: 8})
+Seed = 0, status counts :  Counter({2.0: 919, 4.0: 44, 3.0: 37})
+Seed = 0, status counts :  Counter({2.0: 801, 3.0: 104, 4.0: 95})
+Seed = 0, status counts :  Counter({2.0: 580, 3.0: 244, 4.0: 176})
+Seed = 0, status counts :  Counter({2.0: 496, 3.0: 277, 4.0: 227})
+Seed = 0, status counts :  Counter({2.0: 437, 3.0: 317, 4.0: 246})
+Best thresh is : 2.36037280e+07
+Which gives best dev of : 11.7763
+Which is sum of :  [1.86670975 0.07642072 0.52215728 6.05826791 0.47876883 2.77400313]
+p_res is : [0.098 0.37  0.724 0.899 0.909 0.933]
+Starting loop for b2u=6.00e-01, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  0.6        0.         0.60000015]
+Seed = 0, status counts :  Counter({2.0: 867, 1.0: 109, 4.0: 18, 3.0: 6})
+Seed = 0, status counts :  Counter({2.0: 916, 3.0: 48, 4.0: 36})
+Seed = 0, status counts :  Counter({2.0: 803, 3.0: 110, 4.0: 87})
+Seed = 0, status counts :  Counter({2.0: 549, 3.0: 237, 4.0: 214})
+Seed = 0, status counts :  Counter({2.0: 405, 3.0: 316, 4.0: 279})
+Seed = 0, status counts :  Counter({2.0: 349, 3.0: 348, 4.0: 303})
+Best thresh is : 2.27446150e+07
+Which gives best dev of : 11.3646
+Which is sum of :  [2.31965055 0.53738484 0.01745347 6.05826791 0.29583047 2.13603107]
+p_res is : [0.089 0.322 0.664 0.899 0.919 0.948]
+Starting loop for b2u=7.00e-01, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  0.7        0.         0.70000015]
+Seed = 0, status counts :  Counter({2.0: 874, 1.0: 109, 3.0: 15, 4.0: 2})
+Seed = 0, status counts :  Counter({2.0: 912, 3.0: 44, 4.0: 44})
+Seed = 0, status counts :  Counter({2.0: 769, 3.0: 125, 4.0: 106})
+Seed = 0, status counts :  Counter({2.0: 542, 3.0: 250, 4.0: 208})
+Seed = 0, status counts :  Counter({2.0: 372, 3.0: 344, 4.0: 284})
+Seed = 0, status counts :  Counter({3.0: 360, 4.0: 330, 2.0: 310})
+Best thresh is : 2.15645910e+07
+Which gives best dev of : 11.5488
+Which is sum of :  [1.96078915e+00 7.23989377e-01 8.79896434e-05 5.88532708e+00
+ 2.47465277e-01 2.73115363e+00]
+p_res is : [0.096 0.31  0.651 0.897 0.922 0.934]
+Starting loop for b2u=8.00e-01, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  0.8        0.         0.80000015]
+Seed = 0, status counts :  Counter({2.0: 866, 1.0: 109, 4.0: 13, 3.0: 12})
+Seed = 0, status counts :  Counter({2.0: 934, 3.0: 35, 4.0: 31})
+Seed = 0, status counts :  Counter({2.0: 791, 3.0: 116, 4.0: 93})
+Seed = 0, status counts :  Counter({2.0: 480, 3.0: 286, 4.0: 234})
+Seed = 0, status counts :  Counter({2.0: 371, 3.0: 335, 4.0: 294})
+Seed = 0, status counts :  Counter({3.0: 374, 4.0: 343, 2.0: 283})
+Best thresh is : 2.03476740e+07
+Which gives best dev of : 11.0544
+Which is sum of :  [1.44614816 0.88436243 0.03458821 6.23605366 0.1481096  2.30516451]
+p_res is : [0.108 0.301 0.63  0.901 0.929 0.944]
+Starting loop for b2u=9.00e-01, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  0.9        0.         0.90000015]
+Seed = 0, status counts :  Counter({2.0: 860, 1.0: 109, 4.0: 19, 3.0: 12})
+Seed = 0, status counts :  Counter({2.0: 919, 4.0: 47, 3.0: 34})
+Seed = 0, status counts :  Counter({2.0: 760, 3.0: 133, 4.0: 107})
+Seed = 0, status counts :  Counter({2.0: 518, 3.0: 259, 4.0: 223})
+Seed = 0, status counts :  Counter({3.0: 373, 2.0: 319, 4.0: 308})
+Seed = 0, status counts :  Counter({3.0: 388, 4.0: 358, 2.0: 254})
+Best thresh is : 1.88894100e+07
+Which gives best dev of : 9.7773
+Which is sum of :  [1.44614816 1.12677915 0.1431648  5.08732575 0.09018729 1.8836643 ]
+p_res is : [0.108 0.289 0.609 0.887 0.934 0.954]
+Starting loop for b2u=1.00e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  1.         0.         1.00000015]
+Seed = 0, status counts :  Counter({2.0: 863, 1.0: 109, 3.0: 16, 4.0: 12})
+Seed = 0, status counts :  Counter({2.0: 902, 3.0: 53, 4.0: 45})
+Seed = 0, status counts :  Counter({2.0: 777, 3.0: 115, 4.0: 108})
+Seed = 0, status counts :  Counter({2.0: 472, 3.0: 288, 4.0: 240})
+Seed = 0, status counts :  Counter({3.0: 379, 4.0: 322, 2.0: 299})
+Seed = 0, status counts :  Counter({3.0: 411, 4.0: 380, 2.0: 209})
+Best thresh is : 1.70417130e+07
+Which gives best dev of : 9.7956
+Which is sum of :  [1.96078915e+00 1.02170250e+00 2.28656755e-01 5.23855407e+00
+ 3.65205728e-03 1.34227134e+00]
+p_res is : [0.096 0.294 0.598 0.889 0.947 0.967]
+Starting loop for b2u=1.10e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  1.1        0.         1.10000015]
+Seed = 0, status counts :  Counter({2.0: 857, 1.0: 109, 3.0: 18, 4.0: 16})
+Seed = 0, status counts :  Counter({2.0: 919, 3.0: 43, 4.0: 38})
+Seed = 0, status counts :  Counter({2.0: 766, 3.0: 125, 4.0: 109})
+Seed = 0, status counts :  Counter({2.0: 461, 3.0: 271, 4.0: 268})
+Seed = 0, status counts :  Counter({3.0: 385, 4.0: 331, 2.0: 284})
+Seed = 0, status counts :  Counter({4.0: 396, 3.0: 384, 2.0: 220})
+Best thresh is : 1.70779750e+07
+Which gives best dev of : 10.6641
+Which is sum of :  [1.96078915 1.68958685 0.51982928 5.01318308 0.01410373 1.46655937]
+p_res is : [0.096 0.266 0.571 0.886 0.944 0.964]
+Starting loop for b2u=1.20e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  1.2        0.         1.20000015]
+Seed = 0, status counts :  Counter({2.0: 863, 1.0: 109, 4.0: 15, 3.0: 13})
+Seed = 0, status counts :  Counter({2.0: 921, 3.0: 42, 4.0: 37})
+Seed = 0, status counts :  Counter({2.0: 762, 3.0: 131, 4.0: 107})
+Seed = 0, status counts :  Counter({2.0: 436, 3.0: 302, 4.0: 262})
+Seed = 0, status counts :  Counter({4.0: 382, 3.0: 366, 2.0: 252})
+Seed = 0, status counts :  Counter({3.0: 411, 4.0: 388, 2.0: 201})
+Best thresh is : 1.48446150e+07
+Which gives best dev of : 11.1803
+Which is sum of :  [2.05849817e+00 2.10120761e+00 7.15672579e-01 4.79644624e+00
+ 4.15812825e-04 1.50807469e+00]
+p_res is : [0.094 0.252 0.557 0.883 0.949 0.963]
+Starting loop for b2u=1.30e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  1.3        0.         1.30000015]
+Seed = 0, status counts :  Counter({2.0: 871, 1.0: 109, 3.0: 12, 4.0: 8})
+Seed = 0, status counts :  Counter({2.0: 911, 3.0: 53, 4.0: 36})
+Seed = 0, status counts :  Counter({2.0: 781, 4.0: 117, 3.0: 102})
+Seed = 0, status counts :  Counter({2.0: 403, 3.0: 306, 4.0: 291})
+Seed = 0, status counts :  Counter({3.0: 395, 4.0: 345, 2.0: 260})
+Seed = 0, status counts :  Counter({3.0: 453, 4.0: 361, 2.0: 186})
+Best thresh is : 1.11825930e+07
+Which gives best dev of : 12.0626
+Which is sum of :  [1.33476107 1.08403957 0.20341746 8.2088567  0.13665468 1.09484787]
+p_res is : [0.111 0.291 0.601 0.92  0.966 0.973]
+Starting loop for b2u=1.40e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  1.4        0.         1.40000015]
+Seed = 0, status counts :  Counter({2.0: 870, 1.0: 109, 4.0: 12, 3.0: 9})
+Seed = 0, status counts :  Counter({2.0: 924, 3.0: 38, 4.0: 38})
+Seed = 0, status counts :  Counter({2.0: 783, 4.0: 120, 3.0: 97})
+Seed = 0, status counts :  Counter({2.0: 435, 3.0: 290, 4.0: 275})
+Seed = 0, status counts :  Counter({3.0: 405, 4.0: 352, 2.0: 243})
+Seed = 0, status counts :  Counter({3.0: 428, 4.0: 417, 2.0: 155})
+Best thresh is : 1.14240390e+07
+Which gives best dev of : 12.2333
+Which is sum of :  [3.05953534e+00 2.26196563e+00 6.28010535e-01 5.55326880e+00
+ 3.93988317e-03 7.26558825e-01]
+p_res is : [0.077 0.247 0.563 0.893 0.953 0.982]
+Starting loop for b2u=1.50e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  1.5        0.         1.50000015]
+Seed = 0, status counts :  Counter({2.0: 872, 1.0: 109, 4.0: 11, 3.0: 8})
+Seed = 0, status counts :  Counter({2.0: 920, 3.0: 42, 4.0: 38})
+Seed = 0, status counts :  Counter({2.0: 794, 4.0: 105, 3.0: 101})
+Seed = 0, status counts :  Counter({2.0: 442, 3.0: 287, 4.0: 271})
+Seed = 0, status counts :  Counter({4.0: 392, 3.0: 366, 2.0: 242})
+Seed = 0, status counts :  Counter({3.0: 434, 4.0: 402, 2.0: 164})
+Best thresh is : 8.70662200e+06
+Which gives best dev of : 11.0204
+Which is sum of :  [1.68888953 1.47849442 0.85763762 5.88532708 0.1793103  0.93074508]
+p_res is : [0.102 0.274 0.548 0.897 0.968 0.977]
+Starting loop for b2u=1.60e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  1.6        0.         1.60000015]
+Seed = 0, status counts :  Counter({2.0: 858, 1.0: 109, 4.0: 23, 3.0: 10})
+Seed = 0, status counts :  Counter({2.0: 910, 3.0: 49, 4.0: 41})
+Seed = 0, status counts :  Counter({2.0: 781, 3.0: 115, 4.0: 104})
+Seed = 0, status counts :  Counter({2.0: 440, 3.0: 295, 4.0: 265})
+Seed = 0, status counts :  Counter({3.0: 375, 4.0: 372, 2.0: 253})
+Seed = 0, status counts :  Counter({3.0: 432, 4.0: 412, 2.0: 156})
+Best thresh is : 6.72356200e+06
+Which gives best dev of : 8.4050
+Which is sum of :  [0.71356397 0.59621057 0.23738878 6.23605366 0.1793103  0.44243789]
+p_res is : [0.132 0.318 0.597 0.901 0.968 0.989]
+Starting loop for b2u=1.70e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  1.7        0.         1.70000015]
+Seed = 0, status counts :  Counter({2.0: 855, 1.0: 109, 3.0: 19, 4.0: 17})
+Seed = 0, status counts :  Counter({2.0: 924, 4.0: 44, 3.0: 32})
+Seed = 0, status counts :  Counter({2.0: 792, 3.0: 107, 4.0: 101})
+Seed = 0, status counts :  Counter({2.0: 442, 3.0: 302, 4.0: 256})
+Seed = 0, status counts :  Counter({3.0: 400, 4.0: 370, 2.0: 230})
+Seed = 0, status counts :  Counter({3.0: 475, 4.0: 392, 2.0: 133})
+Best thresh is : 6.41673800e+06
+Which gives best dev of : 9.5174
+Which is sum of :  [0.94841562 1.91800928 0.61394365 5.23855407 0.07187998 0.72655883]
+p_res is : [0.123 0.258 0.564 0.889 0.962 0.982]
+Starting loop for b2u=1.80e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  1.8        0.         1.80000015]
+Seed = 0, status counts :  Counter({2.0: 866, 1.0: 109, 3.0: 14, 4.0: 11})
+Seed = 0, status counts :  Counter({2.0: 915, 4.0: 44, 3.0: 41})
+Seed = 0, status counts :  Counter({2.0: 803, 3.0: 105, 4.0: 92})
+Seed = 0, status counts :  Counter({2.0: 470, 3.0: 276, 4.0: 254})
+Seed = 0, status counts :  Counter({4.0: 385, 3.0: 355, 2.0: 260})
+Seed = 0, status counts :  Counter({3.0: 445, 4.0: 392, 2.0: 163})
+Best thresh is : 5.30600200e+06
+Which gives best dev of : 9.6399
+Which is sum of :  [1.56407243 1.14850692 1.12217896 4.93999948 0.1793103  0.68584635]
+p_res is : [0.105 0.288 0.533 0.885 0.968 0.983]
+Starting loop for b2u=1.90e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  1.9        0.         1.90000015]
+Seed = 0, status counts :  Counter({2.0: 866, 1.0: 109, 3.0: 15, 4.0: 10})
+Seed = 0, status counts :  Counter({2.0: 917, 4.0: 42, 3.0: 41})
+Seed = 0, status counts :  Counter({2.0: 797, 3.0: 103, 4.0: 100})
+Seed = 0, status counts :  Counter({2.0: 464, 4.0: 273, 3.0: 263})
+Seed = 0, status counts :  Counter({4.0: 395, 3.0: 360, 2.0: 245})
+Seed = 0, status counts :  Counter({4.0: 425, 3.0: 421, 2.0: 154})
+Best thresh is : 4.82913800e+06
+Which gives best dev of : 8.8835
+Which is sum of :  [1.37118448 1.28396169 1.21813642 4.13119848 0.03004663 0.84894546]
+p_res is : [0.11  0.282 0.528 0.873 0.958 0.979]
+Starting loop for b2u=2.00e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  2.         0.         2.00000015]
+Seed = 0, status counts :  Counter({2.0: 873, 1.0: 109, 3.0: 12, 4.0: 6})
+Seed = 0, status counts :  Counter({2.0: 935, 3.0: 33, 4.0: 32})
+Seed = 0, status counts :  Counter({2.0: 802, 3.0: 107, 4.0: 91})
+Seed = 0, status counts :  Counter({2.0: 478, 4.0: 262, 3.0: 260})
+Seed = 0, status counts :  Counter({3.0: 363, 4.0: 345, 2.0: 292})
+Seed = 0, status counts :  Counter({4.0: 418, 3.0: 417, 2.0: 165})
+Best thresh is : 4.81181500e+06
+Which gives best dev of : 9.8402
+Which is sum of :  [1.48471295 2.29502307 2.50673826 2.69766578 0.00709912 0.84894546]
+p_res is : [0.107 0.246 0.474 0.846 0.954 0.979]
+Starting loop for b2u=2.10e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  2.1        0.         2.10000015]
+Seed = 0, status counts :  Counter({2.0: 875, 1.0: 109, 3.0: 11, 4.0: 5})
+Seed = 0, status counts :  Counter({2.0: 930, 3.0: 35, 4.0: 35})
+Seed = 0, status counts :  Counter({2.0: 831, 3.0: 88, 4.0: 81})
+Seed = 0, status counts :  Counter({2.0: 460, 4.0: 274, 3.0: 266})
+Seed = 0, status counts :  Counter({3.0: 413, 4.0: 331, 2.0: 256})
+Seed = 0, status counts :  Counter({3.0: 425, 4.0: 414, 2.0: 161})
+Best thresh is : 4.83105200e+06
+Which gives best dev of : 12.5783
+Which is sum of :  [3.05953534 3.52716522 2.94917023 1.86747257 0.08005877 1.09484787]
+p_res is : [0.077 0.214 0.459 0.825 0.935 0.973]
+Starting loop for b2u=2.20e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  2.2        0.         2.20000015]
+Seed = 0, status counts :  Counter({2.0: 877, 1.0: 109, 3.0: 7, 4.0: 7})
+Seed = 0, status counts :  Counter({2.0: 924, 3.0: 41, 4.0: 35})
+Seed = 0, status counts :  Counter({2.0: 833, 3.0: 84, 4.0: 83})
+Seed = 0, status counts :  Counter({2.0: 494, 3.0: 256, 4.0: 250})
+Seed = 0, status counts :  Counter({3.0: 383, 4.0: 326, 2.0: 291})
+Seed = 0, status counts :  Counter({4.0: 416, 3.0: 416, 2.0: 168})
+Best thresh is : 4.80258000e+06
+Which gives best dev of : 14.4245
+Which is sum of :  [3.74340251 3.89372271 3.84358044 1.1267023  0.10081855 1.71630004]
+p_res is : [0.068 0.206 0.432 0.8   0.933 0.958]
+Starting loop for b2u=2.30e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  2.3        0.         2.30000015]
+Seed = 0, status counts :  Counter({2.0: 878, 1.0: 109, 4.0: 7, 3.0: 6})
+Seed = 0, status counts :  Counter({2.0: 928, 3.0: 44, 4.0: 28})
+Seed = 0, status counts :  Counter({2.0: 834, 3.0: 92, 4.0: 74})
+Seed = 0, status counts :  Counter({2.0: 501, 4.0: 250, 3.0: 249})
+Seed = 0, status counts :  Counter({3.0: 368, 4.0: 356, 2.0: 276})
+Seed = 0, status counts :  Counter({4.0: 419, 3.0: 413, 2.0: 168})
+Best thresh is : 4.80051200e+06
+Which gives best dev of : 16.5269
+Which is sum of :  [3.27361796 4.49400411 5.2881173  0.98278814 0.47876883 2.00964866]
+p_res is : [0.074 0.194 0.395 0.794 0.909 0.951]
+Starting loop for b2u=2.40e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  2.4        0.         2.40000015]
+Seed = 0, status counts :  Counter({2.0: 879, 1.0: 109, 4.0: 6, 3.0: 6})
+Seed = 0, status counts :  Counter({2.0: 932, 4.0: 36, 3.0: 32})
+Seed = 0, status counts :  Counter({2.0: 841, 3.0: 88, 4.0: 71})
+Seed = 0, status counts :  Counter({2.0: 519, 3.0: 241, 4.0: 240})
+Seed = 0, status counts :  Counter({3.0: 367, 4.0: 347, 2.0: 286})
+Seed = 0, status counts :  Counter({3.0: 425, 4.0: 403, 2.0: 172})
+Best thresh is : 4.81753700e+06
+Which gives best dev of : 17.7713
+Which is sum of :  [3.91363026 4.81866491 6.61519357 0.0391299  0.4590873  1.92561501]
+p_res is : [0.066 0.188 0.366 0.72  0.91  0.953]
+Starting loop for b2u=2.50e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [3.08357774 0.05660776 2.8743736  2.5        0.         2.50000015]
+Seed = 0, status counts :  Counter({2.0: 873, 1.0: 109, 4.0: 10, 3.0: 8})
+Seed = 0, status counts :  Counter({2.0: 949, 3.0: 27, 4.0: 24})
+Seed = 0, status counts :  Counter({2.0: 862, 3.0: 73, 4.0: 65})
+Seed = 0, status counts :  Counter({2.0: 535, 3.0: 236, 4.0: 229})
+Seed = 0, status counts :  Counter({4.0: 368, 3.0: 357, 2.0: 275})
+Seed = 0, status counts :  Counter({3.0: 430, 4.0: 415, 2.0: 155})
+Best thresh is : 4.81170500e+06
+Which gives best dev of : 21.8023
+Which is sum of :  [3.50119556 7.33390739 7.74941146 0.0190144  1.10493405 2.09385921]
+p_res is : [0.071 0.15  0.344 0.714 0.882 0.949]
+optim objs is :  [11.77632761 11.3646183  11.54881251 11.05442657  9.77726945  9.79562588
+ 10.66405147 11.1803151  12.06257735 12.23327901 11.02040403  8.40496518
+  9.51736143  9.63991445  8.88347315  9.84018464 12.57825001 14.42452655
+ 16.526945   17.77132095 21.80232207]
+Best fit is : 8.404965176723474
+1 DE solution took :  703.597190245986 s
+Output filename :  results/6021324_1000rep0se_39to39b2d1_1o5_cpu.npz
