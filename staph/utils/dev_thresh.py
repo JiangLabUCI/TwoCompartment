@@ -12,7 +12,7 @@ from collections import Counter
 
 @njit(cache=False, parallel=False)
 def get_best_thresh(
-    final_loads: np.ndarray,
+    final_loads: np.ndarray, lower_thresh: float = 0
 ) -> Tuple[int, float, np.ndarray, np.ndarray]:
     """Best threshold search.
 
@@ -23,6 +23,8 @@ def get_best_thresh(
     ----------
     final_loads
         The bacterial loads at the end of the simulations.
+    lower_thresh
+        Search for the best threshold above `lower_thresh`.
 
     Returns
     -------
@@ -37,6 +39,7 @@ def get_best_thresh(
     """
     npts = final_loads.shape[0]
     thresh_array = np.sort(np.unique(final_loads)) + 1
+    thresh_array = thresh_array[thresh_array > lower_thresh]
     nthresh = thresh_array.shape[0]
     p_inf = np.zeros(npts)
     devs = np.zeros(thresh_array.shape[0])
