@@ -178,7 +178,9 @@ def thresh_obj_wrapper(
         # p_inf = prob (H(t) + I(t) > thresh)
 
     max_load = np.max(final_loads)
-    best_thresh, best_dev, devs, all_devs = get_best_thresh(final_loads=final_loads)
+    best_thresh, best_dev, devs, all_devs = get_best_thresh(
+        final_loads=final_loads, lower_thresh=H0[4]
+    )
     best_dev_index = np.argmin(devs)
     p_res = np.zeros((npts))
     for ind1 in range(npts):
