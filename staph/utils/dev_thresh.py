@@ -44,7 +44,8 @@ def get_best_thresh(
     for ind1 in range(npts):
         for ind2 in prange(nthresh):
             this_thresh = thresh_array[ind2]
-            p_inf[ind1] = np.mean(final_loads[ind1, :] >= this_thresh)
+            this_final_load = final_loads[ind1, :]
+            p_inf[ind1], _, _ = get_ocprobs(this_final_load, this_thresh)
             all_devs[ind2, ind1] = compute_deviance(p_inf=p_inf[ind1], dose_index=ind1)
             devs[ind2] += all_devs[ind2, ind1]
     best_dev_index = np.argmin(devs)
@@ -205,7 +206,7 @@ def thresh_obj_wrapper(
 def r_to_load(r: Tuple[int, float, np.ndarray, np.ndarray, int]):
     """Return load from `r`.
 
-    Using the output of the simulation `r`, return the final load used for 
+    Using the output of the simulation `r`, return the final load used for
     deviance computation.
 
     Parameters
@@ -227,6 +228,7 @@ def r_to_load(r: Tuple[int, float, np.ndarray, np.ndarray, int]):
     return load
 
 
+@njit(cache=False)
 def get_ocprobs(final_loads: np.ndarray, thresh: float) -> Tuple[float, float, float]:
     """Compute outcome probabilities.
 
@@ -238,7 +240,7 @@ def get_ocprobs(final_loads: np.ndarray, thresh: float) -> Tuple[float, float, f
         SA load at the end of the simulation (H+I).
     thresh
         Threshold to use for computation.
-    
+
     Returns
     -------
     pres
