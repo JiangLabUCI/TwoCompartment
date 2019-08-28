@@ -44,6 +44,8 @@ def get_best_thresh(
     p_inf = np.zeros(npts)
     devs = np.zeros(thresh_array.shape[0])
     all_devs = np.zeros((thresh_array.shape[0], npts))
+    if len(thresh_array) == 0:
+        thresh_array = np.array([1e7])
     for ind1 in range(npts):
         for ind2 in prange(nthresh):
             this_thresh = thresh_array[ind2]
