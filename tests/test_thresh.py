@@ -18,10 +18,9 @@ def test_gb_thresh():
 
     for ind1 in range(npts):
         switch_index = np.int(p[ind1] * nrep)
-        print(f"switch index {switch_index}")
+        # print(f"switch index {switch_index}")
         fake_loads[ind1, :switch_index] = thresh + 1
         fake_loads[ind1, switch_index:] = thresh - 1
-    # print(fake_loads)
     best_thresh, best_dev, devs, _ = get_best_thresh(fake_loads)
     assert devs.shape[0] == 2
     assert best_thresh == thresh
@@ -34,11 +33,25 @@ def test_gb_thresh():
         n2 = nrep - n1
         fake_loads[ind1, :switch_index] = thresh + 1 * np.random.randint(2, 10, n1)
         fake_loads[ind1, switch_index:] = thresh - 1 * np.random.randint(2, 10, n2)
-    # print(fake_loads)
     best_thresh, best_dev, devs, _ = get_best_thresh(fake_loads)
     assert devs.shape[0] == len(np.unique(fake_loads))
     assert best_thresh == 999
     assert np.abs(best_dev) < 1e-12
+
+    fake_loads = np.zeros([npts, nrep])
+
+    for ind1 in range(npts):
+        switch_index = np.int(p[ind1] * nrep)
+        # print(f"switch index {switch_index}")
+        fake_loads[ind1, :switch_index] = thresh + 100
+        fake_loads[ind1, switch_index:] = thresh - 100
+    best_thresh, best_dev, devs, _ = get_best_thresh(fake_loads, lower_thresh=1000)
+    assert devs.shape[0] == 1
+    assert best_thresh == 1101
+
+    best_thresh, best_dev, devs, _ = get_best_thresh(fake_loads, lower_thresh=80)
+    assert devs.shape[0] == 2
+    assert best_thresh == 901
 
 
 def test_thresh_minimizer():
