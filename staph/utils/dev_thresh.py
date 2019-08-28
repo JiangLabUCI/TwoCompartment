@@ -227,6 +227,33 @@ def r_to_load(r: Tuple[int, float, np.ndarray, np.ndarray, int]):
     return load
 
 
+def get_ocprobs(final_loads: np.ndarray, thresh: float) -> Tuple[float, float, float]:
+    """Compute outcome probabilities.
+
+    From the final loads and threshold, compute the outcome probability.
+
+    Parameters
+    ----------
+    final_loads
+        SA load at the end of the simulation (H+I).
+    thresh
+        Threshold to use for computation.
+    
+    Returns
+    -------
+    pres
+        Response probability.
+    pcar
+        Carrier probability.
+    ps
+        Unaffected probability.
+    """
+    pres = np.mean(final_loads >= thresh)
+    ps = np.mean(final_loads == 0)
+    pcar = 1 - (pres + ps)
+    return pres, pcar, ps
+
+
 def thresh_brute_min(
     filename="results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat",
     npts: int = 2,

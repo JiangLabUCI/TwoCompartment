@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from ..staph.utils.predict import predict_fit, get_ocprobs
+from ..staph.utils.predict import predict_fit
 
 
 def test_predict():
@@ -35,15 +35,3 @@ def test_predict():
         # plt.plot(t_array2[ind], pop_array2[ind][1, :], color="darkblue")
 
     # plt.show()
-
-
-def test_ocprobs():
-    final_loads = np.array([0, 0, 0, 10, 10, 10])
-    thresh = 5
-    assert (get_ocprobs(final_loads, thresh) == np.array([0.5, 0, 0.5])).all()
-    final_loads = np.array([0, 0, 0, 1, 1, 1])
-    assert (get_ocprobs(final_loads, thresh) == np.array([0, 0.5, 0.5])).all()
-    final_loads = np.zeros(20)
-    assert (get_ocprobs(final_loads, thresh) == np.array([0, 0, 1])).all()
-    final_loads = np.ones(20) * thresh * 5
-    assert (get_ocprobs(final_loads, thresh) == np.array([1, 0, 0])).all()

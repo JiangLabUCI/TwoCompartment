@@ -1,6 +1,6 @@
 import numpy as np
 from ..staph.utils.dev_thresh import get_best_thresh, thresh_brute_min
-from ..staph.utils.dev_thresh import r_to_load
+from ..staph.utils.dev_thresh import r_to_load, get_ocprobs
 from ..staph.utils.data import get_singh_data
 from ..staph.analysis.f2 import get_filename
 from ..staph.utils.tau_twocomp import tau_twocomp_carrier
@@ -87,3 +87,15 @@ def test_r_to_load():
     assert r[2][0, -1] == 0
     assert r[2][0, -1] == 0
     assert r_to_load(r) == 0
+
+
+def test_ocprobs():
+    final_loads = np.array([0, 0, 0, 10, 10, 10])
+    thresh = 5
+    assert (get_ocprobs(final_loads, thresh) == np.array([0.5, 0, 0.5])).all()
+    final_loads = np.array([0, 0, 0, 1, 1, 1])
+    assert (get_ocprobs(final_loads, thresh) == np.array([0, 0.5, 0.5])).all()
+    final_loads = np.zeros(20)
+    assert (get_ocprobs(final_loads, thresh) == np.array([0, 0, 1])).all()
+    final_loads = np.ones(20) * thresh * 5
+    assert (get_ocprobs(final_loads, thresh) == np.array([1, 0, 0])).all()

@@ -8,7 +8,7 @@ from .dev import carrier_obj_wrapper, status_to_pinf
 from .data import calc_for_map, get_b1d2, get_singh_data, get_bedrail_data
 from .tau_twocomp import tau_twocomp_carrier
 from .tau_twocomp_rmf import tau_twocomp_carrier_rmf
-from .dev_thresh import r_to_load
+from .dev_thresh import r_to_load, get_ocprobs
 
 
 def predict_fit(
@@ -173,33 +173,6 @@ def predict_fit(
         )
     if pop_array_flag:
         return pop_array, t_array
-
-
-def get_ocprobs(final_loads: np.ndarray, thresh: float) -> Tuple[float, float, float]:
-    """Compute outcome probabilities.
-
-    From the final loads and threshold, compute the outcome probability.
-
-    Parameters
-    ----------
-    final_loads
-        SA load at the end of the simulation (H+I).
-    thresh
-        Threshold to use for computation.
-    
-    Returns
-    -------
-    pres
-        Response probability.
-    pcar
-        Carrier probability.
-    ps
-        Unaffected probability.
-    """
-    pres = np.mean(final_loads >= thresh)
-    ps = np.mean(final_loads == 0)
-    pcar = 1 - (pres + ps)
-    return pres, pcar, ps
 
 
 def get_rates_simfunc(
