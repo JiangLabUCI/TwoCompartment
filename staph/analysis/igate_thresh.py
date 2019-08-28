@@ -18,7 +18,7 @@ def igate(filenames: str, option1: int = 1):
         List of file names created by the output of optimization.
     option1
         One of 1, 2 or 3.
-    
+
     Notes
     -----
     If option1 = 1, solution landscape is plotted.

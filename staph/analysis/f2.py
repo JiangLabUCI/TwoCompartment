@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 from matplotlib.patches import Polygon
-from typing import List, Dict, Union
+from typing import List, Union
 from os import listdir
 from ..utils.data import get_kinetic_data_params, get_singh_data
 from ..utils.rh_data import get_rh_fit_data
@@ -295,7 +295,7 @@ def get_filename(task_no: int = 0) -> Union[str, None]:
     ----------
     task_no
         Task number.
-    
+
     Returns
     -------
     filename
