@@ -23,7 +23,7 @@ def f2(display: bool = False):
     # part_cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
     part_cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
     col_mo = ["#984ea3", "#ff7f00"]
-    sol_inds = [0, 8]
+    sol_inds = [0, 4]
     annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
 
     plt.figure(figsize=(9, 8))
@@ -46,7 +46,7 @@ def f2(display: bool = False):
     plt.text(x1 - 0.15 * (x2 - x1), y2, "C", annotation_args)
 
     ax = plt.subplot(224)
-    filename = "results/predsbasebase2523823dl5r1_1000rep.npz"
+    filename = "results/predsbasebase2523823dl" + str(sol_inds[1]) + "r1_1000rep.npz"
     with np.load(filename) as data:
         dose = data["doselist"]
         pinf = data["pinf"]
