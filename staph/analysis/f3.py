@@ -67,8 +67,8 @@ def f3(display: bool = False):
         If `True`, display the plot.
     """
     fnames = [
-        "results/predsr1s24h2523823dl5r1_1000rep.npz",
-        "results/predsrmf24h2523823dl5r1_1000rep.npz",
+        "results/predsr1s24h2523823dl4r1_1000rep.npz",
+        "results/predsrmf24h2523823dl4r1_1000rep.npz",
     ]
     col_mo = ["#984ea3", "#ff7f00"]
     cols = ["#4daf4a", "#ff7f00", "#e41a1c"]

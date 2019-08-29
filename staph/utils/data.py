@@ -323,7 +323,7 @@ def get_bedrail_data(
     return times, loads, hand_size
 
 
-def get_soap_data(dsno: int = 1, parno: int = 5) -> Dict:
+def get_soap_data(dsno: int = 1, parno: int = 4) -> Dict:
     """Data from Rose 1999.
 
     Get the original data, RH fitted constants and 2C fitted constants.
@@ -334,7 +334,7 @@ def get_soap_data(dsno: int = 1, parno: int = 5) -> Dict:
         Dataset number. 1 (control soap, 24h before inoculation),
         2 (control soap, immediate inoculation)
     parno
-        Index of rank 1 solutions in [0,5].
+        Index of rank 1 solutions in [0,4].
 
     Returns
     p
