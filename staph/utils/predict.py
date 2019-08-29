@@ -12,7 +12,6 @@ from .dev_thresh import r_to_load, get_ocprobs
 
 
 def predict_fit(
-    filename: str = "results/rank_1_solutions.csv",
     n_cores: int = 2,
     nrep: int = 10,
     nstep: int = 200,
@@ -22,6 +21,7 @@ def predict_fit(
     hyp: str = "base",
     inoc_time: str = "base",
     pop_array_flag: bool = False,
+    sim_stop_thresh: float = None,
 ) -> [None, List[np.ndarray]]:
     """Predict outcome probabilities.
 
@@ -31,8 +31,6 @@ def predict_fit(
 
     Parameters
     ----------
-    filename
-        The names of binary file with solutions from optimization.
     n_cores
         The number of cores to run predictions on.
     nrep
@@ -51,61 +49,17 @@ def predict_fit(
         One of "base", "imm" or "24h".
     pop_array_flag
         Whether or not to return population arrays.
-
-    Notes
-    -----
-
-    The three cases under which predictions will be made are given by `hyp`.
-    - "base" means no changes to constants.
-    - "r1s" means r1* hypothesis, r1 is updated.
-    - "rmf" means rmf hypotehsis, rmf is introduced.
-
-    inoc_time
-    - "base" is assuming skin was wiped with alcohol before inoculation.
-    - "imm" is assuming skin was control-soap-washed before inoculation.
-    - "24h" is assuming skin was control-soap-washed 24h before inoculation.
-
-    The predicted constants are stored in "results/pred_consts.csv". It has
-    the following columns:
-        Dataset - 1 (control soap, 24h before inoculation)
-                - 2 (control soap, immediate inoculation)
-        Parameterset - 1-6 (Index of the rank 1 solution + 1)
-        Hyp - 1 (r1 and r2 change)
-              2 (r1 changes)
-              3 (r2 changes)
-              4 (r3 changes)
-              5 (r3Imax changes)
-              6 (rmf is introduced)
-        Parameter - Value of parameter fitted according to hypothesis.
-        SSE - Sum of squared error of the fit.
-        AIC - Akaike information criterion of the fit.
-        AICc - Corrected Akaike information criterion of the fit.
-        BIC - Bayesian information criterion of the fit.
-    Hyp 1 does not have the parameters stored and does not appear in the file.
+    sim_stop_thresh
+        Population threshold to stop the simulation at. If `None`, use imax =
+        Imax * A.
 
     """
 
-    assert hyp in ["base", "r1s", "rmf"]
-    if hyp == "base":
-        assert inoc_time == "base"
-    else:
-        assert inoc_time in ["imm", "24h"]
-
-    df = pd.read_csv(filename)
-    pdf = pd.read_csv("results/pred_consts.csv")
+    # Get requisite data
     _, _, _, _, A, _ = get_singh_data()
-
-    if inoc_time == "imm":
-        datasetno = 1
-    elif inoc_time == "24h":
-        datasetno = 2
-    if inoc_time is not "base":
-        pdf = pdf[pdf.Dataset == datasetno]
+    # Start pool
     pool = mp.Pool(n_cores)
-
-    print("Parameters are : ")
-    print(df)
-
+    # Define output holders
     nrank1sols = len(rank_1_sol_inds)
     ndose = len(doselist)
     final_loads = np.zeros([ndose, nrep])
@@ -118,11 +72,12 @@ def predict_fit(
     for ind1, r1sind in enumerate(rank_1_sol_inds):
         np.random.seed(seed)
         seeds = np.random.randint(low=0, high=1e5, size=nrep)
-        rates, simfunc, Imax, = get_rates_simfunc(
-            df=df, pdf=pdf, r1sind=r1sind, hyp=hyp
+        rates, simfunc, Imax, thresh = get_rates_simfunc(
+            r1sind=r1sind, hyp=hyp, inoc_time=inoc_time
         )
-        thresh = df["thresh"][r1sind]
-        imax = Imax * A
+        if sim_stop_thresh is None:
+            sim_stop_thresh = Imax * A
+        print(f"Using a sim stop threshold of {sim_stop_thresh:.8e}")
 
         for ind2 in range(ndose):
             arg_list = []
@@ -130,7 +85,9 @@ def predict_fit(
             status = np.zeros(nrep)
             for ind3 in range(nrep):
                 init_load = np.array([doselist[ind2]], dtype=np.int32)
-                arg_list.append((init_load, rates, imax, nstep, seeds[ind3], 6.0, True))
+                arg_list.append(
+                    (init_load, rates, sim_stop_thresh, nstep, seeds[ind3], 6.0, True)
+                )
             # Run parallel simulation
             partial_func = partial(calc_for_map, func=simfunc)
             results = pool.map(partial_func, arg_list)
@@ -164,7 +121,6 @@ def predict_fit(
     ) as f:
         np.savez(
             f,
-            df=df,
             pinf=pinf,
             pcar=pcar,
             ps=ps,
@@ -176,24 +132,22 @@ def predict_fit(
 
 
 def get_rates_simfunc(
-    df: pd.DataFrame, pdf: pd.DataFrame, r1sind: int, hyp: str
+    r1sind: int, hyp: str, inoc_time: str
 ) -> Tuple[List[float], callable, float]:
     """Get rates and simulation function.
 
     Use the hypothesis to get the corresponding rates and simulation functions.
-    Intended for use by `predict_fit`.
+    Intended for use by `predict_fit` and `predict_bedrail`.
 
     Parameters
     ----------
-    df
-        Dataframe with rank 1 solutions.
-    pdf
-        Dataframe with fitted constants.
     r1sind
         Index of rank 1 solution.
     hyp
-        Hypothesis.
-    
+        One of "base", "r1s" or "rmf".
+    inoc_time
+        One of "base", "imm" or "24h".
+
     Returns
     -------
     rates
@@ -203,12 +157,63 @@ def get_rates_simfunc(
     Imax
         Imax value used for calculating threshold of stochastic simulation. 
         (Units of CFU/cm^2, has to be converted.)
+    thresh
+        Threshold used to calculate outcome probabilities.
+    
+    Notes
+    -----
+
+    The three cases under which predictions will be made are given by `hyp`.
+    - "base" means no changes to constants.
+    - "r1s" means r1* hypothesis, r1 is updated.
+    - "rmf" means rmf hypotehsis, rmf is introduced.
+
+    inoc_time
+    - "base" is assuming skin was wiped with alcohol before inoculation.
+    - "imm" is assuming skin was control-soap-washed before inoculation.
+    - "24h" is assuming skin was control-soap-washed 24h before inoculation.
+
+    The predicted constants are stored in "results/pred_consts.csv". It has
+    the following columns:
+        Dataset - 1 (control soap, 24h before inoculation)
+                - 2 (control soap, immediate inoculation)
+        Parameterset - 1-6 (Index of the rank 1 solution + 1)
+        Hyp - 1 (r1 and r2 change)
+              2 (r1 changes)
+              3 (r2 changes)
+              4 (r3 changes)
+              5 (r3Imax changes)
+              6 (rmf is introduced)
+        Parameter - Value of parameter fitted according to hypothesis.
+        SSE - Sum of squared error of the fit.
+        AIC - Akaike information criterion of the fit.
+        AICc - Corrected Akaike information criterion of the fit.
+        BIC - Bayesian information criterion of the fit.
+    Hyp 1 does not have the parameters stored and does not appear in the file.
 
     See Also
     --------
     predict_fit : Predict outcome probabilities.
-
+    
     """
+    assert hyp in ["base", "r1s", "rmf"]
+    if hyp == "base":
+        assert inoc_time == "base"
+    else:
+        assert inoc_time in ["imm", "24h"]
+
+    df = pd.read_csv("results/rank_1_solutions.csv")
+    pdf = pd.read_csv("results/pred_consts.csv")
+
+    print(df)
+
+    if inoc_time == "imm":
+        datasetno = 1
+    elif inoc_time == "24h":
+        datasetno = 2
+    if inoc_time is not "base":
+        pdf = pdf[pdf.Dataset == datasetno]
+
     r1 = df.r1[r1sind]
     r2 = df.r2[r1sind]
     r3 = df.r3[r1sind]
@@ -217,6 +222,7 @@ def get_rates_simfunc(
     b2 = df.b2[r1sind]
     Imax = r3Imax / r3
     b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3 * Imax)
+    thresh = df.thresh[r1sind]
     if hyp == "r1s":
         r1_star = float(
             pdf[(pdf.Hyp == 2) & (pdf.Parameterset == r1sind + 1)].Parameter
@@ -231,70 +237,7 @@ def get_rates_simfunc(
         rates = np.array([r1, r2, b1, b2, d1, d2])
         simfunc = tau_twocomp_carrier
 
-    return rates, simfunc, Imax
-
-
-def get_rates(hyp: str = "r1*", A: float = None) -> Tuple[List[np.float32], np.float32]:
-    """Get the rates for r1* or rmf hypotheses.
-
-    Parameters
-    ----------
-    hyp
-        Hypothesis the rates are needed for, either "r1*" or "rmf".
-    A
-        Area of the inoculation region used to calculate the rates.
-
-    Returns
-    -------
-    rates
-        The list of rates used for simulation.
-
-    Notes
-    -----
-    Information is read from "pred_consts.txt". 
-    If `hyp` is "r1*", six rate constants are returned in a list 
-    (r1, r2, b1, b2, d1 and d2).This is then used for simulation with the 
-    `tau_twocomp_carrier` function.
-
-    If `hyp` is "rmf" seven rate constants are returned in a list 
-    (r1, r2, b1, b2, d1, d2 and rmf). This is then used for simulation with 
-    the `tau_twocomp_carrier_rmf` function.
-
-    """
-    dsno = 1
-    parno = 6
-    filename = "results/pred_consts.csv"
-    data = pd.read_csv(filename)
-    if hyp == "rmf":
-        hypno = 6
-        rmf = data[
-            (data.Dataset == dsno) & (data.Parameterset == parno) & (data.Hyp == hypno)
-        ].Parameter.values[0]
-    elif hyp == "r1*":
-        hypno = 2
-        r1 = float(
-            data[
-                (data.Dataset == dsno)
-                & (data.Parameterset == parno)
-                & (data.Hyp == hypno)
-            ].Parameter
-        )
-
-    data = pd.read_csv("results/rank_1_solutions.csv")
-    data = data.iloc[parno - 1]
-    r2 = data.r2
-    r3 = data.r3
-    r3Imax = data["r3*Imax"]
-    b2 = data.b2
-    d1 = data.d1
-    b1, d2 = get_b1d2(b2=b2, d1=d1, r3=r3, r3Imax=r3Imax, A=A)
-    if hyp == "rmf":
-        r1 = data.r1
-        rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
-    elif hyp == "r1*":
-        rates = np.array([r1, r2, b1, b2, d1, d2])
-    Imax = r3Imax / r3
-    return rates, Imax
+    return rates, simfunc, Imax, thresh
 
 
 def sim_multi(
@@ -307,6 +250,7 @@ def sim_multi(
     seed: int = 0,
     t_max: float = 6.0,
     A: float = None,
+    sim_stop_thresh: float = None,
 ) -> Tuple[np.ndarray, np.ndarray, List[np.ndarray], int, int]:
     """Simulate multiple inoculations.
 
@@ -332,6 +276,9 @@ def sim_multi(
         Maximum time to simulate for.
     A
         Area of the hand.
+    sim_stop_thresh
+        Population threshold to stop the simulation at. If `None`, use imax =
+        Imax * A.
     
     Returns
     -------
@@ -353,7 +300,9 @@ def sim_multi(
     """
     if A is None:
         _, _, _, _, A, _ = get_singh_data()
-    imax = Imax * A
+    if sim_stop_thresh is None:
+        sim_stop_thresh = Imax * A
+    print(f"Using a sim stop threshold of {sim_stop_thresh:.8e}")
     n = len(dose_intervals)
     dose_intervals = np.hstack(
         [dose_intervals, np.max([0, t_max - np.sum(dose_intervals)])]
@@ -371,7 +320,7 @@ def sim_multi(
         _, endt, pop_array[ind], t_array[ind], this_status = simfunc(
             init_load=init_load,
             rates=rates,
-            imax=imax,
+            imax=sim_stop_thresh,
             nstep=nstep,
             seed=seeds[ind],
             t_max=t_final,
@@ -426,6 +375,9 @@ def sim_multi(
 
 
 def predict_bedrail(
+    r1sind: int,
+    inoc_time: str,
+    sim_stop_thresh: float,
     n_cores: int = 2,
     nrep: int = 10,
     nstep: int = 200,
@@ -443,6 +395,13 @@ def predict_bedrail(
 
     Parameters
     ----------
+    r1sind
+        Rank 1 solution index.
+    inoc_time
+        One of "base", "imm" or "24h".
+    sim_stop_thresh
+        Population threshold to stop the simulation at. If `None`, use imax =
+        Imax * A.
     n_cores
         The number of cores to run predictions on.
     nrep
@@ -468,12 +427,15 @@ def predict_bedrail(
     sstat = np.zeros((nrep, tref.shape[0]))
     pool = mp.Pool(n_cores)
 
-    if hyp == "r1*":
-        simfunc = tau_twocomp_carrier
-    elif hyp == "rmf":
-        simfunc = tau_twocomp_carrier_rmf
-    dose_intervals, dose_loads, A = get_bedrail_data(nrep, tmax=t_max)
-    rates, Imax = get_rates(hyp=hyp, A=A)
+    dose_intervals, dose_loads, _ = get_bedrail_data(nrep, tmax=t_max)
+    rates, simfunc, Imax, thresh = get_rates_simfunc(
+        r1sind=r1sind, hyp=hyp, inoc_time=inoc_time
+    )
+    if sim_stop_thresh is None:
+        _, _, _, _, A, _ = get_singh_data()
+        sim_stop_thresh = Imax * A
+    print(f"Using a sim stop threshold of {sim_stop_thresh:.8e}")
+
     pop = [0 for x in range(nrep)]
     popH = [0 for x in range(nrep)]
     popI = [0 for x in range(nrep)]
@@ -490,7 +452,7 @@ def predict_bedrail(
                 rates,
                 dose_intervals[ind1],
                 dose_loads[ind1],
-                Imax,
+                sim_stop_thresh,
                 nstep,
                 seeds[ind1],
             )
@@ -506,7 +468,7 @@ def predict_bedrail(
         extinction[ind2] = r[4]
         status[ind2] = r[5]
         sstat[ind2, :] = get_stat_time_course(
-            tsim=r[1], pop=np.sum(pop[ind2], axis=0), tref=tref, thresh=Imax
+            tsim=r[1], pop=np.sum(pop[ind2], axis=0), tref=tref, thresh=thresh  # TODO
         )
 
     pres, pcar, ps = stat_ocprob(stat=sstat)
@@ -584,7 +546,7 @@ def predict_bedrail(
             t_max=t_max,
             new_exp=new_exp,
             new_ext=new_ext,
-            imax=Imax * A,
+            thresh=thresh,
         )
 
     print("Output file name : ", output_name)

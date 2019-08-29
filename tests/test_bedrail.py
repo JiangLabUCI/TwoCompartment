@@ -1,16 +1,45 @@
 import numpy as np
+import pytest
 import matplotlib.pyplot as plt
 from ..staph.utils.data import get_bedrail_data, get_occurence_dist
 from ..staph.utils.tau_twocomp import tau_twocomp_carrier
 from ..staph.utils.tau_twocomp_rmf import tau_twocomp_carrier_rmf
-from ..staph.utils.predict import get_rates, sim_multi, get_stat_time_course
-from ..staph.utils.predict import stat_ocprob
+from ..staph.utils.predict import sim_multi, get_stat_time_course
+from ..staph.utils.predict import stat_ocprob, get_rates_simfunc
+
+
+def test_get_rates_simfunc():
+    with pytest.raises(AssertionError):
+        get_rates_simfunc(r1sind=1, hyp="base", inoc_time="imm")
+    with pytest.raises(AssertionError):
+        get_rates_simfunc(r1sind=1, hyp="base45", inoc_time="imm")
+    rates, simfunc, _, thresh = get_rates_simfunc(
+        r1sind=0, hyp="base", inoc_time="base"
+    )
+    r1 = 1.941_837_212_691_128
+    assert simfunc == tau_twocomp_carrier
+    assert abs(rates[0] - r1) < 1e-5
+    assert abs(thresh - 7_339_343.0) < 1e2
+
+    rates2, simfunc, _, _ = get_rates_simfunc(r1sind=0, hyp="r1s", inoc_time="24h")
+    assert simfunc == tau_twocomp_carrier
+    assert rates[0] < rates2[0]
+    assert abs(rates[0] - rates2[0]) > 1
+    for ind in range(1, len(rates)):
+        assert abs(rates[ind] - rates2[ind]) < 1e-5
+
+    rates3, simfunc, _, _ = get_rates_simfunc(r1sind=0, hyp="rmf", inoc_time="24h")
+    assert simfunc == tau_twocomp_carrier_rmf
+    assert abs(rates[0] - rates3[0]) < 1e-5
+    for ind in range(1, len(rates)):
+        assert abs(rates[ind] - rates3[ind]) < 1e-5
+    assert len(rates3) == 7
 
 
 def test_bedrail_data():
     n = 3
-    times, loads, A = get_bedrail_data(n)
-    times2, loads2, A = get_bedrail_data(n)
+    times, loads, _ = get_bedrail_data(n)
+    times2, loads2, _ = get_bedrail_data(n)
     for ind in range(n):
         assert np.all(times[ind].shape == loads[ind].shape)
         assert np.all(loads[ind].dtype == np.int32)
@@ -32,28 +61,15 @@ def test_contact_freq():
     assert (sum(inter_times) / 100 - lam) < 1e-2
 
 
-def test_get_rates():
-    rates_rmf, Imax_rmf = get_rates(hyp="rmf")
-    rates_r1, Imax_r1 = get_rates(hyp="r1*")
-    assert len(rates_rmf) == 7
-    assert len(rates_r1) == 6
-    assert rates_rmf[1] == rates_r1[1]  # r2
-    assert rates_rmf[2] == rates_r1[2]  # b1
-    assert rates_rmf[3] == rates_r1[3]  # b2
-    assert rates_rmf[4] == rates_r1[4]  # d1
-    assert rates_rmf[5] == rates_r1[5]  # d2
-    assert Imax_rmf == Imax_r1
-
-
 def test_sim_multi_r1():
-    rates, Imax = get_rates("r1*")
+    rates, simfunc, Imax, _ = get_rates_simfunc(r1sind=0, hyp="r1s", inoc_time="24h")
     dose_intervals = [0.1, 2.0, 3.0]
     t_max = 6.0
-    pop, t, t_array, explosion, extinction, stat = sim_multi(
-        tau_twocomp_carrier,
+    pop, t, t_array, explosion, extinction, _ = sim_multi(
+        simfunc,
         rates=rates,
         dose_intervals=dose_intervals,
-        dose_loads=[100_000, 200_000, 200_000],
+        dose_loads=[1000, 200_000, 200_000],
         Imax=Imax,
         t_max=t_max,
     )
@@ -67,23 +83,23 @@ def test_sim_multi_r1():
     assert t.shape[0] == pop.shape[1]
     assert (tdiff >= 0).all()
     assert np.max(t) <= t_max
+    assert explosion == 0
+    assert extinction == 0
     for ind in range(len(t_array)):
         if ind == len(t_array) - 1:
             t_final = t_max - np.sum(dose_intervals)
         else:
             t_final = dose_intervals[ind + 1]
         assert np.abs((np.max(t_array[ind]) - t_final)) < 1e-5
-    assert explosion == 0
-    assert extinction == 0
 
 
 def test_sim_multi_rmf():
-    rates, Imax = get_rates("rmf")
+    rates, simfunc, Imax, _ = get_rates_simfunc(r1sind=0, hyp="rmf", inoc_time="24h")
     dose_intervals = np.array([0.3, 2.0, 2.0])
     dose_loads = np.array([100_000, 200_000, 200_000])
     t_max = 10
-    pop, t, t_array, explosion, extinction, stat = sim_multi(
-        tau_twocomp_carrier_rmf,
+    pop, t, t_array, explosion, extinction, _ = sim_multi(
+        simfunc,
         rates=rates,
         dose_intervals=dose_intervals,
         dose_loads=dose_loads,
@@ -102,32 +118,30 @@ def test_sim_multi_rmf():
     assert t.shape[0] == pop.shape[1]
     assert (tdiff >= 0).all()
     assert np.max(t) == t_max
+    assert explosion == 0
+    assert extinction == 1
     for ind in range(len(t_array)):
         if ind == len(t_array) - 1:
             t_final = t_max - np.sum(dose_intervals)
         else:
             t_final = dose_intervals[ind + 1]
         assert np.abs((np.max(t_array[ind]) - t_final)) < 1e-5
-    assert explosion == 0
-    assert extinction == 1
 
 
 def test_sim_multi_overshoot():
     # Reproduces bug which counts a carrier as an extinction.
 
-    hyp = "rmf"
-    simfunc = tau_twocomp_carrier_rmf
     seed = 0
     nrep = 100
     nstep = 200_000
 
     np.random.seed(seed)
     seeds = np.random.randint(low=0, high=1e5, size=nrep)
-    rates, Imax = get_rates(hyp)
-    dose_intervals, dose_loads, A = get_bedrail_data(nrep, tmax=6.0)
+    rates, simfunc, Imax, _ = get_rates_simfunc(r1sind=0, hyp="rmf", inoc_time="24h")
+    dose_intervals, dose_loads, _ = get_bedrail_data(nrep, tmax=6.0)
     ind1 = 59
     print(dose_intervals[ind1].dtype, dose_loads[ind1].dtype)
-    pop, t, _, explosion, extinction, _ = sim_multi(
+    _, t, _, explosion, extinction, _ = sim_multi(
         simfunc, rates, dose_intervals[ind1], dose_loads[ind1], Imax, nstep, seeds[ind1]
     )
     # plt.plot(t, pop[0, :])
