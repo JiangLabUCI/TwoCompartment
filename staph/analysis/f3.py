@@ -189,7 +189,7 @@ def pop_time(
     popI
         List of I time courses.
     extinction
-        List of ultimate extinction flags. 1 if pop finally went extinct for 
+        List of ultimate extinction flags. 1 if pop finally went extinct for
         that repetition, 0 otherwise.
     explosion
         List of ultimate explosion flags. 1 if pop finally exploded for
@@ -252,8 +252,8 @@ def pop_time(
 def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = False):
     """Plot soap fit data.
 
-    Plot the fit of RH model, r1 and rmf hypotheses to data on SA kinetics 
-    after washing with soap. 
+    Plot the fit of RH model, r1 and rmf hypotheses to data on SA kinetics
+    after washing with soap.
 
     Parameters
     ----------
@@ -262,7 +262,7 @@ def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = Fa
     both
         Flag on whether to plot immediate inoculation. Inoculation after 24h is
         always plotted.
-    
+
     Notes
     -----
     Get the relevant data from `get_soap_data`.
@@ -309,14 +309,14 @@ def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = Fa
         sol2cr2.t,
         np.log10(sol2cr2.y.transpose().sum(axis=1)),
         color=col[0],
-        label="$r1$ " + f"(SSE={sse})",
+        label="$r_1^*$ " + f"(SSE={sse})",
     )
     sse, _ = round(p2["sse_rmf"], 3), round(p2["aicc_rmf"], 2)
     plt.plot(
         sol2crmf2.t,
         np.log10(sol2crmf2.y.transpose().sum(axis=1)),
         color=col[1],
-        label="$r_{mf}$" + f"(SSE={sse})",
+        label="$r_{mf}$" + f" (SSE={sse})",
     )
 
     if both:
