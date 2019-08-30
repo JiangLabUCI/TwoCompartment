@@ -109,8 +109,8 @@ def f3(display: bool = False):
         2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs, wspace=0.15
     )
     fnames = [
-        "results/pred_1000rep200000nstr1hypF6_multi.npz",
-        "results/pred_1000rep200000nstrmfhypF6_multi.npz",
+        "results/pred_1000rep400000nstr1shypF6_multi.npz",
+        "results/pred_1000rep400000nstrmfhypF6_multi.npz",
     ]
     labs1 = ["A", "B"]
     labs2 = ["C", "D"]
@@ -125,7 +125,8 @@ def f3(display: bool = False):
             t = data["t"]
             new_ext = data["new_ext"]
             new_exp = data["new_exp"]
-            imax = data["imax"]
+            sim_stop_thresh = data["sim_stop_thresh"]
+            thresh = data["thresh"]
 
         # Plot population vs. time
         ax = fig.add_subplot(gs2[0, ind1])
@@ -139,7 +140,8 @@ def f3(display: bool = False):
             alpha=0.8,
             nplot=2,
             cols=cols,
-            imax=imax,
+            plot_thresh=thresh,
+            sim_stop_thresh=sim_stop_thresh,
         )
         if ind1 == 0:
             label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs1[ind1])
@@ -167,7 +169,8 @@ def pop_time(
     popI: List[np.ndarray],
     extinction: List[int],
     explosion: List[int],
-    imax: float,
+    plot_thresh: float,
+    sim_stop_thresh: float,
     nplot: int = 1,
     cols: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"],
     alpha: float = 1.0,
@@ -191,7 +194,9 @@ def pop_time(
     explosion
         List of ultimate explosion flags. 1 if pop finally exploded for
         that repetition, 0 otherwise.
-    imax
+    plot_thresh
+        Threshold value used to compute outcome probabilities.
+    sim_stop_thresh
         Threshold value of the simulation at which it is stopped.
     nplot
         Number of time courses of each outcome type to plot.
@@ -205,7 +210,7 @@ def pop_time(
     nrep = len(t)
     extcount, expcount, carcount = 0, 0, 0
     y_upper = 0
-    handles = [0 for ind in range(3)]
+    handles = [0 for ind in range(4)]
     for ind in range(nrep):
         y = popH[ind] + popI[ind]
         y_upper = np.max([np.max(y), y_upper])
@@ -215,23 +220,33 @@ def pop_time(
             extcount += 1
             print(np.min(y))
             handles[0], = plt.step(t[ind], y, color=cols[0], alpha=alpha)
-        elif explosion[ind] and (expcount < nplot) and (np.max(y) > np.log10(imax)):
+        elif (
+            explosion[ind]
+            and (expcount < nplot)
+            and (np.max(y) > np.log10(plot_thresh))
+        ):
             expcount += 1
-            print(np.min(y), np.max(y), np.log10(imax))
+            print(np.min(y), np.max(y), np.log10(plot_thresh))
             handles[2], = plt.step(t[ind], y, color=cols[2], alpha=alpha, label="y")
         elif carcount < nplot:
             carcount += 1
             print(np.min(y))
             handles[1], = plt.plot(t[ind], y, color=cols[1], alpha=alpha)
+    left, right = plt.xlim()
+    print(f"Left is : {left}, right is : {right}")
+    handles[3], = plt.plot(
+        [left, right], np.log10([plot_thresh, plot_thresh]), "k--", alpha=alpha
+    )
     legend_flag = 1
     for ind in range(len(handles)):
         if handles[ind] == 0:
             legend_flag = 0
     if legend_flag:
-        plt.legend(handles, ["Unaffected", "Carrier", "Response"])
+        plt.legend(handles, ["Unaffected", "Carrier", "Response", "Threshold"])
     if log:
-        plt.ylim([0, 7])
+        plt.ylim([0, np.log10(sim_stop_thresh)])
         plt.ylabel("$\log_{10}$(Staph.) (CFU)")
+    plt.xlim(left, right)
 
 
 def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = False):
@@ -281,7 +296,7 @@ def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = Fa
     plt.plot(p2["t"], p2["y"], "ko", label="Data (+24h)")
     if both:
         plt.plot(p1["t"], p1["y"], "kx", label="Data (imm)")
-    sse, aicc = round(p2["sse_rh"], 3), round(p2["aicc_rh"], 2)
+    sse, _ = round(p2["sse_rh"], 3), round(p2["aicc_rh"], 2)
     plt.plot(
         solrh2.t,
         np.log10(solrh2.y.transpose()),
@@ -289,14 +304,14 @@ def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = Fa
         linestyle="--",
         label=f"RH (SSE={sse})",
     )
-    sse, aicc = round(p2["sse_r1"], 3), round(p2["aicc_r1"], 2)
+    sse, _ = round(p2["sse_r1"], 3), round(p2["aicc_r1"], 2)
     plt.plot(
         sol2cr2.t,
         np.log10(sol2cr2.y.transpose().sum(axis=1)),
         color=col[0],
         label="$r1$ " + f"(SSE={sse})",
     )
-    sse, aicc = round(p2["sse_rmf"], 3), round(p2["aicc_rmf"], 2)
+    sse, _ = round(p2["sse_rmf"], 3), round(p2["aicc_rmf"], 2)
     plt.plot(
         sol2crmf2.t,
         np.log10(sol2crmf2.y.transpose().sum(axis=1)),
@@ -327,9 +342,9 @@ def soap_obj(col: List[str] = ["#4daf4a", "#ff7f00", "#e41a1c"], both: bool = Fa
             [10 ** ptemp["y0"], 0],
         )
         plt.plot(solrh1.t, np.log10(solrh1.y.transpose()), color="grey", linestyle="--")
-        sse, aicc = round(p1["sse_r1"], 2), round(p1["aicc_r1"], 2)
+        sse, _ = round(p1["sse_r1"], 2), round(p1["aicc_r1"], 2)
         plt.plot(sol2cr1.t, np.log10(sol2cr1.y.transpose().sum(axis=1)), color=col[0])
-        sse, aicc = round(p1["sse_rmf"], 2), round(p1["aicc_rmf"], 2)
+        sse, _ = round(p1["sse_rmf"], 2), round(p1["aicc_rmf"], 2)
         plt.plot(
             sol2crmf1.t, np.log10(sol2crmf1.y.transpose().sum(axis=1)), color=col[1]
         )
