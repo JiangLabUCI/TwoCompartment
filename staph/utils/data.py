@@ -41,6 +41,49 @@ def get_singh_data() -> Tuple[List[int], List[int], int, float, float, Any]:
     return h0, norig, ntot, tiny, A, H0
 
 
+def cochran_armitage(d: List[float], p: List[int], n: List[int]):
+    """Cochran-Armitage test for trend.
+
+    Parameters
+    ----------
+    d
+        Dose.
+    p
+        Number of positive responses.
+    n
+        Total number of subjects for given dose.
+
+    Returns
+    -------
+    zca
+        Cochran-Armitage test statistic.
+    pbar
+        Mean of `p`.
+    xbar
+        Mean of log(dose).
+    
+    Notes
+    -----
+    The formula is in chapter 8 of [1]_.
+
+
+    References
+    ----------
+    .. [1] Haas, C. N., Rose, J. B., & Gerba, C. P. (2014). Quantitative
+    Microbial Risk Assessment. Hoboken, New Jersey: John Wiley & Sons, Inc.
+    https://doi.org/10.1002/9781118910030
+    """
+    p = np.array(p)
+    n = np.array(n)
+    x = np.log(d)
+    xbar = np.dot(n, x) / np.sum(n)
+    pbar = np.sum(p) / np.sum(n)
+    print(xbar, pbar)
+    zca = np.dot(x - xbar, p) / np.sqrt(pbar * (1 - pbar) * np.dot((x - xbar) ** 2, n))
+
+    return zca, pbar, xbar
+
+
 def get_kinetic_data_params() -> Dict:
     """Get kinetic data and params.
 

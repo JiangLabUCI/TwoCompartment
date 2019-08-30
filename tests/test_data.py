@@ -1,6 +1,6 @@
 import numpy as np
 from ..staph.utils.data import get_singh_data, get_b1d2, get_fcs_fcr, get_k_ec
-from ..staph.utils.data import get_kinetic_data_params, get_soap_data
+from ..staph.utils.data import get_kinetic_data_params, get_soap_data, cochran_armitage
 
 
 def test_singh():
@@ -12,6 +12,17 @@ def test_singh():
         assert H0[ind] == np.int32(h0[ind] * A)
     assert (np.array(norig) <= ntot).all()
     assert tiny < 1
+
+
+def test_cochran_armitage():
+    d = [10, 1000, 10000, 100_000, 1_000_000, 100_000_000]
+    p = [0, 0, 9, 6, 20, 2]
+    n = [0, 3, 11, 7, 21, 2]
+    tol = 1e-3
+    zca, pbar, xbar = cochran_armitage(d, p, n)
+    assert abs(zca - 3.039) < tol
+    assert abs(pbar - 0.841) < tol
+    assert abs(xbar - 12.036) < tol
 
 
 def test_b1d2():
