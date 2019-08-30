@@ -31,14 +31,16 @@ elif option1 == 2:
         )
     bru_igate(filenames=fnames)
 elif option1 == 3:
+    # fnames = ["ntest.o8451930.3"]
     fnames = []
-    flist = [9]
-    for ind in flist:
-        fnames.append("results/ntest.o7721941." + str(ind))
-    igate_ntest(filenames=fnames)
+    flist = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    for ind in range(21, 101):
+        fnames.append("ntest.o8523481." + str(ind))
+    igate_ntest(filenames=fnames, option1=1)
 elif option1 == 4:
     fnames = []
-    for ind1 in range(9):
+    option2 = int(sys.argv[2])
+    for ind1 in range(100):
         fnames.append(
             "results/opt/6021324_1000rep0se_"
             + str(ind1)
@@ -46,4 +48,4 @@ elif option1 == 4:
             + str(ind1)
             + "b2d1_1o5_cpu.npz"
         )
-    igate_thresh(filenames=fnames)
+    igate_thresh(filenames=fnames, option1=option2)
