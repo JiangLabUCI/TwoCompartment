@@ -302,7 +302,7 @@ def sim_multi(
         _, _, _, _, A, _ = get_singh_data()
     if sim_stop_thresh is None:
         sim_stop_thresh = Imax * A
-    print(f"Using a sim stop threshold of {sim_stop_thresh:.8e}")
+        print(f"Using a sim stop threshold of {sim_stop_thresh:.8e}")
     n = len(dose_intervals)
     dose_intervals = np.hstack(
         [dose_intervals, np.max([0, t_max - np.sum(dose_intervals)])]
@@ -431,9 +431,10 @@ def predict_bedrail(
     rates, simfunc, Imax, thresh = get_rates_simfunc(
         r1sind=r1sind, hyp=hyp, inoc_time=inoc_time
     )
+    _, _, _, _, A, _ = get_singh_data()
     if sim_stop_thresh is None:
-        _, _, _, _, A, _ = get_singh_data()
         sim_stop_thresh = Imax * A
+        print(f"Set sim stop threshold = Imax * A = {Imax * A}")
     print(f"Using a sim stop threshold of {sim_stop_thresh:.8e}")
 
     pop = [0 for x in range(nrep)]
@@ -452,9 +453,12 @@ def predict_bedrail(
                 rates,
                 dose_intervals[ind1],
                 dose_loads[ind1],
-                sim_stop_thresh,
+                Imax,
                 nstep,
                 seeds[ind1],
+                6.0,
+                A,
+                sim_stop_thresh,
             )
         )
     partial_func = partial(calc_for_map, func=sim_multi)
@@ -468,7 +472,7 @@ def predict_bedrail(
         extinction[ind2] = r[4]
         status[ind2] = r[5]
         sstat[ind2, :] = get_stat_time_course(
-            tsim=r[1], pop=np.sum(pop[ind2], axis=0), tref=tref, thresh=thresh  # TODO
+            tsim=r[1], pop=np.sum(pop[ind2], axis=0), tref=tref, thresh=thresh
         )
 
     pres, pcar, ps = stat_ocprob(stat=sstat)
@@ -547,6 +551,7 @@ def predict_bedrail(
             new_exp=new_exp,
             new_ext=new_ext,
             thresh=thresh,
+            sim_stop_thresh=sim_stop_thresh,
         )
 
     print("Output file name : ", output_name)
