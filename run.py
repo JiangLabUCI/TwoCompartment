@@ -87,16 +87,27 @@ if __name__ == "__main__":
         ncores = np.int32(sys.argv[2])
         predict_fit(
             nrep=1000,
-            nstep=200_000,
+            nstep=400_000,
             hyp="base",
             inoc_time="base",
-            rank_1_sol_inds=[0],
+            rank_1_sol_inds=[4],
             doselist=np.int32(np.power(10, np.arange(1, 6.3, 0.3))),
             n_cores=ncores,
+            sim_stop_thresh=1e9,
         )
     elif choice == 5:
         ncores = np.int32(sys.argv[2])
-        predict_bedrail(n_cores=ncores, nstep=200_000, nrep=1000, hyp="r1*")
+        predict_bedrail(
+            r1sind=4,
+            inoc_time="24h",
+            sim_stop_thresh=1e9,
+            hyp="rmf",
+            n_cores=ncores,
+            nstep=400_000,
+            nrep=1000,
+            n_to_save=3,
+            pop_flag=False,
+        )
     elif choice == 6:
         ncores = np.int32(sys.argv[2])
         ind = np.int32(sys.argv[3])
@@ -109,8 +120,9 @@ if __name__ == "__main__":
             desol_ind=desol_ind,
             nstep=400_000,
             n_procs=ncores,
-            nb2=10,
-            nd1=10,
-            lims={"d1l": 0, "d1u": 9, "b2l": 0, "b2u": 9},
-            sim_stop_thresh=1e10,
+            nd1=1,
+            nb2=21,
+            lims={"d1l": 0, "d1u": 0, "b2l": 0.5, "b2u": 2.5},
+            sim_stop_thresh=1e9,
+            save_final_loads=False,
         )
