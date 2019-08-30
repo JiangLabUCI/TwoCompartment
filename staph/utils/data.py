@@ -80,7 +80,6 @@ def cochran_armitage(d: List[float], p: List[int], n: List[int]):
     x = np.log(d)
     xbar = np.dot(n, x) / np.sum(n)
     pbar = np.sum(p) / np.sum(n)
-    print(xbar, pbar)
     zca = np.dot(x - xbar, p) / np.sqrt(pbar * (1 - pbar) * np.dot((x - xbar) ** 2, n))
     pvalue = 1 - norm.cdf(zca)
 

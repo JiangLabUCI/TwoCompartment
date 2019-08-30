@@ -12,6 +12,10 @@ def test_singh():
         assert H0[ind] == np.int32(h0[ind] * A)
     assert (np.array(norig) <= ntot).all()
     assert tiny < 1
+    zca, _, _, pvalue = cochran_armitage(d=h0, p=norig, n=np.ones(6) * ntot)
+    print(f"Zca value for Singh data is : {zca:.2f}")
+    print(f"P value for Singh data is : {pvalue:.2e}")
+    assert zca > 1.644
 
 
 def test_cochran_armitage():
