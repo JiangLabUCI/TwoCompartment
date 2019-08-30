@@ -19,10 +19,17 @@ def test_cochran_armitage():
     p = [0, 0, 9, 6, 20, 2]
     n = [0, 3, 11, 7, 21, 2]
     tol = 1e-3
-    zca, pbar, xbar = cochran_armitage(d, p, n)
+    zca, pbar, xbar, _ = cochran_armitage(d, p, n)
     assert abs(zca - 3.039) < tol
     assert abs(pbar - 0.841) < tol
     assert abs(xbar - 12.036) < tol
+    p = [2, 3, 4, 1, 3, 5, 4, 6]
+    n = [5, 6, 6, 6, 6, 6, 6, 6]
+    d = [12000, 24000, 66000, 93000, 141_000, 256_000, 587_000, 860_000]
+    zca, _, _, pvalue = cochran_armitage(d, p, n)
+    tol = 1e-2
+    assert abs(zca - 2.19) < tol
+    assert abs(pvalue - 0.014) < tol
 
 
 def test_b1d2():

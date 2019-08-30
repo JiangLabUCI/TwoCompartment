@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from typing import Tuple, List, Any, Dict
-from scipy.stats import truncnorm
+from scipy.stats import truncnorm, norm
 from numba import njit
 
 
@@ -61,6 +61,8 @@ def cochran_armitage(d: List[float], p: List[int], n: List[int]):
         Mean of `p`.
     xbar
         Mean of log(dose).
+    pvalue
+        p-value of the Cochran-Armitage test.
     
     Notes
     -----
@@ -80,8 +82,9 @@ def cochran_armitage(d: List[float], p: List[int], n: List[int]):
     pbar = np.sum(p) / np.sum(n)
     print(xbar, pbar)
     zca = np.dot(x - xbar, p) / np.sqrt(pbar * (1 - pbar) * np.dot((x - xbar) ** 2, n))
+    pvalue = 1 - norm.cdf(zca)
 
-    return zca, pbar, xbar
+    return zca, pbar, xbar, pvalue
 
 
 def get_kinetic_data_params() -> Dict:
