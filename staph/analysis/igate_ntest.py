@@ -114,8 +114,10 @@ def igate(filenames=List[str], option1: int = 1):
                 if line.startswith("Best F values :"):
                     Fde = line
                 if line.startswith(qstr):
-                    roi = d[ind1 + 2]
-                    break
+                    for ind2 in range(5):
+                        if d[ind1 + ind2].startswith("p_res is :"):
+                            roi = d[ind1 + ind2]
+                            break
             roi = roi.replace("[", "").replace("]", "").split()
             roi = roi[3:]
             pinf = [float(this_roi) for this_roi in roi]

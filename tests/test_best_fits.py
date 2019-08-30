@@ -18,7 +18,7 @@ def test_best_fits():
     npts = 6
     nrep = 1000
     nstep = 400_000
-    sim_stop_thresh = 1e10
+    sim_stop_thresh = 1e9
     seed = 0
     n_procs = 8
     tol = 1e-7
