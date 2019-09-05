@@ -1,19 +1,20 @@
+import numpy as np
 from scipy.stats import chi2
 import pandas as pd
 from typing import List
 from ..utils.rh_data import get_rh_fit_data
 
 
-def get_gof_values(dev: float, k: int, m: int, sig: float = 0.05) -> List[float]:
+def get_gof_values(test_stat: float, k: int, m: int, sig: float = 0.05) -> List[float]:
     """Get goodness of fit values.
 
-    Return the deviance, degrees of freedeom, chisquared critical value
+    Return the test statisic, degrees of freedeom, chisquared critical value
     and the p-value.
 
     Parameters
     ----------
-    dev
-        Deviance of the model.
+    test_stat
+        Test statisic of the model.
     k
         Number of data points.
     m
@@ -23,8 +24,8 @@ def get_gof_values(dev: float, k: int, m: int, sig: float = 0.05) -> List[float]
 
     Returns
     -------
-    dev
-        Deviance of the model.
+    test_stat
+        Test statisic of the model.
     dof
         Degrees of freedom.
     crit
@@ -35,9 +36,9 @@ def get_gof_values(dev: float, k: int, m: int, sig: float = 0.05) -> List[float]
     dof = k - m
     sig = 0.05
     crit = chi2.ppf(1 - sig, k - m)
-    p = 1 - chi2.cdf(dev, k - m)
+    p = 1 - chi2.cdf(test_stat, k - m)
     conc = "Accept" if p > sig else "Reject"
-    return [dev, dof * 1.0, crit, p, conc]
+    return [test_stat, dof * 1.0, crit, p, conc]
 
 
 def compute_chisq(dev_2c: List[float] = [11.67]):
@@ -69,3 +70,63 @@ def compute_chisq(dev_2c: List[float] = [11.67]):
         )
 
     print(df)
+
+
+def decision_kimura_chisq(p, sig=0.05):
+    """Return decision.
+
+    Return the hypothesis decision based on the p value and significance level.
+
+    Parameters
+    ----------
+    p
+        P value of the decision boundary.
+    sig
+        Significance level, defaults to 0.05.
+
+    """
+    decision = "Unable to reject simpler model" if p > sig else "Reject simpler model"
+    return decision
+
+
+def sse_chisq(
+    sse_2par: float = 0.003, sse_1par: float = 0.925, sd_estimate: float = 1.0
+):
+    """Compute chi-squared statistic.
+
+    Use the estimator given in Kimura 1990 to compute chi squared statistic.
+
+    Parameters
+    ----------
+    sse_2par
+        Sum of squared error for 2 parameter model.
+    sse_1par
+        Sum of squared error for 1 parameter model.
+    sd_estimate
+        Estimate of the standard deviation.
+
+    Notes
+    -----
+    This is the estimator when all the sigma^2 are known. Given by equation (10) in [1]_.
+
+    References
+    ----------
+    .. [1] Kimura, D. K. (1990). Testing Nonlinear Regression Parameters under
+    Heteroscedastic, Normally Distributed Errors. Biometrics, 46(3), 697. 
+    https://doi.org/10.2307/2532089
+    """
+
+    assert sse_1par > sse_2par
+
+    p = 2  # Number of parameters
+    I = 4  # Number of populations (datapoints)
+    dof = p * (I - 1)  # degrees of freedom
+
+    print(f"Using an estimated sd = {sd_estimate}")
+
+    chisq_v = (sse_1par - sse_2par) / sd_estimate ** 2
+    P = 1 - chi2.cdf(chisq_v, dof)
+    sig = 0.05
+    conc = decision_kimura_chisq(p=P, sig=sig)
+    print(conc + f" : P = {P:.5e}")
+    return P, conc
