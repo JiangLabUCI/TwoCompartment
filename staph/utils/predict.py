@@ -4,11 +4,13 @@ import multiprocessing as mp
 from functools import partial
 from typing import List, Tuple, Callable
 from scipy import interpolate
+from scipy.integrate import solve_ivp
 from .dev import carrier_obj_wrapper, status_to_pinf
 from .data import calc_for_map, get_b1d2, get_singh_data, get_bedrail_data
 from .tau_twocomp import tau_twocomp_carrier
 from .tau_twocomp_rmf import tau_twocomp_carrier_rmf
 from .dev_thresh import r_to_load, get_ocprobs
+from .det_models import twocomp_model
 
 
 def predict_fit(
@@ -628,3 +630,107 @@ def stat_ocprob(stat: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     ps = np.mean(stat == 1, axis=0)
 
     return pres, pcar, ps
+
+
+def predict_demo(
+    sim_stop_thresh: float,
+    init_load: int = 100,
+    n_cores: int = 2,
+    nrep: int = 10,
+    nstep: int = 200,
+    seed: int = 0,
+    t_max: float = 6.0,
+    n_to_save: int = 10,
+):
+    """
+    Model demonstration.
+
+    To demonstrate the facets of the model, simulate it and save results.
+
+    Parameters
+    ----------
+    sim_stop_thresh
+        Population threshold to stop the simulation at. If `None`, use imax =
+        Imax * A.
+    rates
+        The stochastic rate parameters in the following order:
+        r1, r2, b1, b2, d1, d2.
+    init_load
+        The dose to predict model outcomes at.
+    n_cores
+        The number of cores to run predictions on.
+    nrep
+        The number of repetitions to run the predictions for.
+    nstep
+        The maximum number of simulation steps to run the algorithm for.
+    seed
+        Initial of the random number generator.
+    t_max
+        Maximum time to run the simulations for.
+    n_to_save
+        Number of time courses of each outcome type to save.
+    """
+    np.random.seed(seed)
+    seeds = np.random.randint(low=0, high=1e5, size=nrep)
+    init_load = np.array([np.int(init_load)], dtype=np.int32)
+    pop = [0 for x in range(nrep * 3)]
+    t = [0 for x in range(nrep * 3)]
+    rate_mat = np.zeros([3, 6])
+    for ind1 in range(3):
+        if ind1 == 0:
+            b2, d1 = 0.0, 0.0
+        elif ind1 == 1:
+            b2, d1 = 1.7, 0.0
+        elif ind1 == 2:
+            b2, d1 = 0.0, 2.0
+        # rates = [1.0, 0.01, 1.0, b2, d1, 1.0]
+        r3Imax = 3.40
+        r3 = 3.90e-7
+        A = 3
+        rates = [1.69, 0.01, d1 + r3Imax, b2, d1, b2 + 2 * r3 / A]
+        rate_mat[ind1, :] = rates
+        for ind2 in range(nrep):
+            _, _, this_pop, this_t, this_status = tau_twocomp_carrier(
+                init_load=init_load,
+                rates=rates,
+                imax=sim_stop_thresh,
+                nstep=nstep,
+                seed=seeds[ind2],
+                t_max=t_max,
+                store_flag=True,
+            )
+            t[ind1 * nrep + ind2] = this_t
+            pop[ind1 * nrep + ind2] = this_pop[0, :] + this_pop[1, :]
+            print(ind1 * nrep + ind2, ind1, ind2, this_status)
+
+    p = {}
+    p["r1"] = rates[0]
+    p["r2"] = rates[1]
+    p["r3"] = r3
+    p["r3Imax"] = r3Imax
+    sol_det = solve_ivp(
+        lambda t, y: twocomp_model(t, y, p),
+        t_span=[0, t_max],
+        t_eval=np.linspace(0, t_max, num=100),
+        y0=[np.int(init_load), 0],
+    )
+    sol_det_t = sol_det.t
+    sol_det_y = sum(sol_det.y, 1)
+
+    output_name = f"results/demo.npz"
+    with open(output_name, "wb") as f:
+        np.savez(
+            f,
+            t=t,
+            pop=pop,
+            nstep=nstep,
+            nrep=nrep,
+            rate_mat=rate_mat,
+            sol_det_t=sol_det_t,
+            sol_det_y=sol_det_y,
+            seed=seed,
+            t_max=t_max,
+            sim_stop_thresh=sim_stop_thresh,
+        )
+
+    print("Output file name : ", output_name)
