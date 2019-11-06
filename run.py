@@ -2,7 +2,7 @@ import numpy as np
 import sys
 from staph.utils.dev import compute_devs_min as cdmin
 from staph.utils.dev import compute_devs_brute as cdbrute
-from staph.utils.predict import predict_fit, predict_bedrail
+from staph.utils.predict import predict_fit, predict_bedrail, predict_demo
 from staph.utils.dev_thresh import thresh_brute_min as tmin
 
 if __name__ == "__main__":
@@ -126,3 +126,6 @@ if __name__ == "__main__":
             sim_stop_thresh=1e9,
             save_final_loads=False,
         )
+    elif choice == 7:
+        predict_demo(sim_stop_thresh=1e8, nstep=100_000, init_load=10000, nrep=50)
+
