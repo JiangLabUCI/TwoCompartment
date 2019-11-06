@@ -1,10 +1,32 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
+from matplotlib import cm
 
 
 def get_intervals(t, pop, t_req):
-    # TODO: document this func
+    """Get intervals for plotting.
+
+    Get the lower and upper limits of variation at required times points.
+    These are calculated as one standard deviation below and above the mean.
+
+    Parameters
+    ----------
+    t
+        The list of simulation times for each iteration.
+    pop
+        The list of total population size (adapted + unadapted) for each
+        iteration.
+    t_req
+        Time points at which the intervals are required.
+
+    Returns
+    -------
+    lower_int
+        Lower limit of variation.
+    upper_int
+        Upper limit of variation.
+    """
     nrep = len(t)
     pop_req = np.zeros([nrep, len(t_req)])
     for ind in range(nrep):
@@ -27,11 +49,19 @@ def get_intervals(t, pop, t_req):
     return lower_int, upper_int
 
 
-def igate(option1: int = 2):
+def igate(option1: int = 2, disp: bool = True):
     """
     Model demo plot.
 
-    # TODO: document this func
+    Demonstrate the effect of b2 and d1 by plotting how much simulations vary
+    over the timecourse for determinstic case, b2 = d1 = 0, b2 = 0 and d1 = 0.
+
+    Parameters
+    ----------
+    option1
+        If 1, plot the time series itself. If 2, plot 1 SD of the time series.
+    disp
+        If `True`, display the plot.
     """
     filename = "results/demo.npz"
     with np.load(filename, allow_pickle=True) as data:
@@ -41,34 +71,30 @@ def igate(option1: int = 2):
         pop_det = data["sol_det_y"]
     nrep = int(len(t) / 3)
 
-    alpha_val = 0.5
-
+    alpha_val = 1.0
+    cols = plt.get_cmap("Set2")
     if option1 == 1:
-        for ind in range(nrep):
-            pop[ind][pop[ind] < 0] = np.max(pop[ind])
-            plt.step(t[ind], np.log10(pop[ind]), color="xkcd:blue", alpha=alpha_val)
-
-        for ind in range(nrep):
-            this_pop = pop[nrep * 2 + ind]
-            this_pop[this_pop < 0] = np.max(this_pop)
-            plt.step(
-                t[nrep * 2 + ind],
-                np.log10(this_pop),
-                "--",
-                color="xkcd:red",
-                alpha=alpha_val,
-            )
 
         for ind in range(nrep):
             this_pop = pop[nrep + ind]
             this_pop[this_pop < 0] = np.max(this_pop)
-            plt.step(
-                t[nrep + ind],
-                np.log10(this_pop),
-                color="xkcd:green",
-                alpha=alpha_val / 2,
+            h1, = plt.step(
+                t[nrep + ind], np.log10(this_pop), color=cols(0), alpha=alpha_val
             )
-        plt.plot(t_det, np.log10(pop_det), "k", linewidth=2)
+
+        for ind in range(nrep):
+            this_pop = pop[nrep * 2 + ind]
+            this_pop[this_pop < 0] = np.max(this_pop)
+            h2, = plt.step(
+                t[nrep * 2 + ind], np.log10(this_pop), color=cols(1), alpha=alpha_val
+            )
+
+        for ind in range(nrep):
+            pop[ind][pop[ind] < 0] = np.max(pop[ind])
+            h3, = plt.step(t[ind], np.log10(pop[ind]), color=cols(2), alpha=alpha_val)
+
+        h4, = plt.plot(t_det, np.log10(pop_det), "k", linewidth=2)
+        ordered_handles = [h4, h3, h2, h1]
     elif option1 == 2:
         old_t_det = t_det
         t_det = t_det[t_det < 3.5]
@@ -90,10 +116,15 @@ def igate(option1: int = 2):
 
         h4, = plt.plot(old_t_det, np.log10(pop_det), "k", linewidth=2)
 
-        plt.legend(
-            [h4, h3, h2, h1], ["Deterministic", "$b_2=d_1=0$", "$b_2=0$", "$d_1=0$"]
-        )
+        ordered_handles = [h4, h3, h2, h1]
+    plt.legend(ordered_handles, ["Deterministic", "$b_2=d_1=0$", "$b_2=0$", "$d_1=0$"])
 
     plt.xlim([0, 3])
     plt.ylim([2.5, 6])
-    plt.show()
+    plt.xticks(ticks=[0, 1, 2, 3])
+    plt.yticks(ticks=[3, 4, 5, 6])
+    plt.xlabel("Time (days)")
+    plt.ylabel("$\log_{10}$(bacterial load)")
+
+    if disp == True:
+        plt.show()
