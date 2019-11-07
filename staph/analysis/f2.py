@@ -8,6 +8,7 @@ from os import listdir
 from ..utils.data import get_kinetic_data_params, get_singh_data
 from ..utils.rh_data import get_rh_fit_data
 from ..utils.det_models import rh_growth_model, twocomp_model
+from ..analysis.igate_ntest import igate
 
 
 def f2(display: bool = False):
@@ -104,15 +105,18 @@ def dr_obj(col, solinds=[0]):
         print(roi)
         pinf = [float(this_roi) for this_roi in roi]
         pinfs[ind1] = pinf
+    devb20, _, _, pinfb20 = igate(filenames=["ntest.o9717095.59"], option1=4)
 
     plt.plot(np.log10(H0), np.array(norig) / 20, "ko", label="Data")
     this_label = f"RH (dev = {round(dev_rh, 2)})"
     plt.plot(np.log10(H0), pinf_rh, "--", label=this_label, color="grey")
+    this_label = f"2C, $b_2$=0 (dev = {round(devb20, 2)})"
+    plt.plot(np.log10(H0), pinfb20, ":", label=this_label, color="xkcd:red")
     for ind1 in range(len(solinds)):
         this_ind = solinds[ind1]
         this_pinf = pinfs[ind1, :]
         this_dev = df.Fst[this_ind]
-        this_label = f"2C (dev = {round(this_dev,2):.2f})"
+        this_label = f"2C, $d_1$=0 (dev = {round(this_dev,2):.2f})"
         plt.plot(np.log10(H0), this_pinf, label=this_label, color=col[ind1])
     plt.legend(loc="lower right")
     plt.xlabel("$Log_{10}$(dose)")
@@ -231,7 +235,7 @@ def partition_plot(
     Notes
     -----
     """
-
+    plt.rcParams["legend.frameon"] = True
     if "cols" not in kwargs.keys():
         cols = ["xkcd:green", "xkcd:orange", "xkcd:red"]
     else:
