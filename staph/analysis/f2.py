@@ -9,6 +9,7 @@ from ..utils.data import get_kinetic_data_params, get_singh_data
 from ..utils.rh_data import get_rh_fit_data
 from ..utils.det_models import rh_growth_model, twocomp_model
 from ..analysis.igate_ntest import igate
+from ..utils.dev import compute_deviance
 
 
 def f2(display: bool = False):
@@ -107,9 +108,21 @@ def dr_obj(col, solinds=[0]):
         pinfs[ind1] = pinf
     devb20, _, _, pinfb20 = igate(filenames=["ntest.o9717095.59"], option1=4)
 
+    # best fit beta-Poisson
+    bp_alpha = 0.18511
+    bp_beta = 28.9968
+    bp_presp = []
+    bp_dev = 0
+    for ind in range(len(H0)):
+        bp_presp.append(1 - (1 + H0[ind] / bp_beta) ** (-bp_alpha))
+        bp_dev += compute_deviance(bp_presp[ind], ind)
+    print("beta poisson deviance : ", bp_dev)
+
     plt.plot(np.log10(H0), np.array(norig) / 20, "ko", label="Data")
     this_label = f"RH (dev = {round(dev_rh, 2)})"
     plt.plot(np.log10(H0), pinf_rh, "--", label=this_label, color="grey")
+    this_label = f"BP (dev = {round(bp_dev, 2)})"
+    plt.plot(np.log10(H0), bp_presp, "-", label=this_label, color="grey")
     this_label = f"2C, $b_2$=0 (dev = {round(devb20, 2)})"
     plt.plot(np.log10(H0), pinfb20, ":", label=this_label, color="xkcd:red")
     for ind1 in range(len(solinds)):
