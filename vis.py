@@ -5,6 +5,7 @@ from staph.analysis.igate_ntest import igate as igate_ntest
 from staph.analysis.igate_thresh import igate as igate_thresh
 from staph.analysis.compute_chisq import compute_chisq
 from staph.analysis.igate_demo import igate as igate_demo
+from staph.analysis.phase_plot import make_phase_plot
 
 
 option1 = int(sys.argv[1])
@@ -55,3 +56,5 @@ elif option1 == 5:
     compute_chisq([6.34, 8.67])
 elif option1 == 6:
     igate_demo(option1=2)
+elif option1 == 7:
+    make_phase_plot(nquivs=20)
