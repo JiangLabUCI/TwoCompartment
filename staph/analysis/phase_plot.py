@@ -5,7 +5,9 @@ from scipy.integrate import odeint
 from typing import List, Dict
 
 
-def make_phase_plot(nquivs: int = 15, logflag: bool = False, disp: bool = True):
+def make_phase_plot(
+    nquivs: int = 15, logflag: bool = False, disp: bool = True, save: bool = False
+):
     """Make phase plot.
 
     Plot a phase diagram of the two-compartment model.
@@ -18,6 +20,8 @@ def make_phase_plot(nquivs: int = 15, logflag: bool = False, disp: bool = True):
         If `True`, make x and y on the log scales. Defaults to `False`.
     disp
         If `True`, display the plot. Defaults to `True`.
+    save
+        If `True`, save the figure as a PDF. Defaults to `False`.
     """
     # Read data and parameters
     df = pd.read_csv("results/rank_1_solutions.csv")
@@ -29,7 +33,15 @@ def make_phase_plot(nquivs: int = 15, logflag: bool = False, disp: bool = True):
     p["r3Imax"] = df["r3*Imax"][index]
 
     # Plot parameters
+    lw = 4
     cols = plt.get_cmap("Set2")
+    plt.figure(figsize=(4.5, 4))
+    if save == True:
+        plt.rcParams["font.family"] = "sans-serif"
+        plt.rcParams["font.size"] = 14
+        plt.rcParams["lines.linewidth"] = lw
+        plt.rcParams["axes.linewidth"] = lw
+        plt.rcParams["lines.markersize"] = 10
 
     # Make quiver data
     if logflag:
@@ -64,7 +76,7 @@ def make_phase_plot(nquivs: int = 15, logflag: bool = False, disp: bool = True):
             color="0.5",
         )
     else:
-        Q = plt.quiver(Y1, Y2, u, v, color="0.5")
+        Q = plt.quiver(Y1, Y2, u, v, color="0.5", linewidth=lw)
 
     plt.plot(0, 0, "o", label="Critical point", color=cols(1))
     plt.plot(0, p["r3Imax"] / p["r3"], "o", color=cols(1))
@@ -96,15 +108,13 @@ def make_phase_plot(nquivs: int = 15, logflag: bool = False, disp: bool = True):
                 color=cols(0),
             )  # end
         else:
-            plt.plot(
-                ys[:, 0], ys[:, 1], "-", label="Example trajectory", color=cols(0)
-            )  # path
+            plt.plot(ys[:, 0], ys[:, 1], "-", label="Trajectory", color=cols(0))  # path
             plt.plot([ys[0, 0]], [ys[0, 1]], "o", label="Start", color=cols(0))  # start
             plt.plot([ys[-1, 0]], [ys[-1, 1]], "bx", label="End", color=cols(0))  # end
         # print(ys)
 
-    plt.xlabel("h(t)")
-    plt.ylabel("i(t)")
+    plt.xlabel("S1")
+    plt.ylabel("S2")
     plt.legend(frameon=True, loc="upper right")
     plt.xticks(ticks=[0, 0.5e7, 1e7])
     plt.yticks(ticks=[0, 0.5e7, 1e7])
@@ -112,6 +122,9 @@ def make_phase_plot(nquivs: int = 15, logflag: bool = False, disp: bool = True):
     # plt.ylim([-4, 4])
     if disp == True:
         plt.show()
+    if save == True:
+        plt.tight_layout()
+        plt.savefig("results/imgs/phase_plot.pdf", transparent=True)
 
 
 def twocomp_derivatives(Y: List[float], t: float, p: Dict) -> List[float]:
