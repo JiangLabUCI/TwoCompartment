@@ -150,6 +150,7 @@ def f3(display: bool = False):
 
         # Plot probability vs. time
         ax = fig.add_subplot(gs2[1, ind1])
+        plt.rcParams["legend.frameon"] = True
         if ind1 == 0:
             partition_plot(tref, pres, pcar, ps, ax, cols=cols)
             label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
