@@ -80,26 +80,21 @@ def f3(display: bool = False):
     hs = 0.3
 
     fig = plt.figure(1, figsize=(9, 4))
-    gs1 = GridSpec(2, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs)
-    ax = fig.add_subplot(gs1[0:2, 0])
-    soap_obj(col_mo)
-    label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label="A")
 
-    labs = ["B", "C"]
+    labs = ["A", "B"]
     for ind1, filename in enumerate(fnames):
         with np.load(filename) as data:
             dose = data["doselist"]
             pinf = data["pinf"]
             pcar = data["pcar"]
             ps = data["ps"]
-        ax = fig.add_subplot(gs1[ind1, 1])
+        ax = plt.subplot(121 + ind1)
         if ind1 == 0:
             partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
-            label(ylab=ax.get_ylabel(), label=labs[ind1])
-            ax.get_xaxis().set_visible(False)
+            label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label=labs[ind1])
         elif ind1 == 1:
             partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=cols, log=True)
-            label(xlab=ax.get_xlabel(), ylab=ax.get_ylabel(), label=labs[ind1])
+            label(xlab=ax.get_xlabel(), ylab=None, label=labs[ind1])
             ax.legend_.remove()
     plt.savefig("results/figs/f3.pdf")
 
