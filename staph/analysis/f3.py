@@ -139,9 +139,9 @@ def f3(display: bool = False):
             sim_stop_thresh=sim_stop_thresh,
         )
         if ind1 == 0:
-            label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs1[ind1])
+            label(xlab=None, ylab=ax.get_ylabel(), label=labs1[ind1])
         elif ind1 == 1:
-            label(xlab="Time (days)", label=labs1[ind1], factor=right_fact)
+            label(xlab=None, label=labs1[ind1], factor=right_fact)
 
         # Plot probability vs. time
         ax = fig.add_subplot(gs2[1, ind1])
@@ -151,7 +151,7 @@ def f3(display: bool = False):
             label(xlab="Time (days)", ylab=ax.get_ylabel(), label=labs2[ind1])
         elif ind1 == 1:
             partition_plot(tref, pres, pcar, ps, ax, cols=cols)
-            label(xlab=ax.get_xlabel(), label=labs2[ind1], factor=right_fact)
+            label(xlab="Time (days)", label=labs2[ind1], factor=right_fact)
         ax.legend_.remove()
 
     plt.savefig("results/figs/f4.pdf")
@@ -238,6 +238,7 @@ def pop_time(
         if handles[ind] == 0:
             legend_flag = 0
     if legend_flag:
+        plt.rcParams["legend.frameon"] = True
         plt.legend(handles, ["Unaffected", "Carrier", "Response", "Threshold"])
     if log:
         plt.ylim([0, np.log10(sim_stop_thresh)])
