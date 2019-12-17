@@ -24,7 +24,7 @@ def f2(display: bool = False):
     """
     # part_cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
     part_cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
-    col_mo = ["#984ea3", "#ff7f00"]
+    col_mo = ["#1b9e77", "#d95f02"]
     sol_inds = [0, 4]
     annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
 
@@ -292,10 +292,13 @@ def pareto_plot(col, solinds=[0]):
     df_r1 = pd.read_csv(fname)
 
     df_nr1 = df_all[df_all.ranks != 1]
-    plt.plot(df_r1.Fde, df_r1.Fst, "o", color="k", label="Rank 1 solutions")
+    r1_marker = "s"
+    plt.plot(df_r1.Fde, df_r1.Fst, r1_marker, color="k", label="Rank 1 solutions")
     plt.plot(df_r1.Fde, df_r1.Fst, "-", color="k", label="Pareto front")
     for ind in range(len(solinds)):
-        plt.plot(df_r1.Fde[solinds[ind]], df_r1.Fst[solinds[ind]], "o", color=col[ind])
+        plt.plot(
+            df_r1.Fde[solinds[ind]], df_r1.Fst[solinds[ind]], r1_marker, color=col[ind]
+        )
     plt.plot(df_nr1.Fde, df_nr1.Fst, ".", color="k", label="Rank >1 solutions")
     plt.legend()
     plt.xlabel("Growth objective")
