@@ -34,7 +34,7 @@ def make_phase_plot(
 
     # Plot parameters
     lw = 4
-    cols = plt.get_cmap("Set2")
+    cols = ["#1b9e77", "#d95f02", "#7570b3"]  # colorbrewer 1
     plt.figure(figsize=(4.5, 4))
     if save == True:
         plt.rcParams["font.family"] = "sans-serif"
@@ -78,8 +78,8 @@ def make_phase_plot(
     else:
         Q = plt.quiver(Y1, Y2, u, v, color="0.5", linewidth=lw)
 
-    plt.plot(0, 0, "o", label="Critical point", color=cols(1))
-    plt.plot(0, p["r3Imax"] / p["r3"], "o", color=cols(1))
+    plt.plot(0, 0, "o", label="Critical point", color=cols[1])
+    plt.plot(0, p["r3Imax"] / p["r3"], "o", color=cols[1])
 
     # Starting points
     y10s = [1e7]
@@ -92,25 +92,27 @@ def make_phase_plot(
         y0 = [y10s[ind], y20s[ind]]
         ys = odeint(lambda Y, t: twocomp_derivatives(Y, t, p), y0, tspan)
         if logflag:
-            plt.plot(np.log10(ys[:, 0]), np.log10(ys[:, 1]), "-", color=cols(0))  # path
+            plt.plot(np.log10(ys[:, 0]), np.log10(ys[:, 1]), "-", color=cols[0])  # path
             plt.plot(
                 np.log10([ys[0, 0]]),
                 np.log10([ys[0, 1]]),
                 "o",
                 label="Start",
-                color=cols(0),
+                color=cols[0],
             )  # start
             plt.plot(
                 np.log10([ys[-1, 0]]),
                 np.log10([ys[-1, 1]]),
                 ">",
                 label="End",
-                color=cols(0),
+                color=cols[0],
             )  # end
         else:
-            plt.plot(ys[:, 0], ys[:, 1], "-", label="Trajectory", color=cols(0))  # path
-            plt.plot([ys[0, 0]], [ys[0, 1]], "o", label="Start", color=cols(0))  # start
-            plt.plot([ys[-1, 0]], [ys[-1, 1]], "bx", label="End", color=cols(0))  # end
+            plt.plot(ys[:, 0], ys[:, 1], "-", label="Trajectory", color=cols[0])  # path
+            plt.plot([ys[0, 0]], [ys[0, 1]], "o", label="Start", color=cols[0])  # start
+            plt.plot(
+                [ys[-1, 0]], [ys[-1, 1]], "bx", mew=3, label="End", color=cols[0]
+            )  # end
         # print(ys)
 
     plt.xlabel("S1")
