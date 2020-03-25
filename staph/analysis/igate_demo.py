@@ -49,7 +49,7 @@ def get_intervals(t, pop, t_req):
     return lower_int, upper_int
 
 
-def igate(option1: int = 2, disp: bool = True):
+def igate(option1: int = 2, disp: bool = True, save: bool = False):
     """
     Model demo plot.
 
@@ -70,6 +70,15 @@ def igate(option1: int = 2, disp: bool = True):
         t_det = data["sol_det_t"]
         pop_det = data["sol_det_y"]
     nrep = int(len(t) / 3)
+
+    plt.figure(figsize=(4.5, 4))
+    lw = 4
+    if save == True:
+        plt.rcParams["font.family"] = "sans-serif"
+        plt.rcParams["font.size"] = 14
+        plt.rcParams["lines.linewidth"] = lw
+        plt.rcParams["axes.linewidth"] = lw
+        plt.rcParams["lines.markersize"] = 10
 
     alpha_val = 1.0
     cols = plt.get_cmap("Set2")
@@ -124,7 +133,10 @@ def igate(option1: int = 2, disp: bool = True):
     plt.xticks(ticks=[0, 1, 2, 3])
     plt.yticks(ticks=[3, 4, 5, 6])
     plt.xlabel("Time (days)")
-    plt.ylabel("$\log_{10}$(bacterial load)")
+    plt.ylabel("$\log_{10}$(S1 + S2)")
 
-    if disp == True:
+    if disp is True:
         plt.show()
+    if save is True:
+        plt.tight_layout()
+        plt.savefig("results/imgs/variance_plot.pdf", transparent=True)
