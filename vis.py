@@ -53,8 +53,8 @@ elif option1 == 4:
         )
     igate_thresh(filenames=fnames, option1=option2)
 elif option1 == 5:
-    compute_chisq([6.34, 8.67])
+    compute_chisq([6.34, 16.24])
 elif option1 == 6:
     igate_demo(option1=2)
 elif option1 == 7:
-    make_phase_plot(nquivs=20)
+    make_phase_plot(nquivs=15, logflag=True)
