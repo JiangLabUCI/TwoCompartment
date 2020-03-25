@@ -92,8 +92,7 @@ def compute_chisq(dev_2c: List[float] = [11.67]):
             dev_2c[ind], k, m_2c_dronly
         )
     n = len(df)
-    df.loc[n] = ["Het host (dose response only)"] + get_gof_values(1.02, k, 3)
-    df.loc[n + 1] = ["Bet Pos (dose response only)"] + get_gof_values(5.49, k, 2)
+    df.loc[n + 1] = ["Bet Pos (dose response only)"] + get_gof_values(6.40, k, 2)
 
     print(df)
     print(
