@@ -25,20 +25,27 @@ def igate(filenames=List[str], option1: int = 1):
     4 : Return best fit's deviance, b2, d1 and pinf.
     """
     for ind1, filename in enumerate(filenames):
-        with open(filename) as f:
+        with open("results/ops/" + filename) as f:
             d = f.read()
         d = d.split("\n")
         b2 = []
         d1 = []
         dev = []
-        for line in d:
+        thresh = []
+        for ind1, line in enumerate(d):
             if line.startswith("Rates are :"):
-                this_line = line.split()
+                if line.endswith("]"):
+                    this_line = line.split()
+                else:
+                    this_line = (d[ind1] + d[ind1 + 1]).replace("\n", "").split()
                 b2.append(float(this_line[6]))
                 d1.append(float(this_line[7]))
-            if line.startswith("Objective is :"):
+            if line.startswith("Which gives"):
                 this_line = line.split()
-                dev.append(float(this_line[3]))
+                dev.append(float(this_line[6]))
+            if line.startswith("Best thresh is : "):
+                this_line = line.split()
+                thresh.append(float(this_line[4]))
             if line.startswith("Initial_guess is :"):
                 this_line = (
                     line.replace(",", "").replace("(", "").replace(")", "").split()
@@ -46,7 +53,9 @@ def igate(filenames=List[str], option1: int = 1):
                 init_guess = float(this_line[3]), float(this_line[4])
         if option1 == 1:
             best_ind = np.argmin(dev)
-            print(f"{dev[best_ind]:.2f}, {b2[best_ind]:.2f}, {d1[best_ind]:.2f}")
+            print(
+                f"Dev = {dev[best_ind]:.2f}, b2 = {b2[best_ind]:.2f}, d1 = {d1[best_ind]:.2f}, thresh = {thresh[best_ind]:.3e}"
+            )
         elif option1 == 2:
             plt.figure()
             plt.subplot(231)
@@ -62,27 +71,25 @@ def igate(filenames=List[str], option1: int = 1):
             # plt.plot(d1)
             plt.plot(np.log10(d1), ".")
             plt.subplot(234)
-            plt.axvline(x=init_guess[0], color="k")
             plt.plot(b2, dev, "r.")
             plt.subplot(235)
-            plt.axvline(x=init_guess[1], color="k")
             plt.plot(d1, dev, "r.")
             plt.subplot(236)
             plt.plot(b2, d1, "r.")
-            plt.plot(init_guess[0], init_guess[1], "ko")
         elif option1 == 3:
             sdata = get_singh_data()
-            qstr = "Objective is :  " + str(np.min(dev))
+            qstr = f"Which gives best dev of : {np.min(dev):.4f}"
             for ind1, line in enumerate(d):
                 if line.startswith("Best F values :"):
                     Fde = line
                 if line.startswith(qstr):
-                    roi = d[ind1 - 6 : ind1]
-                    break
-            pinf = []
-            for ind1, this_roi in enumerate(roi):
-                temp = this_roi.replace(",", "").split()
-                pinf.append(float(temp[5]))
+                    for ind2 in range(5):
+                        if d[ind1 + ind2].startswith("p_res is :"):
+                            roi = d[ind1 + ind2]
+                            break
+            roi = roi.replace("[", "").replace("]", "").split()
+            roi = roi[3:]
+            pinf = [float(this_roi) for this_roi in roi]
             Fde = Fde[:-1].replace("[", "").split()
             Fde = float(Fde[4])
             rh = get_rh_fit_data()
@@ -102,15 +109,17 @@ def igate(filenames=List[str], option1: int = 1):
             plt.legend()
         elif option1 == 4:
             min_ind = np.argmin(dev)
-            qstr = "Objective is :  " + str(np.min(dev))
+            qstr = f"Which gives best dev of : {np.min(dev):.4f}"
             for ind1, line in enumerate(d):
+                if line.startswith("Best F values :"):
+                    Fde = line
                 if line.startswith(qstr):
-                    print(ind1, "many")
-                    roi = d[ind1 - 6 : ind1]
-                    # break
-            pinf = []
-            for ind1, this_roi in enumerate(roi):
-                temp = this_roi.replace(",", "").split()
-                pinf.append(np.float(temp[5]))
+                    for ind2 in range(5):
+                        if d[ind1 + ind2].startswith("p_res is :"):
+                            roi = d[ind1 + ind2]
+                            break
+            roi = roi.replace("[", "").replace("]", "").split()
+            roi = roi[3:]
+            pinf = [float(this_roi) for this_roi in roi]
             return dev[min_ind], b2[min_ind], d1[min_ind], pinf
     plt.show()

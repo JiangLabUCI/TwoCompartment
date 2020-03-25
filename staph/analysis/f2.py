@@ -3,10 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 from matplotlib.patches import Polygon
-from typing import List, Dict
+from typing import List, Union
+from os import listdir
 from ..utils.data import get_kinetic_data_params, get_singh_data
 from ..utils.rh_data import get_rh_fit_data
 from ..utils.det_models import rh_growth_model, twocomp_model
+from ..analysis.igate_ntest import igate
+from ..utils.dev import compute_deviance
 
 
 def f2(display: bool = False):
@@ -21,8 +24,8 @@ def f2(display: bool = False):
     """
     # part_cols = ["#4daf4a", "#ff7f00", "#e41a1c"]
     part_cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
-    col_mo = ["#984ea3", "#ff7f00"]
-    sol_inds = [0, 5]
+    col_mo = ["#1b9e77", "#d95f02"]
+    sol_inds = [0, 4]
     annotation_args = {"va": "bottom", "weight": "bold", "fontsize": "12"}
 
     plt.figure(figsize=(9, 8))
@@ -45,7 +48,7 @@ def f2(display: bool = False):
     plt.text(x1 - 0.15 * (x2 - x1), y2, "C", annotation_args)
 
     ax = plt.subplot(224)
-    filename = "results/predsbasebase2523823dl5r1_1000rep.npz"
+    filename = "results/predsbasebase2523823dl" + str(sol_inds[1]) + "r1_1000rep.npz"
     with np.load(filename) as data:
         dose = data["doselist"]
         pinf = data["pinf"]
@@ -86,29 +89,47 @@ def dr_obj(col, solinds=[0]):
 
     # Get infection probabilities from output files
     for ind1, this_sol_ind in enumerate(solinds):
-        fname = "results/ops/ntest.o7721941." + str(df["desol_inds"][this_sol_ind] + 1)
+        fname = "results/ops/" + get_filename(df["desol_inds"][this_sol_ind] + 1)
+        print(f"Fname is : {fname}")
         with open(fname) as f:
             d = f.read()
         d = d.split("\n")
-        qstr = "Objective is :  " + str(df.Fst[this_sol_ind])[:-4]
+        qstr = f"Which gives best dev of : {df.Fst[this_sol_ind]:.4f}"
         for ind2, line in enumerate(d):
             if line.startswith(qstr):
-                roi = d[ind2 - 6 : ind2]
+                roi = d[ind2 + 2]
                 break
-        pinf = []
-        for ind2, this_roi in enumerate(roi):
-            temp = this_roi.replace(",", "").split()
-            pinf.append(float(temp[5]))
+        print(ind1, qstr)
+        assert roi.startswith("p_res is : ")
+        roi = roi[12:]
+        roi = roi.replace("]", "").split()
+        print(roi)
+        pinf = [float(this_roi) for this_roi in roi]
         pinfs[ind1] = pinf
+    devb20, _, _, pinfb20 = igate(filenames=["ntest.o9717095.59"], option1=4)
+
+    # best fit beta-Poisson
+    bp_alpha = 0.18511
+    bp_beta = 28.9968
+    bp_presp = []
+    bp_dev = 0
+    for ind in range(len(H0)):
+        bp_presp.append(1 - (1 + H0[ind] / bp_beta) ** (-bp_alpha))
+        bp_dev += compute_deviance(bp_presp[ind], ind)
+    print("beta poisson deviance : ", bp_dev)
 
     plt.plot(np.log10(H0), np.array(norig) / 20, "ko", label="Data")
     this_label = f"RH (dev = {round(dev_rh, 2)})"
     plt.plot(np.log10(H0), pinf_rh, "--", label=this_label, color="grey")
+    this_label = f"BP (dev = {round(bp_dev, 2)})"
+    plt.plot(np.log10(H0), bp_presp, "-", label=this_label, color="grey")
+    this_label = f"2C, $b_2$=0 (dev = {round(devb20, 2)})"
+    plt.plot(np.log10(H0), pinfb20, ":", label=this_label, color="xkcd:red")
     for ind1 in range(len(solinds)):
         this_ind = solinds[ind1]
         this_pinf = pinfs[ind1, :]
         this_dev = df.Fst[this_ind]
-        this_label = f"2C (dev = {round(this_dev,2):.2f})"
+        this_label = f"2C, $d_1$=0 (dev = {round(this_dev,2):.2f})"
         plt.plot(np.log10(H0), this_pinf, label=this_label, color=col[ind1])
     plt.legend(loc="lower right")
     plt.xlabel("$Log_{10}$(dose)")
@@ -227,7 +248,7 @@ def partition_plot(
     Notes
     -----
     """
-
+    plt.rcParams["legend.frameon"] = True
     if "cols" not in kwargs.keys():
         cols = ["xkcd:green", "xkcd:orange", "xkcd:red"]
     else:
@@ -271,11 +292,39 @@ def pareto_plot(col, solinds=[0]):
     df_r1 = pd.read_csv(fname)
 
     df_nr1 = df_all[df_all.ranks != 1]
-    plt.plot(df_r1.Fde, df_r1.Fst, "o", color="k", label="Rank 1 solutions")
+    r1_marker = "s"
+    plt.plot(df_r1.Fde, df_r1.Fst, r1_marker, color="k", label="Rank 1 solutions")
     plt.plot(df_r1.Fde, df_r1.Fst, "-", color="k", label="Pareto front")
     for ind in range(len(solinds)):
-        plt.plot(df_r1.Fde[solinds[ind]], df_r1.Fst[solinds[ind]], "o", color=col[ind])
+        plt.plot(
+            df_r1.Fde[solinds[ind]], df_r1.Fst[solinds[ind]], r1_marker, color=col[ind]
+        )
     plt.plot(df_nr1.Fde, df_nr1.Fst, ".", color="k", label="Rank >1 solutions")
     plt.legend()
     plt.xlabel("Growth objective")
     plt.ylabel("Dose-response objective")
+
+
+def get_filename(task_no: int = 0) -> Union[str, None]:
+    """Get output filename.
+
+    For a given task number, get the file name of where the output is saved.
+    Task number = DE solution number + 1.
+
+    Parameters
+    ----------
+    task_no
+        Task number.
+
+    Returns
+    -------
+    filename
+        Output file name.
+    """
+    filenames = listdir("results/ops/")
+    filename = None
+    for a_file in filenames:
+        if a_file.endswith("." + str(task_no)):
+            filename = a_file
+            break
+    return filename

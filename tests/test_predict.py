@@ -5,7 +5,6 @@ from ..staph.utils.predict import predict_fit
 
 def test_predict():
     pop_array, t_array = predict_fit(
-        filename="results/rank_1_solutions.csv",
         n_cores=8,
         nrep=1,
         nstep=200000,

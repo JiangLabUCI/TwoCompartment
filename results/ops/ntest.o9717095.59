@@ -1,0 +1,788 @@
+staph.utils
+Seed is :  0
+Nstep :  400000
+Number of points is :  6
+Best F values :  [0.6710525]
+Best parameters :  [[1.74528507e+00 6.50343763e-03 3.91170687e-07 3.52920212e+00]]
+Creating pool with 8  processes
+
+staph.utils
+Seed is :  0
+Nstep :  400000
+Number of points is :  6
+Best F values :  [0.6710525]
+Best parameters :  [[1.74528507e+00 6.50343763e-03 3.91170687e-07 3.52920212e+00]]
+Creating pool with 8  processes
+
+staph.utils
+Seed is :  0
+Nstep :  400000
+Number of points is :  6
+Best F values :  [0.6710525]
+Best parameters :  [[1.74528507e+00 6.50343763e-03 3.91170687e-07 3.52920212e+00]]
+Creating pool with 8  processes
+
+staph.utils
+Seed is :  0
+Nstep :  400000
+Number of points is :  6
+Best F values :  [0.6710525]
+Best parameters :  [[1.74528507e+00 6.50343763e-03 3.91170687e-07 3.52920212e+00]]
+Creating pool with 8  processes
+
+staph.utils
+Seed is :  0
+Nstep :  400000
+Number of points is :  6
+Best F values :  [0.6710525]
+Best parameters :  [[1.74528507e+00 6.50343763e-03 3.91170687e-07 3.52920212e+00]]
+Creating pool with 8  processes
+
+pool = %s <multiprocessing.pool.Pool object at 0x2b212535bba8>
+bXlist, r3 and Imax are :  [1.74528507e+00 6.50343763e-03 3.91170687e-07 3.52920212e+00] 3.9117068742420017e-07 9022153.834122816
+r3 * Imax is :  3.5292021173407053
+Starting loop for b2u=0.00e+00, d1u=0.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 3.52920212e+00 0.00000000e+00
+ 0.00000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 654, 2.0: 346})
+Seed = 0, status counts :  Counter({2.0: 921, 1.0: 79})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70596860e+07
+Which gives best dev of : 17.6245
+Which is sum of :  [6.71762838 3.7072333  0.01953268 3.32899058 0.60272244 3.24840222]
+p_res is : [0.042 0.21  0.635 0.859 0.903 0.922]
+Starting loop for b2u=0.00e+00, d1u=0.10
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 3.62920212e+00 0.00000000e+00
+ 1.00000000e-01 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 664, 2.0: 336})
+Seed = 0, status counts :  Counter({2.0: 914, 1.0: 86})
+Seed = 0, status counts :  Counter({2.0: 997, 4.0: 3})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70593250e+07
+Which gives best dev of : 16.8439
+Which is sum of :  [7.56506174 2.82887784 0.02896352 2.74276457 0.64616194 3.03206854]
+p_res is : [0.037 0.231 0.668 0.847 0.901 0.927]
+Starting loop for b2u=0.00e+00, d1u=0.20
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 3.72920212e+00 0.00000000e+00
+ 2.00000000e-01 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 672, 2.0: 328})
+Seed = 0, status counts :  Counter({2.0: 902, 1.0: 96, 4.0: 2})
+Seed = 0, status counts :  Counter({2.0: 998, 4.0: 2})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70583040e+07
+Which gives best dev of : 17.9109
+Which is sum of :  [7.56506174 3.14442773 0.03458821 4.72604602 0.13559667 2.30516451]
+p_res is : [0.037 0.223 0.63  0.882 0.93  0.944]
+Starting loop for b2u=0.00e+00, d1u=0.30
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 3.82920212e+00 0.00000000e+00
+ 3.00000000e-01 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 679, 2.0: 321})
+Seed = 0, status counts :  Counter({2.0: 898, 1.0: 102})
+Seed = 0, status counts :  Counter({2.0: 996, 4.0: 4})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70592050e+07
+Which gives best dev of : 17.8602
+Which is sum of :  [7.56506174 2.82887784 0.20341746 3.54425662 0.38334512 3.33526436]
+p_res is : [0.037 0.231 0.601 0.863 0.914 0.92 ]
+Starting loop for b2u=0.00e+00, d1u=0.40
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 3.92920212e+00 0.00000000e+00
+ 4.00000000e-01 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 689, 2.0: 311})
+Seed = 0, status counts :  Counter({2.0: 889, 1.0: 109, 4.0: 2})
+Seed = 0, status counts :  Counter({2.0: 993, 4.0: 7})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70591310e+07
+Which gives best dev of : 17.7024
+Which is sum of :  [7.38496252 3.02345952 0.23738878 3.22524179 0.53951823 3.29180971]
+p_res is : [0.038 0.226 0.597 0.857 0.906 0.921]
+Starting loop for b2u=0.00e+00, d1u=0.50
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 4.02920212e+00 0.00000000e+00
+ 5.00000000e-01 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 702, 2.0: 298})
+Seed = 0, status counts :  Counter({2.0: 881, 1.0: 116, 4.0: 3})
+Seed = 0, status counts :  Counter({2.0: 996, 4.0: 4})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70588090e+07
+Which gives best dev of : 17.4306
+Which is sum of :  [8.14198733 3.06342534 0.13635836 3.07428619 0.53951823 2.47501615]
+p_res is : [0.034 0.225 0.61  0.854 0.906 0.94 ]
+Starting loop for b2u=0.00e+00, d1u=0.60
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 4.12920212e+00 0.00000000e+00
+ 6.00000000e-01 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 703, 2.0: 297})
+Seed = 0, status counts :  Counter({2.0: 881, 1.0: 119})
+Seed = 0, status counts :  Counter({2.0: 994, 4.0: 6})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70581900e+07
+Which gives best dev of : 18.0931
+Which is sum of :  [7.21043996 3.94137406 0.1232315  3.71278404 0.20246317 2.90282771]
+p_res is : [0.039 0.205 0.612 0.866 0.925 0.93 ]
+Starting loop for b2u=0.00e+00, d1u=0.70
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 4.22920212e+00 0.00000000e+00
+ 7.00000000e-01 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 711, 2.0: 289})
+Seed = 0, status counts :  Counter({2.0: 868, 1.0: 130, 4.0: 2})
+Seed = 0, status counts :  Counter({2.0: 991, 4.0: 9})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70583400e+07
+Which gives best dev of : 16.2369
+Which is sum of :  [6.87702329e+00 3.02345952e+00 7.89143811e-04 3.38182311e+00
+ 4.78768834e-01 2.47501615e+00]
+p_res is : [0.041 0.226 0.647 0.86  0.909 0.94 ]
+Starting loop for b2u=0.00e+00, d1u=0.80
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 4.32920212e+00 0.00000000e+00
+ 8.00000000e-01 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 716, 2.0: 284})
+Seed = 0, status counts :  Counter({2.0: 863, 1.0: 134, 4.0: 3})
+Seed = 0, status counts :  Counter({2.0: 992, 4.0: 8})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70579340e+07
+Which gives best dev of : 18.2046
+Which is sum of :  [8.34770187 4.03793652 0.01053837 3.77035819 0.07044715 1.96760977]
+p_res is : [0.033 0.203 0.639 0.867 0.936 0.952]
+Starting loop for b2u=0.00e+00, d1u=0.90
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 4.42920212e+00 0.00000000e+00
+ 9.00000000e-01 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 726, 2.0: 274})
+Seed = 0, status counts :  Counter({2.0: 856, 1.0: 143, 4.0: 1})
+Seed = 0, status counts :  Counter({2.0: 984, 4.0: 16})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70588990e+07
+Which gives best dev of : 17.9339
+Which is sum of :  [8.14198733 4.03793652 0.01253127 2.56561459 0.40182173 2.77400313]
+p_res is : [0.034 0.203 0.638 0.843 0.913 0.933]
+Starting loop for b2u=0.00e+00, d1u=1.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 4.52920212e+00 0.00000000e+00
+ 1.00000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 730, 2.0: 269, 4.0: 1})
+Seed = 0, status counts :  Counter({2.0: 851, 1.0: 148, 4.0: 1})
+Seed = 0, status counts :  Counter({2.0: 986, 4.0: 14})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70577200e+07
+Which gives best dev of : 19.3390
+Which is sum of :  [8.14198733 4.2868654  0.0170288  4.06917204 0.13559667 2.68834999]
+p_res is : [0.034 0.198 0.636 0.872 0.93  0.935]
+Starting loop for b2u=0.00e+00, d1u=1.10
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 4.62920212e+00 0.00000000e+00
+ 1.10000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 735, 2.0: 265})
+Seed = 0, status counts :  Counter({2.0: 840, 1.0: 160})
+Seed = 0, status counts :  Counter({2.0: 988, 4.0: 12})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70582160e+07
+Which gives best dev of : 18.5296
+Which is sum of :  [7.94323048e+00 4.33797168e+00 4.28182281e-03 3.17430895e+00
+ 2.95830467e-01 2.77400313e+00]
+p_res is : [0.035 0.197 0.643 0.856 0.919 0.933]
+Starting loop for b2u=0.00e+00, d1u=1.20
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 4.72920212e+00 0.00000000e+00
+ 1.20000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 740, 2.0: 260})
+Seed = 0, status counts :  Counter({2.0: 838, 1.0: 161, 4.0: 1})
+Seed = 0, status counts :  Counter({2.0: 991, 4.0: 9})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70580550e+07
+Which gives best dev of : 18.1489
+Which is sum of :  [7.56506174e+00 3.89372271e+00 7.93317457e-04 3.02518071e+00
+ 4.59087303e-01 3.20504178e+00]
+p_res is : [0.037 0.206 0.653 0.853 0.91  0.923]
+Starting loop for b2u=0.00e+00, d1u=1.30
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 4.82920212e+00 0.00000000e+00
+ 1.30000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 748, 2.0: 252})
+Seed = 0, status counts :  Counter({2.0: 831, 1.0: 169})
+Seed = 0, status counts :  Counter({2.0: 990, 4.0: 10})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70574450e+07
+Which gives best dev of : 18.7009
+Which is sum of :  [7.94323048 4.44153688 0.04178731 3.71278404 0.38334512 2.17824743]
+p_res is : [0.035 0.195 0.628 0.866 0.914 0.947]
+Starting loop for b2u=0.00e+00, d1u=1.40
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 4.92920212e+00 0.00000000e+00
+ 1.40000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 748, 2.0: 252})
+Seed = 0, status counts :  Counter({2.0: 821, 1.0: 178, 4.0: 1})
+Seed = 0, status counts :  Counter({2.0: 992, 4.0: 8})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70589390e+07
+Which gives best dev of : 18.2730
+Which is sum of :  [7.38496252 3.75324522 0.11691156 1.86747257 1.15758546 3.99281341]
+p_res is : [0.038 0.209 0.613 0.825 0.88  0.905]
+Starting loop for b2u=0.00e+00, d1u=1.50
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 5.02920212e+00 0.00000000e+00
+ 1.50000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 747, 2.0: 253})
+Seed = 0, status counts :  Counter({2.0: 817, 1.0: 183})
+Seed = 0, status counts :  Counter({2.0: 988, 4.0: 12})
+Seed = 0, status counts :  Counter({2.0: 999, 4.0: 1})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70579300e+07
+Which gives best dev of : 16.6840
+Which is sum of :  [6.71762838 3.66162264 0.03810405 2.74276457 0.23207967 3.29180971]
+p_res is : [0.042 0.211 0.629 0.847 0.923 0.921]
+Starting loop for b2u=0.00e+00, d1u=1.60
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 5.12920212e+00 0.00000000e+00
+ 1.60000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 747, 2.0: 252, 4.0: 1})
+Seed = 0, status counts :  Counter({2.0: 816, 1.0: 184})
+Seed = 0, status counts :  Counter({2.0: 986, 4.0: 14})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70590710e+07
+Which gives best dev of : 16.5291
+Which is sum of :  [6.2660514  3.57159187 0.01469487 1.69963534 1.29246627 3.68461156]
+p_res is : [0.045 0.213 0.637 0.82  0.875 0.912]
+Starting loop for b2u=0.00e+00, d1u=1.70
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 5.22920212e+00 0.00000000e+00
+ 1.70000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 753, 2.0: 247})
+Seed = 0, status counts :  Counter({2.0: 810, 1.0: 188, 4.0: 2})
+Seed = 0, status counts :  Counter({2.0: 985, 4.0: 15})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70576210e+07
+Which gives best dev of : 18.8629
+Which is sum of :  [7.75104128e+00 3.18546979e+00 8.79896434e-05 4.38723103e+00
+ 4.20608174e-01 3.11846166e+00]
+p_res is : [0.036 0.222 0.651 0.877 0.912 0.925]
+Starting loop for b2u=0.00e+00, d1u=1.80
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 5.32920212e+00 0.00000000e+00
+ 1.80000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 757, 2.0: 243})
+Seed = 0, status counts :  Counter({2.0: 800, 1.0: 199, 4.0: 1})
+Seed = 0, status counts :  Counter({2.0: 991, 4.0: 9})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70570880e+07
+Which gives best dev of : 17.7595
+Which is sum of :  [7.38496252e+00 3.48312680e+00 7.89143811e-04 3.77035819e+00
+ 1.74447052e-01 2.94586161e+00]
+p_res is : [0.038 0.215 0.647 0.867 0.927 0.929]
+Starting loop for b2u=0.00e+00, d1u=1.90
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 5.42920212e+00 0.00000000e+00
+ 1.90000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 766, 2.0: 234})
+Seed = 0, status counts :  Counter({2.0: 792, 1.0: 208})
+Seed = 0, status counts :  Counter({2.0: 983, 4.0: 17})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70588320e+07
+Which gives best dev of : 19.7954
+Which is sum of :  [ 7.56506174  5.04482784 -0.          1.90232183  1.15758546  4.12563036]
+p_res is : [0.037 0.184 0.65  0.826 0.88  0.902]
+Starting loop for b2u=0.00e+00, d1u=2.00
+Using a sim stop threshold of 1.00000000e+09
+Rates are :   [1.74528507e+00 6.50343763e-03 5.52920212e+00 0.00000000e+00
+ 2.00000000e+00 2.60780458e-07]
+Seed = 0, status counts :  Counter({1.0: 768, 2.0: 232})
+Seed = 0, status counts :  Counter({2.0: 798, 1.0: 201, 4.0: 1})
+Seed = 0, status counts :  Counter({2.0: 983, 4.0: 17})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Seed = 0, status counts :  Counter({2.0: 1000})
+Best thresh is : 2.70571320e+07
+Which gives best dev of : 18.4045
+Which is sum of :  [7.56506174e+00 3.98944412e+00 7.06627913e-03 3.59974292e+00
+ 3.83345118e-01 2.85984007e+00]
+p_res is : [0.037 0.204 0.641 0.864 0.914 0.931]
+optim objs is :  [17.62450958 16.84389815 17.91088488 17.86022314 17.70238056 17.4305916
+ 18.09312044 16.23688005 18.20459187 17.93389455 19.33900023 18.52962653
+ 18.14888755 18.70093126 18.27299074 16.68400902 16.52905131 18.86289992
+ 17.75954531 19.79542722 18.40450024]
+Best fit is : 16.236880045312077
+1 DE solution took :  60.97553060762584 s
+Output filename :  results/6021324_1000rep0se_58to58b2d1_1o5_cpu.npz
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.00934555e+08 0.00000000e+00
+ 5.41319840e+06 9.55196958e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.03647043e+08 0.00000000e+00
+ 8.12025900e+06 9.55305518e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14445690e+08 0.00000000e+00
+ 1.89425761e+07 9.54832150e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17150473e+08 0.00000000e+00
+ 2.16484184e+07 9.54810980e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19873813e+08 0.00000000e+00
+ 2.43579834e+07 9.55086429e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22564390e+08 0.00000000e+00
+ 2.70609230e+07 9.54839207e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.30680561e+08 0.00000000e+00
+ 3.51786331e+07 9.54808439e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36149836e+08 0.00000000e+00
+ 4.06077840e+07 9.55610901e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36134320e+08 0.00000000e+00
+ 4.06031565e+07 9.55393118e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36158315e+08 0.00000000e+00
+ 4.06103130e+07 9.55729933e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38860278e+08 0.00000000e+00
+ 4.33159856e+07 9.55655731e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38799312e+08 0.00000000e+00
+ 4.32969680e+07 9.54816766e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38856626e+08 0.00000000e+00
+ 4.33148464e+07 9.55605464e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41503851e+08 0.00000000e+00
+ 4.60025338e+07 9.54796231e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.44248157e+08 0.00000000e+00
+ 4.87214928e+07 9.55303118e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.44203365e+08 0.00000000e+00
+ 4.87063638e+07 9.54709928e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.44208700e+08 0.00000000e+00
+ 4.87081656e+07 9.54780565e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46910409e+08 0.00000000e+00
+ 5.14126700e+07 9.54724676e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46920996e+08 0.00000000e+00
+ 5.14163750e+07 9.54862284e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49697408e+08 0.00000000e+00
+ 5.41479240e+07 9.55759586e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49694511e+08 0.00000000e+00
+ 5.41468760e+07 9.55722590e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49691088e+08 0.00000000e+00
+ 5.41456380e+07 9.55678888e+07]
+Attention: b1 reaction overflow. Prop array is :  [       0.                0.         98210949.03320473        0.
+  2706130.6        95486623.56046875]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.00935125e+08 0.00000000e+00
+ 5.41322900e+06 9.55207757e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.03663746e+08 0.00000000e+00
+ 8.12156760e+06 9.55613442e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.06371509e+08 0.00000000e+00
+ 1.08288152e+07 9.55623749e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.09033900e+08 0.00000000e+00
+ 1.35304580e+07 9.54838713e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.11786061e+08 0.00000000e+00
+ 1.62432438e+07 9.55626220e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17184596e+08 0.00000000e+00
+ 2.16547240e+07 9.55367282e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17201246e+08 0.00000000e+00
+ 2.16578008e+07 9.55638787e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19910243e+08 0.00000000e+00
+ 2.43653859e+07 9.55667027e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19856681e+08 0.00000000e+00
+ 2.43545022e+07 9.54813450e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19906173e+08 0.00000000e+00
+ 2.43645588e+07 9.55602146e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19860029e+08 0.00000000e+00
+ 2.43551826e+07 9.54866800e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22614474e+08 0.00000000e+00
+ 2.70719810e+07 9.55619725e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22563384e+08 0.00000000e+00
+ 2.70607010e+07 9.54823541e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25265793e+08 0.00000000e+00
+ 2.97659010e+07 9.54767722e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.0000000e+00 0.0000000e+00 1.2803175e+08 0.0000000e+00 3.2487108e+07
+ 9.5566272e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.27972422e+08 0.00000000e+00
+ 3.24720540e+07 9.54777248e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.30684241e+08 0.00000000e+00
+ 3.51796237e+07 9.54862213e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.33448097e+08 0.00000000e+00
+ 3.79021454e+07 9.55688913e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.33441980e+08 0.00000000e+00
+ 3.79004080e+07 9.55601299e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36158762e+08 0.00000000e+00
+ 4.06104465e+07 9.55736216e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36095998e+08 0.00000000e+00
+ 4.05917265e+07 9.54855297e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38861807e+08 0.00000000e+00
+ 4.33164624e+07 9.55676770e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38793845e+08 0.00000000e+00
+ 4.32952624e+07 9.54741541e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38817224e+08 0.00000000e+00
+ 4.33025552e+07 9.55063208e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41572474e+08 0.00000000e+00
+ 4.60248429e+07 9.55722519e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41571439e+08 0.00000000e+00
+ 4.60245063e+07 9.55708540e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41572845e+08 0.00000000e+00
+ 4.60249636e+07 9.55727532e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46950981e+08 0.00000000e+00
+ 5.14268687e+07 9.55252084e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49688003e+08 0.00000000e+00
+ 5.41445220e+07 9.55639493e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49626916e+08 0.00000000e+00
+ 5.41224260e+07 9.54859673e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.00934775e+08 0.00000000e+00
+ 5.41321020e+06 9.55201122e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.06354008e+08 0.00000000e+00
+ 1.08270336e+07 9.55309329e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.09078886e+08 0.00000000e+00
+ 1.35360405e+07 9.55626785e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14495362e+08 0.00000000e+00
+ 1.89507976e+07 9.55661167e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14474330e+08 0.00000000e+00
+ 1.89473165e+07 9.55310106e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14462082e+08 0.00000000e+00
+ 1.89452893e+07 9.55105697e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14491378e+08 0.00000000e+00
+ 1.89501382e+07 9.55594663e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14461710e+08 0.00000000e+00
+ 1.89452277e+07 9.55099486e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19858258e+08 0.00000000e+00
+ 2.43548226e+07 9.54838572e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19905770e+08 0.00000000e+00
+ 2.43644769e+07 9.55595722e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19892163e+08 0.00000000e+00
+ 2.43617121e+07 9.55378859e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22560988e+08 0.00000000e+00
+ 2.70601720e+07 9.54786210e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22597978e+08 0.00000000e+00
+ 2.70683390e+07 9.55362623e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22613269e+08 0.00000000e+00
+ 2.70717150e+07 9.55600946e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22561894e+08 0.00000000e+00
+ 2.70603720e+07 9.54800324e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22560246e+08 0.00000000e+00
+ 2.70600080e+07 9.54774637e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22617467e+08 0.00000000e+00
+ 2.70726420e+07 9.55666391e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25304960e+08 0.00000000e+00
+ 2.97752081e+07 9.55364882e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25323894e+08 0.00000000e+00
+ 2.97797071e+07 9.55653613e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.28012242e+08 0.00000000e+00
+ 3.24821580e+07 9.55371517e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.30737396e+08 0.00000000e+00
+ 3.51939328e+07 9.55639140e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.30735392e+08 0.00000000e+00
+ 3.51933933e+07 9.55609842e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36110935e+08 0.00000000e+00
+ 4.05961815e+07 9.55064902e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38861109e+08 0.00000000e+00
+ 4.33162448e+07 9.55667168e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41565404e+08 0.00000000e+00
+ 4.60225445e+07 9.55627068e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.44272735e+08 0.00000000e+00
+ 4.87297944e+07 9.55628691e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.44209462e+08 0.00000000e+00
+ 4.87084230e+07 9.54790656e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46982329e+08 0.00000000e+00
+ 5.14378393e+07 9.55659684e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46906988e+08 0.00000000e+00
+ 5.14114730e+07 9.54680221e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49697104e+08 0.00000000e+00
+ 5.41478140e+07 9.55755703e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49659229e+08 0.00000000e+00
+ 5.41341140e+07 9.55272130e+07]
+Attention: b1 reaction overflow. Prop array is :  [       0.                0.         98225854.16630065        0.
+  2706541.3        95515609.10380192]
+Attention: b1 reaction overflow. Prop array is :  [       0.                0.         98210673.21384382        0.
+  2706123.         95486087.22468849]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.06346445e+08 0.00000000e+00
+ 1.08262636e+07 9.55173454e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.06345576e+08 0.00000000e+00
+ 1.08261752e+07 9.55157856e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.06353835e+08 0.00000000e+00
+ 1.08270160e+07 9.55306223e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.06342834e+08 0.00000000e+00
+ 1.08258960e+07 9.55108590e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.06356409e+08 0.00000000e+00
+ 1.08272780e+07 9.55352458e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.09059264e+08 0.00000000e+00
+ 1.35336055e+07 9.55283000e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.11786119e+08 0.00000000e+00
+ 1.62432522e+07 9.55627209e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14461152e+08 0.00000000e+00
+ 1.89451353e+07 9.55090169e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17183609e+08 0.00000000e+00
+ 2.16545416e+07 9.55351188e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17153339e+08 0.00000000e+00
+ 2.16489480e+07 9.54857697e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17149854e+08 0.00000000e+00
+ 2.16483040e+07 9.54800888e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17153699e+08 0.00000000e+00
+ 2.16490144e+07 9.54863554e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19857212e+08 0.00000000e+00
+ 2.43546102e+07 9.54821918e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19860029e+08 0.00000000e+00
+ 2.43551826e+07 9.54866800e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25270311e+08 0.00000000e+00
+ 2.97669746e+07 9.54836596e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25265200e+08 0.00000000e+00
+ 2.97657602e+07 9.54758689e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.28030383e+08 0.00000000e+00
+ 3.24867612e+07 9.55642317e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.33427108e+08 0.00000000e+00
+ 3.78961842e+07 9.55388318e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.33448284e+08 0.00000000e+00
+ 3.79021986e+07 9.55691596e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36118770e+08 0.00000000e+00
+ 4.05985185e+07 9.55174866e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38862699e+08 0.00000000e+00
+ 4.33167408e+07 9.55689054e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38795681e+08 0.00000000e+00
+ 4.32958352e+07 9.54766804e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38866500e+08 0.00000000e+00
+ 4.33179264e+07 9.55741370e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41508301e+08 0.00000000e+00
+ 4.60039805e+07 9.54856285e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41574257e+08 0.00000000e+00
+ 4.60254226e+07 9.55746595e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41568218e+08 0.00000000e+00
+ 4.60234591e+07 9.55665050e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41506879e+08 0.00000000e+00
+ 4.60035181e+07 9.54837090e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.44209488e+08 0.00000000e+00
+ 4.87084320e+07 9.54791009e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46912200e+08 0.00000000e+00
+ 5.14132970e+07 9.54747963e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49688285e+08 0.00000000e+00
+ 5.41446240e+07 9.55643094e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49692006e+08 0.00000000e+00
+ 5.41459700e+07 9.55690607e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.00937456e+08 0.00000000e+00
+ 5.41335400e+06 9.55251872e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.03647154e+08 0.00000000e+00
+ 8.12026770e+06 9.55307565e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14493877e+08 0.00000000e+00
+ 1.89505519e+07 9.55636387e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14493383e+08 0.00000000e+00
+ 1.89504700e+07 9.55628127e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14464941e+08 0.00000000e+00
+ 1.89457625e+07 9.55153409e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17203095e+08 0.00000000e+00
+ 2.16581424e+07 9.55668933e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19910810e+08 0.00000000e+00
+ 2.43655011e+07 9.55676064e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19905725e+08 0.00000000e+00
+ 2.43644679e+07 9.55595016e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22580097e+08 0.00000000e+00
+ 2.70643910e+07 9.55083958e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22580935e+08 0.00000000e+00
+ 2.70645760e+07 9.55097015e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25271551e+08 0.00000000e+00
+ 2.97672694e+07 9.54855509e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.28004448e+08 0.00000000e+00
+ 3.24801804e+07 9.55255190e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.28032937e+08 0.00000000e+00
+ 3.24874092e+07 9.55680441e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.28013051e+08 0.00000000e+00
+ 3.24823632e+07 9.55383588e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.30676891e+08 0.00000000e+00
+ 3.51776451e+07 9.54754808e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.30740076e+08 0.00000000e+00
+ 3.51946543e+07 9.55678323e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.33385796e+08 0.00000000e+00
+ 3.78844508e+07 9.54796795e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.33450941e+08 0.00000000e+00
+ 3.79029532e+07 9.55729650e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36158440e+08 0.00000000e+00
+ 4.06103505e+07 9.55731698e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38795153e+08 0.00000000e+00
+ 4.32956704e+07 9.54759536e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41566691e+08 0.00000000e+00
+ 4.60229627e+07 9.55644435e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41497147e+08 0.00000000e+00
+ 4.60003544e+07 9.54705765e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46980142e+08 0.00000000e+00
+ 5.14370736e+07 9.55631233e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46912266e+08 0.00000000e+00
+ 5.14133198e+07 9.54748810e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46978725e+08 0.00000000e+00
+ 5.14365777e+07 9.55612807e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49687583e+08 0.00000000e+00
+ 5.41443700e+07 9.55634127e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49689772e+08 0.00000000e+00
+ 5.41451620e+07 9.55662085e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49694168e+08 0.00000000e+00
+ 5.41467520e+07 9.55718213e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.06346728e+08 0.00000000e+00
+ 1.08262924e+07 9.55178536e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.06342197e+08 0.00000000e+00
+ 1.08258312e+07 9.55097157e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.09059385e+08 0.00000000e+00
+ 1.35336205e+07 9.55285118e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.11755278e+08 0.00000000e+00
+ 1.62387708e+07 9.55099980e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.11770354e+08 0.00000000e+00
+ 1.62409614e+07 9.55357682e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17202788e+08 0.00000000e+00
+ 2.16580856e+07 9.55663920e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17149958e+08 0.00000000e+00
+ 2.16483232e+07 9.54802582e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19910863e+08 0.00000000e+00
+ 2.43655119e+07 9.55676911e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22586809e+08 0.00000000e+00
+ 2.70658730e+07 9.55188559e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25268547e+08 0.00000000e+00
+ 2.97665555e+07 9.54809709e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25304784e+08 0.00000000e+00
+ 2.97751663e+07 9.55362200e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25322417e+08 0.00000000e+00
+ 2.97793562e+07 9.55631092e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.27975766e+08 0.00000000e+00
+ 3.24729024e+07 9.54827140e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.30698864e+08 0.00000000e+00
+ 3.51835601e+07 9.55075912e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.33441590e+08 0.00000000e+00
+ 3.79002974e+07 9.55595722e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36091612e+08 0.00000000e+00
+ 4.05904185e+07 9.54793761e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36089933e+08 0.00000000e+00
+ 4.05899175e+07 9.54770191e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38802811e+08 0.00000000e+00
+ 4.32980592e+07 9.54864895e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38860324e+08 0.00000000e+00
+ 4.33160000e+07 9.55656366e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.44248296e+08 0.00000000e+00
+ 4.87215396e+07 9.55304953e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46988698e+08 0.00000000e+00
+ 5.14400680e+07 9.55742500e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46983502e+08 0.00000000e+00
+ 5.14382497e+07 9.55674934e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.03663068e+08 0.00000000e+00
+ 8.12151450e+06 9.55600946e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.09077633e+08 0.00000000e+00
+ 1.35358850e+07 9.55604829e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.14477020e+08 0.00000000e+00
+ 1.89477617e+07 9.55355000e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19910810e+08 0.00000000e+00
+ 2.43655011e+07 9.55676064e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19910181e+08 0.00000000e+00
+ 2.43653733e+07 9.55666038e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22598535e+08 0.00000000e+00
+ 2.70684620e+07 9.55371306e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.0000000e+00 0.0000000e+00 1.2256083e+08 0.0000000e+00 2.7060137e+07
+ 9.5478374e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25326704e+08 0.00000000e+00
+ 2.97803748e+07 9.55696467e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25286527e+08 0.00000000e+00
+ 2.97708279e+07 9.55083817e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.27977818e+08 0.00000000e+00
+ 3.24734232e+07 9.54857767e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.33388862e+08 0.00000000e+00
+ 3.78853216e+07 9.54840689e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.33450709e+08 0.00000000e+00
+ 3.79028874e+07 9.55726332e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36111729e+08 0.00000000e+00
+ 4.05964185e+07 9.55076054e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36134763e+08 0.00000000e+00
+ 4.06032885e+07 9.55399330e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38863284e+08 0.00000000e+00
+ 4.33169232e+07 9.55697103e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41563632e+08 0.00000000e+00
+ 4.60219682e+07 9.55603135e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41564630e+08 0.00000000e+00
+ 4.60222929e+07 9.55616619e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41568374e+08 0.00000000e+00
+ 4.60235101e+07 9.55667168e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41530583e+08 0.00000000e+00
+ 4.60112242e+07 9.55157009e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41566842e+08 0.00000000e+00
+ 4.60230120e+07 9.55646482e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.44272298e+08 0.00000000e+00
+ 4.87296468e+07 9.55622902e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.44276130e+08 0.00000000e+00
+ 4.87309410e+07 9.55673663e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46954961e+08 0.00000000e+00
+ 5.14282614e+07 9.55303823e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46943511e+08 0.00000000e+00
+ 5.14242543e+07 9.55154962e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46910713e+08 0.00000000e+00
+ 5.14127764e+07 9.54728628e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46987932e+08 0.00000000e+00
+ 5.14398001e+07 9.55732545e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49616267e+08 0.00000000e+00
+ 5.41185740e+07 9.54723759e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49700278e+08 0.00000000e+00
+ 5.41489620e+07 9.55796230e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49693300e+08 0.00000000e+00
+ 5.41464380e+07 9.55707128e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49615388e+08 0.00000000e+00
+ 5.41182560e+07 9.54712539e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.09033195e+08 0.00000000e+00
+ 1.35303705e+07 9.54826364e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.09033243e+08 0.00000000e+00
+ 1.35303765e+07 9.54827210e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.11739674e+08 0.00000000e+00
+ 1.62365034e+07 9.54833279e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.11740107e+08 0.00000000e+00
+ 1.62365664e+07 9.54840689e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.17152569e+08 0.00000000e+00
+ 2.16488056e+07 9.54845135e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19858745e+08 0.00000000e+00
+ 2.43549216e+07 9.54846335e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.19905526e+08 0.00000000e+00
+ 2.43644274e+07 9.55591839e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22599287e+08 0.00000000e+00
+ 2.70686280e+07 9.55383023e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.22614895e+08 0.00000000e+00
+ 2.70720740e+07 9.55626291e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.25266584e+08 0.00000000e+00
+ 2.97660891e+07 9.54779789e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.28011897e+08 0.00000000e+00
+ 3.24820704e+07 9.55366364e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.30737343e+08 0.00000000e+00
+ 3.51939185e+07 9.55638363e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.30684661e+08 0.00000000e+00
+ 3.51797368e+07 9.54868353e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.30736425e+08 0.00000000e+00
+ 3.51936715e+07 9.55624950e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.36133898e+08 0.00000000e+00
+ 4.06030305e+07 9.55387188e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.38862514e+08 0.00000000e+00
+ 4.33166832e+07 9.55686513e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.41504505e+08 0.00000000e+00
+ 4.60027463e+07 9.54805052e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.44208390e+08 0.00000000e+00
+ 4.87080612e+07 9.54776472e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46907108e+08 0.00000000e+00
+ 5.14115148e+07 9.54681773e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.46909562e+08 0.00000000e+00
+ 5.14123736e+07 9.54713668e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49693350e+08 0.00000000e+00
+ 5.41464560e+07 9.55707764e+07]
+Attention: b1 reaction overflow. Prop array is :  [0.00000000e+00 0.00000000e+00 1.49626092e+08 0.00000000e+00
+ 5.41221280e+07 9.54849158e+07]

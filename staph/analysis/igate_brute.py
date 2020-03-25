@@ -1,17 +1,15 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from typing import List
 from ..utils.dev import transform_x
 from collections import Counter
-from typing import List
 
 
 def igate(filenames: List[str], option1: int = 1):
     """Investigate output of compute_devs_brute.
 
-    Produce plots and post-process the results from brute-force fitting 
+    Produce plots and post-process the results from brute-force fitting
     the 2C model to the Singh data.
 
     Parameters

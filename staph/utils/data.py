@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from typing import Tuple, List, Any, Dict
-from scipy.stats import truncnorm
+from scipy.stats import truncnorm, norm
 from numba import njit
 
 
@@ -26,7 +26,7 @@ def get_singh_data() -> Tuple[List[int], List[int], int, float, float, Any]:
         Area over which the inoculum is spread (cm^2).
     H0 : array_like (int)
         The inoculum load (CFU).
-    
+
     Notes
     -----
     H0 = h0 * A
@@ -39,6 +39,51 @@ def get_singh_data() -> Tuple[List[int], List[int], int, float, float, Any]:
     H0 = np.array(h0, dtype=np.int32) * np.int32(A)  # CFU
 
     return h0, norig, ntot, tiny, A, H0
+
+
+def cochran_armitage(d: List[float], p: List[int], n: List[int]):
+    """Cochran-Armitage test for trend.
+
+    Parameters
+    ----------
+    d
+        Dose.
+    p
+        Number of positive responses.
+    n
+        Total number of subjects for given dose.
+
+    Returns
+    -------
+    zca
+        Cochran-Armitage test statistic.
+    pbar
+        Mean of `p`.
+    xbar
+        Mean of log(dose).
+    pvalue
+        p-value of the Cochran-Armitage test.
+    
+    Notes
+    -----
+    The formula is in chapter 8 of [1]_.
+
+
+    References
+    ----------
+    .. [1] Haas, C. N., Rose, J. B., & Gerba, C. P. (2014). Quantitative
+    Microbial Risk Assessment. Hoboken, New Jersey: John Wiley & Sons, Inc.
+    https://doi.org/10.1002/9781118910030
+    """
+    p = np.array(p)
+    n = np.array(n)
+    x = np.log(d)
+    xbar = np.dot(n, x) / np.sum(n)
+    pbar = np.sum(p) / np.sum(n)
+    zca = np.dot(x - xbar, p) / np.sqrt(pbar * (1 - pbar) * np.dot((x - xbar) ** 2, n))
+    pvalue = 1 - norm.cdf(zca)
+
+    return zca, pbar, xbar, pvalue
 
 
 def get_kinetic_data_params() -> Dict:
@@ -142,9 +187,9 @@ def get_k_ec(strain: int = 1) -> Tuple[float, float, float, float]:
 
     References
     ----------
-    .. [1] Campion, J. J., McNamara, P. J., & Evans, M. E. (2005). 
-    Pharmacodynamic Modeling of Ciprofloxacin Resistance in Staphylococcus 
-    aureus. Antimicrobial Agents and Chemotherapy, 49(1), 209–219. 
+    .. [1] Campion, J. J., McNamara, P. J., & Evans, M. E. (2005).
+    Pharmacodynamic Modeling of Ciprofloxacin Resistance in Staphylococcus
+    aureus. Antimicrobial Agents and Chemotherapy, 49(1), 209–219.
     https://doi.org/10.1128/AAC.49.1.209-219.2005
     """
     assert strain in [1, 2]
@@ -192,7 +237,7 @@ def get_occurence_dist(n: int = 100) -> np.ndarray:
     ----------
     n
         The number of random samples.
-    
+
     Returns
     -------
     rv
@@ -200,10 +245,10 @@ def get_occurence_dist(n: int = 100) -> np.ndarray:
 
     References
     ----------
-    .. [1] Kurashige, E. J. O., Oie, S., & Furukawa, H. (2016). 
-    Contamination of environmental surfaces by methicillin-resistant 
-    Staphylococcus aureus (MRSA) in rooms of inpatients with MRSA-positive 
-    body sites. Brazilian Journal of Microbiology, 47(3), 703–705. 
+    .. [1] Kurashige, E. J. O., Oie, S., & Furukawa, H. (2016).
+    Contamination of environmental surfaces by methicillin-resistant
+    Staphylococcus aureus (MRSA) in rooms of inpatients with MRSA-positive
+    body sites. Brazilian Journal of Microbiology, 47(3), 703–705.
     https://doi.org/10.1016/j.bjm.2016.04.002
     """
     mean = 159.5
@@ -223,7 +268,7 @@ def get_bedrail_data(
 ) -> Tuple[List[float], List[int], float]:
     """Return MRSA exposure time points and loads.
 
-    Use data from several publications to construct samples of MRSA exposure 
+    Use data from several publications to construct samples of MRSA exposure
     time points and loads.
 
     Parameters
@@ -239,11 +284,11 @@ def get_bedrail_data(
 
     Returns
     -------
-    times 
-        A tuple of `n` MRSA exposure time point sequences. Each sequence is 
+    times
+        A tuple of `n` MRSA exposure time point sequences. Each sequence is
         a `np.ndarray` of time points from 0 to tmax at which exposure occurs.
     loads
-        A tuple of `n` MRSA exposure load sequences. Each sequence is 
+        A tuple of `n` MRSA exposure load sequences. Each sequence is
         a `np.ndarray` of loads corresponding to the sequence of exposure time
         points in `times` parameter.
     A
@@ -271,24 +316,24 @@ def get_bedrail_data(
 
     References
     ----------
-    .. [1] Cheng, V. C. C., Chau, P. H., Lee, W. M., Ho, S. K. Y., 
-    Lee, D. W. Y., So, S. Y. C., … Yuen, K. Y. (2015). Hand-touch 
-    contact assessment of high-touch and mutual-touch surfaces among 
-    healthcare workers, patients, and visitors. Journal of Hospital 
-    Infection, 90(3), 220–225. https://doi.org/10.1016/j.jhin.2014.12.024 
-    .. [2] Kurashige, E. J. O., Oie, S., & Furukawa, H. (2016). 
-    Contamination of environmental surfaces by methicillin-resistant 
-    Staphylococcus aureus (MRSA) in rooms of inpatients with MRSA-positive 
-    body sites. Brazilian Journal of Microbiology, 47(3), 703–705. 
+    .. [1] Cheng, V. C. C., Chau, P. H., Lee, W. M., Ho, S. K. Y.,
+    Lee, D. W. Y., So, S. Y. C., … Yuen, K. Y. (2015). Hand-touch
+    contact assessment of high-touch and mutual-touch surfaces among
+    healthcare workers, patients, and visitors. Journal of Hospital
+    Infection, 90(3), 220–225. https://doi.org/10.1016/j.jhin.2014.12.024
+    .. [2] Kurashige, E. J. O., Oie, S., & Furukawa, H. (2016).
+    Contamination of environmental surfaces by methicillin-resistant
+    Staphylococcus aureus (MRSA) in rooms of inpatients with MRSA-positive
+    body sites. Brazilian Journal of Microbiology, 47(3), 703–705.
     https://doi.org/10.1016/j.bjm.2016.04.002
-    .. [3] Agarwal, P., & Sahu, S. (2010). Determination of hand and palm 
-    area as a ratio of body surface area in Indian population. Indian 
-    Journal of Plastic Surgery : Official Publication of the Association 
-    of Plastic Surgeons of India, 43(1), 49–53. 
+    .. [3] Agarwal, P., & Sahu, S. (2010). Determination of hand and palm
+    area as a ratio of body surface area in Indian population. Indian
+    Journal of Plastic Surgery : Official Publication of the Association
+    of Plastic Surgeons of India, 43(1), 49–53.
     https://doi.org/10.4103/0970-0358.63962
-    .. [4] Ali, S., Moore, G., & Wilson, A. P. R. (2012). Effect of surface 
-    coating and finish upon the cleanability of bed rails and the spread of 
-    Staphylococcus aureus. Journal of Hospital Infection, 80(3), 192–198. 
+    .. [4] Ali, S., Moore, G., & Wilson, A. P. R. (2012). Effect of surface
+    coating and finish upon the cleanability of bed rails and the spread of
+    Staphylococcus aureus. Journal of Hospital Infection, 80(3), 192–198.
     https://doi.org/10.1016/j.jhin.2011.12.005
     """
 
@@ -323,7 +368,7 @@ def get_bedrail_data(
     return times, loads, hand_size
 
 
-def get_soap_data(dsno: int = 1, parno: int = 5) -> Dict:
+def get_soap_data(dsno: int = 1, parno: int = 4) -> Dict:
     """Data from Rose 1999.
 
     Get the original data, RH fitted constants and 2C fitted constants.
@@ -331,15 +376,15 @@ def get_soap_data(dsno: int = 1, parno: int = 5) -> Dict:
     Parameters
     ----------
     dsno
-        Dataset number. 1 (control soap, 24h before inoculation), 
+        Dataset number. 1 (control soap, 24h before inoculation),
         2 (control soap, immediate inoculation)
     parno
-        Index of rank 1 solutions in [0,5]. 
-    
+        Index of rank 1 solutions in [0,4].
+
     Returns
     p
         Dictionary of relevant parameters and data.
-    
+
     """
     # Helper constants
     permin_to_perday = 60 * 24  # (min/hr) * (hr/day) = min/day

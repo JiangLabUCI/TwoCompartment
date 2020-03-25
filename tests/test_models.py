@@ -1,6 +1,7 @@
 import numpy as np
 from ..staph.utils.det_models import *
 from ..staph.utils.tau_twocomp import tau_twocomp_carrier
+from ..staph.utils.tau_twocomp_rmf import tau_twocomp_carrier_rmf
 
 
 def test_dm_derivatives():
@@ -151,6 +152,136 @@ def test_sm_explosion():
     n0 = 15
     init_load = np.array([n0], dtype=np.int32)
     (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier(
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=1500, seed=0, t_max=300
+    )
+    assert extflag == 0
+    assert status == 3
+    assert np.all(pop_array >= 0)
+    for ind in range(1, len(t_array)):
+        assert t_array[ind - 1] <= t_array[ind]
+        assert pop_array[0, ind - 1] >= pop_array[0, ind]
+        assert pop_array[1, ind - 1] <= pop_array[1, ind]
+
+
+def test_sm_rmf():
+    # Only r1 fires
+    r1, r2, b1, b2, d1, d2, rmf = 1, 0, 0, 0, 0, 0, 0
+    rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
+    init_load = np.array([100], dtype=np.int32)
+    # Not until extinction
+    (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier_rmf(
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=10, seed=0
+    )
+    assert extflag == 0
+    assert status == -1
+    assert np.all(pop_array >= 0)
+    for ind in range(1, len(t_array)):
+        assert t_array[ind - 1] <= t_array[ind]
+        assert pop_array[0, ind - 1] > pop_array[0, ind]
+        assert pop_array[1, ind] == 0
+    # Until extinction
+    (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier_rmf(
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=200, seed=0
+    )
+    assert extflag == 1
+    assert status == 1
+    assert np.all(pop_array >= 0)
+    for ind in range(1, len(t_array)):
+        assert t_array[ind - 1] <= t_array[ind]
+        # Population declines
+        assert pop_array[0, ind - 1] > pop_array[0, ind]
+        assert pop_array[1, ind] == 0
+
+    # Only r2 fires --> conservation
+    r1, r2, b1, b2, d1, d2, rmf = 0, 1, 0, 0, 0, 0, 0
+    rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
+    n0 = 100
+    init_load = np.array([n0], dtype=np.int32)
+    (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier_rmf(
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=200, seed=0
+    )
+    assert extflag == 0
+    assert status == 2
+    assert np.all(pop_array >= 0)
+    for ind in range(1, len(t_array)):
+        assert t_array[ind - 1] <= t_array[ind]
+        assert pop_array[0, ind] + pop_array[1, ind] == n0
+
+    # r2 and d1 fire --> extinction
+    r1, r2, b1, b2, d1, d2, rmf = 0, 1, 0, 0, 1, 0, 0
+    rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
+    n0 = 15
+    init_load = np.array([n0], dtype=np.int32)
+    (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier_rmf(
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=200, seed=0
+    )
+    assert extflag == 1
+    assert status == 1
+    assert np.all(pop_array >= 0)
+    for ind in range(1, len(t_array)):
+        assert t_array[ind - 1] <= t_array[ind]
+        assert pop_array[0, ind - 1] >= pop_array[0, ind]
+        if pop_array[0, ind - 1] == pop_array[0, ind]:
+            assert pop_array[1, ind - 1] > pop_array[1, ind]
+
+    # r2 and d1,d2 fire --> extinction
+    r1, r2, b1, b2, d1, d2, rmf = 0, 1, 0, 0, 1, 1, 0
+    rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
+    n0 = 15
+    init_load = np.array([n0], dtype=np.int32)
+    (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier_rmf(
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=200, seed=0
+    )
+    assert extflag == 1
+    assert status == 1
+    assert np.all(pop_array >= 0)
+    for ind in range(1, len(t_array)):
+        assert t_array[ind - 1] <= t_array[ind]
+        assert pop_array[0, ind - 1] >= pop_array[0, ind]
+        if pop_array[0, ind - 1] == pop_array[0, ind]:
+            assert pop_array[1, ind - 1] > pop_array[1, ind]
+
+    # r2 and rmf fire --> extinction
+    r1, r2, b1, b2, d1, d2, rmf = 0, 1, 0, 0, 0, 0, 1
+    rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
+    n0 = 15
+    init_load = np.array([n0], dtype=np.int32)
+    (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier_rmf(
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=200, seed=0
+    )
+    assert extflag == 1
+    assert status == 1
+    assert np.all(pop_array >= 0)
+    for ind in range(1, len(t_array)):
+        assert t_array[ind - 1] <= t_array[ind]
+        assert pop_array[0, ind - 1] >= pop_array[0, ind]
+        if pop_array[0, ind - 1] == pop_array[0, ind]:
+            assert pop_array[1, ind - 1] > pop_array[1, ind]
+
+
+def test_sm_rmf_explosion():
+    # r2 and b1 fire --> explosion
+    r1, r2, b1, b2, d1, d2, rmf = 0, 1, 1, 0, 0, 0, 0
+    rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
+    n0 = 15
+    init_load = np.array([n0], dtype=np.int32)
+    (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier_rmf(
+        init_load=init_load, rates=rates, imax=float(1e7), nstep=1500, seed=0, t_max=300
+    )
+    assert extflag == 0
+    assert status == 3
+    assert np.all(pop_array >= 0)
+    for ind in range(1, len(t_array)):
+        assert t_array[ind - 1] <= t_array[ind]
+        assert pop_array[0, ind - 1] >= pop_array[0, ind]
+        assert pop_array[1, ind - 1] <= pop_array[1, ind]
+
+    # r2 and b2 fire --> explosion
+    r1, r2, b1, b2, d1, d2, rmf = 0, 1, 0, 1, 0, 0, 0
+    rates = np.array([r1, r2, b1, b2, d1, d2, rmf])
+    n0 = 15
+    init_load = np.array([n0], dtype=np.int32)
+    (extflag, t, pop_array, t_array, status) = tau_twocomp_carrier_rmf(
         init_load=init_load, rates=rates, imax=float(1e7), nstep=1500, seed=0, t_max=300
     )
     assert extflag == 0

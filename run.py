@@ -1,9 +1,9 @@
 import numpy as np
 import sys
-import time
 from staph.utils.dev import compute_devs_min as cdmin
 from staph.utils.dev import compute_devs_brute as cdbrute
-from staph.utils.predict import predict_fit, predict_bedrail
+from staph.utils.predict import predict_fit, predict_bedrail, predict_demo
+from staph.utils.dev_thresh import thresh_brute_min as tmin
 
 if __name__ == "__main__":
     choice = np.int32(sys.argv[1])
@@ -16,7 +16,7 @@ if __name__ == "__main__":
         ind = np.int32(sys.argv[3])
         assert ind >= 1
         desol_ind = np.arange(ind - 1, ind)
-        nstep = 200000
+        nstep = 200_000
         npts = 2
         niter = 5
         cdmin(
@@ -40,7 +40,7 @@ if __name__ == "__main__":
         ind = np.int32(sys.argv[3])
         assert ind >= 1
         desol_ind = np.arange(ind - 1, ind)
-        nstep = 200000
+        nstep = 200_000
         npts = 6
         cdbrute(
             filename=fname,
@@ -64,7 +64,7 @@ if __name__ == "__main__":
         ind = np.int32(sys.argv[3])
         assert ind >= 1
         desol_ind = np.arange(ind - 1, ind)
-        nstep = 200000
+        nstep = 200_000
         npts = 1
         niter = 2
         cdmin(
@@ -87,13 +87,45 @@ if __name__ == "__main__":
         ncores = np.int32(sys.argv[2])
         predict_fit(
             nrep=1000,
-            nstep=200000,
+            nstep=400_000,
             hyp="base",
             inoc_time="base",
-            rank_1_sol_inds=[0],
+            rank_1_sol_inds=[4],
             doselist=np.int32(np.power(10, np.arange(1, 6.3, 0.3))),
             n_cores=ncores,
+            sim_stop_thresh=1e9,
         )
     elif choice == 5:
         ncores = np.int32(sys.argv[2])
-        predict_bedrail(n_cores=ncores, nstep=200000, nrep=1000, hyp="r1*")
+        predict_bedrail(
+            r1sind=4,
+            inoc_time="24h",
+            sim_stop_thresh=1e9,
+            hyp="rmf",
+            n_cores=ncores,
+            nstep=400_000,
+            nrep=1000,
+            n_to_save=3,
+            pop_flag=False,
+        )
+    elif choice == 6:
+        ncores = np.int32(sys.argv[2])
+        ind = np.int32(sys.argv[3])
+        assert ind >= 1
+        desol_ind = np.arange(ind - 1, ind)
+        tmin(
+            npts=6,
+            nrep=1000,
+            seed=0,
+            desol_ind=desol_ind,
+            nstep=400_000,
+            n_procs=ncores,
+            nd1=1,
+            nb2=21,
+            lims={"d1l": 0, "d1u": 0, "b2l": 0.5, "b2u": 2.5},
+            sim_stop_thresh=1e9,
+            save_final_loads=False,
+        )
+    elif choice == 7:
+        predict_demo(sim_stop_thresh=1e8, nstep=100_000, init_load=10000, nrep=50)
+
