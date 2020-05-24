@@ -145,45 +145,44 @@ def plot_parameter(
         plt.vlines(rank_1_samples, ymin, ymax, color=rank_1_color)
 
     plt.xlabel(label)
-    print(label)
 
 
 def plot_parameter_posteriors():
     log10Xlist, Flist, r1, r2, r3, Imax, modno = get_parameters_and_objective_values()
+    df = pd.read_csv("results/rank_1_solutions.csv")
+    print(df)
 
-    param1 = np.log10(r1)
-    param2 = np.log10(r2)
-    param3 = np.log10(r3)
-    param4 = np.log10(Imax)
-    param5 = np.log10(r1 + r2)
-    param6 = np.log10(r3 * Imax)
+    params = [
+        np.log10(r1),
+        np.log10(r2),
+        np.log10(r3),
+        np.log10(Imax),
+        np.log10(r1 + r2),
+        np.log10(r3 * Imax),
+    ]
     labels = [
-        "none",
         "$log_{10}(r_1)$",
         "$log_{10}(r_2)$",
         "$log_{10}(r_3)$",
         "$log_{10}{(I_{max})}$",
         "$log_{10}(r_1+r_2)$",
+        "$log_{10}(r_3I_{max})$",
     ]
-    print(log10Xlist.shape, Flist.shape)
+    rank_1_params = [
+        np.log10(df.r1),
+        np.log10(df.r2),
+        np.log10(df["r3"]),
+        np.log10(df["r3*Imax"] / df["r3"]),
+        np.log10(df["r1"] + df["r2"]),
+        np.log10(df["r3*Imax"]),
+    ]
 
-    df = pd.read_csv("results/rank_1_solutions.csv")
-    print(df)
-    
     # plot parameters
     plt.figure(figsize=(9, 6))
-    plt.subplot(231)
-    plot_parameter(param1, np.log10(df.r1), labels[1])
-    plt.subplot(232)
-    plot_parameter(param2, np.log10(df.r2), labels[2])
-    plt.subplot(233)
-    plot_parameter(param3, np.log10(df["r3"]), labels[3])
-    plt.subplot(234)
-    plot_parameter(param4, np.log10(df["r3*Imax"] / df["r3"]), labels[4])
-    plt.subplot(235)
-    plot_parameter(param5, np.log10(df["r1"] + df["r2"]), labels[5])
-    plt.subplot(236)
-    plot_parameter(param6, np.log10(df["r3*Imax"]), "$log_{10}(r_3I_{max})$")
+    for ind in range(6):
+        plt.subplot(231 + ind)
+        plot_parameter(params[ind], rank_1_params[ind], labels[ind])
+        print(f"Plotted  {labels[ind]}")
 
     plt.tight_layout()
     plt.savefig("results/figs/f_posterior.pdf")
