@@ -1,7 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as sio
+import scipy.interpolate as intp
 from typing import Tuple
+import seaborn as sns
+import pandas as pd
 
 
 def get_parameters_and_objective_values(
@@ -99,8 +102,48 @@ def get_r_Imax(
     return r1, r2, r3, Imax, modno
 
 
-def plot_parameter(parameter, label, col="#70a89f"):
-    plt.hist(parameter, color=col)
+def plot_parameter(
+    posterior_samples: np.ndarray,
+    rank_1_samples: pd.DataFrame,
+    label: str,
+    rank_1_plottype: str = "interp",
+    main_color: str = "#70a89f",
+    rank_1_color: str = "#fb8072",
+):
+    """
+    Plot one of the posterior parameters
+
+    Parameters
+    ----------
+    posterior_samples
+        The posterior samples of the parameter.
+    rank_1_samples
+        The rank 1 samples of the parameter after multi-objective fitting.
+    label
+        The name of the parameter, to be used as x axis label.
+    rank_1_plottype
+        How to plot the rank 1 solution. Can be "interp", "base" or "vline".
+    main_color
+        Color of the kernel density estimate of the posterior.
+    rank_1_color
+        Color of the rank 1 samples of the parameter.
+    """
+    sns.kdeplot(posterior_samples, color=main_color, cut=0, shade=True)
+    if rank_1_plottype == "base":
+        plt.plot(
+            rank_1_samples, np.zeros(rank_1_samples.shape), "x", color=rank_1_color
+        )
+    elif rank_1_plottype == "interp":
+        line = plt.gca().get_lines()[0]
+        xd = line.get_xdata()
+        yd = line.get_ydata()
+        f = intp.interp1d(xd, yd)
+        new_y = f(rank_1_samples)
+        plt.plot(rank_1_samples, new_y, "x", color=rank_1_color)
+    elif rank_1_plottype == "vline":
+        ymin, ymax = plt.ylim()
+        plt.vlines(rank_1_samples, ymin, ymax, color=rank_1_color)
+
     plt.xlabel(label)
     print(label)
 
@@ -124,27 +167,23 @@ def plot_parameter_posteriors():
     ]
     print(log10Xlist.shape, Flist.shape)
 
+    df = pd.read_csv("results/rank_1_solutions.csv")
+    print(df)
+    
     # plot parameters
-
-    # plt.plot(Flist)
-    # plt.xlabel("Generations")
-    # plt.ylabel("Objective function value")
-
     plt.figure(figsize=(9, 6))
     plt.subplot(231)
-    plot_parameter(param1, labels[1])
+    plot_parameter(param1, np.log10(df.r1), labels[1])
     plt.subplot(232)
-    plot_parameter(param2, labels[2])
+    plot_parameter(param2, np.log10(df.r2), labels[2])
     plt.subplot(233)
-    plot_parameter(param3, labels[3])
+    plot_parameter(param3, np.log10(df["r3"]), labels[3])
     plt.subplot(234)
-    plot_parameter(param4, labels[4])
+    plot_parameter(param4, np.log10(df["r3*Imax"] / df["r3"]), labels[4])
     plt.subplot(235)
-    plot_parameter(param5, labels[5])
+    plot_parameter(param5, np.log10(df["r1"] + df["r2"]), labels[5])
     plt.subplot(236)
-    plot_parameter(param6, "$log_{10}(r_3I_{max})$")
-    # plt.hist2d(param4, param5, cmap=plt.get_cmap("Greys"), bins=20)
-    # plt.xlabel("")
+    plot_parameter(param6, np.log10(df["r3*Imax"]), "$log_{10}(r_3I_{max})$")
 
     plt.tight_layout()
     plt.savefig("results/figs/f_posterior.pdf")
