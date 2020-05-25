@@ -221,11 +221,17 @@ def plot_parameter_posteriors():
     ]
 
     # plot parameters
-    plt.figure(figsize=(9, 6))
-    for ind in range(6):
+    fig, axs = plt.subplots(2, 3, figsize=(9, 6))
+    for ind in range(4):
         plt.subplot(231 + ind)
         plot_parameter(posterior[ind], rank_1[ind], top_N[ind], labels[ind], rank_1_plottype=None)
         print(f"Plotted  {labels[ind]}")
+
+    ax = axs[1, 1]
+    ax.hexbin(log10X_posterior["r1"], log10X_posterior["r2"], gridsize=15, cmap="Greys")
+    plt.subplot(235)
+    plt.xlabel(labels[0])
+    plt.ylabel(labels[1])
 
     plt.tight_layout()
     plt.savefig("results/figs/f_posterior.pdf")
