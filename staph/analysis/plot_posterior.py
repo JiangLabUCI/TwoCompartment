@@ -2,53 +2,79 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as sio
 import scipy.interpolate as intp
-from typing import Tuple
+from typing import Tuple, Dict
 import seaborn as sns
 import pandas as pd
+from ..utils.dev import get_bF_bX, get_consts_bX
 
 
 def get_parameters_and_objective_values(
     filename: str = "results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat",
-) -> Tuple[np.ndarray, np.ndarray]:
+    N: int = 100,
+) -> Tuple[np.ndarray, np.ndarray, Dict, Dict, int]:
     """Get all parameters and corresponding objective values.
 
     Read the solutions present in `filename` and return all parameters and
-    corresponding objective values.
+    corresponding objective values. Also returns the top N.
 
     Parameters
     ----------
     filename
         The file containing the DEMC solutions.
+    N
+        Top N solutions by objective value will also be returned.
 
     Returns
     -------
-    log10Xlist
+    log10X_orig
         The parameter sets. Warmup is not excluded.
     Flist
         The objective values. Warmup is not excluded.
-    r1
-        Rate constant with units (/day).
-    r2
-        Rate constant with units (/day).
-    r3
-        Rate constant with units (cm^2/(bacteria * day)).
-    Imax
-        Carrying capacity with units (bacteria/cm^2).
+    log10X_posterior
+        The log10 posterior parameters with warmup excluded.
+    log10X_topN
+        The top N log10 posterior parameters with warmup excluded.
     modno
         Model number. 3 means Imax was predicted in DEMC.
         6 means r3Imax was predicted in DEMC.
 
     """
     data = sio.loadmat(filename)
-    log10Xlist = data["solset"][0][0][
-        2
-    ]  # 3d array (n_generations * n_chains * n_params)
+    # 3d array (n_generations * n_chains * n_params)
+    log10X_orig = data["solset"][0][0][2]
     Flist = data["solset"][0][0][3]
-    n_generations = log10Xlist.shape[0]
+    n_generations = log10X_orig.shape[0]
+
+    # remove warmup
     warmup_cutoff = int(n_generations / 2)
-    log10X_posterior = log10Xlist[warmup_cutoff + 1 :, :, :]
-    r1, r2, r3, Imax, modno = get_r_Imax(log10X_posterior, filename)
-    return log10Xlist, Flist, r1, r2, r3, Imax, modno
+    log10X_fullposterior = log10X_orig[warmup_cutoff + 1 :, :, :]
+
+    # create log10X_posterior
+    r1, r2, r3, Imax, modno = get_r_Imax(log10X_fullposterior, filename)
+    log10X_posterior = {
+        "r1": np.log10(r1),
+        "r2": np.log10(r2),
+        "r3": np.log10(r3),
+        "Imax": np.log10(Imax),
+    }
+
+    # create log10X_topN
+    Flist_topN, Xlist_topN = get_bF_bX(desol_ind=np.arange(N))
+    r1_topN = np.empty([N])
+    r2_topN = np.empty([N])
+    r3_topN = np.empty([N])
+    Imax_topN = np.empty([N])
+    for ind in range(N):
+        r1_topN[ind], r2_topN[ind], r3_topN[ind], Imax_topN[ind], _ = get_consts_bX(
+            Xlist_topN, ind, filename, verbose=0
+        )
+    log10X_topN = {
+        "r1": np.log10(r1_topN),
+        "r2": np.log10(r2_topN),
+        "r3": np.log10(r3_topN),
+        "Imax": np.log10(Imax_topN),
+    }
+    return log10X_orig, Flist, log10X_posterior, log10X_topN, modno
 
 
 def get_r_Imax(
@@ -105,6 +131,7 @@ def get_r_Imax(
 def plot_parameter(
     posterior_samples: np.ndarray,
     rank_1_samples: pd.DataFrame,
+    topN_samples: np.ndarray,
     label: str,
     rank_1_plottype: str = "interp",
     main_color: str = "#70a89f",
@@ -119,6 +146,8 @@ def plot_parameter(
         The posterior samples of the parameter.
     rank_1_samples
         The rank 1 samples of the parameter after multi-objective fitting.
+    topN_samples
+        The top N samples of the parameter ranked by objective function value.
     label
         The name of the parameter, to be used as x axis label.
     rank_1_plottype
@@ -143,22 +172,28 @@ def plot_parameter(
     elif rank_1_plottype == "vline":
         ymin, ymax = plt.ylim()
         plt.vlines(rank_1_samples, ymin, ymax, color=rank_1_color)
+    
+    _, ymax = plt.ylim()
+    plt.vlines(np.min(topN_samples), 0, ymax, color=rank_1_color, linestyles="dashed")
+    plt.vlines(np.max(topN_samples), 0, ymax, color=rank_1_color, linestyles="dashed")
 
     plt.xlabel(label)
 
 
 def plot_parameter_posteriors():
-    log10Xlist, Flist, r1, r2, r3, Imax, modno = get_parameters_and_objective_values()
+    log10Xlist, Flist, log10X_posterior, log10X_topN, modno = (
+        get_parameters_and_objective_values()
+    )
     df = pd.read_csv("results/rank_1_solutions.csv")
     print(df)
 
-    params = [
-        np.log10(r1),
-        np.log10(r2),
-        np.log10(r3),
-        np.log10(Imax),
-        np.log10(r1 + r2),
-        np.log10(r3 * Imax),
+    posterior = [
+        log10X_posterior["r1"],
+        log10X_posterior["r2"],
+        log10X_posterior["r3"],
+        log10X_posterior["Imax"],
+        np.log10(np.power(10, log10X_posterior["r1"]) + np.power(10, log10X_posterior["r2"])),
+        log10X_posterior["r3"] + log10X_posterior["Imax"],
     ]
     labels = [
         "$log_{10}(r_1)$",
@@ -168,7 +203,7 @@ def plot_parameter_posteriors():
         "$log_{10}(r_1+r_2)$",
         "$log_{10}(r_3I_{max})$",
     ]
-    rank_1_params = [
+    rank_1 = [
         np.log10(df.r1),
         np.log10(df.r2),
         np.log10(df["r3"]),
@@ -176,12 +211,20 @@ def plot_parameter_posteriors():
         np.log10(df["r1"] + df["r2"]),
         np.log10(df["r3*Imax"]),
     ]
+    top_N = [
+        log10X_topN["r1"],
+        log10X_topN["r2"],
+        log10X_topN["r3"],
+        log10X_topN["Imax"],
+        np.log10(np.power(10, log10X_topN["r1"]) + np.power(10, log10X_topN["r2"])),
+        log10X_topN["r3"] + log10X_topN["Imax"],
+    ]
 
     # plot parameters
     plt.figure(figsize=(9, 6))
     for ind in range(6):
         plt.subplot(231 + ind)
-        plot_parameter(params[ind], rank_1_params[ind], labels[ind])
+        plot_parameter(posterior[ind], rank_1[ind], top_N[ind], labels[ind], rank_1_plottype=None)
         print(f"Plotted  {labels[ind]}")
 
     plt.tight_layout()
