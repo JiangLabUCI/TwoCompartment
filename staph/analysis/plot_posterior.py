@@ -1,10 +1,14 @@
-import numpy as np
+from typing import Dict, Tuple
+
+import matplotlib as mpl
 import matplotlib.pyplot as plt
-import scipy.io as sio
-import scipy.interpolate as intp
-from typing import Tuple, Dict
-import seaborn as sns
+import numpy as np
 import pandas as pd
+import scipy.interpolate as intp
+import scipy.io as sio
+import seaborn as sns
+from matplotlib.gridspec import GridSpec
+
 from ..utils.dev import get_bF_bX, get_consts_bX
 
 
@@ -132,6 +136,7 @@ def plot_parameter(
     posterior_samples: np.ndarray,
     rank_1_samples: pd.DataFrame,
     topN_samples: np.ndarray,
+    ax: plt.axis,
     label: str,
     rank_1_plottype: str = "interp",
     main_color: str = "#70a89f",
@@ -148,6 +153,8 @@ def plot_parameter(
         The rank 1 samples of the parameter after multi-objective fitting.
     topN_samples
         The top N samples of the parameter ranked by objective function value.
+    ax
+        The axis object to plot the parameter on.
     label
         The name of the parameter, to be used as x axis label.
     rank_1_plottype
@@ -159,25 +166,28 @@ def plot_parameter(
     """
     sns.kdeplot(posterior_samples, color=main_color, cut=0, shade=True)
     if rank_1_plottype == "base":
-        plt.plot(
-            rank_1_samples, np.zeros(rank_1_samples.shape), "x", color=rank_1_color
-        )
+        ax.plot(rank_1_samples, np.zeros(rank_1_samples.shape), "x", color=rank_1_color)
     elif rank_1_plottype == "interp":
         line = plt.gca().get_lines()[0]
         xd = line.get_xdata()
         yd = line.get_ydata()
         f = intp.interp1d(xd, yd)
         new_y = f(rank_1_samples)
-        plt.plot(rank_1_samples, new_y, "x", color=rank_1_color)
+        ax.plot(rank_1_samples, new_y, "x", color=rank_1_color)
     elif rank_1_plottype == "vline":
-        ymin, ymax = plt.ylim()
-        plt.vlines(rank_1_samples, ymin, ymax, color=rank_1_color)
-    
-    _, ymax = plt.ylim()
-    plt.vlines(np.min(topN_samples), 0, ymax, color=rank_1_color, linestyles="dashed")
-    plt.vlines(np.max(topN_samples), 0, ymax, color=rank_1_color, linestyles="dashed")
+        ymin, ymax = ax.get_ylim()
+        ax.vlines(rank_1_samples, ymin, ymax, color=rank_1_color)
 
-    plt.xlabel(label)
+    _, ymax = ax.get_ylim()
+    ax.vlines(np.min(topN_samples), 0, ymax, color=rank_1_color, linestyles="dashed")
+    ax.vlines(np.max(topN_samples), 0, ymax, color=rank_1_color, linestyles="dashed")
+
+    ax.set_xlabel(label)
+
+
+def panel_label(ax, text):
+    # TODO
+    ax.text()
 
 
 def plot_parameter_posteriors():
@@ -192,7 +202,9 @@ def plot_parameter_posteriors():
         log10X_posterior["r2"],
         log10X_posterior["r3"],
         log10X_posterior["Imax"],
-        np.log10(np.power(10, log10X_posterior["r1"]) + np.power(10, log10X_posterior["r2"])),
+        np.log10(
+            np.power(10, log10X_posterior["r1"]) + np.power(10, log10X_posterior["r2"])
+        ),
         log10X_posterior["r3"] + log10X_posterior["Imax"],
     ]
     labels = [
@@ -220,19 +232,33 @@ def plot_parameter_posteriors():
         log10X_topN["r3"] + log10X_topN["Imax"],
     ]
 
-    # plot parameters
-    fig, axs = plt.subplots(2, 3, figsize=(9, 6))
-    for ind in range(4):
-        plt.subplot(231 + ind)
-        plot_parameter(posterior[ind], rank_1[ind], top_N[ind], labels[ind], rank_1_plottype=None)
-        print(f"Plotted  {labels[ind]}")
+    mpl.rcParams["font.family"] = "arial"
+    lef, rig = 0.10, 0.99
+    bot, top = 0.11, 0.95
+    hs, ws = 0.5, 0.35
+    fig = plt.figure(figsize=(9, 6))
+    gs = GridSpec(3, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs, wspace=ws)
 
-    ax = axs[1, 1]
+    for ind in range(3):
+        ax = fig.add_subplot(gs[ind, 0])
+        plot_parameter(
+            posterior[ind],
+            rank_1[ind],
+            top_N[ind],
+            ax=ax,
+            label=labels[ind],
+            rank_1_plottype=None,
+        )
+
+    ax = fig.add_subplot(gs[2, 1])
+    plot_parameter(
+        posterior[3], rank_1[3], top_N[3], ax=ax, label=labels[3], rank_1_plottype=None
+    )
+
+    ax = fig.add_subplot(gs[0:2, 1])
     ax.hexbin(log10X_posterior["r1"], log10X_posterior["r2"], gridsize=15, cmap="Greys")
-    plt.subplot(235)
-    plt.xlabel(labels[0])
-    plt.ylabel(labels[1])
+    ax.set_xlabel(labels[0])
+    ax.set_ylabel(labels[1])
 
-    plt.tight_layout()
     plt.savefig("results/figs/f_posterior.pdf")
     # plt.show()
