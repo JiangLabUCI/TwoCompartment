@@ -1,12 +1,13 @@
 import sys
-from staph.analysis.landscape import igate as b2d1_igate
+
+from staph.analysis.compute_chisq import compute_chisq
 from staph.analysis.igate_brute import igate as bru_igate
+from staph.analysis.igate_demo import igate as igate_demo
 from staph.analysis.igate_ntest import igate as igate_ntest
 from staph.analysis.igate_thresh import igate as igate_thresh
-from staph.analysis.compute_chisq import compute_chisq
-from staph.analysis.igate_demo import igate as igate_demo
+from staph.analysis.landscape import igate as b2d1_igate
 from staph.analysis.phase_plot import make_phase_plot
-
+from staph.analysis.plot_posterior import plot_parameter_posteriors
 
 option1 = int(sys.argv[1])
 
@@ -58,3 +59,5 @@ elif option1 == 6:
     igate_demo(option1=2)
 elif option1 == 7:
     make_phase_plot(nquivs=15, logflag=True)
+elif option1 == 8:
+    plot_parameter_posteriors()

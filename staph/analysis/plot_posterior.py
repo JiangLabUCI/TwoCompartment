@@ -63,7 +63,7 @@ def get_parameters_and_objective_values(
     }
 
     # create log10X_topN
-    Flist_topN, Xlist_topN = get_bF_bX(desol_ind=np.arange(N))
+    _, Xlist_topN = get_bF_bX(desol_ind=np.arange(N))
     r1_topN = np.empty([N])
     r2_topN = np.empty([N])
     r3_topN = np.empty([N])
@@ -136,7 +136,7 @@ def plot_parameter(
     posterior_samples: np.ndarray,
     rank_1_samples: pd.DataFrame,
     topN_samples: np.ndarray,
-    ax: plt.axis,
+    ax: mpl.axis,
     label: str,
     rank_1_plottype: str = "interp",
     main_color: str = "#70a89f",
@@ -185,15 +185,35 @@ def plot_parameter(
     ax.set_xlabel(label)
 
 
-def panel_label(ax, text):
-    # TODO
-    ax.text()
+def panel_label(label: str, ax: mpl.axis, factor: float = 0.15):
+    """Label plots.
+
+    Handy function to label plots.
+
+    Parameters
+    ----------
+    label
+        Subfigure label for the plot.
+    ax
+        Axis to put the label on.
+    factor
+        Factor by which to left-shift label.
+    """
+    annotation_args = {
+        "va": "bottom",
+        "weight": "bold",
+        "fontsize": "14",
+        "family": "arial",
+    }
+    x1, x2 = ax.get_xlim()
+    _, y2 = ax.get_ylim()
+    ax.text(x1 - factor * (x2 - x1), y2, label, annotation_args)
 
 
 def plot_parameter_posteriors():
-    log10Xlist, Flist, log10X_posterior, log10X_topN, modno = (
-        get_parameters_and_objective_values()
-    )
+    """Plot the posterior parameters.
+    """
+    _, _, log10X_posterior, log10X_topN, _ = get_parameters_and_objective_values()
     df = pd.read_csv("results/rank_1_solutions.csv")
     print(df)
 
@@ -208,12 +228,12 @@ def plot_parameter_posteriors():
         log10X_posterior["r3"] + log10X_posterior["Imax"],
     ]
     labels = [
-        "$log_{10}(r_1)$",
-        "$log_{10}(r_2)$",
-        "$log_{10}(r_3)$",
-        "$log_{10}{(I_{max})}$",
-        "$log_{10}(r_1+r_2)$",
-        "$log_{10}(r_3I_{max})$",
+        "$\log_{10}(r_1)$",
+        "$\log_{10}(r_2)$",
+        "$\log_{10}(r_3)$",
+        "$\log_{10}{(I_{\mathrm{max}})}$",
+        "$\log_{10}(r_1+r_2)$",
+        "$\log_{10}(r_3I_{max})$",
     ]
     rank_1 = [
         np.log10(df.r1),
@@ -232,10 +252,11 @@ def plot_parameter_posteriors():
         log10X_topN["r3"] + log10X_topN["Imax"],
     ]
 
-    mpl.rcParams["font.family"] = "arial"
+    panel_labels = ["A", "B", "D"]
+
     lef, rig = 0.10, 0.99
     bot, top = 0.11, 0.95
-    hs, ws = 0.5, 0.35
+    hs, ws = 0.6, 0.25
     fig = plt.figure(figsize=(9, 6))
     gs = GridSpec(3, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs, wspace=ws)
 
@@ -249,16 +270,19 @@ def plot_parameter_posteriors():
             label=labels[ind],
             rank_1_plottype=None,
         )
+        panel_label(panel_labels[ind], ax)
 
     ax = fig.add_subplot(gs[2, 1])
     plot_parameter(
         posterior[3], rank_1[3], top_N[3], ax=ax, label=labels[3], rank_1_plottype=None
     )
+    panel_label("E", ax)
 
     ax = fig.add_subplot(gs[0:2, 1])
     ax.hexbin(log10X_posterior["r1"], log10X_posterior["r2"], gridsize=15, cmap="Greys")
     ax.set_xlabel(labels[0])
     ax.set_ylabel(labels[1])
+    panel_label("C", ax)
 
     plt.savefig("results/figs/f_posterior.pdf")
     # plt.show()
