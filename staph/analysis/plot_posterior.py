@@ -12,6 +12,9 @@ from matplotlib.gridspec import GridSpec
 from ..utils.dev import get_bF_bX, get_consts_bX
 
 
+RANK_1_COLOR = "#fb8072"
+
+
 def get_parameters_and_objective_values(
     filename: str = "results/6021324_DEMC_40000g_16p6mod1ds0se_staph1o6.mat",
     N: int = 100,
@@ -139,8 +142,9 @@ def plot_parameter(
     ax: mpl.axis,
     label: str,
     rank_1_plottype: str = "interp",
+    topN_plottype: str = "rug",
     main_color: str = "#70a89f",
-    rank_1_color: str = "#fb8072",
+    rank_1_color: str = RANK_1_COLOR,
 ):
     """
     Plot one of the posterior parameters
@@ -159,6 +163,8 @@ def plot_parameter(
         The name of the parameter, to be used as x axis label.
     rank_1_plottype
         How to plot the rank 1 solution. Can be "interp", "base" or "vline".
+    topN_plottype
+        How to plot the top N solutions. Can be "rug" or "range".
     main_color
         Color of the kernel density estimate of the posterior.
     rank_1_color
@@ -179,8 +185,16 @@ def plot_parameter(
         ax.vlines(rank_1_samples, ymin, ymax, color=rank_1_color)
 
     _, ymax = ax.get_ylim()
-    ax.vlines(np.min(topN_samples), 0, ymax, color=rank_1_color, linestyles="dashed")
-    ax.vlines(np.max(topN_samples), 0, ymax, color=rank_1_color, linestyles="dashed")
+    if topN_plottype == "range":
+        ax.vlines(
+            np.min(topN_samples), 0, ymax, color=rank_1_color, linestyles="dashed"
+        )
+        ax.vlines(
+            np.max(topN_samples), 0, ymax, color=rank_1_color, linestyles="dashed"
+        )
+    elif topN_plottype == "rug":
+        y_zero = np.zeros(topN_samples.shape)
+        ax.plot(topN_samples, y_zero, "|", color=rank_1_color, alpha=0.5)
 
     ax.set_xlabel(label)
 
