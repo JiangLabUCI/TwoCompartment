@@ -278,7 +278,7 @@ def plot_parameter_posteriors():
     lef, rig = 0.10, 0.99
     bot, top = 0.11, 0.95
     hs, ws = 0.65, 0.25
-    fig = plt.figure(figsize=(9, 6))
+    fig = plt.figure(figsize=(9, 8))
     gs = GridSpec(4, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs, wspace=ws)
 
     ax = fig.add_subplot(gs[0:2, 0])
