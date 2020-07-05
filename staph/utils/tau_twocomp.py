@@ -1,6 +1,8 @@
+from typing import Tuple
+
 import numpy as np
 from numba import njit
-from typing import Tuple
+
 from .roulette import roulette
 
 
@@ -56,7 +58,7 @@ def get_propensity(rates: np.ndarray, curH: int, curI: int) -> np.ndarray:
 def tau_twocomp_carrier(
     init_load: np.ndarray,
     rates: np.ndarray,
-    imax: float,
+    i_thresh: float,
     nstep: int,
     seed: int,
     t_max: float = 6.0,
@@ -71,7 +73,7 @@ def tau_twocomp_carrier(
         both compartments.
     rates : (6,) array_like
         The rate parameters in the following order: r1, r2, b1, b2, d1, d2.
-    imax : float
+    i_thresh : float
         The maximum population size (units of CFU).
     nstep : int
         The maximum number of steps to execute the simulation for.
@@ -97,7 +99,7 @@ def tau_twocomp_carrier(
         0 : Status not set.
         1 : Succesful completion, terminated when all species went extinct.
         2 : Succesful completion, terminated when `max_t` crossed.
-        3 : Succesful completion, terminated when I(t) > imax.
+        3 : Succesful completion, terminated when I(t) > i_thresh.
         4 : Succesful completion, curI overflow.
         5 : Succesful completion, curH overflow.
         -1 : Somewhat succesful completion, terminated when `max_iter` reached.
@@ -350,7 +352,7 @@ def tau_twocomp_carrier(
             break
 
         # Stop if initial density is reached
-        if (curI) > imax:
+        if (curI) > i_thresh:
             status = 3
             extflag = 0
             break
