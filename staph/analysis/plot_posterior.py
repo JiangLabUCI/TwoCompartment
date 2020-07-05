@@ -10,7 +10,7 @@ import seaborn as sns
 from matplotlib.gridspec import GridSpec
 
 from ..utils.dev import get_bF_bX, get_consts_bX
-
+from .f2 import growth_obj
 
 RANK_1_COLOR = "#fb8072"
 
@@ -227,9 +227,16 @@ def panel_label(label: str, ax: mpl.axis, factor: float = 0.15):
 def plot_parameter_posteriors():
     """Plot the posterior parameters.
     """
-    _, _, log10X_posterior, log10X_topN, _ = get_parameters_and_objective_values()
-    df = pd.read_csv("results/rank_1_solutions.csv")
-    print(df)
+    _, _, log10X_posterior, log10X_topN, Flist_topN, _ = (
+        get_parameters_and_objective_values()
+    )
+    rank1sol = pd.read_csv("results/rank_1_solutions.csv")
+    print(rank1sol)
+    log10X_topN_df = pd.DataFrame(log10X_topN)
+    topN_df = np.power(10, log10X_topN_df)
+    topN_df["Fde"] = Flist_topN
+    topN_df["r3*Imax"] = topN_df["r3"] * topN_df["Imax"]
+    print(topN_df.loc[:3, :])
 
     posterior = [
         log10X_posterior["r1"],
@@ -250,12 +257,12 @@ def plot_parameter_posteriors():
         "$\log_{10}(r_3I_{max})$",
     ]
     rank_1 = [
-        np.log10(df.r1),
-        np.log10(df.r2),
-        np.log10(df["r3"]),
-        np.log10(df["r3*Imax"] / df["r3"]),
-        np.log10(df["r1"] + df["r2"]),
-        np.log10(df["r3*Imax"]),
+        np.log10(rank1sol.r1),
+        np.log10(rank1sol.r2),
+        np.log10(rank1sol["r3"]),
+        np.log10(rank1sol["r3*Imax"] / rank1sol["r3"]),
+        np.log10(rank1sol["r1"] + rank1sol["r2"]),
+        np.log10(rank1sol["r3*Imax"]),
     ]
     top_N = [
         log10X_topN["r1"],
@@ -266,16 +273,21 @@ def plot_parameter_posteriors():
         log10X_topN["r3"] + log10X_topN["Imax"],
     ]
 
-    panel_labels = ["A", "B", "D"]
+    panel_labels = ["B", "C", "D", "E"]
 
     lef, rig = 0.10, 0.99
     bot, top = 0.11, 0.95
-    hs, ws = 0.6, 0.25
+    hs, ws = 0.65, 0.25
     fig = plt.figure(figsize=(9, 6))
-    gs = GridSpec(3, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs, wspace=ws)
+    gs = GridSpec(4, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs, wspace=ws)
 
-    for ind in range(3):
-        ax = fig.add_subplot(gs[ind, 0])
+    ax = fig.add_subplot(gs[0:2, 0])
+    col_mo = ["#1b9e77", "#d95f02"]
+    growth_obj(topN_df, col_mo, ax, solinds=[0, 99])
+    panel_label("A", ax)
+
+    for ind in range(2):
+        ax = fig.add_subplot(gs[ind, 1])
         plot_parameter(
             posterior[ind],
             rank_1[ind],
@@ -286,17 +298,23 @@ def plot_parameter_posteriors():
         )
         panel_label(panel_labels[ind], ax)
 
-    ax = fig.add_subplot(gs[2, 1])
-    plot_parameter(
-        posterior[3], rank_1[3], top_N[3], ax=ax, label=labels[3], rank_1_plottype=None
-    )
-    panel_label("E", ax)
+    for ind in range(2):
+        ax = fig.add_subplot(gs[2 + ind, 0])
+        plot_parameter(
+            posterior[2 + ind],
+            rank_1[2 + ind],
+            top_N[2 + ind],
+            ax=ax,
+            label=labels[2 + ind],
+            rank_1_plottype=None,
+        )
+        panel_label(panel_labels[ind + 2], ax)
 
-    ax = fig.add_subplot(gs[0:2, 1])
+    ax = fig.add_subplot(gs[2:, 1])
     ax.hexbin(log10X_posterior["r1"], log10X_posterior["r2"], gridsize=15, cmap="Greys")
     ax.set_xlabel(labels[0])
     ax.set_ylabel(labels[1])
-    panel_label("C", ax)
+    panel_label("F", ax)
 
     plt.savefig("results/figs/f_posterior.pdf")
     # plt.show()
