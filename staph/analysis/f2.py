@@ -53,7 +53,8 @@ def f2(display: bool = False):
     plt.text(x1 - 0.15 * (x2 - x1), y2, "C", annotation_args)
 
     ax = plt.subplot(224)
-    filename = "results/predsbasebase2523823dl" + str(sol_inds[1]) + "r1_1000rep.npz"
+    filename = "results/predsbasebase2523823dl" + str(sol_inds[1])
+    filename += "r1_1000rep.npz"
     with np.load(filename) as data:
         dose = data["doselist"]
         pinf = data["pinf"]
@@ -94,7 +95,8 @@ def dr_obj(col, solinds=[0]):
 
     # Get infection probabilities from output files
     for ind1, this_sol_ind in enumerate(solinds):
-        fname = "results/ops/" + get_filename(df["desol_inds"][this_sol_ind] + 1)
+        fname = "results/ops/"
+        fname += get_filename(df["desol_inds"][this_sol_ind] + 1)
         print(f"Fname is : {fname}")
         with open(fname) as f:
             d = f.read()
@@ -141,7 +143,9 @@ def dr_obj(col, solinds=[0]):
     plt.ylabel("$P_{response}$")
 
 
-def growth_obj(df: pd.DataFrame, col: List[str], ax: mpl.axis, solinds: List[int] = [0]):
+def growth_obj(
+    df: pd.DataFrame, col: List[str], ax: mpl.axis, solinds: List[int] = [0]
+):
     """Plot growth data and fits.
 
     Plots the kinetic/growth data of SA, best fit RH model and a subset of
@@ -212,7 +216,7 @@ def growth_obj(df: pd.DataFrame, col: List[str], ax: mpl.axis, solinds: List[int
                     twoc_t[ind2],
                     twoc_y[ind2],
                     color=col[ind1],
-                    label=f"2C (SSE = {round(sse_2c,2)})",
+                    label=f"2C, rank {this_sol_ind + 1} (SSE = {round(sse_2c,2)})",
                 )
             else:
                 ax.plot(twoc_t[ind2], twoc_y[ind2], color=col[ind1])
@@ -227,8 +231,13 @@ def growth_obj(df: pd.DataFrame, col: List[str], ax: mpl.axis, solinds: List[int
     ax.set_ylabel("SA density (CFU/cm$^2$)")
 
     handles, labels = ax.get_legend_handles_labels()
-    order = [3, 0, 1, 2]
-    ax.legend([handles[idx] for idx in order], [labels[idx] for idx in order])
+    order = [3, 1, 2, 0]
+    ax.legend(
+        [handles[idx] for idx in order],
+        [labels[idx] for idx in order],
+        frameon=True,
+        fontsize=11,
+    )
 
 
 def partition_plot(
