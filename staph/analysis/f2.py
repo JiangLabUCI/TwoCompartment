@@ -1,15 +1,18 @@
+from os import listdir
+from typing import List, Union
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
 from matplotlib.patches import Polygon
-from typing import List, Union
-from os import listdir
-from ..utils.data import get_kinetic_data_params, get_singh_data
-from ..utils.rh_data import get_rh_fit_data
-from ..utils.det_models import rh_growth_model, twocomp_model
+from scipy.integrate import solve_ivp
+
 from ..analysis.igate_ntest import igate
+from ..utils.data import get_kinetic_data_params, get_singh_data
+from ..utils.det_models import rh_growth_model, twocomp_model
 from ..utils.dev import compute_deviance
+from ..utils.rh_data import get_rh_fit_data
 
 
 def f2(display: bool = False):
@@ -35,8 +38,10 @@ def f2(display: bool = False):
     _, y2 = plt.ylim()
     plt.text(x1 - 0.15 * (x2 - x1), y2, "A", annotation_args)
 
-    plt.subplot(222)
-    growth_obj(col_mo, solinds=sol_inds)
+    ax = plt.subplot(222)
+    fname = "results//rank_1_solutions.csv"
+    df = pd.read_csv(fname)
+    growth_obj(df, col_mo, ax, solinds=sol_inds)
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
     plt.text(x1 - 0.15 * (x2 - x1), y2, "B", annotation_args)
@@ -136,22 +141,23 @@ def dr_obj(col, solinds=[0]):
     plt.ylabel("$P_{response}$")
 
 
-def growth_obj(col: List[str], solinds: List[int] = [0]):
+def growth_obj(df: pd.DataFrame, col: List[str], ax: mpl.axis, solinds: List[int] = [0]):
     """Plot growth data and fits.
 
-    Plots the kinetic/growth data of SA, best fit RH model and two rank 1
-    solutions of the 2C model.
+    Plots the kinetic/growth data of SA, best fit RH model and a subset of
+    the solutions in df whose indices are given by the ``solinds`` argument.
 
     Parameters
     ----------
+    df
+        The dataframe to plot the solutions from.
     col
         Colors of the 2C solutions.
+    ax
+        The axis object to plot the growth objective on.
     solinds
         Indices of the rank 1 solutions to plot.
     """
-    fname = "results//rank_1_solutions.csv"
-    df = pd.read_csv(fname)
-
     p = get_kinetic_data_params()
     sse_rh = get_rh_fit_data()
     sse_rh = sse_rh[0]
@@ -163,7 +169,7 @@ def growth_obj(col: List[str], solinds: List[int] = [0]):
     # Make plots
     for ind in range(3):
         if ind == 1:
-            plt.plot(
+            ax.plot(
                 solrh.t,
                 np.log10(solrh.y[ind, :].transpose()),
                 color="grey",
@@ -171,7 +177,7 @@ def growth_obj(col: List[str], solinds: List[int] = [0]):
                 label=f"RH (SSE = {round(sse_rh,2)})",
             )
         else:
-            plt.plot(
+            ax.plot(
                 solrh.t,
                 np.log10(solrh.y[ind, :].transpose()),
                 color="grey",
@@ -202,27 +208,27 @@ def growth_obj(col: List[str], solinds: List[int] = [0]):
             twoc_y.append(np.log10(sum(sol2c.y, 1)))
 
             if ind2 == 1:
-                plt.plot(
+                ax.plot(
                     twoc_t[ind2],
                     twoc_y[ind2],
                     color=col[ind1],
                     label=f"2C (SSE = {round(sse_2c,2)})",
                 )
             else:
-                plt.plot(twoc_t[ind2], twoc_y[ind2], color=col[ind1])
+                ax.plot(twoc_t[ind2], twoc_y[ind2], color=col[ind1])
 
     # Data
 
-    plt.plot(p["t1"], p["y1"], "ko", label="Data")
-    plt.plot(p["t2"], p["y2"], "ko")
-    plt.plot(p["t3"], p["y3"], "ko")
-    plt.ylim([0, 8])
-    plt.xlabel("Time (days)")
-    plt.ylabel("Staph. density (CFU/cm$^2$)")
+    ax.plot(p["t1"], p["y1"], "ko", label="Data")
+    ax.plot(p["t2"], p["y2"], "ko")
+    ax.plot(p["t3"], p["y3"], "ko")
+    ax.set_ylim([0, 8])
+    ax.set_xlabel("Time (days)")
+    ax.set_ylabel("SA density (CFU/cm$^2$)")
 
-    handles, labels = plt.gca().get_legend_handles_labels()
+    handles, labels = ax.get_legend_handles_labels()
     order = [3, 0, 1, 2]
-    plt.legend([handles[idx] for idx in order], [labels[idx] for idx in order])
+    ax.legend([handles[idx] for idx in order], [labels[idx] for idx in order])
 
 
 def partition_plot(
