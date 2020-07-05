@@ -66,7 +66,7 @@ def get_parameters_and_objective_values(
     }
 
     # create log10X_topN
-    _, Xlist_topN = get_bF_bX(desol_ind=np.arange(N))
+    Flist_topN, Xlist_topN = get_bF_bX(desol_ind=np.arange(N))
     r1_topN = np.empty([N])
     r2_topN = np.empty([N])
     r3_topN = np.empty([N])
@@ -81,7 +81,7 @@ def get_parameters_and_objective_values(
         "r3": np.log10(r3_topN),
         "Imax": np.log10(Imax_topN),
     }
-    return log10X_orig, Flist, log10X_posterior, log10X_topN, modno
+    return log10X_orig, Flist, log10X_posterior, log10X_topN, Flist_topN, modno
 
 
 def get_r_Imax(
