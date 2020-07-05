@@ -542,8 +542,8 @@ def get_bF_bX(
 ) -> Tuple[np.ndarray, np.ndarray]:
     """Get the best F and X values from DEMC solutions.
 
-    Read the solutions present in `filename` and extract the best objective
-    values and the solutions giving best objective values to return.
+    Read the solutions present in `filename` and return the best objective
+    values and corresponding best-fit parameters.
 
     Parameters
     ----------
@@ -557,7 +557,7 @@ def get_bF_bX(
     bFlist
         The best objective values.
     bXlist
-        The solutions that provide the best objective values.
+        The best-fit parameters that provide the best objective values.
     """
     ndesol = len(desol_ind)  # number of DE solutions to investigate
     data = sio.loadmat(filename)
