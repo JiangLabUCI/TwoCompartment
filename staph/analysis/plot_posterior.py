@@ -283,7 +283,7 @@ def plot_parameter_posteriors():
 
     ax = fig.add_subplot(gs[0:2, 0])
     col_mo = ["#1b9e77", "#d95f02"]
-    growth_obj(topN_df, col_mo, ax, solinds=[0, 99])
+    growth_obj(topN_df, col_mo, ax, solinds=[0, 99], obj_name="$f_{\mathrm{SSE}}$")
     panel_label("A", ax)
 
     for ind in range(2):

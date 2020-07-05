@@ -144,7 +144,11 @@ def dr_obj(col, solinds=[0]):
 
 
 def growth_obj(
-    df: pd.DataFrame, col: List[str], ax: mpl.axis, solinds: List[int] = [0]
+    df: pd.DataFrame,
+    col: List[str],
+    ax: mpl.axis,
+    solinds: List[int] = [0],
+    obj_name: str = "SSE",
 ):
     """Plot growth data and fits.
 
@@ -161,6 +165,8 @@ def growth_obj(
         The axis object to plot the growth objective on.
     solinds
         Indices of the rank 1 solutions to plot.
+    obj_name
+        The name of the objective function to display in the legend.
     """
     p = get_kinetic_data_params()
     sse_rh = get_rh_fit_data()
@@ -178,7 +184,7 @@ def growth_obj(
                 np.log10(solrh.y[ind, :].transpose()),
                 color="grey",
                 linestyle="--",
-                label=f"RH (SSE = {round(sse_rh,2)})",
+                label=f"RH ({obj_name} = {round(sse_rh,2)})",
             )
         else:
             ax.plot(
@@ -216,7 +222,7 @@ def growth_obj(
                     twoc_t[ind2],
                     twoc_y[ind2],
                     color=col[ind1],
-                    label=f"2C, rank {this_sol_ind + 1} (SSE = {round(sse_2c,2)})",
+                    label=f"2C, rank {this_sol_ind + 1} ({obj_name} = {round(sse_2c,2)})",
                 )
             else:
                 ax.plot(twoc_t[ind2], twoc_y[ind2], color=col[ind1])
