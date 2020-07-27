@@ -299,7 +299,7 @@ def plot_parameter_posteriors():
         panel_label(panel_labels[ind], ax)
 
     for ind in range(2):
-        ax = fig.add_subplot(gs[2 + ind, 0])
+        ax = fig.add_subplot(gs[2 + ind, 1])
         plot_parameter(
             posterior[2 + ind],
             rank_1[2 + ind],
@@ -310,7 +310,7 @@ def plot_parameter_posteriors():
         )
         panel_label(panel_labels[ind + 2], ax)
 
-    ax = fig.add_subplot(gs[2:, 1])
+    ax = fig.add_subplot(gs[2:, 0])
     ax.hexbin(log10X_posterior["r1"], log10X_posterior["r2"], gridsize=15, cmap="Greys")
     ax.set_xlabel(labels[0])
     ax.set_ylabel(labels[1])
