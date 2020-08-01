@@ -273,7 +273,7 @@ def plot_parameter_posteriors():
         log10X_topN["r3"] + log10X_topN["Imax"],
     ]
 
-    panel_labels = ["B", "C", "D", "E"]
+    panel_labels = ["B", "C", "E", "F"]
 
     lef, rig = 0.10, 0.99
     bot, top = 0.11, 0.95
@@ -314,7 +314,7 @@ def plot_parameter_posteriors():
     ax.hexbin(log10X_posterior["r1"], log10X_posterior["r2"], gridsize=15, cmap="Greys")
     ax.set_xlabel(labels[0])
     ax.set_ylabel(labels[1])
-    panel_label("F", ax)
+    panel_label("D", ax)
 
     plt.savefig("results/figs/f_posterior.pdf")
     # plt.show()
