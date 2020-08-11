@@ -151,4 +151,3 @@ def twocomp_derivatives(Y: List[float], t: float, p: Dict) -> List[float]:
     iprime = p["r2"] * H + p["r3Imax"] * I - p["r3"] * I * I
     ders = [hprime, iprime]
     return ders
-

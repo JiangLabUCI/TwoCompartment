@@ -10,7 +10,7 @@ import seaborn as sns
 from matplotlib.gridspec import GridSpec
 
 from ..utils.dev import get_bF_bX, get_consts_bX
-from .f2 import growth_obj
+from .f2 import growth_obj, dr_obj, pareto_plot, partition_plot
 
 RANK_1_COLOR = "#fb8072"
 
@@ -318,3 +318,70 @@ def plot_parameter_posteriors():
 
     plt.savefig("results/figs/f_posterior.pdf")
     # plt.show()
+
+
+def plot_posterior_dose_resp():
+    """Plot the posterior dose response.
+
+    Plot the pareto plot, fit to dose response data, and outcome probabilities
+    as a function of dose.
+    """
+
+    # layout of figure
+    lef, rig = 0.10, 0.98
+    bot, top = 0.10, 0.95
+    hs, ws = 0.48, 0.25
+    fig = plt.figure(figsize=(9, 6))
+    gs = GridSpec(3, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs, wspace=ws)
+
+    # misc. choices
+    col_mo = ["#1b9e77", "#d95f02"]
+    part_cols = ["#70a89f", "#fdb462", "#fb8072"]  # colorbrewer 1
+    sol_inds = [0, 4]
+
+    ax = plt.subplot(gs[:2, 0])
+    pareto_plot(col_mo, sol_inds, ax)
+
+    ax = plt.subplot(gs[:2, 1])
+    dr_obj(col_mo, sol_inds, ax)
+
+    ax = plt.subplot(gs[2, :])
+    filename = "results/predsbasebase2523823dl" + str(sol_inds[1])
+    filename += "r1_1000rep.npz"
+    with np.load(filename) as data:
+        dose = data["doselist"]
+        pinf = data["pinf"]
+        pcar = data["pcar"]
+        ps = data["ps"]
+    partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=part_cols, log=True)
+
+    plt.savefig("results/figs/posterior_dr.pdf")
+
+
+def _plot_parallel_coords():
+    """Parallel coords plot.
+
+    A parallel coordinates plot of some parameters and minimized objective
+    values.
+    """
+    params_to_plot = ["$\log_{10}(r_1)$", "$\log_{10}(r_2)$", "r3", "Imax", "Fst"]
+    # _, _, log10X_posterior, log10X_topN, Flist_topN, _ = (
+    #     get_parameters_and_objective_values()
+    # )
+    # log10X_topN_df = pd.DataFrame(log10X_topN)
+    # df_to_plot = log10X_topN_df[params_to_plot]
+    full_df = pd.read_csv("results/all_solutions.csv")
+    full_df["Imax"] = full_df["r3*Imax"] / full_df["r3"]
+    full_df["$\log_{10}(r_1)$"] = np.log10(full_df["r1"])
+    full_df["$\log_{10}(r_2)$"] = np.log10(full_df["r2"])
+    df_to_plot = full_df[params_to_plot]
+    df_to_plot -= df_to_plot.min()
+    df_to_plot /= df_to_plot.max()
+    full_df.loc[full_df["ranks"] != 1.0, "class"] = "Rank >1"
+    full_df.loc[full_df["ranks"] == 1.0, "class"] = "Rank 1"
+    df_to_plot["class"] = full_df["class"]
+    pd.plotting.parallel_coordinates(
+        df_to_plot, "class", color=["#556270FF", "#4ECDC433"]
+    )
+    plt.ylabel("Normalized parameter")
+    plt.show()
