@@ -230,6 +230,9 @@ def plot_parameter_posteriors():
     _, _, log10X_posterior, log10X_topN, Flist_topN, _ = (
         get_parameters_and_objective_values()
     )
+    print(
+        mpl.rcParams["font.family"], mpl.rcParams["font.size"], mpl.matplotlib_fname()
+    )
     rank1sol = pd.read_csv("results/rank_1_solutions.csv")
     print(rank1sol)
     log10X_topN_df = pd.DataFrame(log10X_topN)
@@ -280,6 +283,9 @@ def plot_parameter_posteriors():
     hs, ws = 0.65, 0.25
     fig = plt.figure(figsize=(9, 8))
     gs = GridSpec(4, 2, top=top, bottom=bot, left=lef, right=rig, hspace=hs, wspace=ws)
+    print(
+        mpl.rcParams["font.family"], mpl.rcParams["font.size"], mpl.matplotlib_fname()
+    )
 
     ax = fig.add_subplot(gs[0:2, 0])
     col_mo = ["#1b9e77", "#d95f02"]
@@ -326,7 +332,11 @@ def plot_posterior_dose_resp():
     Plot the pareto plot, fit to dose response data, and outcome probabilities
     as a function of dose.
     """
-
+    mpl.rcParams["font.size"] = 10
+    mpl.rcParams["legend.frameon"] = True
+    print(
+        mpl.rcParams["font.family"], mpl.rcParams["font.size"], mpl.matplotlib_fname()
+    )
     # layout of figure
     lef, rig = 0.10, 0.98
     bot, top = 0.10, 0.95
@@ -341,9 +351,11 @@ def plot_posterior_dose_resp():
 
     ax = plt.subplot(gs[:2, 0])
     pareto_plot(col_mo, sol_inds, ax)
+    panel_label("A", ax)
 
     ax = plt.subplot(gs[:2, 1])
     dr_obj(col_mo, sol_inds, ax)
+    panel_label("B", ax)
 
     ax = plt.subplot(gs[2, :])
     filename = "results/predsbasebase2523823dl" + str(sol_inds[1])
@@ -354,6 +366,7 @@ def plot_posterior_dose_resp():
         pcar = data["pcar"]
         ps = data["ps"]
     partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=part_cols, log=True)
+    panel_label("C", ax, 0.08)
 
     plt.savefig("results/figs/posterior_dr.pdf")
 
