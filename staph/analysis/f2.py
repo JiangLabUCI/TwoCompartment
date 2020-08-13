@@ -132,17 +132,17 @@ def dr_obj(col, solinds=[0], ax=None):
     print("beta poisson deviance : ", bp_dev)
 
     ax.plot(np.log10(H0), np.array(norig) / 20, "ko", label="Data")
-    this_label = f"RH (dev = {round(dev_rh, 2)})"
+    this_label = "RH ($f_{\mathrm{dev}}$= " + f"{dev_rh:.2f})"
     ax.plot(np.log10(H0), pinf_rh, "--", label=this_label, color="grey")
-    this_label = f"BP (dev = {round(bp_dev, 2)})"
+    this_label = "BP ($f_{\mathrm{dev}}$= " + f"{bp_dev:.2f})"
     ax.plot(np.log10(H0), bp_presp, "-", label=this_label, color="grey")
-    this_label = f"2C, $b_2$=0 (dev = {round(devb20, 2)})"
+    this_label = "2C, $b_2$=0 ($f_{\mathrm{dev}}$= " + f"{devb20:.2f})"
     ax.plot(np.log10(H0), pinfb20, ":", label=this_label, color="xkcd:red")
     for ind1 in range(len(solinds)):
         this_ind = solinds[ind1]
         this_pinf = pinfs[ind1, :]
         this_dev = df.Fst[this_ind]
-        this_label = f"2C, $d_1$=0 (dev = {round(this_dev,2):.2f})"
+        this_label = "2C, $d_1$=0 ($f_{\mathrm{dev}}$= " + f"{this_dev:.2f})"
         ax.plot(np.log10(H0), this_pinf, label=this_label, color=col[ind1])
     ax.legend(loc="lower right")
     ax.set_xlabel("$\log_{10}$(dose)")
