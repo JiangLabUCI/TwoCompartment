@@ -71,7 +71,7 @@ def f2(display: bool = False):
         plt.show()
 
 
-def dr_obj(col, solinds=[0]):
+def dr_obj(col, solinds=[0], ax=None):
     """Plot dose-response data and fits.
 
     Plots the dose-response data of SA, best fit RH model and two rank 1
@@ -83,7 +83,13 @@ def dr_obj(col, solinds=[0]):
         Colors of the 2C solutions.
     solinds
         Indices of the rank 1 solutions to plot.
+    ax
+        The axis object to plot the growth objective on.
     """
+
+    if ax is None:
+        ax = plt.gca()
+
     # Get requisite data
     h0, norig, ntot, tiny, A, H0 = get_singh_data()
     _, dev_rh, int_dose, k = get_rh_fit_data()
@@ -125,22 +131,22 @@ def dr_obj(col, solinds=[0]):
         bp_dev += compute_deviance(bp_presp[ind], ind)
     print("beta poisson deviance : ", bp_dev)
 
-    plt.plot(np.log10(H0), np.array(norig) / 20, "ko", label="Data")
+    ax.plot(np.log10(H0), np.array(norig) / 20, "ko", label="Data")
     this_label = f"RH (dev = {round(dev_rh, 2)})"
-    plt.plot(np.log10(H0), pinf_rh, "--", label=this_label, color="grey")
+    ax.plot(np.log10(H0), pinf_rh, "--", label=this_label, color="grey")
     this_label = f"BP (dev = {round(bp_dev, 2)})"
-    plt.plot(np.log10(H0), bp_presp, "-", label=this_label, color="grey")
+    ax.plot(np.log10(H0), bp_presp, "-", label=this_label, color="grey")
     this_label = f"2C, $b_2$=0 (dev = {round(devb20, 2)})"
-    plt.plot(np.log10(H0), pinfb20, ":", label=this_label, color="xkcd:red")
+    ax.plot(np.log10(H0), pinfb20, ":", label=this_label, color="xkcd:red")
     for ind1 in range(len(solinds)):
         this_ind = solinds[ind1]
         this_pinf = pinfs[ind1, :]
         this_dev = df.Fst[this_ind]
         this_label = f"2C, $d_1$=0 (dev = {round(this_dev,2):.2f})"
-        plt.plot(np.log10(H0), this_pinf, label=this_label, color=col[ind1])
-    plt.legend(loc="lower right")
-    plt.xlabel("$Log_{10}$(dose)")
-    plt.ylabel("$P_{response}$")
+        ax.plot(np.log10(H0), this_pinf, label=this_label, color=col[ind1])
+    ax.legend(loc="lower right")
+    ax.set_xlabel("$\log_{10}$(dose)")
+    ax.set_ylabel("$P_{\mathrm{response}}$")
 
 
 def growth_obj(
@@ -295,7 +301,7 @@ def partition_plot(
         plt.ylabel("Probability")
 
 
-def pareto_plot(col, solinds=[0]):
+def pareto_plot(col, solinds=[0], ax=None):
     """Pareto front plot.
 
     Plot all the solutions and the pareto front.
@@ -306,7 +312,13 @@ def pareto_plot(col, solinds=[0]):
         Colors of the 2C solutions.
     solinds
         Indices of the rank 1 solutions to plot.
+    ax
+        The axis object to plot the growth objective on.
     """
+
+    if ax is None:
+        ax = plt.gca()
+
     fname = "results/all_solutions.csv"
     df_all = pd.read_csv(fname)
     fname = "results/rank_1_solutions.csv"
@@ -314,16 +326,16 @@ def pareto_plot(col, solinds=[0]):
 
     df_nr1 = df_all[df_all.ranks != 1]
     r1_marker = "s"
-    plt.plot(df_r1.Fde, df_r1.Fst, r1_marker, color="k", label="Rank 1 solutions")
-    plt.plot(df_r1.Fde, df_r1.Fst, "-", color="k", label="Pareto front")
+    ax.plot(df_r1.Fde, df_r1.Fst, r1_marker, color="k", label="Rank 1 solutions")
+    ax.plot(df_r1.Fde, df_r1.Fst, "-", color="k", label="Pareto front")
     for ind in range(len(solinds)):
-        plt.plot(
+        ax.plot(
             df_r1.Fde[solinds[ind]], df_r1.Fst[solinds[ind]], r1_marker, color=col[ind]
         )
-    plt.plot(df_nr1.Fde, df_nr1.Fst, ".", color="k", label="Rank >1 solutions")
-    plt.legend()
-    plt.xlabel("Growth objective")
-    plt.ylabel("Dose-response objective")
+    ax.plot(df_nr1.Fde, df_nr1.Fst, ".", color="k", label="Rank >1 solutions")
+    ax.legend()
+    ax.set_xlabel("Growth objective")
+    ax.set_ylabel("Dose-response objective")
 
 
 def get_filename(task_no: int = 0) -> Union[str, None]:
