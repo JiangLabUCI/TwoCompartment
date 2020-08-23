@@ -134,7 +134,7 @@ def dr_obj(col, solinds=[0], ax=None):
     ax.plot(np.log10(H0), np.array(norig) / 20, "ko", label="Data")
     this_label = "RH ($f_{\mathrm{dev}}$= " + f"{dev_rh:.2f})"
     ax.plot(np.log10(H0), pinf_rh, "--", label=this_label, color="grey")
-    this_label = "BP ($f_{\mathrm{dev}}$= " + f"{bp_dev:.2f})"
+    this_label = "approx. BP ($f_{\mathrm{dev}}$= " + f"{bp_dev:.2f})"
     ax.plot(np.log10(H0), bp_presp, "-", label=this_label, color="grey")
     this_label = "2C, $b_2$=0 ($f_{\mathrm{dev}}$= " + f"{devb20:.2f})"
     ax.plot(np.log10(H0), pinfb20, ":", label=this_label, color="xkcd:red")
@@ -326,16 +326,16 @@ def pareto_plot(col, solinds=[0], ax=None):
 
     df_nr1 = df_all[df_all.ranks != 1]
     r1_marker = "s"
-    ax.plot(df_r1.Fde, df_r1.Fst, r1_marker, color="k", label="Rank 1 solutions")
+    ax.plot(df_r1.Fde, df_r1.Fst, r1_marker, color="k", label="Pareto rank 1")
     ax.plot(df_r1.Fde, df_r1.Fst, "-", color="k", label="Pareto front")
     for ind in range(len(solinds)):
         ax.plot(
             df_r1.Fde[solinds[ind]], df_r1.Fst[solinds[ind]], r1_marker, color=col[ind]
         )
-    ax.plot(df_nr1.Fde, df_nr1.Fst, ".", color="k", label="Rank >1 solutions")
+    ax.plot(df_nr1.Fde, df_nr1.Fst, ".", color="k", label="Pareto rank >1")
     ax.legend()
-    ax.set_xlabel("Growth objective")
-    ax.set_ylabel("Dose-response objective")
+    ax.set_xlabel("Growth objective ($f_{\mathrm{SSE}}$)")
+    ax.set_ylabel("Dose-response objective ($f_{\mathrm{dev}}$)")
 
 
 def get_filename(task_no: int = 0) -> Union[str, None]:
