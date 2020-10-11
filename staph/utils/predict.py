@@ -682,7 +682,7 @@ def predict_demo(
         elif ind1 == 1:
             b2, d1 = 1.7, 0.0
         elif ind1 == 2:
-            b2, d1 = 0.0, 2.0
+            b2, d1 = 0.0, 100.0
         # rates = [1.0, 0.01, 1.0, b2, d1, 1.0]
         r3Imax = 3.40
         r3 = 3.90e-7
