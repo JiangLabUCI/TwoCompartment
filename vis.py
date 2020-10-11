@@ -7,7 +7,7 @@ from staph.analysis.igate_ntest import igate as igate_ntest
 from staph.analysis.igate_thresh import igate as igate_thresh
 from staph.analysis.landscape import igate as b2d1_igate
 from staph.analysis.phase_plot import make_phase_plot
-from staph.analysis.plot_posterior import plot_parameter_posteriors
+from staph.analysis.plot_posterior import plot_posterior_dose_resp
 
 option1 = int(sys.argv[1])
 
@@ -60,4 +60,4 @@ elif option1 == 6:
 elif option1 == 7:
     make_phase_plot(nquivs=15, logflag=True)
 elif option1 == 8:
-    plot_parameter_posteriors()
+    plot_posterior_dose_resp()
