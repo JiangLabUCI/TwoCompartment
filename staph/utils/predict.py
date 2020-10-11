@@ -693,7 +693,7 @@ def predict_demo(
             _, _, this_pop, this_t, this_status = tau_twocomp_carrier(
                 init_load=init_load,
                 rates=rates,
-                imax=sim_stop_thresh,
+                i_thresh=sim_stop_thresh,
                 nstep=nstep,
                 seed=seeds[ind2],
                 t_max=t_max,
