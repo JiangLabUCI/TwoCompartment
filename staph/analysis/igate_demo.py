@@ -73,7 +73,7 @@ def igate(option1: int = 2, disp: bool = True, save: bool = False):
 
     plt.figure(figsize=(4.5, 4))
     lw = 4
-    if save == True:
+    if save is True:
         plt.rcParams["font.family"] = "sans-serif"
         plt.rcParams["font.size"] = 14
         plt.rcParams["lines.linewidth"] = lw
@@ -112,16 +112,16 @@ def igate(option1: int = 2, disp: bool = True, save: bool = False):
         ind2 = 2 * nrep - 1
         lower2, upper2 = get_intervals(t[ind1:ind2], pop[ind1:ind2], t_det)
         lower2[lower2 <= 0] = 1
-        h1 = plt.fill_between(t_det, np.log10(lower2), np.log10(upper2))  # , alpha=0.5)
+        h1 = plt.fill_between(t_det, np.log10(lower2), np.log10(upper2))
 
         ind1 = 2 * nrep
         ind2 = 3 * nrep - 1
         lower3, upper3 = get_intervals(t[ind1:ind2], pop[ind1:ind2], t_det)
         lower3[lower3 <= 0] = 1
-        h2 = plt.fill_between(t_det, np.log10(lower3), np.log10(upper3))  # , alpha=0.5)
+        h2 = plt.fill_between(t_det, np.log10(lower3), np.log10(upper3))
 
         lower1, upper1 = get_intervals(t[:nrep], pop[:nrep], t_det)
-        h3 = plt.fill_between(t_det, np.log10(lower1), np.log10(upper1))  # , alpha=0.5)
+        h3 = plt.fill_between(t_det, np.log10(lower1), np.log10(upper1))
 
         h4, = plt.plot(old_t_det, np.log10(pop_det), "k", linewidth=2)
 
