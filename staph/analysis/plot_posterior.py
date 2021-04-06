@@ -197,6 +197,7 @@ def plot_parameter(
         ax.plot(topN_samples, y_zero, "|", color=rank_1_color, alpha=0.5)
 
     ax.set_xlabel(label)
+    ax.set_ylabel("Density")
 
 
 def panel_label(label: str, ax: mpl.axis, factor: float = 0.15):
@@ -276,7 +277,7 @@ def plot_parameter_posteriors():
         log10X_topN["r3"] + log10X_topN["Imax"],
     ]
 
-    panel_labels = ["B", "C", "E", "F"]
+    panel_labels = ["b", "c", "e", "f"]
 
     lef, rig = 0.10, 0.99
     bot, top = 0.11, 0.95
@@ -290,7 +291,7 @@ def plot_parameter_posteriors():
     ax = fig.add_subplot(gs[0:2, 0])
     col_mo = ["#1b9e77", "#d95f02"]
     growth_obj(topN_df, col_mo, ax, solinds=[0, 99], obj_name="$f_{\mathrm{SSE}}$")
-    panel_label("A", ax)
+    panel_label("a", ax)
 
     for ind in range(2):
         ax = fig.add_subplot(gs[ind, 1])
@@ -320,7 +321,7 @@ def plot_parameter_posteriors():
     ax.hexbin(log10X_posterior["r1"], log10X_posterior["r2"], gridsize=15, cmap="Greys")
     ax.set_xlabel(labels[0])
     ax.set_ylabel(labels[1])
-    panel_label("D", ax)
+    panel_label("d", ax)
 
     plt.savefig("results/figs/f_posterior.pdf")
     # plt.show()
@@ -332,8 +333,7 @@ def plot_posterior_dose_resp():
     Plot the pareto plot, fit to dose response data, and outcome probabilities
     as a function of dose.
     """
-    mpl.rcParams["font.size"] = 10
-    mpl.rcParams["legend.frameon"] = True
+    # mpl.rcParams["legend.frameon"] = True
     print(
         mpl.rcParams["font.family"], mpl.rcParams["font.size"], mpl.matplotlib_fname()
     )
@@ -351,11 +351,11 @@ def plot_posterior_dose_resp():
 
     ax = plt.subplot(gs[:2, 0])
     pareto_plot(col_mo, sol_inds, ax)
-    panel_label("A", ax)
+    panel_label("a", ax)
 
     ax = plt.subplot(gs[:2, 1])
     dr_obj(col_mo, sol_inds, ax)
-    panel_label("B", ax)
+    panel_label("b", ax)
 
     ax = plt.subplot(gs[2, :])
     filename = "results/predsbasebase2523823dl" + str(sol_inds[1])
@@ -366,7 +366,7 @@ def plot_posterior_dose_resp():
         pcar = data["pcar"]
         ps = data["ps"]
     partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=part_cols, log=True)
-    panel_label("C", ax, 0.08)
+    panel_label("c", ax, 0.08)
 
     plt.savefig("results/figs/posterior_dr.pdf")
 
