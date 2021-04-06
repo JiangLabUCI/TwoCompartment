@@ -81,7 +81,7 @@ def f3(display: bool = False):
 
     fig = plt.figure(1, figsize=(9, 4))
 
-    labs = ["A", "B"]
+    labs = ["a", "b"]
     for ind1, filename in enumerate(fnames):
         with np.load(filename) as data:
             dose = data["doselist"]
@@ -107,8 +107,8 @@ def f3(display: bool = False):
         "results/pred_1000rep400000nstr1shypF6_multi.npz",
         "results/pred_1000rep400000nstrmfhypF6_multi.npz",
     ]
-    labs1 = ["A", "B"]
-    labs2 = ["C", "D"]
+    labs1 = ["a", "b"]
+    labs2 = ["c", "d"]
     for ind1, filename in enumerate(fnames):
         with np.load(filename, allow_pickle=True) as data:
             pres = data["pres"]

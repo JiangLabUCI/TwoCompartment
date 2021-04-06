@@ -36,7 +36,7 @@ def f2(display: bool = False):
     pareto_plot(col_mo, solinds=sol_inds)
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
-    plt.text(x1 - 0.15 * (x2 - x1), y2, "A", annotation_args)
+    plt.text(x1 - 0.15 * (x2 - x1), y2, "a", annotation_args)
 
     ax = plt.subplot(222)
     fname = "results//rank_1_solutions.csv"
@@ -44,13 +44,13 @@ def f2(display: bool = False):
     growth_obj(df, col_mo, ax, solinds=sol_inds)
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
-    plt.text(x1 - 0.15 * (x2 - x1), y2, "B", annotation_args)
+    plt.text(x1 - 0.15 * (x2 - x1), y2, "b", annotation_args)
 
     ax = plt.subplot(223)
     dr_obj(col_mo, solinds=sol_inds)
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
-    plt.text(x1 - 0.15 * (x2 - x1), y2, "C", annotation_args)
+    plt.text(x1 - 0.15 * (x2 - x1), y2, "c", annotation_args)
 
     ax = plt.subplot(224)
     filename = "results/predsbasebase2523823dl" + str(sol_inds[1])
@@ -63,7 +63,7 @@ def f2(display: bool = False):
     partition_plot(dose, pinf[0,], pcar[0,], ps[0,], ax, cols=part_cols, log=True)
     x1, x2 = plt.xlim()
     _, y2 = plt.ylim()
-    plt.text(x1 - 0.15 * (x2 - x1), y2, "D", annotation_args)
+    plt.text(x1 - 0.15 * (x2 - x1), y2, "d", annotation_args)
 
     plt.tight_layout()
     plt.savefig("results/figs/f2.pdf")
